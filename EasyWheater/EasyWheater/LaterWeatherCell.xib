@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LaterCell" rowHeight="40" id="KGk-i7-Jjw" customClass="LaterWeatherCell" customModule="EasyWheater" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrq-V8-9VF">
+                        <rect key="frame" x="165" y="0.0" width="155" height="39.5"/>
+                        <state key="normal" title="- -">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npr-DP-mNC">
+                        <rect key="frame" x="10" y="0.0" width="155" height="39.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Npr-DP-mNC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2vc-wB-KbU"/>
+                    <constraint firstItem="Wrq-V8-9VF" firstAttribute="leading" secondItem="Npr-DP-mNC" secondAttribute="trailing" id="Fsr-Qw-Uog"/>
+                    <constraint firstAttribute="bottom" secondItem="Wrq-V8-9VF" secondAttribute="bottom" id="J2x-ga-Qox"/>
+                    <constraint firstItem="Wrq-V8-9VF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Lv5-sT-SRl"/>
+                    <constraint firstAttribute="trailing" secondItem="Wrq-V8-9VF" secondAttribute="trailing" id="Sna-9t-gkS"/>
+                    <constraint firstItem="Wrq-V8-9VF" firstAttribute="width" secondItem="Npr-DP-mNC" secondAttribute="width" id="Urv-l9-9AD"/>
+                    <constraint firstItem="Npr-DP-mNC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gR0-Zi-YQF"/>
+                    <constraint firstAttribute="bottom" secondItem="Npr-DP-mNC" secondAttribute="bottom" id="tXy-ho-xZZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="Npr-DP-mNC" id="uZk-Nm-DJL"/>
+                <outlet property="weatherAndStateBtn" destination="Wrq-V8-9VF" id="GTW-1C-sfP"/>
+            </connections>
+            <point key="canvasLocation" x="321" y="368"/>
+        </tableViewCell>
+    </objects>
+</document>

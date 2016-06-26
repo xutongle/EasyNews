@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnotherInfoCell" rowHeight="60" id="KGk-i7-Jjw" customClass="AnotherInfoTableViewCell" customModule="EasyWheater" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUn-y0-CKc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcy-pm-pyW">
+                                <rect key="frame" x="0.0" y="0.0" width="106.5" height="60"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNE-Ue-UoN">
+                                <rect key="frame" x="106.5" y="0.0" width="107" height="60"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPN-W2-mfR">
+                                <rect key="frame" x="213.5" y="0.0" width="106.5" height="60"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="FNE-Ue-UoN" firstAttribute="width" secondItem="Lcy-pm-pyW" secondAttribute="width" id="9F7-y6-JJU"/>
+                            <constraint firstItem="rPN-W2-mfR" firstAttribute="width" secondItem="Lcy-pm-pyW" secondAttribute="width" id="mBe-fb-c68"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="xUn-y0-CKc" secondAttribute="bottom" id="08z-IB-c2w"/>
+                    <constraint firstAttribute="trailing" secondItem="xUn-y0-CKc" secondAttribute="trailing" id="JTo-5U-ILI"/>
+                    <constraint firstItem="xUn-y0-CKc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Lvg-iW-QQD"/>
+                    <constraint firstItem="xUn-y0-CKc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nRJ-VY-cy1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="centerBtn" destination="FNE-Ue-UoN" id="f9e-GF-Swe"/>
+                <outlet property="leftBtn" destination="Lcy-pm-pyW" id="BcX-DD-rIA"/>
+                <outlet property="rightBtn" destination="rPN-W2-mfR" id="Sba-a9-2Bv"/>
+            </connections>
+            <point key="canvasLocation" x="224" y="248"/>
+        </tableViewCell>
+    </objects>
+</document>
