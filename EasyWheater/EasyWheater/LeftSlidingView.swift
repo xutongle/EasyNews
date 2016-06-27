@@ -149,14 +149,15 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     
     // 自己的方法 查询完后执行
     func getAllLocationFormSQLite() -> Void {
+        
+        weak var weakSelf:LeftSlidingView! = self
         dataArray = NSMutableArray()
         
         // 判断查询到的值如果和当前显示的位置是一样的 就不加入
         DBOperate.dbOperate.queryData { backCitys in
-            
+            print(backCitys["city"])
             if backCitys["city"] as! String != HeadView.headView.location {
-                print(backCitys["city"])
-                self.dataArray.addObject(backCitys)
+                weakSelf.dataArray.addObject(backCitys)
             }
             tableview?.reloadData()
         }
@@ -216,6 +217,10 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell", forIndexPath: indexPath) as! HistoryTableViewCell
             
             let dict = dataArray[indexPath.row - 1] as! NSDictionary
+            
+            // 显示省和市
+            cell.shengLabel.text = dict["province"] as? String
+            cell.shiLabel.text = dict["city"] as? String
             
             //组合拳 使下划线往左靠
             cell.separatorInset = UIEdgeInsetsZero
