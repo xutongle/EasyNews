@@ -74,7 +74,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         
         //
         searchTextField.endEditing(true)
-        downSearchTextField()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -119,18 +118,18 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 暂时不用
-    func downSearchTextField() -> Void {
-        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
-            self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2 + 20, SCREEN_WIDTH, 30)
-        }) { (finshed) in
-            //
-            self.searchTextField.resignFirstResponder()
-
-            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
-                self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, 30)
-                }, completion: { (finshed) in
-            })
-        }
-    }
+//    func downSearchTextField() -> Void {
+//        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
+//            self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2 + 20, SCREEN_WIDTH, 30)
+//        }) { (finshed) in
+//            //
+//            self.searchTextField.resignFirstResponder()
+//
+//            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
+//                self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, 30)
+//                }, completion: { (finshed) in
+//            })
+//        }
+//    }
     
 }

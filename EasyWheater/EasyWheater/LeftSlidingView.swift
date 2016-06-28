@@ -27,7 +27,7 @@ private let alphaView = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN
 private var tableview:UITableView?
 
 //协议
-weak var setting_delegate:LeftViewProtocol?
+weak var left_delegate:LeftViewProtocol?
 
 // MARK: - -------------------extension UIView-------------------
 
@@ -144,7 +144,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     
     @objc
     func jumpToSetting() -> Void {
-        setting_delegate?.settingBtnAction()
+        left_delegate?.settingBtnAction()
     }
     
     // 自己的方法 查询完后执行
@@ -165,8 +165,10 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     
     // MARK: - -------------------打开侧滑-------------------
     private func openSliding() -> Void{
-        //
+        //获得历史记录
         getAllLocationFormSQLite()
+        //
+        
         
         //做个控制 防止侧滑漂移
         if myControl.openSize > SCREEN_WIDTH{
@@ -212,6 +214,9 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
             //组合拳 使下划线往左靠
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
+            
+            SingleManager.singleManager.add(Key: "LeftSldingView_1", andValue: cell)
+            
             return cell
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell", forIndexPath: indexPath) as! HistoryTableViewCell
@@ -232,7 +237,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     @objc
     private func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        left_delegate?.chooseHitsoryCity(dataArray[indexPath.row - 1] as! NSDictionary)
     }
     
     @objc

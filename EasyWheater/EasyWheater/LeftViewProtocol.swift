@@ -11,4 +11,6 @@ import UIKit
 protocol LeftViewProtocol: NSObjectProtocol {
 
     func settingBtnAction() -> Void
+    
+    func chooseHitsoryCity(citys: NSDictionary) -> Void
 }

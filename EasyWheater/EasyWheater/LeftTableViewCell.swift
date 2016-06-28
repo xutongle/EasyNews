@@ -19,17 +19,19 @@ class LeftTableViewCell: UITableViewCell {
     
     //温度
     var weatherText:String = Tools.getUserDefaults("temperature") as! String
-//    {
-//        didSet{
-//            weatherButton.setTitle(weatherText, forState: .Normal)
-//        }
-//    }
+    {
+        didSet{
+            weatherButton.setTitle(weatherText, forState: .Normal)
+        }
+    }
 
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var weatherButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.userInteractionEnabled = false
         
         locationLabel.text = locationText
         weatherButton.setTitle(weatherText, forState: .Normal)
