@@ -12,6 +12,7 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
+        self.backgroundColor = UIColor.groupTableViewBackgroundColor()
     }
     
     required init?(coder aDecoder: NSCoder) {

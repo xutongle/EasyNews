@@ -22,7 +22,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.searchTextField.becomeFirstResponder()
         if isFirst {
             
             // 搞定导航栏 Model过来也有
@@ -30,49 +29,54 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             navBar.barStyle = .BlackTranslucent
             let navItem = UINavigationItem.init(title: "搜索城市")
             
-            let navLeftButton = UIBarButtonItem.init(title: "<返回", style: .Done, target: self, action: #selector(dismissMe))
-            let navRightButton = UIBarButtonItem.init(title: "搜索", style: .Done, target: self, action: #selector(searchIt))
-            navLeftButton.tintColor = UIColor.whiteColor()
-            navRightButton.tintColor = UIColor.whiteColor()
+            // 导航栏按钮
+            let navCancelButton = UIBarButtonItem.init(title: "取消", style: .Done, target: self, action: #selector(dismissMe))
+            let navSearchButton = UIBarButtonItem.init(title: "搜索", style: .Done, target: self, action: #selector(searchIt))
+            navCancelButton.tintColor = UIColor.whiteColor()
+            navSearchButton.tintColor = UIColor.whiteColor()
             
             navBar.pushNavigationItem(navItem, animated: false)
-            navItem.setLeftBarButtonItem(navLeftButton, animated: false)
-            navItem.setRightBarButtonItem(navRightButton, animated: false)
+            navItem.setRightBarButtonItems([navSearchButton,navCancelButton], animated: false)
+            
+            /**
+             * 搜索框
+             **/
+            searchTextField = UITextField.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 30))
+            searchTextField.borderStyle = .RoundedRect
+            searchTextField.textAlignment = .Center
+            searchTextField.placeholder = "输入城市名称"
+            searchTextField.clearButtonMode = .WhileEditing
+            
+            searchTextField.delegate = self
+            self.view.addSubview(searchTextField)
+            
+            // 添加上
+            navItem.titleView = searchTextField
             
             self.view.addSubview(navBar)
             isFirst = false
         }
+        self.searchTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        wself.view.backgroundColor = UIColor.whiteColor()
         let bgImageView = UIImageView.init(frame: self.view.frame)
         bgImageView.image = UIImage.init(named: "SearchBg")
         self.view.addSubview(bgImageView)
         
-        /**
-         * 搜索框
-         **/
-        searchTextField = UITextField.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, 30))
-        searchTextField.borderStyle = .RoundedRect
-        searchTextField.textAlignment = .Center
-        searchTextField.placeholder = "输入城市名称"
-        searchTextField.clearButtonMode = .WhileEditing
-        
-        searchTextField.delegate = self
-        searchTextField.addTarget(self, action: #selector(upSearchTextField), forControlEvents: .TouchDown)
-        self.view.addSubview(searchTextField)
-        
+        // 手势
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(inputBegin))
         self.view.addGestureRecognizer(tapGesture)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     func dismissMe() -> Void {
         
-        //
         searchTextField.endEditing(true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -84,10 +88,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     // 点击空白处
     func inputBegin() -> Void {
         self.searchTextField.endEditing(true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // 文字改变时
@@ -105,17 +105,17 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 上升键盘
-    func upSearchTextField() -> Void {
-        // 一次动画
-        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
-            self.searchTextField.frame = CGRectMake(0, 44, SCREEN_WIDTH, 30)
-        }) { (finshed) in
-            // 二次动画
-            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
-                self.searchTextField.frame = CGRectMake(0, 64, SCREEN_WIDTH, 30)
-                }, completion: { (finshed) in })
-        }
-    }
+//    func upSearchTextField() -> Void {
+//        // 一次动画
+//        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
+//            self.searchTextField.frame = CGRectMake(0, 44, SCREEN_WIDTH, 30)
+//        }) { (finshed) in
+//            // 二次动画
+//            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
+//                self.searchTextField.frame = CGRectMake(0, 64, SCREEN_WIDTH, 30)
+//                }, completion: { (finshed) in })
+//        }
+//    }
     
     // 暂时不用
 //    func downSearchTextField() -> Void {

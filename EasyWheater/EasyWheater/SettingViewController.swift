@@ -33,7 +33,7 @@ class SettingViewController: UIViewController {
         
         let okButton = UIButton.init(frame: CGRectMake(SCREEN_WIDTH - 70, SCREEN_HEIGHT - 70, 60, 60))
         okButton.setImage(UIImage.init(named: "okBtn"), forState: .Normal)
-        okButton.backgroundColor = UIColor.whiteColor()
+        okButton.backgroundColor = UIColor.clearColor()
         self.view.addSubview(okButton)
         okButton.addTarget(self, action: #selector(dismissMe), forControlEvents: .TouchUpInside)
     }

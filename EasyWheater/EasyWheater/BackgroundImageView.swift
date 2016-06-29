@@ -36,6 +36,18 @@ class BackgroundImageView: UIImageView {
         visualView.alpha = 0.5
         //添加到背景上
         self.addSubview(visualView)
+        
+        //
+        otherSettingBlock = {other in
+            switch other {
+            case .BLUR:
+                visualView.alpha = 0.0
+                break
+            case .CHANGE_BG:
+                self.image = UIImage.init(named: "SearchBg")
+                break
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
