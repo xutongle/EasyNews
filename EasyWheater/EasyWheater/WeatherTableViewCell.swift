@@ -9,7 +9,7 @@
 import UIKit
 
 class WeatherTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var weaterButton: UIButton!
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var stateLabel: UILabel!
@@ -19,8 +19,16 @@ class WeatherTableViewCell: UITableViewCell {
     var stateText:String = Tools.getUserDefaults("dayTime") as! String {
         didSet{
             stateLabel.text = stateText
-            self.weatherImageView.image = UIImage.init(named: stateText)
-            self.weatherImageView.backgroundColor = UIColor.clearColor()
+            
+            var image = UIImage.init(named: stateText)
+            if image == nil {
+                self.weatherImageView.backgroundColor = UIColor.orangeColor()
+                
+            }else {
+                self.weatherImageView.image = UIImage.init(named: stateText)
+                self.weatherImageView.backgroundColor = UIColor.clearColor()
+            }
+            image = nil
         }
     }
     
@@ -49,19 +57,20 @@ class WeatherTableViewCell: UITableViewCell {
         self.weatherImageView.contentMode = .ScaleAspectFill
         
         //判断有没有图，有图就显示，没有图就显示黄色
-        let image = UIImage.init(named: stateText)
+        var image = UIImage.init(named: stateText)
         if image == nil {
             self.weatherImageView.backgroundColor = UIColor.orangeColor()
         }else {
             self.weatherImageView.backgroundColor = UIColor.clearColor()
             self.weatherImageView.image = image
         }
+        image = nil
         
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
     @IBAction func weatherButtonAction(sender: UIButton, forEvent event: UIEvent) {

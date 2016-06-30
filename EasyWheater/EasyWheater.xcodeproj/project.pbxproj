@@ -34,6 +34,8 @@
 		9D8BBB9C1D12900100E8CE13 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BBB9A1D12900100E8CE13 /* WeatherTableViewCell.swift */; };
 		9D8BBB9D1D12900100E8CE13 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8BBB9B1D12900100E8CE13 /* WeatherTableViewCell.xib */; };
 		9DA481191D1EE1CC00A6EDEE /* DBOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */; };
+		9DB2A1891D24CE7900F6A513 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2A1881D24CE7900F6A513 /* WebViewController.swift */; };
+		9DB2A18C1D24CF5900F6A513 /* Mine_Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */; };
 		9DCEC9681D1EDFCE001E7246 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */; };
 		9DE828C11D09019A00725DDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE828C01D09019A00725DDA /* AppDelegate.swift */; };
 		9DE828C61D09019A00725DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE828C41D09019A00725DDA /* Main.storyboard */; };
@@ -94,6 +96,8 @@
 		9D8BBB9A1D12900100E8CE13 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		9D8BBB9B1D12900100E8CE13 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperate.swift; sourceTree = "<group>"; };
+		9DB2A1881D24CE7900F6A513 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mine_Webview.swift; sourceTree = "<group>"; };
 		9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9DE828BD1D09019A00725DDA /* EasyWheater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyWheater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE828C01D09019A00725DDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				9DE924561D1135FA003961F9 /* SlidingView */,
 				9D1B861F1D1E348E001654D0 /* SettingView */,
 				9D8B7FE81D2013F1008BE762 /* AddView */,
+				9DB2A18A1D24CF1C00F6A513 /* WebView */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				9DE828F31D0903B200725DDA /* MainViewController.swift */,
 				9D1B86291D1E4BC7001654D0 /* SettingViewController.swift */,
 				9D8B7FE61D20128A008BE762 /* AddViewController.swift */,
+				9DB2A1881D24CE7900F6A513 /* WebViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -286,6 +292,14 @@
 				9D3C73661D1D10400035258A /* FirstCell */,
 			);
 			name = Main_TableVie;
+			sourceTree = "<group>";
+		};
+		9DB2A18A1D24CF1C00F6A513 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		9DE828B41D09019A00725DDA = {
@@ -579,6 +593,7 @@
 				9D7D12071D102EB900C52D03 /* LeftSlidingView.swift in Sources */,
 				9D8B7FE41D20055F008BE762 /* HistoryTableViewCell.swift in Sources */,
 				9D8BBB9C1D12900100E8CE13 /* WeatherTableViewCell.swift in Sources */,
+				9DB2A1891D24CE7900F6A513 /* WebViewController.swift in Sources */,
 				9D8BBB981D128F0800E8CE13 /* MainTableView.swift in Sources */,
 				9D1B86281D1E4A0D001654D0 /* LeftViewProtocol.swift in Sources */,
 				9D1B86211D1E34C3001654D0 /* SettingTableView.swift in Sources */,
@@ -592,6 +607,7 @@
 				9D8B7FEA1D201428008BE762 /* SearchTitleView.swift in Sources */,
 				9DE924551D11011F003961F9 /* Tools.swift in Sources */,
 				9DE828C11D09019A00725DDA /* AppDelegate.swift in Sources */,
+				9DB2A18C1D24CF5900F6A513 /* Mine_Webview.swift in Sources */,
 				9D12C75E1D0F03D900A7BA7D /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

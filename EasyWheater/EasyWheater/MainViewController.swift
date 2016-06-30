@@ -85,7 +85,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 self.view.sliding(.OPEN)
                 break
             case .isLocationButton:
-                
+//                UIApplication.sharedApplication().openURL(NSURL.init(string: "http://tianqi.moji.com/")!)
+                let webViewVC = WebViewController()
+                self.presentViewController(webViewVC, animated: true, completion: nil)
                 break
             case .isAddLocationButton:
                 self.presentViewController(AddViewController.addViewController, animated: true, completion: nil)
