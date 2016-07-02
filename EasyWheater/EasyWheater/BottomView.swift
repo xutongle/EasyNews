@@ -66,7 +66,7 @@ class BottomView: UIView {
     //更新时间
     var updateTime = Tools.getUserDefaults("updateTime") as! String {
         didSet{
-            updateTimeLabel.text = updateTime
+            updateTimeLabel.text = String.init(format: "数据库更新时间:%@", updateTime)
         }
     }
     
@@ -99,7 +99,7 @@ class BottomView: UIView {
         updateTimeLabel = UILabel.init(frame: CGRectMake(0, self.frame.size.height - infoLabelHeight, self.frame.size.width, infoLabelHeight))
         updateTimeLabel.font = UIFont.systemFontOfSize(14)
         updateTimeLabel.textAlignment = .Center
-        updateTimeLabel.text = updateTime
+        updateTimeLabel.text = String.init(format: "数据库更新时间:%@", updateTime)
         updateTimeLabel.textColor = UIColor.orangeColor()
         self.addSubview(updateTimeLabel)
         
