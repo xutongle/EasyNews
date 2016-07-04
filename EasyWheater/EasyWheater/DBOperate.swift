@@ -22,6 +22,7 @@ class DBOperate: NSObject {
     // 字段
     var city:Expression<String>!
     var province:Expression<String>!
+    
     // 表对象
     var city_list_table:Table!
     
@@ -63,7 +64,7 @@ class DBOperate: NSObject {
              **/
             if !Tools.fileManager.fileExistsAtPath(fielExitsStr) {
                 print("创建文件", fielExitsStr)
-                // 创建表 (就一个表,一个字段)
+                // 创建表 (就一个表,两个字段)
                 try db.run(city_list_table.create(block: { tableBuilder in
                     tableBuilder.column(city, primaryKey: true)
                     tableBuilder.column(province)

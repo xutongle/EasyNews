@@ -39,6 +39,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     // MARK: - -----------------------------生命周期-----------------------------
     
     override func viewWillAppear(animated: Bool) {
+        
+        // 做一个变量用来判断是不是第一次启动app
+        if Tools.getUserDefaultsIsNil("firstIn") == nil {
+            Tools.setUserDefaults(key: "firstIn", andVluew: false)
+            Tools.setUserDefaults(key: "isBlur", andVluew: Float(0.5))
+        }
+        
         super.viewWillAppear(animated)
         
         //
@@ -73,9 +80,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         initailLocation()
                 
         // 背景视图
-        let view = BackgroundImageView.init(frame: self.view.frame)
-        view.weather = "多云"
-        self.view.addSubview(view)
+        BackgroundImageView.backgroundImageView.weather = "多云"
+        self.view.addSubview(BackgroundImageView.backgroundImageView)
         
         // heand按钮事件
         btnAction = {whichButton in
@@ -85,7 +91,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 self.view.sliding(.OPEN)
                 break
             case .isLocationButton:
-//                UIApplication.sharedApplication().openURL(NSURL.init(string: "http://tianqi.moji.com/")!)
                 let webViewVC = WebViewController()
                 self.presentViewController(webViewVC, animated: true, completion: nil)
                 break

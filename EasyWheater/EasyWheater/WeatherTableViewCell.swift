@@ -23,6 +23,7 @@ class WeatherTableViewCell: UITableViewCell {
             var image = UIImage.init(named: stateText)
             if image == nil {
                 self.weatherImageView.backgroundColor = UIColor.orangeColor()
+                self.weatherImageView.image = UIImage.init(named: "")
                 
             }else {
                 self.weatherImageView.image = UIImage.init(named: stateText)
@@ -60,6 +61,7 @@ class WeatherTableViewCell: UITableViewCell {
         var image = UIImage.init(named: stateText)
         if image == nil {
             self.weatherImageView.backgroundColor = UIColor.orangeColor()
+            self.weatherImageView.image = UIImage.init(named: "");
         }else {
             self.weatherImageView.backgroundColor = UIColor.clearColor()
             self.weatherImageView.image = image

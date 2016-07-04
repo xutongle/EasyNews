@@ -10,17 +10,23 @@ import UIKit
 
 class BackgroundImageView: UIImageView {
     
+    static let backgroundImageView = BackgroundImageView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+    
+    var visualView:UIVisualEffectView!
+    
     var weather:String!{
         didSet{
             changeBackground()
         }
     }
     
-//    var blurSiggle:Bool = Tools.getUserDefaults("") as! Bool {
-//        didSet{
-//            
-//        }
-//    }
+    // 透明度值的监听
+    var blurValue:Float! = Tools.getUserDefaults("isBlur") as! Float{
+        didSet{
+            visualView.alpha = 1
+            visualView.alpha = CGFloat(blurValue)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,25 +35,15 @@ class BackgroundImageView: UIImageView {
         //毛玻璃效果
         let blurEffect = UIBlurEffect.init(style: .Dark)
         //毛玻璃view
-        let visualView = UIVisualEffectView.init(effect: blurEffect)
+        visualView = UIVisualEffectView.init(effect: blurEffect)
         //设置毛玻璃view的视图
         visualView.frame = frame
-        //
-        visualView.alpha = 0.5
+        
+        visualView.alpha = 1
+        visualView.alpha = CGFloat(Tools.getUserDefaults("isBlur") as! Float)
+        
         //添加到背景上
         self.addSubview(visualView)
-        
-        //
-        otherSettingBlock = {other in
-            switch other {
-            case .BLUR:
-                visualView.alpha = 0.0
-                break
-            case .CHANGE_BG:
-                self.image = UIImage.init(named: "SearchBg")
-                break
-            }
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,5 +60,5 @@ class BackgroundImageView: UIImageView {
             break
         }
     }
-
+    
 }

@@ -24,6 +24,7 @@
 		9D3C73761D1D45910035258A /* LaterWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3C73741D1D45910035258A /* LaterWeatherCell.xib */; };
 		9D3C73791D1D6F170035258A /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C73781D1D6F170035258A /* BottomView.swift */; };
 		9D3C737B1D1D84AD0035258A /* InfoBtnProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C737A1D1D84AD0035258A /* InfoBtnProtocol.swift */; };
+		9D4B9EFA1D2A97E80007BA10 /* DBOperateFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */; };
 		9D7D12071D102EB900C52D03 /* LeftSlidingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D12061D102EB900C52D03 /* LeftSlidingView.swift */; };
 		9D8B7FE41D20055F008BE762 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */; };
 		9D8B7FE51D20055F008BE762 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */; };
@@ -86,6 +87,7 @@
 		9D3C73741D1D45910035258A /* LaterWeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaterWeatherCell.xib; sourceTree = "<group>"; };
 		9D3C73781D1D6F170035258A /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		9D3C737A1D1D84AD0035258A /* InfoBtnProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoBtnProtocol.swift; sourceTree = "<group>"; };
+		9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperateFile.swift; sourceTree = "<group>"; };
 		9D7D12061D102EB900C52D03 /* LeftSlidingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSlidingView.swift; sourceTree = "<group>"; };
 		9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				9D3C73641D1D04B50035258A /* Toast.swift */,
 				9D3C736C1D1D26840035258A /* SingleManager.swift */,
 				9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */,
+				9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D4B9EFA1D2A97E80007BA10 /* DBOperateFile.swift in Sources */,
 				9DE924521D10E9C5003961F9 /* LeftTableViewCell.swift in Sources */,
 				9D3C73751D1D45910035258A /* LaterWeatherCell.swift in Sources */,
 				9D8B7FE71D20128A008BE762 /* AddViewController.swift in Sources */,

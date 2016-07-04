@@ -12,7 +12,10 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        self.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        
+        self.backgroundColor = UIColor(red:135/255.0, green:206/255.0, blue:235/255.0, alpha: 1)
+        self.bounces = false
+        self.tableHeaderView = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 20))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,5 +30,9 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCellWithIdentifier("OtherSettingCell") as! OtherSettingCellTableViewCell
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
 }
