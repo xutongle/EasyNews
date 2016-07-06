@@ -20,25 +20,25 @@ class AnotherInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var rightBtn: UIButton!
     
     //湿度
-    var humidity = Tools.getUserDefaults("humidity") as! String {
+    var humidity = Tools.getUserDefaults("humidity") != nil ? Tools.getUserDefaults("humidity") as! String : "无" {
         didSet{
             leftBtn.setTitle(humidity, forState: .Normal)
         }
     }
     //最高最低温度
-    var fullTemperature = Tools.getUserDefaults("fullTemperature") as! String {
+    var fullTemperature = Tools.getUserDefaults("fullTemperature") != nil ? Tools.getUserDefaults("fullTemperature") as! String : "无" {
         didSet{
             centerBtn.setTitle(fullTemperature, forState: .Normal)
         }
     }
     
     //风速
-    var wind = Tools.getUserDefaults("wind") as! String {
+    var wind = Tools.getUserDefaults("wind") != nil ? Tools.getUserDefaults("wind") as! String : "无" {
         didSet{
             rightBtn.setTitle(wind, forState: .Normal)
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         //背景透明
@@ -55,7 +55,7 @@ class AnotherInfoTableViewCell: UITableViewCell {
         rightBtn.setTitle(wind, forState: .Normal)
         
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

@@ -16,21 +16,21 @@ class LaterWeatherCell: UITableViewCell {
     @IBOutlet weak var weatherAndStateBtn: UIButton!
     
     //星期几
-    var week = Tools.getUserDefaults(String.init(format: "week%d", count)) as! String {
+    var week =  Tools.getUserDefaults(String.init(format: "week%d", count)) != nil ? Tools.getUserDefaults(String.init(format: "week%d", count)) as! String : "无"{
         didSet{
             dateLabel.text = week
         }
     }
     
     //最低最高温度
-    var dayTime1 = Tools.getUserDefaults(String.init(format: "dayTime%d", count)) as! String {
+    var dayTime1 = Tools.getUserDefaults(String.init(format: "dayTime%d", count)) != nil ? Tools.getUserDefaults(String.init(format: "dayTime%d", count)) as! String : "无" {
         didSet{
             changeBtnValue()
         }
     }
 
     //风力风向
-    var temperature1 = Tools.getUserDefaults(String.init(format: "temperature%d", count)) as! String {
+    var temperature1 = Tools.getUserDefaults(String.init(format: "temperature%d", count)) != nil ? Tools.getUserDefaults(String.init(format: "temperature%d", count)) as! String : " "{
         didSet{
             changeBtnValue()
         }

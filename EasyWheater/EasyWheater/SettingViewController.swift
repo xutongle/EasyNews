@@ -108,15 +108,26 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as! UIImage;
         
-        // MARK: - ToDo 保存图片
+        // 保存图片并显示图片
+        SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") { (compltete) in
+            if compltete {
+                // 存储成功直接给背景图
+                BackgroundImageView.backgroundImageView.image = image
+                
+                self.show("存储成功", block: {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }else {
+                self.show("存储失败", block: {
+                    //self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+        }
         
-        // 直接给背景图
-        BackgroundImageView.backgroundImageView.image = image
-        self.dismissViewControllerAnimated(true, completion: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

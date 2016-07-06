@@ -43,28 +43,28 @@ class BottomView: UIView {
     // MARK: ---------------属性--------------------
     
     //穿衣指数
-    var dressingIndex = Tools.getUserDefaults("dressingIndex") as! String {
+    var dressingIndex = Tools.getUserDefaults("dressingIndex") != nil ? Tools.getUserDefaults("dressingIndex") as! String : "无" {
         didSet{
             dressingIndexLabel.text = dressingIndex
         }
     }
     
     //锻炼
-    var exerciseIndex = Tools.getUserDefaults("exerciseIndex") as! String {
+    var exerciseIndex = Tools.getUserDefaults("exerciseIndex") != nil ? Tools.getUserDefaults("exerciseIndex") as! String : "无" {
         didSet{
             exerciseIndexLabel.text = exerciseIndex
         }
     }
     
     //空气质量
-    var airCondition = Tools.getUserDefaults("airCondition") as! String {
+    var airCondition = Tools.getUserDefaults("airCondition") != nil ? Tools.getUserDefaults("airCondition") as! String : "无" {
         didSet{
             airConditionLabel.text = airCondition
         }
     }
     
     //更新时间
-    var updateTime = Tools.getUserDefaults("updateTime") as! String {
+    var updateTime = Tools.getUserDefaults("updateTime") != nil ? Tools.getUserDefaults("updateTime") as! String : "无" {
         didSet{
             updateTimeLabel.text = String.init(format: "数据库更新时间:%@", updateTime)
         }

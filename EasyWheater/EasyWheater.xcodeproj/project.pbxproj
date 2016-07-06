@@ -24,7 +24,7 @@
 		9D3C73761D1D45910035258A /* LaterWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3C73741D1D45910035258A /* LaterWeatherCell.xib */; };
 		9D3C73791D1D6F170035258A /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C73781D1D6F170035258A /* BottomView.swift */; };
 		9D3C737B1D1D84AD0035258A /* InfoBtnProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C737A1D1D84AD0035258A /* InfoBtnProtocol.swift */; };
-		9D4B9EFA1D2A97E80007BA10 /* DBOperateFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */; };
+		9D737DE01D2CDEF2007D0F8A /* SaveImageToDocment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D737DDF1D2CDEF2007D0F8A /* SaveImageToDocment.swift */; };
 		9D7D12071D102EB900C52D03 /* LeftSlidingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D12061D102EB900C52D03 /* LeftSlidingView.swift */; };
 		9D8B7FE41D20055F008BE762 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */; };
 		9D8B7FE51D20055F008BE762 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */; };
@@ -39,7 +39,6 @@
 		9DB2A18C1D24CF5900F6A513 /* Mine_Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */; };
 		9DCEC9681D1EDFCE001E7246 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */; };
 		9DE828C11D09019A00725DDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE828C01D09019A00725DDA /* AppDelegate.swift */; };
-		9DE828C61D09019A00725DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE828C41D09019A00725DDA /* Main.storyboard */; };
 		9DE828C91D09019A00725DDA /* EasyWheater.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DE828C71D09019A00725DDA /* EasyWheater.xcdatamodeld */; };
 		9DE828CB1D09019A00725DDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE828CA1D09019A00725DDA /* Assets.xcassets */; };
 		9DE828CE1D09019A00725DDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE828CC1D09019A00725DDA /* LaunchScreen.storyboard */; };
@@ -87,7 +86,7 @@
 		9D3C73741D1D45910035258A /* LaterWeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaterWeatherCell.xib; sourceTree = "<group>"; };
 		9D3C73781D1D6F170035258A /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		9D3C737A1D1D84AD0035258A /* InfoBtnProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoBtnProtocol.swift; sourceTree = "<group>"; };
-		9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperateFile.swift; sourceTree = "<group>"; };
+		9D737DDF1D2CDEF2007D0F8A /* SaveImageToDocment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageToDocment.swift; sourceTree = "<group>"; };
 		9D7D12061D102EB900C52D03 /* LeftSlidingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSlidingView.swift; sourceTree = "<group>"; };
 		9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9DE828BD1D09019A00725DDA /* EasyWheater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyWheater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE828C01D09019A00725DDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9DE828C51D09019A00725DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DE828C81D09019A00725DDA /* EasyWheater.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyWheater.xcdatamodel; sourceTree = "<group>"; };
 		9DE828CA1D09019A00725DDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DE828CD1D09019A00725DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 		9D3C736F1D1D3FA40035258A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9DE828C41D09019A00725DDA /* Main.storyboard */,
 				9D12C7581D0EFCBE00A7BA7D /* BackgroundImageView.swift */,
 				9D12C75A1D0F01DE00A7BA7D /* HeadView.swift */,
 				9D8BBB991D128FB000E8CE13 /* Main_TableVie */,
@@ -244,7 +241,7 @@
 				9D3C73641D1D04B50035258A /* Toast.swift */,
 				9D3C736C1D1D26840035258A /* SingleManager.swift */,
 				9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */,
-				9D4B9EF91D2A97E80007BA10 /* DBOperateFile.swift */,
+				9D737DDF1D2CDEF2007D0F8A /* SaveImageToDocment.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -510,7 +507,6 @@
 				9D8BBB9D1D12900100E8CE13 /* WeatherTableViewCell.xib in Resources */,
 				9D8B7FEC1D202134008BE762 /* citydict.plist in Resources */,
 				9DE828CB1D09019A00725DDA /* Assets.xcassets in Resources */,
-				9DE828C61D09019A00725DDA /* Main.storyboard in Resources */,
 				9D8B7FE51D20055F008BE762 /* HistoryTableViewCell.xib in Resources */,
 				9D1B86261D1E36F0001654D0 /* OtherSettingCellTableViewCell.xib in Resources */,
 			);
@@ -585,7 +581,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D4B9EFA1D2A97E80007BA10 /* DBOperateFile.swift in Sources */,
 				9DE924521D10E9C5003961F9 /* LeftTableViewCell.swift in Sources */,
 				9D3C73751D1D45910035258A /* LaterWeatherCell.swift in Sources */,
 				9D8B7FE71D20128A008BE762 /* AddViewController.swift in Sources */,
@@ -604,6 +599,7 @@
 				9DA481191D1EE1CC00A6EDEE /* DBOperate.swift in Sources */,
 				9D12C75B1D0F01DE00A7BA7D /* HeadView.swift in Sources */,
 				9DE828F41D0903B200725DDA /* MainViewController.swift in Sources */,
+				9D737DE01D2CDEF2007D0F8A /* SaveImageToDocment.swift in Sources */,
 				9D3C736A1D1D108B0035258A /* AnotherInfoTableViewCell.swift in Sources */,
 				9DE828C91D09019A00725DDA /* EasyWheater.xcdatamodeld in Sources */,
 				9D3C73791D1D6F170035258A /* BottomView.swift in Sources */,
@@ -648,14 +644,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9DE828C41D09019A00725DDA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9DE828C51D09019A00725DDA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9DE828CC1D09019A00725DDA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

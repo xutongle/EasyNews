@@ -28,7 +28,7 @@ class HeadView: UIView {
     var drawUpButton:UIButton!
     var addLocationButton:UIButton!
     
-    var location:String = Tools.getUserDefaults("city") as! String{
+    var location:String = Tools.getUserDefaults("city") != nil ? Tools.getUserDefaults("city") as! String : "无"{
         didSet{
             locationButton.setTitle(location, forState: .Normal)
         }

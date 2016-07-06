@@ -20,7 +20,7 @@ import Alamofire
 class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnProtocol, LeftViewProtocol {
     
     // MARK: - -----------------------------属性-----------------------------
-        
+    
     //mob天气的相关
     let url = "http://apicloud.mob.com/v1/weather/query"
     let APP_KEY = "12c3624ad5993"
@@ -41,9 +41,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     override func viewWillAppear(animated: Bool) {
         
         // 做一个变量用来判断是不是第一次启动app
-        if Tools.getUserDefaultsIsNil("firstIn") == nil {
+        if Tools.getUserDefaults("firstIn") == nil {
             Tools.setUserDefaults(key: "firstIn", andVluew: false)
-            Tools.setUserDefaults(key: "isBlur", andVluew: Float(0.5))
         }
         
         super.viewWillAppear(animated)
@@ -75,12 +74,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //初始化 CLLocationManager
         initailLocation()
-                
+        
         // 背景视图
         BackgroundImageView.backgroundImageView.weather = "多云"
+        
+        // 从沙盒中取到图片
+        SaveImageToDocment.saveImageToDocment.getImage({ (image) in
+            if image != nil {
+                BackgroundImageView.backgroundImageView.image = image
+            }
+        })
+        
         self.view.addSubview(BackgroundImageView.backgroundImageView)
         
         // heand按钮事件
@@ -130,16 +137,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     func getLocationName(location: CLLocation, complete:(province: NSString,city :NSString) -> Void) -> Void {
         
         /*
-        //经度纬度
-        let jing = CGFloat(location.coordinate.longitude)
-        let wei = CGFloat(location.coordinate.latitude)
-        
-        //高德编码
-        let locationStr = String.init(format: "%@?key=%@&location=%f,%f", GEO_URL, GEOCODE_KEY,  jing, wei)
-        
-        Alamofire.request(NSURLRequest.init(URL: NSURL.init(string: locationStr)!)).responseJSON { (response) in
-            print(response.result.value)
-        }
+         //经度纬度
+         let jing = CGFloat(location.coordinate.longitude)
+         let wei = CGFloat(location.coordinate.latitude)
+         
+         //高德编码
+         let locationStr = String.init(format: "%@?key=%@&location=%f,%f", GEO_URL, GEOCODE_KEY,  jing, wei)
+         
+         Alamofire.request(NSURLRequest.init(URL: NSURL.init(string: locationStr)!)).responseJSON { (response) in
+         print(response.result.value)
+         }
          */
         
         //苹果自带反地理编码
@@ -177,10 +184,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     let tempDict = self.allWeather![0] as! NSDictionary
                     
                     // --------观察者  当值改变时 视图也会改变--------------
-                                        
+                    
                     //
                     let weatherCell = SingleManager.singleManager.getValue(Key: "WeatherCell") as! WeatherTableViewCell
-
+                    
                     //当前天气状态
                     Tools.setUserDefaults(key: "dayTime", andVluew: self.weatherDict["weather"]!)
                     weatherCell.stateText = Tools.getUserDefaults("dayTime") as! String
@@ -215,7 +222,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                         var str = String.init(format: "week%d", index)
                         Tools.setUserDefaults(key: str, andVluew: tomorrowDict["week"]!)
                         laterCell.week = Tools.getUserDefaults(str) as! String
-
+                        
                         //状态（雷阵雨）
                         str = String.init(format: "dayTime%d", index)
                         Tools.setUserDefaults(key: str, andVluew: tomorrowDict["dayTime"]!)
@@ -275,7 +282,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         //当位置稳定时
         if locations.first == locations.last {
             manager.stopUpdatingLocation()
-                        
+            
             //地理位置的回调
             getLocationName(currLocation) { (province ,city) in
                 //省和市
@@ -284,7 +291,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 
                 // 如果之前没有存入过,就存入数据库
                 if !DBOperate.dbOperate.queryIsExitsData(shortCity) {
-                    DBOperate.dbOperate.insertData(shortCity, provinceName: shortProvince)
+                    if !DBOperate.dbOperate.insertData(shortCity, provinceName: shortProvince){
+                        self.show("数据库操作失败", block: {
+                            
+                        })
+                    }else {
+                        print("数据库存储成功")
+                    }
+                }else {
+                    print("存储过了")
                 }
                 
                 // 添加进数据库
@@ -316,7 +331,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     // MARK: - ----------------------自己的协议InfoBtnProtocol------------------
     func infoBtnAction(button: UIButton) {
-
+        
         //去除按钮高亮
         button.adjustsImageWhenHighlighted = false
         UIView.animateWithDuration(0.25) {
@@ -331,9 +346,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     // settingProtocol
     func settingBtnAction() -> Void {
         self.view.sliding(.CLOSE)
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let settingVC = storyboard.instantiateViewControllerWithIdentifier("SettingVC")
-        self.presentViewController(settingVC, animated: true, completion: nil)
+        
+        self.presentViewController(SettingViewController(), animated: true, completion: nil)
     }
     
     func chooseHitsoryCity(citys: NSDictionary) -> Void {
@@ -345,7 +359,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
         
         self.view.sliding(.CLOSE)
-        getWheater { 
+        getWheater {
             leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
         }
     }

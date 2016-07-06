@@ -21,7 +21,7 @@ class BackgroundImageView: UIImageView {
     }
     
     // 透明度值的监听
-    var blurValue:Float! = Tools.getUserDefaults("isBlur") as! Float{
+    var blurValue:Float! = Tools.getUserDefaults("isBlur") != nil ? Tools.getUserDefaults("isBlur") as! Float : 0.5{
         didSet{
             visualView.alpha = 1
             visualView.alpha = CGFloat(blurValue)
@@ -40,7 +40,7 @@ class BackgroundImageView: UIImageView {
         visualView.frame = frame
         
         visualView.alpha = 1
-        visualView.alpha = CGFloat(Tools.getUserDefaults("isBlur") as! Float)
+        visualView.alpha = CGFloat(blurValue)
         
         //添加到背景上
         self.addSubview(visualView)

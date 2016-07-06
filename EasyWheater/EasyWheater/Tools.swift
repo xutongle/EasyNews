@@ -22,23 +22,9 @@ class Tools: NSObject {
     //获得用户变量
     static func getUserDefaults(key: String) -> AnyObject? {
         
-        if  NSUserDefaults.standardUserDefaults().objectForKey(key) != nil {
-            return NSUserDefaults.standardUserDefaults().objectForKey(key)!
-        }else{
-            return "- -"
-        }
-    }
-    
-    //获得用户变量
-    static func getUserDefaultsIsNil(key: String) -> AnyObject? {
-        
-        if  NSUserDefaults.standardUserDefaults().objectForKey(key) != nil {
-            return NSUserDefaults.standardUserDefaults().objectForKey(key)!
-        }else{
-            return nil
-        }
-    }
+        return NSUserDefaults.standardUserDefaults().objectForKey(key)
 
+    }
     
     //设置用户变量
     static func setUserDefaults(key key: String, andVluew value:AnyObject) -> Void {

@@ -42,8 +42,7 @@ class DBOperate: NSObject {
         let urlForDocument = Tools.fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains:NSSearchPathDomainMask.UserDomainMask)
         
         //获得沙盒url
-        let documentUrl = urlForDocument[0]
-        let documentStr = NSString.init(format: "%@", documentUrl)
+        let documentStr = NSString.init(format: "%@", urlForDocument[0])
         //用于判断文件存不存在
         fielExitsStr = documentStr.substringFromIndex(7) + fileName
         //文件路径
@@ -51,7 +50,7 @@ class DBOperate: NSObject {
         
         // 当文件不存在时 创建数据库和表
         do {
-            // 连接数据库
+            // 连接数据库 (不存在会自动创建)
             db = try Connection(filePath)
             // 字段对象
             city = Expression<String>("HISTRY_CITY")
@@ -59,21 +58,25 @@ class DBOperate: NSObject {
             // 表对象
             city_list_table = Table("CITY_LIST")
             
-            /**
-             * 当文件不存在说明还没有存入 要创建数据库和表
-             **/
-            if !Tools.fileManager.fileExistsAtPath(fielExitsStr) {
-                print("创建文件", fielExitsStr)
+            // 没有创建过表并且文件存在时 创建表
+            if Tools.getUserDefaults("isCreateTable") == nil && NSFileManager.defaultManager().fileExistsAtPath(fielExitsStr) {
+                
+                queryData({ (backCitys) in
+                    
+                })
                 // 创建表 (就一个表,两个字段)
                 try db.run(city_list_table.create(block: { tableBuilder in
                     tableBuilder.column(city, primaryKey: true)
                     tableBuilder.column(province)
                 }))
+                Tools.setUserDefaults(key: "isCreateTable", andVluew: true)
+            }else {
+                print("创建过了表")
             }
         }catch {
             print("数据库操作出错\(error)")
         }
-        print(fielExitsStr)
+        print(documentStr)
     }
     
     // 查询数据

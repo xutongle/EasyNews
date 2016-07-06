@@ -35,7 +35,7 @@ class OtherSettingCellTableViewCell: UITableViewCell {
         changeBg.addTarget(self, action: #selector(btnAction), forControlEvents: .TouchUpInside)
         
         blurProgressBar.addTarget(self, action: #selector(changeBlur), forControlEvents: .ValueChanged)
-        blurProgressBar.value = Tools.getUserDefaults("isBlur") as! Float
+        blurProgressBar.value = Tools.getUserDefaults("isBlur") != nil ? Tools.getUserDefaults("isBlur") as! Float : 0.5
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

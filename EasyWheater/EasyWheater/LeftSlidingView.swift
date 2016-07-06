@@ -153,7 +153,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         weak var weakSelf:LeftSlidingView! = self
         dataArray = NSMutableArray()
         
-        // 判断查询到的值如果和当前显示的位置是一样的 就不加入
+        // 判断查询到的值如果和当前显示的位置是一样的 就不加入(而且查询出错也不会运行block)
         DBOperate.dbOperate.queryData { backCitys in
             print(backCitys["city"])
             if backCitys["city"] as! String != HeadView.headView.location {

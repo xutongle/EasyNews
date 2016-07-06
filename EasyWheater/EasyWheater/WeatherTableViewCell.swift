@@ -16,25 +16,23 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var apparentLabel: UILabel!
     
     //天气情况
-    var stateText:String = Tools.getUserDefaults("dayTime") as! String {
+    var stateText:String = Tools.getUserDefaults("dayTime") != nil ? Tools.getUserDefaults("dayTime") as! String : "无" {
         didSet{
             stateLabel.text = stateText
             
-            var image = UIImage.init(named: stateText)
-            if image == nil {
+            if stateText == "无" {
+                // 如果没图 就让背景为黄色
                 self.weatherImageView.backgroundColor = UIColor.orangeColor()
-                self.weatherImageView.image = UIImage.init(named: "")
-                
+                self.weatherImageView.image = UIImage.init()
             }else {
                 self.weatherImageView.image = UIImage.init(named: stateText)
                 self.weatherImageView.backgroundColor = UIColor.clearColor()
             }
-            image = nil
         }
     }
     
     //温度
-    var weatherText:String = Tools.getUserDefaults("temperature") as! String {
+    var weatherText:String = Tools.getUserDefaults("temperature") != nil ? Tools.getUserDefaults("temperature") as! String : "无" {
         didSet{
             weaterButton.setTitle(weatherText, forState: .Normal)
         }

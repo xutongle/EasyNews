@@ -11,15 +11,14 @@ import UIKit
 class LeftTableViewCell: UITableViewCell {
     
     // 位置
-    var locationText = Tools.getUserDefaults("city") as! String {
+    var locationText = Tools.getUserDefaults("city") != nil ? Tools.getUserDefaults("city") as! String : "无" {
         didSet{
             locationLabel.text = locationText
         }
     }
     
     //温度
-    var weatherText:String = Tools.getUserDefaults("temperature") as! String
-    {
+    var weatherText:String = Tools.getUserDefaults("temperature") != nil ? Tools.getUserDefaults("temperature") as! String : "无"{
         didSet{
             weatherButton.setTitle(weatherText, forState: .Normal)
         }
