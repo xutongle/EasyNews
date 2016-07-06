@@ -1,4 +1,3 @@
 # EasyWeather
-Self
 
-新手练习
+没什么可说明的。
