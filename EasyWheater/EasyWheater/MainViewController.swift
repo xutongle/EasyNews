@@ -81,13 +81,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 BackgroundImageView.backgroundImageView.image = image
             }
         })
-        
+        // 添加背景视图
         self.view.addSubview(BackgroundImageView.backgroundImageView)
+        
+        // 左划手势
+        let swipeLeftGestrue = UISwipeGestureRecognizer.init(target: self, action: #selector(swipeLeftAction))
+        self.view.addGestureRecognizer(swipeLeftGestrue)
         
         // heand按钮事件
         btnAction = {whichButton in
             switch whichButton {
             case .isDrawUpButton:
+                // 加载侧滑
                 self.view.addLeftSlidingView()
                 self.view.sliding(.OPEN)
                 break
@@ -100,6 +105,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 break
             }
         }
+        
+        // 监听通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reGetWeather_Locatin), name: "startLocation_GetWeather_Notification", object: nil)
     }
     
@@ -109,10 +116,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     // MARK: - -----------------------------自己的方法-----------------------------
     
+    // 开启定位
     func reGetWeather_Locatin() -> Void {
         locationManager.startUpdatingLocation()
     }
     
+    // 左划手势
+    func swipeLeftAction(sender: UISwipeGestureRecognizer) -> Void {
+        // 加载侧滑
+        self.view.addLeftSlidingView()
+        self.view.sliding(.OPEN)
+    }
+    
+    // 初始化CLLocationManager
     func initailLocation() -> Void {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -322,7 +338,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     //如果未开启定位服务或者获取不到定位，会走此代理方法
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
+        //
         manager.stopUpdatingLocation()
         print("[OTTLocationManager locationManager:didFailWithError] 无法获取到定位")
         if Tools.getUserDefaults("city") != nil && allWeather == nil {
@@ -332,6 +348,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     }
     
     // MARK: - ----------------------自己的协议InfoBtnProtocol------------------
+    
+    // 右下角按钮事件协议
     func infoBtnAction(button: UIButton) {
         
         //去除按钮高亮
@@ -345,13 +363,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         }
     }
     
-    // settingProtocol
+    // settingProtocol 设置按钮事件
     func settingBtnAction() -> Void {
         self.view.sliding(.CLOSE)
         
         self.presentViewController(SettingViewController(), animated: true, completion: nil)
     }
     
+    // cell 侧滑按钮事件
     func chooseHitsoryCity(citys: NSDictionary) -> Void {
         Tools.setUserDefaults(key: "city", andVluew: citys["city"]!)
         Tools.setUserDefaults(key: "province", andVluew: citys["province"]!)

@@ -58,6 +58,16 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
             
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        
+        // 用于恢复默认的背景
+        backDeafultBgBlock = {other in
+            if SaveImageToDocment.saveImageToDocment.removeImage() {
+                BackgroundImageView.backgroundImageView.image = UIImage.init(named: "weather_temp")
+                self.view.show("恢复成功", block: { })
+            }else {
+                self.view.show("恢复失败，稍后试试", block: { })
+            }
+        }
     }
     
     
@@ -99,7 +109,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @objc
     func dismissMe() -> Void {
-        Tools.setUserDefaults(key: "isBlur", andVluew: SingleManager.singleManager.getValue(Key: "isBlur"))
+        Tools.setUserDefaults(key: "isBlur", andVluew: SingleManager.singleManager.getValue(Key: "isBlur")!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

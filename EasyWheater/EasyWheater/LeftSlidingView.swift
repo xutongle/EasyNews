@@ -39,18 +39,10 @@ extension UIView {
         
         self.addSubview(alphaView)
         self.addSubview(leftSlidingView)
+        
         //把视图带到最前
         alphaView.bringSubviewToFront(self)
         leftSlidingView.bringSubviewToFront(self)
-        
-        //        let swipGesrue = UISwipeGestureRecognizer.init(target: self, action: #selector(gestrueOpenSliding))
-        //        swipGesrue.direction = .Right
-        //        self.addGestureRecognizer(swipGesrue)
-    }
-    
-    @objc
-    private func gestrueOpenSliding() -> Void {
-        sliding(.OPEN)
     }
     
     //侧滑开关
@@ -143,12 +135,12 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     // MARK: - ----------------------私有方法-------------------
     
     @objc
-    func jumpToSetting() -> Void {
+    private func jumpToSetting() -> Void {
         left_delegate?.settingBtnAction()
     }
     
     // 自己的方法 查询完后执行
-    func getAllLocationFormSQLite() -> Void {
+    private func getAllLocationFormSQLite() -> Void {
         
         weak var weakSelf:LeftSlidingView! = self
         dataArray = NSMutableArray()
@@ -168,8 +160,6 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     private func openSliding() -> Void{
         //获得历史记录
         getAllLocationFormSQLite()
-        //
-        
         
         //做个控制 防止侧滑漂移
         if myControl.openSize > SCREEN_WIDTH{
@@ -191,7 +181,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
                 self.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
                 alphaView.alpha = 0.0
             }, completion: { (conpletion) in
-                
+                self.removeFromSuperview()
         })
     }
     
@@ -275,7 +265,7 @@ class MySlidingControl {
     //侧滑打开的大小
     var openSize:CGFloat = SCREEN_WIDTH / 7 * 5{
         didSet{
-            tableview?.frame = CGRectMake(SCREEN_WIDTH - myControl.openSize, 0, myControl.openSize, SCREEN_HEIGHT)
+            tableview?.frame = CGRectMake(SCREEN_WIDTH - openSize, 0, openSize, SCREEN_HEIGHT)
         }
     }
     
@@ -318,4 +308,17 @@ class settingButton: UIButton {
         path.lineWidth = 1
         path.stroke()
     }
+}
+
+// MARK: - --------------------Touch 类---------------------------------
+
+func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    
+}
+
+//
+
+func gestureRecognizer(gestrue: UIGestureRecognizer) -> Bool {
+    
+    return true
 }

@@ -25,6 +25,7 @@ class SingleManager: NSObject {
         if key == nil || value == nil {
             return
         }
+        
         mutableDictionary.addEntriesFromDictionary(NSMutableDictionary.init(object: value!, forKey: key!) as [NSObject : AnyObject])
     }
     
@@ -34,12 +35,12 @@ class SingleManager: NSObject {
     }
     
     // 获取
-    func getValue(Key key: String?) -> AnyObject {
+    func getValue(Key key: String?) -> AnyObject? {
         if (mutableDictionary.objectForKey(key!) != nil) {
             let value = mutableDictionary.objectForKey(key!)!
             return value
         }else {
-            return false
+            return nil
         }
     }
 }

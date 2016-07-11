@@ -39,17 +39,27 @@
                                     </slider>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5I-E9-ieX">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0Z-6h-2B2">
                                 <rect key="frame" x="0.0" y="50" width="442" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title=" - -">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYM-vH-EU8">
+                                        <rect key="frame" x="0.0" y="0.0" width="221" height="50"/>
+                                        <state key="normal" title="选择图片以改变背景">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUb-uf-9ml">
+                                        <rect key="frame" x="221" y="0.0" width="221" height="50"/>
+                                        <state key="normal" title="恢复默认">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nUb-uf-9ml" firstAttribute="width" secondItem="xYM-vH-EU8" secondAttribute="width" id="3W7-RE-E3K"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="J5I-E9-ieX" firstAttribute="height" secondItem="kU9-gg-Ri5" secondAttribute="height" id="Eal-Nj-tLV"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -60,9 +70,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="backDefaultBgBtn" destination="nUb-uf-9ml" id="b8p-zb-1Io"/>
                 <outlet property="bgButtonWidth" destination="mM8-W7-Lrh" id="GSC-1g-kBO"/>
                 <outlet property="blurProgressBar" destination="yZZ-H0-lta" id="GUk-Za-ADc"/>
-                <outlet property="changeBg" destination="J5I-E9-ieX" id="6xA-Ky-TEu"/>
+                <outlet property="changeBg" destination="xYM-vH-EU8" id="9Pe-Bt-e3d"/>
                 <outlet property="useBlur" destination="Ggj-k6-We8" id="Bly-Cm-6ei"/>
             </connections>
             <point key="canvasLocation" x="281" y="295"/>

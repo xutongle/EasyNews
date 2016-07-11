@@ -66,6 +66,19 @@ class SaveImageToDocment: NSObject {
         
     }
     
+    // 删除图片
+    func removeImage() -> Bool {
+        do {
+            if NSFileManager.defaultManager().fileExistsAtPath(getDocumentPath()) {
+                try NSFileManager.defaultManager().removeItemAtPath(getDocumentPath() + fileName_in)
+            }
+            return true
+        }catch {
+            print("删除失败－－>",error)
+            return false
+        }
+    }
+    
     // 获得图片
     func getImage(complete: (image: UIImage?)-> Void) -> Void {
         
