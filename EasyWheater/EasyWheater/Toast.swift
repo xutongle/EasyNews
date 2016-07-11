@@ -37,7 +37,7 @@ private var label:UILabel = UILabel()
 
 // MARK: - ---------------------extension继承？---------------------
 
-extension UIViewController{
+extension UIView{
     
     // MARK: - ---------------------在viewcontroller直接调用---------------------
     
@@ -59,9 +59,9 @@ extension UIViewController{
     }
     
     // 自定义的输入totast的位置
-    func show(message: String, style: ToastStyle, postion: CGPoint, block: ()->Void) -> Void {
+    func show(message: String, style: ToastStyle, postion: CGRect, block: ()->Void) -> Void {
         
-        toastView.frame = CGRectMake(postion.x, postion.y, SCREEN_WIDTH / 2, 40)
+        toastView.frame = postion
         show(message, style: style, block: block)
     }
     
@@ -79,13 +79,12 @@ extension UIViewController{
     func show(message: String, block: () -> Void) -> Void {
         
         label.text = message
-        self.view.addSubview(toastView)
+        self.addSubview(toastView)
         
         // 延时几秒后消失
         self.delay(1) {
             toastView.removeFromSuperview()
             block()
-            
         }
     }
     

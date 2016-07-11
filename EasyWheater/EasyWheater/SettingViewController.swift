@@ -114,11 +114,11 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
                 // 存储成功直接给背景图
                 BackgroundImageView.backgroundImageView.image = image
                 
-                self.show("存储成功", block: {
+                self.view.show("存储成功", block: {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }else {
-                self.show("存储失败", block: {
+                self.view.show("存储失败", block: {
                     //self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }

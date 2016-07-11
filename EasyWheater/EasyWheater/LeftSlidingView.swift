@@ -159,6 +159,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
             if backCitys["city"] as! String != HeadView.headView.location {
                 weakSelf.dataArray.addObject(backCitys)
             }
+            
             tableview?.reloadData()
         }
     }
@@ -245,6 +246,26 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         return 60
     }
     
+    // 是否可以删除
+    @objc
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    // 删除数据源 并从数据库中删除
+    @objc
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            
+            let city = dataArray[indexPath.row - 1] as! NSDictionary
+            if DBOperate.dbOperate.deleteData(city["city"] as! String) {
+                dataArray.removeObjectAtIndex(indexPath.row - 1)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }else {
+                self.show("删除失败,稍后重试", block: { })
+            }
+        }
+    }
 }
 
 // MARK: - -------------------侧滑控制类-------------------

@@ -150,7 +150,7 @@ class DBOperate: NSObject {
         
         do {
             for citys in try db.prepare(city_list_table) {
-                // 判断是否存在 - -
+                // 判断是否存在
                 if citys.get(city) == cityName {
                     print("Find It")
                     return true

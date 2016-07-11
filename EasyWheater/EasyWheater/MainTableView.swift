@@ -15,11 +15,6 @@ private let tableview = MainTableView.init(frame: CGRectMake(0, heandViewHeight 
 
 extension UIViewController {
     func getTableView() -> Void {
-        tableview.backgroundColor = UIColor.clearColor()
-        
-        //下划线取消
-        tableview.separatorStyle = .None
-        
         self.view.addSubview(tableview)
     }
     
@@ -41,6 +36,8 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     private override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
+        self.backgroundColor = UIColor.clearColor()
+        //下划线取消
         self.separatorStyle = .None
         
         //签协议
@@ -69,7 +66,7 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     // MARK: -------------------------tableView协议-------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        // 改变这个就行了
+        // 改变这个就行了（总共多少个cell）
         let cellCount = 5
         
         Tools.setUserDefaults(key: "CellCount", andVluew: cellCount - 2)
@@ -109,4 +106,22 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
             return 40
         }
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            break
+        case 4:
+            break
+        default:
+            break
+        }
+    }
+    
 }

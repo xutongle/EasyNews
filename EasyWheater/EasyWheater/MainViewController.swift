@@ -10,11 +10,11 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-/*
- 22.5428234337,114.0595370000  深圳 纬度在前
- 39.9046363143,116.4071136987 北京
- 31.2983194973,120.5831906603 苏州
- */
+/**
+ * 22.5428234337,114.0595370000  深圳 纬度在前
+ * 39.9046363143,116.4071136987 北京
+ * 31.2983194973,120.5831906603 苏州
+ **/
 
 //
 class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnProtocol, LeftViewProtocol {
@@ -39,12 +39,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     // MARK: - -----------------------------生命周期-----------------------------
     
     override func viewWillAppear(animated: Bool) {
-        
-        // 做一个变量用来判断是不是第一次启动app
-        if Tools.getUserDefaults("firstIn") == nil {
-            Tools.setUserDefaults(key: "firstIn", andVluew: false)
-        }
-        
         super.viewWillAppear(animated)
         
         //
@@ -158,7 +152,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 complete(province: placemake!.administrativeArea!, city: placemake!.locality!)
                 //print(placemake?.locality,placemake?.administrativeArea)
             }else{
-                self.show("获取你的地址失败", block: {})
+                self.view.show("获取你的地址失败", block: {})
             }
         }
     }
@@ -263,11 +257,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     // block
                     getWeatherOver()
                 }else{
-                    self.show("稍后重试", block: {})
+                    self.view.show("稍后重试", block: {})
                     print(response.result.value)
                 }
             }else{
-                self.show("获取天气失败", block: {})
+                self.view.show("获取天气失败", block: {})
             }
         }
     }
@@ -285,14 +279,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
             
             //地理位置的回调
             getLocationName(currLocation) { (province ,city) in
-                //省和市
-                let shortProvince = province.substringToIndex(province.length - 1)
-                let shortCity = city.substringToIndex(city.length - 1)
+                
+                var trueProvince:String!
+                var trueCity:String!
+                // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
+                let shi = city.substringWithRange(NSRange.init(location: province.length - 1, length: 1))
+                // 如果有市 根据接口需要的话 需要裁掉市
+                if shi == "市" {
+                    trueProvince = province.substringToIndex(province.length - 1)
+                    trueCity = city.substringToIndex(city.length - 1)
+                }else {
+                    trueProvince = province as String
+                    trueCity = city as String
+                }
                 
                 // 如果之前没有存入过,就存入数据库
-                if !DBOperate.dbOperate.queryIsExitsData(shortCity) {
-                    if !DBOperate.dbOperate.insertData(shortCity, provinceName: shortProvince){
-                        self.show("数据库操作失败", block: {
+                if !DBOperate.dbOperate.queryIsExitsData(trueCity) {
+                    if !DBOperate.dbOperate.insertData(trueCity, provinceName: trueProvince){
+                        self.view.show("数据库操作失败", block: {
                             
                         })
                     }else {
@@ -302,11 +306,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     print("存储过了")
                 }
                 
-                // 添加进数据库
-                Tools.setUserDefaults(key: "province", andVluew: shortProvince)
-                Tools.setUserDefaults(key: "city", andVluew: shortCity)
+                Tools.setUserDefaults(key: "province", andVluew: trueProvince)
+                Tools.setUserDefaults(key: "city", andVluew: trueCity)
                 
-                print("反地理获得位置成功---->>",shortProvince,shortCity)
                 self.getWheater({ })
             }
         }
@@ -326,7 +328,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         if Tools.getUserDefaults("city") != nil && allWeather == nil {
             getWheater({ })
         }
-        self.show("无法获取到定位") { }
+        self.view.show("无法获取到定位") { }
     }
     
     // MARK: - ----------------------自己的协议InfoBtnProtocol------------------
