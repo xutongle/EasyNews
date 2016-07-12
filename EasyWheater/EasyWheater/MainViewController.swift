@@ -106,6 +106,29 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
             }
         }
         
+        // 来自
+        backCityBlock = {cityName in
+            Tools.setUserDefaults(key: "province", andVluew: "")
+            Tools.setUserDefaults(key: "city", andVluew: cityName)
+            
+            // 获取天气 并保存到数据库
+            self.getWheater({ (city, province) in
+                // 侧滑的cell
+                let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as! LeftTableViewCell
+                
+                if city != nil && province != nil {
+                    
+                    Tools.setUserDefaults(key: "province", andVluew: province!)
+                    Tools.setUserDefaults(key: "city", andVluew: city!)
+                    
+                    leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
+                    leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
+                    
+                    DBOperate.dbOperate.insertData(city!, provinceName: province!)
+                }
+            })
+        }
+        
         // 监听通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reGetWeather_Locatin), name: "startLocation_GetWeather_Notification", object: nil)
     }
@@ -174,7 +197,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     }
     
     //获得天气
-    func getWheater(getWeatherOver: () -> Void) -> Void {
+    func getWheater(getWeatherOver: (city: String?, province: String?) -> Void) -> Void {
         // 头视图
         HeadView.headView.location = Tools.getUserDefaults("city") as! String
         
@@ -271,7 +294,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     
                     print(self.weatherDict)
                     // block
-                    getWeatherOver()
+                    getWeatherOver(city: self.weatherDict["city"]! as? String, province: self.weatherDict["province"]! as? String)
                 }else{
                     self.view.show("稍后重试", block: {})
                     print(response.result.value)
@@ -325,7 +348,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 Tools.setUserDefaults(key: "province", andVluew: trueProvince)
                 Tools.setUserDefaults(key: "city", andVluew: trueCity)
                 
-                self.getWheater({ })
+                self.getWheater({ (city, province) in
+                    
+                })
             }
         }
     }
@@ -342,7 +367,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         manager.stopUpdatingLocation()
         print("[OTTLocationManager locationManager:didFailWithError] 无法获取到定位")
         if Tools.getUserDefaults("city") != nil && allWeather == nil {
-            getWheater({ })
+            getWheater({ (city, province) in
+                
+            })
         }
         self.view.show("无法获取到定位") { }
     }
@@ -375,12 +402,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         Tools.setUserDefaults(key: "city", andVluew: citys["city"]!)
         Tools.setUserDefaults(key: "province", andVluew: citys["province"]!)
         
-        // 侧滑的cell
+        // 侧滑的cell对象
         let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as! LeftTableViewCell
         leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
         
         self.view.sliding(.CLOSE)
-        getWheater {
+        getWheater { (city, province) in
             leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
         }
     }

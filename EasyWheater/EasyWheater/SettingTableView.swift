@@ -13,7 +13,7 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         
-        self.backgroundColor = UIColor(red:135/255.0, green:206/255.0, blue:235/255.0, alpha: 1)
+        self.backgroundColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
         self.bounces = false
         self.tableHeaderView = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 20))
     }

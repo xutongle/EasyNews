@@ -15,7 +15,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var imagePicker:UIImagePickerController? = nil
     
-    // MARK: - -------------------声明周期-----------------------
+    // MARK: - -------------------生命周期-----------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
     }
     
-    //
+    // 状态栏
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }

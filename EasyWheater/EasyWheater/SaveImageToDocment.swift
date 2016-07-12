@@ -69,7 +69,7 @@ class SaveImageToDocment: NSObject {
     // 删除图片
     func removeImage() -> Bool {
         do {
-            if NSFileManager.defaultManager().fileExistsAtPath(getDocumentPath()) {
+            if NSFileManager.defaultManager().fileExistsAtPath(getDocumentPath() + fileName_in) {
                 try NSFileManager.defaultManager().removeItemAtPath(getDocumentPath() + fileName_in)
             }
             return true

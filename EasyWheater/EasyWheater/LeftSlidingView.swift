@@ -147,12 +147,12 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         
         // 判断查询到的值如果和当前显示的位置是一样的 就不加入(而且查询出错也不会运行block)
         DBOperate.dbOperate.queryData { backCitys in
-            print(backCitys["city"])
             if backCitys["city"] as! String != HeadView.headView.location {
                 weakSelf.dataArray.addObject(backCitys)
             }
             
             tableview?.reloadData()
+            print(backCitys["city"])
         }
     }
     
@@ -227,13 +227,20 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     
     @objc
     private func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         left_delegate?.chooseHitsoryCity(dataArray[indexPath.row - 1] as! NSDictionary)
     }
     
     @objc
     private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60
+        switch indexPath.row {
+        case 0:
+            return 60
+        default:
+            return 44
+        }
     }
     
     // 是否可以删除

@@ -54,8 +54,9 @@ class HeadView: UIView {
     
     // MARK: - -----------------设置按钮-----------------
     
+    // 左侧按钮
     private func setSlidingButton() -> Void {
-        drawUpButton = UIButton.init(frame: CGRectMake(0, 10, 44, heandViewHeight - 20))
+        drawUpButton = UIButton.init(frame: CGRectMake(0, 10, 39, heandViewHeight - 25))
         drawUpButton.setImage(UIImage.init(named: "Menu"), forState: .Normal)
         drawUpButton.imageView?.contentMode = .ScaleAspectFit
         
@@ -63,6 +64,7 @@ class HeadView: UIView {
         self.addSubview(drawUpButton)
     }
     
+    // 显示位置按钮
     private func setLocationButton() -> Void {
         locationButton = UIButton.init(frame: CGRectMake((SCREEN_WIDTH - locationLabelWidth) / 2, 5,locationLabelWidth, heandViewHeight - 10))
         //locationButton.frame = CGRectMake((SCREEN_WIDTH - locationLabelWidth) / 2, 5,locationLabelWidth, selfHeght - 10)
@@ -81,8 +83,9 @@ class HeadView: UIView {
         self.addSubview(locationButton)
     }
     
+    // 加号按钮
     private func setAddButton() -> Void {
-        addLocationButton = UIButton.init(frame: CGRectMake(SCREEN_WIDTH - 49, 10, 44, heandViewHeight - 20))
+        addLocationButton = UIButton.init(frame: CGRectMake(SCREEN_WIDTH - 49, 10, 39, heandViewHeight - 25))
         addLocationButton.setImage(UIImage.init(named: "Add"), forState: .Normal)
         addLocationButton.imageView?.contentMode = .ScaleAspectFit
         addLocationButton.addTarget(self, action: #selector(self.slidingAction), forControlEvents: .TouchUpInside)

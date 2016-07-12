@@ -29,7 +29,7 @@
 		9D8B7FE41D20055F008BE762 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */; };
 		9D8B7FE51D20055F008BE762 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */; };
 		9D8B7FE71D20128A008BE762 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE61D20128A008BE762 /* AddViewController.swift */; };
-		9D8B7FEA1D201428008BE762 /* SearchTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE91D201428008BE762 /* SearchTitleView.swift */; };
+		9D8B7FEA1D201428008BE762 /* CityListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7FE91D201428008BE762 /* CityListTableView.swift */; };
 		9D8B7FEC1D202134008BE762 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B7FEB1D202134008BE762 /* citydict.plist */; };
 		9D8BBB981D128F0800E8CE13 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BBB971D128F0800E8CE13 /* MainTableView.swift */; };
 		9D8BBB9C1D12900100E8CE13 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BBB9A1D12900100E8CE13 /* WeatherTableViewCell.swift */; };
@@ -48,6 +48,7 @@
 		9DE924521D10E9C5003961F9 /* LeftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE924501D10E9C5003961F9 /* LeftTableViewCell.swift */; };
 		9DE924531D10E9C5003961F9 /* LeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE924511D10E9C5003961F9 /* LeftTableViewCell.xib */; };
 		9DE924551D11011F003961F9 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE924541D11011F003961F9 /* Tools.swift */; };
+		9DF6A9BE1D34B2D400DB21F0 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6A9BD1D34B2D400DB21F0 /* LocationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +92,7 @@
 		9D8B7FE21D20055F008BE762 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		9D8B7FE31D20055F008BE762 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		9D8B7FE61D20128A008BE762 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		9D8B7FE91D201428008BE762 /* SearchTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTitleView.swift; sourceTree = "<group>"; };
+		9D8B7FE91D201428008BE762 /* CityListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableView.swift; sourceTree = "<group>"; };
 		9D8B7FEB1D202134008BE762 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
 		9D8BBB971D128F0800E8CE13 /* MainTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		9D8BBB9A1D12900100E8CE13 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 		9DE924501D10E9C5003961F9 /* LeftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftTableViewCell.swift; sourceTree = "<group>"; };
 		9DE924511D10E9C5003961F9 /* LeftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftTableViewCell.xib; sourceTree = "<group>"; };
 		9DE924541D11011F003961F9 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		9DF6A9BD1D34B2D400DB21F0 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		FC13445E4F076AE32259DD4C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -278,7 +280,8 @@
 		9D8B7FE81D2013F1008BE762 /* AddView */ = {
 			isa = PBXGroup;
 			children = (
-				9D8B7FE91D201428008BE762 /* SearchTitleView.swift */,
+				9D8B7FE91D201428008BE762 /* CityListTableView.swift */,
+				9DF6A9BA1D34B1B100DB21F0 /* Cell */,
 			);
 			name = AddView;
 			sourceTree = "<group>";
@@ -391,6 +394,14 @@
 				9D3C736E1D1D3F9E0035258A /* Model */,
 			);
 			name = "Main首页";
+			sourceTree = "<group>";
+		};
+		9DF6A9BA1D34B1B100DB21F0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9DF6A9BD1D34B2D400DB21F0 /* LocationTableViewCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -583,6 +594,7 @@
 			files = (
 				9DE924521D10E9C5003961F9 /* LeftTableViewCell.swift in Sources */,
 				9D3C73751D1D45910035258A /* LaterWeatherCell.swift in Sources */,
+				9DF6A9BE1D34B2D400DB21F0 /* LocationTableViewCell.swift in Sources */,
 				9D8B7FE71D20128A008BE762 /* AddViewController.swift in Sources */,
 				9D1B86251D1E36F0001654D0 /* OtherSettingCellTableViewCell.swift in Sources */,
 				9D3C736D1D1D26840035258A /* SingleManager.swift in Sources */,
@@ -604,7 +616,7 @@
 				9DE828C91D09019A00725DDA /* EasyWheater.xcdatamodeld in Sources */,
 				9D3C73791D1D6F170035258A /* BottomView.swift in Sources */,
 				9D12C7591D0EFCBE00A7BA7D /* BackgroundImageView.swift in Sources */,
-				9D8B7FEA1D201428008BE762 /* SearchTitleView.swift in Sources */,
+				9D8B7FEA1D201428008BE762 /* CityListTableView.swift in Sources */,
 				9DE924551D11011F003961F9 /* Tools.swift in Sources */,
 				9DE828C11D09019A00725DDA /* AppDelegate.swift in Sources */,
 				9DB2A18C1D24CF5900F6A513 /* Mine_Webview.swift in Sources */,

@@ -21,6 +21,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         return .LightContent
     }
     
+    // MARK: - -----------------------生命周期------------------------------------
+    
     override func viewWillAppear(animated: Bool) {
         if isFirst {
             
@@ -31,12 +33,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             
             // 导航栏按钮
             let navCancelButton = UIBarButtonItem.init(title: "取消", style: .Done, target: self, action: #selector(dismissMe))
-            let navSearchButton = UIBarButtonItem.init(title: "搜索", style: .Done, target: self, action: #selector(searchIt))
             navCancelButton.tintColor = UIColor.whiteColor()
-            navSearchButton.tintColor = UIColor.whiteColor()
             
             navBar.pushNavigationItem(navItem, animated: false)
-            navItem.setRightBarButtonItems([navSearchButton,navCancelButton], animated: false)
+            navItem.setRightBarButtonItems([navCancelButton], animated: false)
             
             /**
              * 搜索框
@@ -61,19 +61,16 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let bgImageView = UIImageView.init(frame: self.view.frame)
-        bgImageView.image = UIImage.init(named: "SearchBg")
-        self.view.addSubview(bgImageView)
-        
-        // 手势
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(inputBegin))
-        self.view.addGestureRecognizer(tapGesture)
+
+        self.view.backgroundColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
+        self.view.addSubview( CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)))
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: - -----------------------自己的方法------------------------------------
     
     func dismissMe() -> Void {
         
@@ -81,14 +78,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func searchIt() -> Void {
-        
-    }
-    
-    // 点击空白处
-    func inputBegin() -> Void {
-        self.searchTextField.endEditing(true)
-    }
+    // MARK: - -----------------------TextField协议------------------------------------
     
     // 文字改变时
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -99,37 +89,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     // 按下return
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         // 收回键盘(搜索)
-        searchIt()
         textField.endEditing(true)
         return true
     }
     
-    // 上升键盘
-//    func upSearchTextField() -> Void {
-//        // 一次动画
-//        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
-//            self.searchTextField.frame = CGRectMake(0, 44, SCREEN_WIDTH, 30)
-//        }) { (finshed) in
-//            // 二次动画
-//            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
-//                self.searchTextField.frame = CGRectMake(0, 64, SCREEN_WIDTH, 30)
-//                }, completion: { (finshed) in })
-//        }
-//    }
-    
-    // 暂时不用
-//    func downSearchTextField() -> Void {
-//        UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut, animations: {
-//            self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2 + 20, SCREEN_WIDTH, 30)
-//        }) { (finshed) in
-//            //
-//            self.searchTextField.resignFirstResponder()
-//
-//            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
-//                self.searchTextField.frame = CGRectMake(0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, 30)
-//                }, completion: { (finshed) in
-//            })
-//        }
-//    }
+    //
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.searchTextField.endEditing(true)
+    }
     
 }
