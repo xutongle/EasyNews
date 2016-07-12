@@ -12,6 +12,7 @@ class LocationTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.textLabel?.textColor = UIColor.brownColor()
     }
     
     required init?(coder aDecoder: NSCoder) {

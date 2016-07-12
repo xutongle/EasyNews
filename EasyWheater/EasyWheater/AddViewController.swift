@@ -28,8 +28,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             
             // 搞定导航栏 Model过来也有
             let navBar = UINavigationBar.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 64))
-            navBar.barStyle = .BlackTranslucent
-            let navItem = UINavigationItem.init(title: "搜索城市")
+            navBar.barStyle = .Black
+            let navItem = UINavigationItem.init(title: "选择城市")
             
             // 导航栏按钮
             let navCancelButton = UIBarButtonItem.init(title: "取消", style: .Done, target: self, action: #selector(dismissMe))
@@ -42,13 +42,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
              * 搜索框
              **/
             searchTextField = UITextField.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 30))
-            searchTextField.borderStyle = .RoundedRect
+            searchTextField.borderStyle = .None
+            searchTextField.backgroundColor = UIColor.whiteColor()
+            searchTextField.layer.cornerRadius = searchTextField.frame.size.height / 2
             searchTextField.textAlignment = .Center
             searchTextField.placeholder = "输入城市名称"
             searchTextField.clearButtonMode = .WhileEditing
-            
             searchTextField.delegate = self
-            self.view.addSubview(searchTextField)
             
             // 添加上
             navItem.titleView = searchTextField
@@ -56,14 +56,16 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             self.view.addSubview(navBar)
             isFirst = false
         }
-        self.searchTextField.becomeFirstResponder()
+        //self.searchTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
-        self.view.addSubview( CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)))
+        
+        let cityListTableView = CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64))
+        self.view.addSubview(cityListTableView)
     }
     
     override func didReceiveMemoryWarning() {

@@ -115,7 +115,7 @@ class DBOperate: NSObject {
             
             return true
         } catch {
-            print("insertDataError!!!")
+            print("insertDataError!!!", error)
             return false
         }
     }

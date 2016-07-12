@@ -94,6 +94,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
             case .isDrawUpButton:
                 // 加载侧滑
                 self.view.addLeftSlidingView()
+                
                 self.view.sliding(.OPEN)
                 break
             case .isLocationButton:
@@ -114,15 +115,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
             // 获取天气 并保存到数据库
             self.getWheater({ (city, province) in
                 // 侧滑的cell
-                let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as! LeftTableViewCell
+                let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as? LeftTableViewCell
                 
                 if city != nil && province != nil {
                     
                     Tools.setUserDefaults(key: "province", andVluew: province!)
                     Tools.setUserDefaults(key: "city", andVluew: city!)
                     
-                    leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
-                    leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
+                    if leftFirstCell != nil {
+                        leftFirstCell!.locationText = Tools.getUserDefaults("city") as! String
+                        leftFirstCell!.weatherText = Tools.getUserDefaults("temperature") as! String
+                    }
                     
                     DBOperate.dbOperate.insertData(city!, provinceName: province!)
                 }
@@ -397,7 +400,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         self.presentViewController(SettingViewController(), animated: true, completion: nil)
     }
     
-    // cell 侧滑按钮事件
+    // cell 的点按事件
     func chooseHitsoryCity(citys: NSDictionary) -> Void {
         Tools.setUserDefaults(key: "city", andVluew: citys["city"]!)
         Tools.setUserDefaults(key: "province", andVluew: citys["province"]!)
@@ -406,7 +409,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as! LeftTableViewCell
         leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
         
-        self.view.sliding(.CLOSE)
         getWheater { (city, province) in
             leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
         }

@@ -22,8 +22,8 @@ class WeatherTableViewCell: UITableViewCell {
             
             if stateText == "无" {
                 // 如果没图 就让背景为黄色
-                self.weatherImageView.backgroundColor = UIColor.orangeColor()
                 self.weatherImageView.image = UIImage.init()
+                self.weatherImageView.backgroundColor = UIColor.orangeColor()
             }else {
                 self.weatherImageView.image = UIImage.init(named: stateText)
                 self.weatherImageView.backgroundColor = UIColor.clearColor()

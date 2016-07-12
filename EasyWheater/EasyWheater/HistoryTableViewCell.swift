@@ -9,28 +9,12 @@
 import UIKit
 
 class HistoryTableViewCell: UITableViewCell {
-    
-//    var shengText = Tools.getUserDefaults("province") as! String {
-//        didSet{
-//            shengLabel.text = shengText
-//        }
-//    }
-//    
-//    var shiText = Tools.getUserDefaults("city") as! String {
-//        didSet{
-//            shiLabel.text = shiText
-//        }
-//    }
 
     @IBOutlet weak var shengLabel: UILabel!
     @IBOutlet weak var shiLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        //
-//        shengLabel.text = shengText
-//        shiLabel.text = shiText
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

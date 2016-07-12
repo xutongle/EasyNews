@@ -231,6 +231,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         left_delegate?.chooseHitsoryCity(dataArray[indexPath.row - 1] as! NSDictionary)
+        getAllLocationFormSQLite()
     }
     
     @objc
