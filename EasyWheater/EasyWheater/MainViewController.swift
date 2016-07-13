@@ -86,6 +86,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         
         // 左划手势
         let swipeLeftGestrue = UISwipeGestureRecognizer.init(target: self, action: #selector(swipeLeftAction))
+        swipeLeftGestrue.direction = .Right
         self.view.addGestureRecognizer(swipeLeftGestrue)
         
         // heand按钮事件
@@ -325,7 +326,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 var trueProvince:String!
                 var trueCity:String!
                 // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
-                let shi = city.substringWithRange(NSRange.init(location: province.length - 1, length: 1))
+                let shi = city.substringWithRange(NSRange.init(location: city.length - 1, length: 1))
+                print("--------->>>>",shi)
                 // 如果有市 根据接口需要的话 需要裁掉市
                 if shi == "市" {
                     trueProvince = province.substringToIndex(province.length - 1)

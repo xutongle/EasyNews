@@ -26,6 +26,10 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView = UITableView.init(frame: CGRectMake(0, 0, frame.size.width, frame.size.height), style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView?.separatorInset = UIEdgeInsetsZero
+        tableView?.layoutMargins = UIEdgeInsetsZero
+        
         self.addSubview(tableView)
         
     }
@@ -77,7 +81,7 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 头标题
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return citysKey[section]
+        return "        " + citysKey[section] + "开头"
     }
     
     // 头标题高度

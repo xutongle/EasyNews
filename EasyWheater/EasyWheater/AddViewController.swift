@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreFoundation
 
 class AddViewController: UIViewController, UITextFieldDelegate {
     
@@ -56,7 +57,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             self.view.addSubview(navBar)
             isFirst = false
         }
-        //self.searchTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {

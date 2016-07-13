@@ -23,7 +23,7 @@ class Tools: NSObject {
     static func getUserDefaults(key: String) -> AnyObject? {
         
         return NSUserDefaults.standardUserDefaults().objectForKey(key)
-
+        
     }
     
     //设置用户变量
@@ -44,5 +44,24 @@ class Tools: NSObject {
             NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
         }
         NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    /**
+     * 汉字转拼音
+     */
+    static func hanZiZhuanPinYin(hanzi: String, yinbiao: Bool) -> String? {
+        
+        var str = NSMutableString.init(string: hanzi) as CFMutableString
+        
+        CFStringTransform(str, nil, kCFStringTransformToLatin, false)
+        print(str)
+        
+        // 如果不要音标
+        if !yinbiao {
+            CFStringTransform(str, nil, kCFStringTransformStripCombiningMarks, false)
+            print(str)
+        }
+        
+        return str as String
     }
 }
