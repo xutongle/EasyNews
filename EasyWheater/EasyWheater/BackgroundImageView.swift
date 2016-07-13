@@ -41,9 +41,10 @@ class BackgroundImageView: UIImageView {
         
         visualView.alpha = 1
         visualView.alpha = CGFloat(blurValue)
-        
+
         //添加到背景上
         self.addSubview(visualView)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,7 +55,8 @@ class BackgroundImageView: UIImageView {
         switch weather {
         case "多云":
             self.image = UIImage.init(named: "weather_temp")
-            
+            //let image = SaveImageToDocment.saveImageToDocment.clipToImage(image: self.image!, forSize: CGRectMake((SCREEN_WIDTH - self.image!.size.width) / 2, (SCREEN_HEIGHT - self.image!.size.height) / 2, SCREEN_WIDTH, SCREEN_HEIGHT))
+            //SaveImageToDocment.saveImageToDocment.maSaiKe(self, image: image, value: 1)
             break
         default:
             break

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GLKit
 
 class SaveImageToDocment: NSObject {
     
@@ -121,7 +122,7 @@ class SaveImageToDocment: NSObject {
      * 图片裁剪
      * rect 定义裁剪的区域相对于原图片的位置
      */
-    func clipToImage(image image: UIImage, firSize rect:CGRect) -> UIImage {
+    func clipToImage(image image: UIImage, forSize rect:CGRect) -> UIImage {
         
         // 图片尺寸
         let size = CGSizeMake(rect.size.width, rect.size.height)
@@ -139,9 +140,72 @@ class SaveImageToDocment: NSObject {
         // 获得裁剪的图片
         let clipImage = UIImage.init(CGImage: subCGImage!)
         // 关闭环境
-        //UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext();
         
         return clipImage
     }
     
+    // 图片滤镜 马赛克 使用OpenGLES绘制
+    func  maSaiKe(drawView: UIView, image: UIImage, value :CGFloat) -> Void {
+        let rect = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)
+        
+        //获取OpenGLES渲染的上下文
+        let eaglContext = EAGLContext.init(API: .OpenGLES2)
+        
+        //创建出渲染的Buffer
+        let glkView = GLKView.init(frame: rect, context: eaglContext)
+        
+        // 绑定绘制
+        glkView.bindDrawable()
+        //
+        drawView.addSubview(glkView)
+        
+        //-------------------------------------------------------------
+        
+        // 渲染的上下文
+        let context = CIContext.init(EAGLContext: eaglContext, options: [kCIContextWorkingColorSpace : NSNull.init()])
+        
+        // 导入CIImage
+        let ciImage = CIImage.init(image: image)
+        /*
+        // 滤镜
+        let msk_filter = CIFilter.init(name: "CIPixellate")
+        msk_filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        msk_filter?.setDefaults()
+        // 导出
+        let msk_outImage = msk_filter?.valueForKey(kCIOutputImageKey) as! CIImage
+        */
+        
+        /*
+        // 滤镜2
+        let hud_filter = CIFilter.init(name: "CIHueAdjust")
+        hud_filter?.setValue(msk_outImage, forKey: kCIInputImageKey)
+        hud_filter?.setDefaults()
+        hud_filter?.setValue(1.0, forKey: kCIInputAngleKey)
+        let hud_outImage = hud_filter?.valueForKey(kCIOutputImageKey) as! CIImage
+        */
+        
+        // 滤镜3
+        let sepia_filter = CIFilter.init(name: "CISepiaTone")
+        sepia_filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        sepia_filter?.setValue(value, forKey: kCIInputIntensityKey)
+        print(sepia_filter?.attributes)
+        let sepia_outImage = sepia_filter?.outputImage
+        
+        //-------------------------------------------------------------
+        
+        // 开始渲染
+        context.drawImage(sepia_outImage!, inRect: CGRectMake(0, 0, CGFloat(glkView.drawableWidth), CGFloat(glkView.drawableHeight)), fromRect: sepia_outImage!.extent)
+        //
+        glkView.display()
+        
+        /**
+         * 不使用OpenGLES绘制
+         */
+        //let cgImage = context.createCGImage(sepia_outImage, fromRect: msk_outImage.extent)
+        // 导出
+        //let image = UIImage.init(CGImage: cgImage)
+        
+        //return image
+    }
 }
