@@ -37,6 +37,8 @@
 		9DA481191D1EE1CC00A6EDEE /* DBOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */; };
 		9DB2A1891D24CE7900F6A513 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2A1881D24CE7900F6A513 /* WebViewController.swift */; };
 		9DB2A18C1D24CF5900F6A513 /* Mine_Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */; };
+		9DC6C8C81D374A7C0056087A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC6C8C71D374A7C0056087A /* SearchTableViewCell.swift */; };
+		9DC6C8CC1D375B130056087A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC6C8CB1D375B130056087A /* SearchView.swift */; };
 		9DCEC9681D1EDFCE001E7246 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */; };
 		9DE828C11D09019A00725DDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE828C01D09019A00725DDA /* AppDelegate.swift */; };
 		9DE828C91D09019A00725DDA /* EasyWheater.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DE828C71D09019A00725DDA /* EasyWheater.xcdatamodeld */; };
@@ -100,6 +102,8 @@
 		9DA481181D1EE1CC00A6EDEE /* DBOperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperate.swift; sourceTree = "<group>"; };
 		9DB2A1881D24CE7900F6A513 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9DB2A18B1D24CF5900F6A513 /* Mine_Webview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mine_Webview.swift; sourceTree = "<group>"; };
+		9DC6C8C71D374A7C0056087A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		9DC6C8CB1D375B130056087A /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		9DCEC9671D1EDFCE001E7246 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9DE828BD1D09019A00725DDA /* EasyWheater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyWheater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE828C01D09019A00725DDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				9D8B7FE91D201428008BE762 /* CityListTableView.swift */,
+				9DC6C8CB1D375B130056087A /* SearchView.swift */,
 				9DF6A9BA1D34B1B100DB21F0 /* Cell */,
 			);
 			name = AddView;
@@ -400,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				9DF6A9BD1D34B2D400DB21F0 /* LocationTableViewCell.swift */,
+				9DC6C8C71D374A7C0056087A /* SearchTableViewCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -607,12 +613,14 @@
 				9DB2A1891D24CE7900F6A513 /* WebViewController.swift in Sources */,
 				9D8BBB981D128F0800E8CE13 /* MainTableView.swift in Sources */,
 				9D1B86281D1E4A0D001654D0 /* LeftViewProtocol.swift in Sources */,
+				9DC6C8CC1D375B130056087A /* SearchView.swift in Sources */,
 				9D1B86211D1E34C3001654D0 /* SettingTableView.swift in Sources */,
 				9DA481191D1EE1CC00A6EDEE /* DBOperate.swift in Sources */,
 				9D12C75B1D0F01DE00A7BA7D /* HeadView.swift in Sources */,
 				9DE828F41D0903B200725DDA /* MainViewController.swift in Sources */,
 				9D737DE01D2CDEF2007D0F8A /* SaveImageToDocment.swift in Sources */,
 				9D3C736A1D1D108B0035258A /* AnotherInfoTableViewCell.swift in Sources */,
+				9DC6C8C81D374A7C0056087A /* SearchTableViewCell.swift in Sources */,
 				9DE828C91D09019A00725DDA /* EasyWheater.xcdatamodeld in Sources */,
 				9D3C73791D1D6F170035258A /* BottomView.swift in Sources */,
 				9D12C7591D0EFCBE00A7BA7D /* BackgroundImageView.swift in Sources */,

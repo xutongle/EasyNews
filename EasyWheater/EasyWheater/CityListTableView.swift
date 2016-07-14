@@ -11,17 +11,19 @@ import UIKit
 var backCityBlock: ((cityName: String) -> Void)!
 
 class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
-        
+    
     private var tableView:UITableView! = nil
     private var citysDict:NSDictionary!
     private var citysKey:Array<String>!
+    
+    static let cityListTableView = CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64))
     
     // MARK: - ---------------------------生命周期-------------------------
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         readFileToCityDict()
-
+        
         // 初始化tableview
         tableView = UITableView.init(frame: CGRectMake(0, 0, frame.size.width, frame.size.height), style: .Grouped)
         tableView.delegate = self
@@ -31,7 +33,6 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView?.layoutMargins = UIEdgeInsetsZero
         
         self.addSubview(tableView)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,15 +42,11 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     // MARK: - ------------------------自己的方法----------------------------
     
     func readFileToCityDict() -> Void {
-        let filePath = NSBundle.mainBundle().pathForResource("citydict", ofType: "plist")
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath!) {
             // 城市
-            citysDict = NSDictionary.init(contentsOfFile: filePath!)
+            citysDict = Tools.readPlist()
             // ABCD键
             citysKey = citysDict.allKeys as! Array<String>
             citysKey = citysKey.sort(<)
-        }
         
     }
     
@@ -71,10 +68,12 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = LocationTableViewCell.initTableViewCell(tableView)
         
-        let key = citysKey[indexPath.section]
-        let array = citysDict[key]
-        let dict = array![indexPath.row]
-        cell.textLabel?.text = dict["name"] as? String
+        if citysDict != nil {
+            let key = citysKey[indexPath.section]
+            let array = citysDict[key]
+            let dict = array![indexPath.row]
+            cell.textLabel?.text = dict["name"] as? String
+        }
         
         return cell
     }
@@ -86,13 +85,17 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 头标题高度
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15.0
+        return 20.0
     }
     
     // 右边显示
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return citysKey
     }
+    
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return UIView()
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

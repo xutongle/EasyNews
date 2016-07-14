@@ -16,17 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻松天气" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ar2-7x-4U6">
-                                <rect key="frame" x="266" y="289.5" width="68" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻松天气" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIE-GB-fpO">
+                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="WCM-j5-TJz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_temp" translatesAutoresizingMaskIntoConstraints="NO" id="tat-vj-usC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ar2-7x-4U6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="127-db-s7r"/>
-                            <constraint firstItem="ar2-7x-4U6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="p5U-3B-h7C"/>
+                            <constraint firstItem="tat-vj-usC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="267-JG-r9t"/>
+                            <constraint firstItem="tat-vj-usC" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="3G9-Ho-S5k"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="WIE-GB-fpO" secondAttribute="bottom" id="6GB-vZ-Zhg"/>
+                            <constraint firstAttribute="trailing" secondItem="WIE-GB-fpO" secondAttribute="trailing" id="Ahm-4h-lJ6"/>
+                            <constraint firstItem="WIE-GB-fpO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="rhM-yZ-rpP"/>
+                            <constraint firstItem="WIE-GB-fpO" firstAttribute="top" secondItem="tat-vj-usC" secondAttribute="bottom" id="vLc-ih-03n"/>
+                            <constraint firstAttribute="trailing" secondItem="tat-vj-usC" secondAttribute="trailing" id="yIS-Bi-GgI"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,4 +47,7 @@
             <point key="canvasLocation" x="96" y="356"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="weather_temp" width="960" height="519"/>
+    </resources>
 </document>

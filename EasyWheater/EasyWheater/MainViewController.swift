@@ -68,7 +68,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         //初始化 CLLocationManager
         initailLocation()
         
@@ -110,11 +110,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         
         // 来自
         backCityBlock = {cityName in
-            Tools.setUserDefaults(key: "province", andVluew: "")
-            Tools.setUserDefaults(key: "city", andVluew: cityName)
+//            Tools.setUserDefaults(key: "province", andVluew: "")
+//            Tools.setUserDefaults(key: "city", andVluew: cityName)
             
             // 获取天气 并保存到数据库
-            self.getWheater({ (city, province) in
+            self.getWheater(cityName, getWeatherOver: { (city, province) in
                 // 侧滑的cell
                 let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as? LeftTableViewCell
                 
@@ -122,6 +122,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     
                     Tools.setUserDefaults(key: "province", andVluew: province!)
                     Tools.setUserDefaults(key: "city", andVluew: city!)
+                    print(city, province)
                     
                     if leftFirstCell != nil {
                         leftFirstCell!.locationText = Tools.getUserDefaults("city") as! String
@@ -195,22 +196,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 complete(province: placemake!.administrativeArea!, city: placemake!.locality!)
                 //print(placemake?.locality,placemake?.administrativeArea)
             }else{
-                self.view.show("获取你的地址失败", block: {})
+                self.view.show("无法获得定位信息", block: {})
             }
         }
     }
     
     //获得天气
-    func getWheater(getWeatherOver: (city: String?, province: String?) -> Void) -> Void {
-        // 头视图
-        HeadView.headView.location = Tools.getUserDefaults("city") as! String
+    func getWheater(city: String?, getWeatherOver: (city: String?, province: String?) -> Void) -> Void {
         
-        let parameters = ["key":APP_KEY,"city":Tools.getUserDefaults("city")!,"province":Tools.getUserDefaults("province")!]
+        let parameters = ["key":APP_KEY,"city":city == nil ?  Tools.getUserDefaults("city")! : city!,"province":Tools.getUserDefaults("province")!]
+        
         Alamofire.request(.POST, url, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
+                
                 //
                 let dict: NSDictionary = response.result.value as! NSDictionary
+                
                 if (dict["msg"] as! String == "success") {
+                    
+                    // 头视图 (成功获得了数据才行)
+                    HeadView.headView.location = city == nil ? Tools.getUserDefaults("city") as! String : city!
+                    
                     let array = dict["result"] as! NSArray
                     //将当前的天气信息存入
                     self.weatherDict = array.firstObject as! NSDictionary
@@ -300,11 +306,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     // block
                     getWeatherOver(city: self.weatherDict["city"]! as? String, province: self.weatherDict["province"]! as? String)
                 }else{
-                    self.view.show("稍后重试", block: {})
+                    self.view.show("请稍后重试", block: {})
+                    
                     print(response.result.value)
                 }
             }else{
-                self.view.show("获取天气失败", block: {})
+                self.view.show("请检查网络", block: {})
             }
         }
     }
@@ -320,7 +327,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         if locations.first == locations.last {
             manager.stopUpdatingLocation()
             
-            //地理位置的回调
+            //逆地理位置的回调
             getLocationName(currLocation) { (province ,city) in
                 
                 var trueProvince:String!
@@ -353,7 +360,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 Tools.setUserDefaults(key: "province", andVluew: trueProvince)
                 Tools.setUserDefaults(key: "city", andVluew: trueCity)
                 
-                self.getWheater({ (city, province) in
+                self.getWheater(nil, getWeatherOver: { (city, province) in
                     
                 })
             }
@@ -372,7 +379,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         manager.stopUpdatingLocation()
         print("[OTTLocationManager locationManager:didFailWithError] 无法获取到定位")
         if Tools.getUserDefaults("city") != nil && allWeather == nil {
-            getWheater({ (city, province) in
+            
+            getWheater(nil, getWeatherOver: { (city, province) in
                 
             })
         }
@@ -409,9 +417,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         
         // 侧滑的cell对象
         let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as! LeftTableViewCell
-        leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
         
-        getWheater { (city, province) in
+        getWheater(nil) { (city, province) in
+            leftFirstCell.locationText = Tools.getUserDefaults("city") as! String
             leftFirstCell.weatherText = Tools.getUserDefaults("temperature") as! String
         }
     }

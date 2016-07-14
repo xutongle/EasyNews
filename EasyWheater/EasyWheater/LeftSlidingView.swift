@@ -152,8 +152,8 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
             }
             
             tableview?.reloadData()
-            print(backCitys["city"])
         }
+        print("有",dataArray.count,"个数据")
     }
     
     // MARK: - -------------------打开侧滑-------------------

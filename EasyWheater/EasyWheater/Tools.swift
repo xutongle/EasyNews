@@ -51,17 +51,34 @@ class Tools: NSObject {
      */
     static func hanZiZhuanPinYin(hanzi: String, yinbiao: Bool) -> String? {
         
-        var str = NSMutableString.init(string: hanzi) as CFMutableString
+        let str = NSMutableString.init(string: hanzi) as CFMutableString
         
         CFStringTransform(str, nil, kCFStringTransformToLatin, false)
-        print(str)
+        //print(str)
         
         // 如果不要音标
         if !yinbiao {
             CFStringTransform(str, nil, kCFStringTransformStripCombiningMarks, false)
-            print(str)
+            //print(str)
         }
         
         return str as String
     }
+    
+    /**
+     *  读取plist文件
+     */
+    static func readPlist() -> NSDictionary? {
+        var citysDict:NSDictionary! = nil
+        
+        let filePath = NSBundle.mainBundle().pathForResource("citydict", ofType: "plist")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath!) {
+            // 城市
+            citysDict = NSDictionary.init(contentsOfFile: filePath!)
+        }
+        return citysDict
+    }
+        
+    
 }

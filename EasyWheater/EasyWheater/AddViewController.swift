@@ -15,6 +15,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     private var searchTextField:UITextField!
     
+    let searchView = SearchView.searchView
+    
     //
     var isFirst = true
     
@@ -49,7 +51,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             searchTextField.textAlignment = .Center
             searchTextField.placeholder = "输入城市名称"
             searchTextField.clearButtonMode = .WhileEditing
+            
             searchTextField.delegate = self
+            searchTextField.addTarget(self, action: #selector(valueChange), forControlEvents: .EditingChanged)
             
             // 添加上
             navItem.titleView = searchTextField
@@ -64,8 +68,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 
         self.view.backgroundColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
         
-        let cityListTableView = CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64))
-        self.view.addSubview(cityListTableView)
+        self.view.addSubview(CityListTableView.cityListTableView)
+        
+        self.view.addSubview(searchView)
+        searchView.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,7 +83,22 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     func dismissMe() -> Void {
         
         searchTextField.endEditing(true)
+        searchView.dataArray?.removeAllObjects()
+        searchView.alpha = 0
+        searchTextField.text = ""
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func valueChange(textFiled: UITextField) -> Void {
+        searchView.alpha = 1
+
+        //let inputStr = textFiled.text
+        let pinyinStr = Tools.hanZiZhuanPinYin(textFiled.text!, yinbiao: false)
+        
+        searchView.dataArray?.addObject(pinyinStr!)
+        searchView.tableview.reloadData()
+
     }
     
     // MARK: - -----------------------TextField协议------------------------------------
