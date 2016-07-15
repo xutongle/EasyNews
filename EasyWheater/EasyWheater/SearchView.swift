@@ -8,6 +8,8 @@
 
 import UIKit
 
+var searchChooseCityBlock: ((city: NSString) -> Void)!
+
 class SearchView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var dataArray: NSMutableArray? = NSMutableArray()
@@ -22,6 +24,10 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource {
         self.addSubview(tableview)
         tableview.delegate = self
         tableview.dataSource = self
+        
+        tableview.bounces = false
+        tableview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+        tableview.tableFooterView = UIView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,5 +50,11 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let chooseCity: NSString = dataArray![indexPath.row] as! NSString
+        
+        // 去往AddViewController (按下搜索时的cell)
+        searchChooseCityBlock(city: chooseCity)
+    }
 }

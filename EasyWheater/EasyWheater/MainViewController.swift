@@ -108,30 +108,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
             }
         }
         
-        // 来自
+        // 来自CityListTableView
         backCityBlock = {cityName in
-//            Tools.setUserDefaults(key: "province", andVluew: "")
-//            Tools.setUserDefaults(key: "city", andVluew: cityName)
-            
-            // 获取天气 并保存到数据库
-            self.getWheater(cityName, getWeatherOver: { (city, province) in
-                // 侧滑的cell
-                let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as? LeftTableViewCell
-                
-                if city != nil && province != nil {
-                    
-                    Tools.setUserDefaults(key: "province", andVluew: province!)
-                    Tools.setUserDefaults(key: "city", andVluew: city!)
-                    print(city, province)
-                    
-                    if leftFirstCell != nil {
-                        leftFirstCell!.locationText = Tools.getUserDefaults("city") as! String
-                        leftFirstCell!.weatherText = Tools.getUserDefaults("temperature") as! String
-                    }
-                    
-                    DBOperate.dbOperate.insertData(city!, provinceName: province!)
-                }
-            })
+            self.chooseOverShowWeather(cityName)
+        }
+        
+        // 来自AddViewController
+        backSearchViewBlock = {cityName in
+            self.chooseOverShowWeather(cityName as String)
         }
         
         // 监听通知
@@ -147,6 +131,31 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     // 开启定位
     func reGetWeather_Locatin() -> Void {
         locationManager.startUpdatingLocation()
+    }
+    
+    func chooseOverShowWeather(cityName: String) -> Void {
+//      Tools.setUserDefaults(key: "province", andVluew: "")
+//      Tools.setUserDefaults(key: "city", andVluew: cityName)
+        
+        // 获取天气 并保存到数据库
+        self.getWheater(cityName, getWeatherOver: { (city, province) in
+            // 侧滑的cell
+            let leftFirstCell = SingleManager.singleManager.getValue(Key: "LeftSldingView_1") as? LeftTableViewCell
+            
+            if city != nil && province != nil {
+                
+                Tools.setUserDefaults(key: "province", andVluew: province!)
+                Tools.setUserDefaults(key: "city", andVluew: city!)
+                print(city, province)
+                
+                if leftFirstCell != nil {
+                    leftFirstCell!.locationText = Tools.getUserDefaults("city") as! String
+                    leftFirstCell!.weatherText = Tools.getUserDefaults("temperature") as! String
+                }
+                
+                DBOperate.dbOperate.insertData(city!, provinceName: province!)
+            }
+        })
     }
     
     // 左划手势
