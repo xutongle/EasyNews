@@ -9,11 +9,12 @@
 import UIKit
 
 class SearchTableViewCell: UITableViewCell {
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         
+        self.separatorInset = UIEdgeInsetsZero
+        self.layoutMargins = UIEdgeInsetsZero
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,7 +24,7 @@ class SearchTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -39,5 +40,5 @@ class SearchTableViewCell: UITableViewCell {
         
         return cell!
     }
-
+    
 }

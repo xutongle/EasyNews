@@ -79,10 +79,12 @@ extension UIView{
     func show(message: String, block: () -> Void) -> Void {
         
         label.text = message
-        self.addSubview(toastView)
+        UIView.animateWithDuration(0.25) { 
+            self.addSubview(toastView)
+        }
         
         // 延时几秒后消失
-        self.delay(1) {
+        self.delay(1.25) {
             toastView.removeFromSuperview()
             block()
         }

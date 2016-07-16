@@ -25,9 +25,11 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     // 所有城市的字典
     var dataDict:NSDictionary! = nil
     
-    // 
+    //
     var queue:dispatch_queue_t! = nil
     var myqueue: NSOperationQueue! = nil
+    var timer:NSTimer! = nil
+    var operation:NSBlockOperation? = nil
     
     //
     var isFirst = true
@@ -42,6 +44,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     // MARK: - -----------------------生命周期------------------------------------
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if isFirst {
             
             // 搞定导航栏 Model过来也有
@@ -67,7 +71,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             searchTextField.placeholder = "输入城市名称"
             searchTextField.clearButtonMode = .WhileEditing
             searchTextField.keyboardType = .Default
-            
+            searchTextField.returnKeyType = .Search
             searchTextField.delegate = self
             searchTextField.addTarget(self, action: #selector(valueChange), forControlEvents: .EditingChanged)
             
@@ -81,7 +85,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // 初始化字典
         dataDict = Tools.readPlist()
         
@@ -93,9 +97,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(searchView)
         searchView.alpha = 0
         
-        queue = dispatch_queue_create("queryQueue", DISPATCH_QUEUE_SERIAL)
+        queue = dispatch_queue_create("queryQueue", DISPATCH_QUEUE_CONCURRENT)
         myqueue = NSOperationQueue.init()
-
+        myqueue.maxConcurrentOperationCount = 1
+        
         searchChooseCityBlock = {city in
             // 去往MainViewController
             backSearchViewBlock(cityName: city)
@@ -132,7 +137,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         let caseInputStr = inputStr?.lowercaseString
         pinyinStr = Tools.hanZiZhuanPinYin(caseInputStr!, yinbiao: false)!
         pinyinStr = pinyinStr.stringByReplacingOccurrencesOfString(" ", withString: "")
-        searchView.dataArray?.removeAllObjects()
         
         if inputStr == "" {
             print("空")
@@ -142,34 +146,29 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        getDataToTableview()
+        //getDataToTableview()
         
-        // 新开线程 太卡了。。。
-//        dispatch_async(queue) {
-//            
-//        }
     }
     
     func getDataToTableview() -> Void {
+        
         myqueue.cancelAllOperations()
         
-        let operation  = NSBlockOperation.init {
+        if operation != nil {
+            operation?.cancel()
+            operation = nil
+        }
+        
+        operation = NSBlockOperation.init(block: {
+            
             for allData in self.dataDict {
-                let array = allData.value as! NSArray
-                for dict in array {
+                for dict in allData.value as! NSArray {
                     // 汉字
-                    let cityName = dict["name"] as! NSString
-                    // 未裁剪的拼音
-                    let strCityName: NSString = Tools.hanZiZhuanPinYin(cityName as String, yinbiao: false)!
-                    // 去除空格
-                    let noSpaceCityName: NSString = strCityName.stringByReplacingOccurrencesOfString(" ", withString: "")
-                    // 裁剪后的拼音
-                    let subCityName: NSString = noSpaceCityName.substringToIndex(self.pinyinStr.length <= noSpaceCityName.length ? self.pinyinStr.length : noSpaceCityName.length)
-                    
-                    print("---->", subCityName, self.pinyinStr)
+                    let cityName = dict["name"] as! String
+                    // pinyin
+                    let subCityName = self.subStr(cityName)
                     // 对比
                     if subCityName == self.pinyinStr {
-                        
                         self.searchView.dataArray?.addObject(cityName)
                     }
                 }
@@ -179,9 +178,25 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             dispatch_async(dispatch_get_main_queue(), {
                 self.searchView.tableview.reloadData()
             })
-        }
+            
+        })
         
-        myqueue.addOperation(operation)
+        myqueue.addOperation(operation!)
+        searchView.dataArray?.removeAllObjects()
+
+    }
+    
+    // 处理字符串
+    func subStr(string: String) -> NSString {
+        
+        // 未裁剪的拼音
+        let strCityName: NSString = Tools.hanZiZhuanPinYin(string, yinbiao: false)!
+        // 去除空格
+        let noSpaceStr: NSString = strCityName.stringByReplacingOccurrencesOfString(" ", withString: "")
+        // 裁剪后的拼音
+        let subStr: NSString = noSpaceStr.substringToIndex(self.pinyinStr.length <= noSpaceStr.length ? self.pinyinStr.length : noSpaceStr.length)
+        
+        return subStr
     }
     
     // MARK: - -----------------------TextField协议------------------------------------
@@ -201,13 +216,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
-        //getDataToTableview()
+        getDataToTableview()
         return true
     }
-    
-    
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        self.searchTextField.endEditing(true)
-//    }
     
 }

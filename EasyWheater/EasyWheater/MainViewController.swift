@@ -275,7 +275,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                         Tools.setUserDefaults(key: str, andVluew: tomorrowDict["week"]!)
                         laterCell.week = Tools.getUserDefaults(str) as! String
                         
-                        //状态（雷阵雨）
+                        //状态（雷阵雨等）
                         str = String.init(format: "dayTime%d", index)
                         Tools.setUserDefaults(key: str, andVluew: tomorrowDict["dayTime"]!)
                         laterCell.dayTime1 = Tools.getUserDefaults(str) as! String

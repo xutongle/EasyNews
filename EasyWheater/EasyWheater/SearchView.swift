@@ -25,6 +25,9 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableview.delegate = self
         tableview.dataSource = self
         
+        tableview?.separatorInset = UIEdgeInsetsZero
+        tableview?.layoutMargins = UIEdgeInsetsZero
+        
         tableview.bounces = false
         tableview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
         tableview.tableFooterView = UIView()

@@ -28,9 +28,14 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView = UITableView.init(frame: CGRectMake(0, 0, frame.size.width, frame.size.height), style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.bounces = false
         
-        tableView?.separatorInset = UIEdgeInsetsZero
-        tableView?.layoutMargins = UIEdgeInsetsZero
+        // 头视图看起来和谐点
+        let view = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 15))
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        tableView.tableHeaderView = view
+        
+        tableView.tableFooterView = UIView()
         
         self.addSubview(tableView)
     }
@@ -79,9 +84,9 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     // 头标题
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "        " + citysKey[section] + "开头"
-    }
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "        " + citysKey[section] + "开头"
+//    }
     
     // 头标题高度
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -92,10 +97,17 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return citysKey
     }
-    
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UIView()
-//    }
+
+    // 自定义头视图
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 20))
+        let label = UILabel.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 20))
+        label.textAlignment = .Center
+        label.font = UIFont.systemFontOfSize(25)
+        label.text = citysKey[section]
+        view.addSubview(label)
+        return view
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
