@@ -183,7 +183,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         
         myqueue.addOperation(operation!)
         searchView.dataArray?.removeAllObjects()
-
+        
     }
     
     // 处理字符串
@@ -215,8 +215,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        
-        getDataToTableview()
+        if self.pinyinStr != nil {
+            getDataToTableview()
+        }
         return true
     }
     

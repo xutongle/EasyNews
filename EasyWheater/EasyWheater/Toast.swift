@@ -25,10 +25,6 @@ public enum ToastPostion {
 
 // MARK: - ---------------------全局变量---------------------
 
-// 屏幕宽高
-//private let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
-//private let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
-
 // 初始化出Toast
 private let toastView:UIView = Toast.init(frame: CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH / 2)) / 2, SCREEN_HEIGHT - 80, SCREEN_WIDTH / 2, 40))
 
@@ -79,8 +75,40 @@ extension UIView{
     func show(message: String, block: () -> Void) -> Void {
         
         label.text = message
-        UIView.animateWithDuration(0.25) { 
+        // 行数自适应
+        label.numberOfLines = 0
+        // 截断新内容
+        label.lineBreakMode = .ByCharWrapping
+//        // 设置字体
+//        label.font = UIFont.systemFontOfSize(15)
+        label.textAlignment = .Left
+        label.textColor = UIColor.whiteColor()
+        
+        let messageStr = message as NSString
+        let rect = messageStr.boundingRectWithSize(CGSizeMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil)
+        
+        var useSize: CGSize = rect.size
+        print("自适应的大小－>", useSize)
+        if rect.width < SCREEN_WIDTH / 2 {
+            useSize.width = SCREEN_WIDTH / 2
+            label.textAlignment = .Center
+        }
+        if rect.height < 30 {
+            useSize.height = 30
+            label.textAlignment = .Center
+        }
+
+        toastView.frame = CGRectMake(SCREEN_WIDTH / 4 - 5, SCREEN_HEIGHT - useSize.height - 80 - 5, useSize.width + 10, useSize.height + 10)
+        // 初始化label
+        label.frame = CGRectMake(5, 5, useSize.width, useSize.height)
+        
+        toastView.addSubview(label)
+        toastView.layer.cornerRadius = 10
+        
+        toastView.alpha = 0
+        UIView.animateWithDuration(0.25) {
             self.addSubview(toastView)
+            toastView.alpha = 1
         }
         
         // 延时几秒后消失
@@ -142,12 +170,6 @@ private class Toast: UIView {
     override private init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.blackColor()
-        
-        // 初始化label
-        label.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
-        label.textAlignment = .Center
-        label.textColor = UIColor.whiteColor()
-        self.addSubview(label)
     }
     
     required init?(coder aDecoder: NSCoder) {

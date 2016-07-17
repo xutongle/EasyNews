@@ -205,7 +205,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 complete(province: placemake!.administrativeArea!, city: placemake!.locality!)
                 //print(placemake?.locality,placemake?.administrativeArea)
             }else{
-                self.view.show("无法获得定位信息", block: {})
+                self.view.show("无法获得定位信息，请稍后重试", block: {})
             }
         }
     }
@@ -315,12 +315,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     // block
                     getWeatherOver(city: self.weatherDict["city"]! as? String, province: self.weatherDict["province"]! as? String)
                 }else{
-                    self.view.show("请稍后重试", block: {})
+                    self.view.show("天气获取失败，请稍后重试", block: {})
                     
                     print(response.result.value)
                 }
             }else{
-                self.view.show("请检查网络", block: {})
+                self.view.show("请检查网络，稍后重试", block: {})
             }
         }
     }
@@ -356,7 +356,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 // 如果之前没有存入过,就存入数据库
                 if !DBOperate.dbOperate.queryIsExitsData(trueCity) {
                     if !DBOperate.dbOperate.insertData(trueCity, provinceName: trueProvince){
-                        self.view.show("数据库操作失败", block: {
+                        self.view.show("数据库操作失败了", block: {
                             
                         })
                     }else {
@@ -393,7 +393,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                 
             })
         }
-        self.view.show("无法获取到定位") { }
+        self.view.show("无法获取定位") { }
     }
     
     // MARK: - ----------------------自己的协议InfoBtnProtocol------------------
