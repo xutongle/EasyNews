@@ -31,7 +31,7 @@ class SaveImageToDocment: NSObject {
     }
     
     // 保存图片
-    func save(image image: UIImage, withName fileName: String, complete: (compltete: Bool) -> Void) -> Void {
+    func save(image image: UIImage, withName fileName: String, complete: (compltete: Bool, backImage: UIImage) -> Void) -> Void {
         
         let filePath = getDocumentPath() + fileName_in
         
@@ -41,26 +41,27 @@ class SaveImageToDocment: NSObject {
         
         //let saveImage = clipToImage(image: image, firSize: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
         
-        //
-        
-        let queue = dispatch_queue_create("SaveQueue", DISPATCH_QUEUE_CONCURRENT)
-        
+        var queue = dispatch_queue_create("SaveQueue", DISPATCH_QUEUE_CONCURRENT)
+        var imageGai: UIImage!
         //自己创建一个线程保存图片
         dispatch_async(queue) {
             do {
+                //imageGai = SaveImageToDocment.saveImageToDocment.getOpenGLImage(image, value: 0.5)
+                imageGai = image
                 print("当前线程是-->",NSThread.currentThread())
-                
-                try UIImagePNGRepresentation(image)!.writeToFile(filePath, options: .AtomicWrite)
+                try UIImagePNGRepresentation(imageGai)!.writeToFile(filePath, options: .AtomicWrite)
                 // 回去显示图片要用到主线程 抛回去
                 dispatch_async(dispatch_get_main_queue(), {
-                    complete(compltete: true)
+                    complete(compltete: true, backImage: imageGai)
+                    queue = nil
                 })
             }catch {
                 print(error)
                 
                 // 回去显示图片要用到主线程
                 dispatch_async(dispatch_get_main_queue(), {
-                    complete(compltete: false)
+                    complete(compltete: false, backImage: imageGai)
+                    queue = nil
                 })
             }
         }
@@ -145,9 +146,9 @@ class SaveImageToDocment: NSObject {
         return clipImage
     }
     
-    // 图片滤镜 马赛克 使用OpenGLES绘制
+    // 图片滤镜 棕色 使用OpenGLES绘制
     func  maSaiKe(drawView: UIView, image: UIImage, value :CGFloat) -> Void {
-        let rect = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)
+        let rect = CGRectMake(-image.size.width / 4,0, image.size.width, SCREEN_HEIGHT)
         
         //获取OpenGLES渲染的上下文
         let eaglContext = EAGLContext.init(API: .OpenGLES2)
@@ -167,29 +168,12 @@ class SaveImageToDocment: NSObject {
         
         // 导入CIImage
         let ciImage = CIImage.init(image: image)
-        /*
-        // 滤镜
-        let msk_filter = CIFilter.init(name: "CIPixellate")
-        msk_filter?.setValue(ciImage, forKey: kCIInputImageKey)
-        msk_filter?.setDefaults()
-        // 导出
-        let msk_outImage = msk_filter?.valueForKey(kCIOutputImageKey) as! CIImage
-        */
-        
-        /*
-        // 滤镜2
-        let hud_filter = CIFilter.init(name: "CIHueAdjust")
-        hud_filter?.setValue(msk_outImage, forKey: kCIInputImageKey)
-        hud_filter?.setDefaults()
-        hud_filter?.setValue(1.0, forKey: kCIInputAngleKey)
-        let hud_outImage = hud_filter?.valueForKey(kCIOutputImageKey) as! CIImage
-        */
         
         // 滤镜3
         let sepia_filter = CIFilter.init(name: "CISepiaTone")
         sepia_filter?.setValue(ciImage, forKey: kCIInputImageKey)
         sepia_filter?.setValue(value, forKey: kCIInputIntensityKey)
-        print(sepia_filter?.attributes)
+        //print(sepia_filter?.attributes)
         let sepia_outImage = sepia_filter?.outputImage
         
         //-------------------------------------------------------------
@@ -198,14 +182,29 @@ class SaveImageToDocment: NSObject {
         context.drawImage(sepia_outImage!, inRect: CGRectMake(0, 0, CGFloat(glkView.drawableWidth), CGFloat(glkView.drawableHeight)), fromRect: sepia_outImage!.extent)
         //
         glkView.display()
+    }
+    
+    // 不使用OpenGL
+    func getOpenGLImage(image: UIImage, value :CGFloat) -> UIImage {
         
-        /**
-         * 不使用OpenGLES绘制
-         */
-        //let cgImage = context.createCGImage(sepia_outImage, fromRect: msk_outImage.extent)
+        // 渲染的上下文
+        let context = CIContext.init()
+        
+        // 导入CIImage
+        let ciImage = CIImage.init(image: image)
+        
+        // 滤镜2
+        let hud_filter = CIFilter.init(name: "CIColorMonochrome")
+        hud_filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        hud_filter?.setDefaults()
+        print(hud_filter?.attributes)
+        hud_filter?.setValue(value, forKey: "inputIntensity")
+        let hud_outImage = hud_filter?.valueForKey(kCIOutputImageKey) as! CIImage
+        
+        let cgImage = context.createCGImage(hud_outImage, fromRect: hud_outImage.extent)
         // 导出
-        //let image = UIImage.init(CGImage: cgImage)
+        let image = UIImage.init(CGImage: cgImage)
         
-        //return image
+        return image
     }
 }

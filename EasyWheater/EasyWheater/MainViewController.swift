@@ -52,11 +52,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
         left_delegate = self
     }
     
-    //监听屏幕旋转
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        
-    }
-    
     // 重写方法让那个状态栏变白
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -225,6 +220,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     
                     // 头视图 (成功获得了数据才行)
                     HeadView.headView.location = city == nil ? Tools.getUserDefaults("city") as! String : city!
+                    NSNotificationCenter.defaultCenter().postNotificationName("RefreshLeftTableView", object: nil)
                     
                     let array = dict["result"] as! NSArray
                     //将当前的天气信息存入

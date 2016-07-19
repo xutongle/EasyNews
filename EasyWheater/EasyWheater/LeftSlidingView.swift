@@ -91,6 +91,8 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         //点击alpha视图收回
         let tapGestrue = UITapGestureRecognizer.init(target: self, action: #selector(closeSliding))
         alphaView.addGestureRecognizer(tapGestrue)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getAllLocationFormSQLite), name: "RefreshLeftTableView", object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -140,6 +142,7 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
     }
     
     // 自己的方法 查询完后执行
+    @objc
     private func getAllLocationFormSQLite() -> Void {
         
         weak var weakSelf:LeftSlidingView! = self
@@ -231,7 +234,6 @@ private class LeftSlidingView: UIView, UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         left_delegate?.chooseHitsoryCity(dataArray[indexPath.row - 1] as! NSDictionary)
-        getAllLocationFormSQLite()
     }
     
     @objc

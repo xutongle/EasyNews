@@ -40,7 +40,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view.addSubview(okButton)
         okButton.addTarget(self, action: #selector(dismissMe), forControlEvents: .TouchUpInside)
         
-        // 从设置传回来的block
+        // 从设置的view传回来的block
         chooseBgSettingBlock = {other in
             // 弹出提示从哪里选择图片
             let alert = UIAlertController.init(title: "", message: "选择图片自", preferredStyle: .ActionSheet)
@@ -63,7 +63,9 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         backDeafultBgBlock = {other in
             if SaveImageToDocment.saveImageToDocment.removeImage() {
                 BackgroundImageView.backgroundImageView.image = UIImage.init(named: "weather_temp")
-                self.view.show("恢复成功", block: { })
+                self.view.show("恢复成功", style: ToastStyle(), postion: .InCente, block: { 
+                    
+                })
             }else {
                 self.view.show("恢复失败，稍后试试", block: { })
             }
@@ -119,13 +121,13 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         let image = info[UIImagePickerControllerEditedImage] as! UIImage;
         
         // 保存图片并显示图片
-        SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") { (compltete) in
+        SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") { (compltete, backImage) in
             if compltete {
                 // 存储成功直接给背景图
-                BackgroundImageView.backgroundImageView.image = image
+                BackgroundImageView.backgroundImageView.image = backImage
                 
                 self.view.show("存储成功，更换背景成功", block: {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    //self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }else {
                 self.view.show("存储失败，更换背景失败", block: {
