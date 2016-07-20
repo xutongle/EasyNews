@@ -35,7 +35,7 @@ class SaveImageToDocment: NSObject {
         
         let filePath = getDocumentPath() + fileName_in
         
-        print(filePath)
+        //print(filePath)
         
         //let saveImage = scaleImage(image: image, firSize: CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT))
         
@@ -48,7 +48,7 @@ class SaveImageToDocment: NSObject {
             do {
                 //imageGai = SaveImageToDocment.saveImageToDocment.getOpenGLImage(image, value: 0.5)
                 imageGai = image
-                print("当前线程是-->",NSThread.currentThread())
+                //print("当前线程是-->",NSThread.currentThread())
                 try UIImagePNGRepresentation(imageGai)!.writeToFile(filePath, options: .AtomicWrite)
                 // 回去显示图片要用到主线程 抛回去
                 dispatch_async(dispatch_get_main_queue(), {
@@ -87,7 +87,7 @@ class SaveImageToDocment: NSObject {
         let queue = NSOperationQueue.init()
         
         let opera = NSBlockOperation.init {
-            print("当前线程是-->", NSThread.currentThread())
+            //print("当前线程是-->", NSThread.currentThread())
             
             let imageData = NSData.init(contentsOfFile: self.getDocumentPath() + self.fileName_in)
             if imageData == nil {
@@ -184,7 +184,7 @@ class SaveImageToDocment: NSObject {
         glkView.display()
     }
     
-    // 不使用OpenGL
+    // 不使用OpenGL 导出滤镜处理过的图片
     func getOpenGLImage(image: UIImage, value :CGFloat) -> UIImage {
         
         // 渲染的上下文
@@ -197,7 +197,7 @@ class SaveImageToDocment: NSObject {
         let hud_filter = CIFilter.init(name: "CIColorMonochrome")
         hud_filter?.setValue(ciImage, forKey: kCIInputImageKey)
         hud_filter?.setDefaults()
-        print(hud_filter?.attributes)
+        //print(hud_filter?.attributes)
         hud_filter?.setValue(value, forKey: "inputIntensity")
         let hud_outImage = hud_filter?.valueForKey(kCIOutputImageKey) as! CIImage
         

@@ -76,7 +76,7 @@ class DBOperate: NSObject {
         }catch {
             print("数据库操作出错\(error)")
         }
-        print(documentStr)
+        //print(documentStr)
     }
     
     // 查询数据

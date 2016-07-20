@@ -66,6 +66,24 @@ class Tools: NSObject {
     }
     
     /**
+     * 截取地区前一个字符 深圳 -> sz
+     */
+    
+    static func subCityWithHead(city: String) -> String? {
+        // 按空格分离字符串
+        let subStrArr = city.componentsSeparatedByString(" ")
+        
+        var resultStr: String? = ""
+        var tempStr: String? = ""
+        for str in subStrArr {
+            tempStr = (str as NSString).substringToIndex(1)
+            resultStr = resultStr! + tempStr!
+        }
+     
+        return resultStr
+    }
+    
+    /**
      *  读取plist文件
      */
     static func readPlist() -> NSDictionary? {

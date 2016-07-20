@@ -165,10 +165,14 @@ class AddViewController: UIViewController, UITextFieldDelegate {
                 for dict in allData.value as! NSArray {
                     // 汉字
                     let cityName = dict["name"] as! String
+                    
+                    let dict = self.subStr(cityName)
                     // pinyin
-                    let subCityName = self.subStr(cityName)
+                    let subCityName = dict["subStr"] as! String
+                    // 首字母
+                    let strSubHead = dict["strSubHead"] as! String
                     // 对比
-                    if subCityName == self.pinyinStr {
+                    if subCityName == self.pinyinStr || strSubHead == self.pinyinStr{
                         self.searchView.dataArray?.addObject(cityName)
                     }
                 }
@@ -187,16 +191,19 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 处理字符串
-    func subStr(string: String) -> NSString {
+    func subStr(string: String) -> NSDictionary {
         
         // 未裁剪的拼音
         let strCityName: NSString = Tools.hanZiZhuanPinYin(string, yinbiao: false)!
+        let strSubHead: NSString = Tools.subCityWithHead(strCityName as String)!
         // 去除空格
         let noSpaceStr: NSString = strCityName.stringByReplacingOccurrencesOfString(" ", withString: "")
         // 裁剪后的拼音
         let subStr: NSString = noSpaceStr.substringToIndex(self.pinyinStr.length <= noSpaceStr.length ? self.pinyinStr.length : noSpaceStr.length)
         
-        return subStr
+        let dict = ["strSubHead":strSubHead,"subStr":subStr]
+        
+        return dict
     }
     
     // MARK: - -----------------------TextField协议------------------------------------

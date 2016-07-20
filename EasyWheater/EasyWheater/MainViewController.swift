@@ -11,7 +11,7 @@ import CoreLocation
 import Alamofire
 
 /**
- * 22.5428234337,114.0595370000  深圳 纬度在前
+ * 22.5428234337,114.0595370000 深圳 纬度在前
  * 39.9046363143,116.4071136987 北京
  * 31.2983194973,120.5831906603 苏州
  **/
@@ -63,7 +63,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+                        
         //初始化 CLLocationManager
         initailLocation()
         
@@ -307,7 +307,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, InfoBtnPr
                     bottomView.updateTime = Tools.getUserDefaults("updateTime") as! String
                     //待更
                     
-                    print(self.weatherDict)
+                    //print(self.weatherDict)
                     // block
                     getWeatherOver(city: self.weatherDict["city"]! as? String, province: self.weatherDict["province"]! as? String)
                 }else{

@@ -112,6 +112,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     @objc
     func dismissMe() -> Void {
         Tools.setUserDefaults(key: "isBlur", andVluew: SingleManager.singleManager.getValue(Key: "isBlur")!)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -127,7 +128,8 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
                 BackgroundImageView.backgroundImageView.image = backImage
                 
                 self.view.show("存储成功，更换背景成功", block: {
-                    //self.dismissViewControllerAnimated(true, completion: nil)
+                    Tools.setUserDefaults(key: "isBlur", andVluew: SingleManager.singleManager.getValue(Key: "isBlur")!)
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }else {
                 self.view.show("存储失败，更换背景失败", block: {
