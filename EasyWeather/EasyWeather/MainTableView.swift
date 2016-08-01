@@ -9,7 +9,15 @@
 import UIKit
 
 class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
-
+    
+    // 存放天气信息
+    var weatherInfoDict:NSMutableDictionary!
+    // 存放其他天气信息
+    var otherWeatherInfoDict: NSMutableDictionary!
+    // 存放后续几天的天气信息（简单）
+    var lastdayWeatherInfo: NSMutableArray!
+    
+    // MARK: - －－－－－－－－－－－－－－－－－ 生命周期 －－－－－－－－－－－－－－－－－
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         
@@ -19,33 +27,58 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         self.delegate = self
         self.dataSource = self
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     
     // MARK: -------------------------tableView协议-------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        // 改变这个就行了（总共多少个cell）
-        let cellCount = 5
-        
-        //Tools.setUserDefaults(key: "CellCount", andVluew: cellCount - 2)
-        return cellCount
+        if weatherInfoDict == nil {
+            return 0
+        }
+        return 5
     }
     
+    
+    // MARK: - ---------------------------UITableViewDataSource---------------------------
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        
         switch indexPath.row {
         case 0:
-            return WeatherInfoTableViewCell.getWheatherInfoTableViewCell(tableView)
+            let cell = WeatherInfoTableViewCell.getWheatherInfoTableViewCell(tableView)
+            cell.weatherValueBtn.setTitle(weatherInfoDict["temperature_now"] as? String, forState: .Normal)
+            cell.maxminTemperatureLabel.text = weatherInfoDict["temperature_future"] as? String
+            cell.weatherStateLabel.text = weatherInfoDict["weather"] as? String
+            return cell
         case 1:
-            return OtherWeatherInfoTableViewCell.getOtherWeatherInfoTableViewCell(tableView)
+            let cell: OtherWeatherInfoTableViewCell = OtherWeatherInfoTableViewCell.getOtherWeatherInfoTableViewCell(tableView)
+            cell.leftLabel.text = otherWeatherInfoDict["humidity"] as? String
+            cell.centerLabel.text = otherWeatherInfoDict["wind"] as? String
+            cell.rightLabel.text = otherWeatherInfoDict["coldIndex"] as? String
+            return cell
+        case 2:
+            let cell: LastWeatherInfoTableViewCell = LastWeatherInfoTableViewCell.getLastWeatherInfoTableViewCell(tableView)
+            let dict =  lastdayWeatherInfo[indexPath.row - 2] as! NSDictionary
+            cell.dayLabel.text = dict["week"] as? String
+            cell.weatherStateAndWeatherLabel.text = (dict["dayTime"] as! String) + "  " + (dict["temperature"] as! String)
+            return cell
+        case 3:
+            let cell: LastWeatherInfoTableViewCell = LastWeatherInfoTableViewCell.getLastWeatherInfoTableViewCell(tableView)
+            let dict =  lastdayWeatherInfo[indexPath.row - 2] as! NSDictionary
+            cell.dayLabel.text = dict["week"] as? String
+            cell.weatherStateAndWeatherLabel.text = (dict["dayTime"] as! String) + "  " + (dict["temperature"] as! String)
+            return cell
+        case 4:
+            let cell: LastWeatherInfoTableViewCell = LastWeatherInfoTableViewCell.getLastWeatherInfoTableViewCell(tableView)
+            let dict =  lastdayWeatherInfo[indexPath.row - 2] as! NSDictionary
+            cell.weatherStateAndWeatherLabel.text = (dict["dayTime"] as! String) + "  " + (dict["temperature"] as! String)
+            cell.dayLabel.text = dict["week"] as? String
+            return cell
         default:
-            return LastWeatherInfoTableViewCell.getLastWeatherInfoTableViewCell(tableView)
+            return UITableViewCell()
         }
     }
     
@@ -55,8 +88,17 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             return 115
         case 1:
             return 60
-        default:
+        case 2:
             return 40
+        case 3:
+            return 40
+        case 4:
+            return 40
+        default:
+            return 0
         }
     }
 }
+
+
+

@@ -11,17 +11,17 @@ import UIKit
 class WeatherInfoTableViewCell: UITableViewCell {
 
     // 天气图标
-    private var weatherIconImageView: UIImageView!
+    var weatherIconImageView: UIImageView!
     // 当前天气温度
-    private var weatherValueBtn: UIButton!
+    var weatherValueBtn: UIButton!
     // 当天最高/最低温度
-    private var maxminTemperatureLabel: UILabel!
+    var maxminTemperatureLabel: UILabel!
     // 当前最低温度
     //private var minTemperatureLabel: UILabel!
     // 当前天气状态 和天气图标对应，比如 多云 等
-    private var weatherStateLabel: UILabel!
+    var weatherStateLabel: UILabel!
     // 体感温度（暂时未写）
-    private var feelTemperatureLabel: UILabel!
+    var feelTemperatureLabel: UILabel!
     
     //
     override private init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -53,14 +53,13 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherIconImageView = UIImageView.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 - weatherIconImageViewWidth, 30, weatherIconImageViewWidth, 35))
         weatherIconImageView.clipsToBounds = true
         weatherIconImageView.contentMode = .ScaleAspectFit
-        weatherIconImageView.image = UIImage.init(named: "晴")
+        print(weatherIconImageView.image?.accessibilityIdentifier)
         self.addSubview(weatherIconImageView)
         
         // 当天最高/最低温度
         maxminTemperatureLabel = UILabel.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 + weatherValueBtnWidth - 5, 0, maxminTemperatureLabelWidth, weatherValueBtnHeigh))
         maxminTemperatureLabel.textColor = UIColor.whiteColor()
         maxminTemperatureLabel.textAlignment = .Center
-        maxminTemperatureLabel.text = "20"
         self.addSubview(maxminTemperatureLabel)
         
         // 当前天气状态 和天气图标对应，比如 多云 等
@@ -68,7 +67,6 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherStateLabel.textColor = UIColor.whiteColor()
         weatherStateLabel.font = UIFont.systemFontOfSize(15)
         weatherStateLabel.textAlignment = .Center
-        weatherStateLabel.text = "多云"
         self.addSubview(weatherStateLabel)
         
         // 体感温度（暂时未写）
@@ -76,7 +74,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
         feelTemperatureLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         feelTemperatureLabel.font = UIFont.systemFontOfSize(14)
         feelTemperatureLabel.textAlignment = .Center
-        feelTemperatureLabel.text = "体感温度 40"
+        feelTemperatureLabel.text = "体感温度 40°C"
         self.addSubview(feelTemperatureLabel)
     }
     

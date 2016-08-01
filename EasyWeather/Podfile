@@ -1,11 +1,18 @@
 # 基本
 use_frameworks!
-platform :ios, ‘8.0’
+platform :ios, ‘9.0’
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'EasyWeather' do
 
 # 网络库
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
 pod 'Alamofire', '~> 3.4'
 
 # Sqlite操作
 pod 'SQLite.swift', '~> 0.10.1' 
+
+# Json
+pod 'SwiftyJSON'
+
+end

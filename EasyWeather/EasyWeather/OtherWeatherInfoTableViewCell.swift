@@ -22,19 +22,19 @@ class OtherWeatherInfoTableViewCell: UITableViewCell {
         leftLabel = UILabel.init(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 60))
         leftLabel.textColor = UIColor.whiteColor()
         leftLabel.textAlignment = .Center
-        leftLabel.text = "A"
+        leftLabel.font = UIFont.systemFontOfSize(14)
         self.addSubview(leftLabel)
         
         centerLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3, 60))
         centerLabel.textColor = UIColor.whiteColor()
         centerLabel.textAlignment = .Center
-        centerLabel.text = "B"
+        centerLabel.font = UIFont.systemFontOfSize(14)
         self.addSubview(centerLabel)
         
         rightLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3 * 2, 0, SCREEN_WIDTH / 3, 60))
         rightLabel.textColor = UIColor.whiteColor()
         rightLabel.textAlignment = .Center
-        rightLabel.text = "C"
+        rightLabel.font = UIFont.systemFontOfSize(14)
         self.addSubview(rightLabel)
         
     }

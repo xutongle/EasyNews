@@ -21,13 +21,11 @@ class LastWeatherInfoTableViewCell: UITableViewCell {
         dayLabel = UILabel.init(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 40))
         dayLabel.textAlignment = .Center
         dayLabel.textColor = UIColor.whiteColor()
-        dayLabel.text = "星期二"
         self.addSubview(dayLabel)
         
-        weatherStateAndWeatherLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3 * 2, 0, SCREEN_WIDTH / 3, 40))
+        weatherStateAndWeatherLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3 * 2, 40))
         weatherStateAndWeatherLabel.textAlignment = .Center
         weatherStateAndWeatherLabel.textColor = UIColor.whiteColor()
-        weatherStateAndWeatherLabel.text = "晴 30-40"
         self.addSubview(weatherStateAndWeatherLabel)
     }
     
