@@ -35,7 +35,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
         // 天气图标大小
         let weatherIconImageViewWidth = SCREEN_WIDTH / 8
         // 当天最高/最低温度宽度
-        let maxminTemperatureLabelWidth = SCREEN_WIDTH / 10
+        let maxminTemperatureLabelWidth: CGFloat = 80
         // 当前天气状态 宽度
         let weatherStateLabelWidth = SCREEN_WIDTH
         // 体感温度 宽度
@@ -45,7 +45,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherValueBtn = UIButton.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2, 0, weatherValueBtnWidth, weatherValueBtnHeigh))
         weatherValueBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         weatherValueBtn.setTitle("23°", forState: .Normal)
-        weatherValueBtn.titleLabel?.font = UIFont.systemFontOfSize(70)
+        weatherValueBtn.titleLabel?.font = UIFont.systemFontOfSize(50)
         weatherValueBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         self.addSubview(weatherValueBtn)
         
@@ -53,12 +53,13 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherIconImageView = UIImageView.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 - weatherIconImageViewWidth, 30, weatherIconImageViewWidth, 35))
         weatherIconImageView.clipsToBounds = true
         weatherIconImageView.contentMode = .ScaleAspectFit
-        print(weatherIconImageView.image?.accessibilityIdentifier)
         self.addSubview(weatherIconImageView)
         
         // 当天最高/最低温度
         maxminTemperatureLabel = UILabel.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 + weatherValueBtnWidth - 5, 0, maxminTemperatureLabelWidth, weatherValueBtnHeigh))
         maxminTemperatureLabel.textColor = UIColor.whiteColor()
+        maxminTemperatureLabel.numberOfLines = 0
+        maxminTemperatureLabel.font = UIFont.systemFontOfSize(14)
         maxminTemperatureLabel.textAlignment = .Center
         self.addSubview(maxminTemperatureLabel)
         

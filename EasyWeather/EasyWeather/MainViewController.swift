@@ -86,13 +86,20 @@ class MainViewController: UIViewController {
                     
                     // 天气信息
                     self.mainTableView.weatherInfoDict = NSMutableDictionary()
+                    var temperature_future = futureInfo![0]["temperature"].stringValue
+                    let range = temperature_future.rangeOfString("/")
+                    let max_temperature = temperature_future.substringToIndex(range!.startIndex.advancedBy(-1))
+                    let min_temperature = temperature_future.substringFromIndex(range!.startIndex.advancedBy(2))
+                    temperature_future = max_temperature + "\n" + min_temperature
+                    print(max_temperature, "-" ,min_temperature)
                     self.mainTableView.weatherInfoDict =
                         ["temperature_now": allInfo["temperature"]!.stringValue,
                             "weather": allInfo["weather"]!.stringValue,
-                            "temperature_future": futureInfo![0]["temperature"].stringValue]
+                            "temperature_future": temperature_future]
                     // 其他天气信息
                     self.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
                     self.mainTableView.otherWeatherInfoDict = ["wind": allInfo["wind"]!.stringValue, "humidity": allInfo["humidity"]!.stringValue, "coldIndex": allInfo["coldIndex"]!.stringValue]
+                    // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
                         if NSInteger(index) > 0 {

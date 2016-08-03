@@ -51,7 +51,10 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             let cell = WeatherInfoTableViewCell.getWheatherInfoTableViewCell(tableView)
             cell.weatherValueBtn.setTitle(weatherInfoDict["temperature_now"] as? String, forState: .Normal)
             cell.maxminTemperatureLabel.text = weatherInfoDict["temperature_future"] as? String
-            cell.weatherStateLabel.text = weatherInfoDict["weather"] as? String
+            
+            let state = weatherInfoDict["weather"] as? String
+            cell.weatherStateLabel.text = state
+            cell.weatherIconImageView.image = UIImage.init(named: state!)
             return cell
         case 1:
             let cell: OtherWeatherInfoTableViewCell = OtherWeatherInfoTableViewCell.getOtherWeatherInfoTableViewCell(tableView)
