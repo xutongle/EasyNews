@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 主要天气信息
 class WeatherInfoTableViewCell: UITableViewCell {
 
     // 天气图标

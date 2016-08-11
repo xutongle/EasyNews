@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     //mob天气的相关
     let url = "http://apicloud.mob.com/v1/weather/query"
@@ -21,6 +22,9 @@ class MainViewController: UIViewController {
     //
     var mainTableView: MainTableView!
     
+    //
+    let clLocationManager: CLLocationManager = CLLocationManager()
+    
     // 重写方法让那个状态栏变白
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -29,22 +33,34 @@ class MainViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let background = BackgroundImageView.backgroundImageView
-        background.weather = "多云"
-        self.view.addSubview(background)
-        
-        let topView = TopView(frame: CGRectMake(0, 20, SCREEN_WIDTH, 44))
-        self.view.addSubview(topView)
-        
-        mainTableView = MainTableView(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
-        self.view.addSubview(mainTableView)
-        
-        slidingView = self.view.addSlidingView_zly()
+        if Tools.getUserDefaults("first") == nil {
+            Tools.setUserDefaults(key: "first", andVluew: false)
+            Tools.setUserDefaults(key: "BlurValue", andVluew: 0.5)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initailLocation()
+        
+        let background = BackgroundImageView.backgroundImageView
+        background.weather = "多云"
+        // 从沙盒中取到图片
+        SaveImageToDocment.saveImageToDocment.getImage({ (image) in
+            if image != nil {
+                BackgroundImageView.backgroundImageView.image = image
+            }
+        })
+        
+        self.view.addSubview(background)
+        
+        self.view.addSubview(TopView.topView)
+        
+        mainTableView = MainTableView(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
+        self.view.addSubview(mainTableView)
+        
+        slidingView = self.view.addSlidingView_zly()
         
         // TopView
         btnAction = {whichButton in
@@ -56,24 +72,75 @@ class MainViewController: UIViewController {
             case .isLocationButton:
                 break
             case .isAddLocationButton:
+                self.presentViewController(AddViewController.addViewController, animated: true, completion: nil)
                 break
             }
         }
         
-        // 设置按钮回掉
+        // 设置按钮回调
         setttingBlock = {
-            
+            self.closeSlidingView()
+            self.presentViewController(SettingViewController(), animated: true, completion: nil)
         }
         
-        getWeather("深圳") {
-            
+        // 城市选择
+        backCityBlock = {cityName in
+            self.chooseOverShowWeather(cityName)
         }
+        
+        // 来自AddViewController
+        backSearchViewBlock = {cityName in
+            self.chooseOverShowWeather(cityName as String)
+        }
+        
+        let swapLeftGestrue = UISwipeGestureRecognizer(target: self, action: #selector(openSlidingView))
+        swapLeftGestrue.direction = .Right
+        self.view.addGestureRecognizer(swapLeftGestrue)
     }
     
     // MARK: - －－－－－－－－－－－－－－－－－－－－ 自己的方法 －－－－－－－－－－－－－－－－－－
-    func getWeather(city: String?, Over: () -> Void) -> Void {
+    
+    // 初始化CLLocationManager
+    func initailLocation() -> Void {
+        if CLLocationManager.locationServicesEnabled() {
+            clLocationManager.delegate = self
+            clLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+            //更新距离
+            clLocationManager.distanceFilter = kCLDistanceFilterNone
+            //when in use
+            if clLocationManager.respondsToSelector(#selector(CLLocationManager.requestAlwaysAuthorization))
+                && UIDevice.currentDevice().systemVersion >= "8.0" {
+                clLocationManager.requestWhenInUseAuthorization()
+            }
+            //
+            clLocationManager.startUpdatingLocation()
+        }
+    }
+    
+    // 开启定位
+    func reGetWeather_Locatin() -> Void {
+        clLocationManager.startUpdatingLocation()
+    }
+    
+    // 选择天气后
+    func chooseOverShowWeather(cityName: String) -> Void {
+        self.view.show("已选\(cityName)", style: ToastStyle(), postion: .InCente, block: {})
         
-        let parameters = ["key":APP_KEY,"city":city == nil ?  Tools.getUserDefaults("city")! : city!,"province":Tools.getUserDefaults("province") == nil ? "" : Tools.getUserDefaults("province")!]
+        getWeather(cityName) { cityName, province in
+            if province != nil {
+                Tools.setUserDefaults(key: "province", andVluew: province!)
+                Tools.setUserDefaults(key: "city", andVluew: cityName)
+                TopView.topView.location = Tools.getUserDefaults("city") as! String
+            }
+        }
+    }
+    
+    // 获取天气
+    func getWeather(city: String?, Over: (cityName: String, province: String?) -> Void) -> Void {
+        
+        let parameters = ["key":APP_KEY,
+                          "city":city == nil ?  Tools.getUserDefaults("city")! : city!,
+                          "province":Tools.getUserDefaults("province") == nil ? "" : Tools.getUserDefaults("province")!]
         
         Alamofire.request(.POST, url, parameters: parameters).responseJSON { (response) in
             let result = response.result
@@ -81,6 +148,8 @@ class MainViewController: UIViewController {
                 let json = JSON(response.result.value!)
                 // 如果获得天气成功
                 if json["retCode"].intValue == 200 {
+                    TopView.topView.location = Tools.getUserDefaults("city") as! String
+                    
                     let allInfo = json["result"].arrayValue[0].dictionaryValue
                     let futureInfo = allInfo["future"]
                     
@@ -98,7 +167,10 @@ class MainViewController: UIViewController {
                             "temperature_future": temperature_future]
                     // 其他天气信息
                     self.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
-                    self.mainTableView.otherWeatherInfoDict = ["wind": allInfo["wind"]!.stringValue, "humidity": allInfo["humidity"]!.stringValue, "coldIndex": allInfo["coldIndex"]!.stringValue]
+                    self.mainTableView.otherWeatherInfoDict =
+                        ["wind": allInfo["wind"]!.stringValue,
+                            "humidity": allInfo["humidity"]!.stringValue,
+                            "coldIndex": allInfo["coldIndex"]!.stringValue]
                     // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
@@ -106,14 +178,104 @@ class MainViewController: UIViewController {
                             self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] = ["week":value["week"].stringValue, "dayTime":value["dayTime"].stringValue, "temperature":value["temperature"].stringValue]
                         }
                     }
+                    // 其他信息
+                    self.mainTableView.otherInfoDict = NSMutableDictionary()
+                    self.mainTableView.otherInfoDict =
+                        ["washIndex": allInfo["washIndex"]!.stringValue,
+                            "airCondition": allInfo["airCondition"]!.stringValue,
+                            "dressingIndex":allInfo["dressingIndex"]!.stringValue,
+                            "exerciseIndex": allInfo["exerciseIndex"]!.stringValue]
                     
                     print(allInfo)
+                    Over(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
                     self.mainTableView.reloadData()
                 }else {
                     self.view.show("获取天气失败", block: { })
                 }
             }
         }
+    }
+    
+    func openSlidingView() -> Void {
+        slidingView.toggleSldingView(true)
+    }
+    
+    func closeSlidingView() -> Void {
+        slidingView.toggleSldingView(false)
+    }
+    
+    //反地理编码
+    func getLocationName(location: CLLocation, complete:(province: NSString,city :NSString) -> Void) -> Void {
+        //苹果自带反地理编码
+        CLGeocoder().reverseGeocodeLocation(location) { (placemakes: [CLPlacemark]?, error: NSError?) -> Void in
+            let placemake = placemakes?.first
+            
+            //成功获得地址
+            if placemake != nil{
+                complete(province: placemake!.administrativeArea!, city: placemake!.locality!)
+                //print(placemake?.locality,placemake?.administrativeArea)
+            }else{
+                self.view.show("无法获得定位信息，请稍后重试", block: {})
+            }
+        }
+    }
+    
+    // MARK: - -----------------------------定位的协议-----------------------------
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        //
+        let currLocation:CLLocation = locations.last!
+        
+        //当位置稳定时
+        if locations.first == locations.last {
+            clLocationManager.stopUpdatingLocation()
+            
+            //逆地理位置的回调
+            getLocationName(currLocation, complete: { (province, city) in
+                
+                var trueProvince:String!
+                var trueCity:String!
+                // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
+                let shi = city.substringWithRange(NSRange.init(location: city.length - 1, length: 1))
+                print("--------->>>>", shi)
+                // 如果有市 根据接口需要的话 需要裁掉市
+                if shi == "市" {
+                    trueProvince = province.substringToIndex(province.length - 1)
+                    trueCity = city.substringToIndex(city.length - 1)
+                }else {
+                    trueProvince = province as String
+                    trueCity = city as String
+                }
+                
+                Tools.setUserDefaults(key: "province", andVluew: trueProvince)
+                Tools.setUserDefaults(key: "city", andVluew: trueCity)
+                
+                // 获取天气
+                self.getWeather(trueCity, Over: {cityName, province in
+                    
+                })
+            })
+        }
+    }
+    
+    //定位错误信息
+    func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
+        
+        print("[OTTLocationManager locationManager:didFinishDeferredUpdatesWithError] \(error)\(error?.description)")
+    }
+    
+    //如果未开启定位服务或者获取不到定位，会走此代理方法
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        //
+        manager.stopUpdatingLocation()
+        print("[OTTLocationManager locationManager:didFailWithError] 无法获取到定位")
+        if Tools.getUserDefaults("city") != nil {
+            
+            getWeather(Tools.getUserDefaults("city") as? String, Over: {cityName, province in
+                
+            })
+        }
+        self.view.show("无法获取定位, 使用上次位置") { }
     }
     
 }

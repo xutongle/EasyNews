@@ -18,6 +18,8 @@ var btnAction: ((whichButton: WhichButton) -> Void)!
 
 class TopView: UIView {
 
+    static let topView = TopView(frame: CGRectMake(0, 20, SCREEN_WIDTH, 44))
+    
     //locationButton宽度
     let locationLabelWidth:CGFloat = 100
     
@@ -25,7 +27,11 @@ class TopView: UIView {
     var drawUpButton:UIButton!
     var addLocationButton:UIButton!
     
-    var location = "深圳"
+    var location: String! = Tools.getUserDefaults("city") != nil ? Tools.getUserDefaults("city")  as! String : " " {
+        didSet{
+            locationButton.setTitle(location, forState: .Normal)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

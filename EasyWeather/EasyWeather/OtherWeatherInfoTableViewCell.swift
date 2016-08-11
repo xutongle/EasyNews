@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 其他天气信息
 class OtherWeatherInfoTableViewCell: UITableViewCell {
     
     var leftLabel: UILabel!

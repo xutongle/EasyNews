@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class Tools: NSObject {
-
+    
     private override init() {}
     
     // 单利
@@ -86,9 +86,11 @@ class Tools: NSObject {
         
         let filePath = NSBundle.mainBundle().pathForResource("citydict", ofType: "plist")
         let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath!) {
-            // 城市
-            citysDict = NSDictionary.init(contentsOfFile: filePath!)
+        if (filePath != nil) {
+            if fileManager.fileExistsAtPath(filePath!) {
+                // 城市
+                citysDict = NSDictionary.init(contentsOfFile: filePath!)
+            }
         }
         return citysDict
     }

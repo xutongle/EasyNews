@@ -13,13 +13,18 @@ var setttingBlock: (() -> Void)!
 
 // MARK: - ----------------------- extension ----------------------------------
 
+let slidingView = SlidingView(frame: CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+
 extension UIView {
     // 添加侧滑到视图
     func addSlidingView_zly() -> SlidingView {
-        let slidingView = SlidingView(frame: CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
         slidingView.tableview.delegate = slidingView
         slidingView.tableview.dataSource = slidingView
         self.addSubview(slidingView)
+        return slidingView
+    }
+    
+    func getSlidingView() -> SlidingView {
         return slidingView
     }
 }
@@ -30,7 +35,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 数据源
     var dataForTableView: NSMutableArray!
     // tableview
-    private var tableview: UITableView!
+    var tableview: UITableView!
     // 顶部视图
     private var topView: UIView!
     // 膜
@@ -96,7 +101,9 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = SlidingViewCell.getSlidingViewCellWith(tableView)
-        
+        if indexPath.row == 0 {
+            cell.backgroundColor = DARK_GRAY
+        }
         return cell
     }
     

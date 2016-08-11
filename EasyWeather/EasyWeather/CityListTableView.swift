@@ -47,11 +47,15 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     // MARK: - ------------------------自己的方法----------------------------
     
     func readFileToCityDict() -> Void {
-            // 城市
-            citysDict = Tools.readPlist()
+        // 城市
+        citysDict = Tools.readPlist()
+        if (citysDict != nil) {
             // ABCD键
             citysKey = citysDict.allKeys as! Array<String>
             citysKey = citysKey.sort(<)
+        }else {
+            citysKey = Array<String>()
+        }
         
     }
     
@@ -83,6 +87,11 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // 头标题
+    //    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //        return "        " + citysKey[section] + "开头"
+    //    }
+    
     // 头标题高度
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20.0
@@ -92,7 +101,7 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return citysKey
     }
-
+    
     // 自定义头视图
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 20))

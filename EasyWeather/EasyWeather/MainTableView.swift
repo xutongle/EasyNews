@@ -11,11 +11,13 @@ import UIKit
 class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // 存放天气信息
-    var weatherInfoDict:NSMutableDictionary!
+    var weatherInfoDict: NSMutableDictionary!
     // 存放其他天气信息
     var otherWeatherInfoDict: NSMutableDictionary!
     // 存放后续几天的天气信息（简单）
     var lastdayWeatherInfo: NSMutableArray!
+    // 存放其他信息
+    var otherInfoDict: NSMutableDictionary!
     
     // MARK: - －－－－－－－－－－－－－－－－－ 生命周期 －－－－－－－－－－－－－－－－－
     override init(frame: CGRect, style: UITableViewStyle) {
@@ -40,7 +42,7 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         if weatherInfoDict == nil {
             return 0
         }
-        return 5
+        return 6
     }
     
     
@@ -81,7 +83,14 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             cell.dayLabel.text = dict["week"] as? String
             return cell
         default:
-            return UITableViewCell()
+            let cell: OtherInfoTableViewCell = OtherInfoTableViewCell.getOtherInfoTableViewCell(tableView)
+            
+            cell.washIndexLabel.text = "洗车适宜:" + (otherInfoDict["washIndex"] as! String)
+            cell.airConditionLabel.text = "空气质量:" + (otherInfoDict["airCondition"] as! String)
+            cell.dressingIndexLabel.text = "穿衣指数:" + (otherInfoDict["dressingIndex"] as! String)
+            cell.exerciseIndexLabel.text = "运动指数:" + (otherInfoDict["exerciseIndex"] as! String)
+            
+            return cell
         }
     }
     
@@ -98,7 +107,7 @@ class MainTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         case 4:
             return 40
         default:
-            return 0
+            return 160
         }
     }
 }

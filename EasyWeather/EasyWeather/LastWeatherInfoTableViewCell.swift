@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 后三天的天气信息
 class LastWeatherInfoTableViewCell: UITableViewCell {
 
     var dayLabel: UILabel!

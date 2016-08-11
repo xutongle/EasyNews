@@ -21,7 +21,7 @@ class BackgroundImageView: UIImageView {
     }
     
     // 透明度值的监听
-    var blurValue:Float! = Tools.getUserDefaults("isBlur") != nil ? Tools.getUserDefaults("isBlur") as! Float : 0.5{
+    var blurValue:Float! = Tools.getUserDefaults("BlurValue") != nil ? Tools.getUserDefaults("BlurValue") as! Float : 0.5{
         didSet{
             visualView.alpha = 1
             visualView.alpha = CGFloat(blurValue)

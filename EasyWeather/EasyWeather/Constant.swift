@@ -8,6 +8,8 @@
 
 import UIKit
 
+/********************** 通用常量 *************************/
+
 // 屏幕宽高
 let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
 let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
@@ -17,3 +19,17 @@ let heandViewHeight:CGFloat = 44
 
 // tablevie高度
 let mainTabbleViewHeight:CGFloat = 285
+
+/********************** 设置页面常量 *************************/
+
+// 设置页面背景的颜色
+let SETTING_BACKGROUND_COLOR: UIColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
+// 设置页面cell的高度
+let SETTING_CELL_HEIGHT: CGFloat = 40
+// 设置CELL的数量
+let SETTING_CELL_NUM: Int = 2
+
+/********************** 颜色常量 *************************/
+
+let DARK_GRAY: UIColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
+let WHITE_COLOR: UIColor = UIColor.whiteColor()
