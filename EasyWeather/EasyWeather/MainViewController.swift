@@ -96,6 +96,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let swapLeftGestrue = UISwipeGestureRecognizer(target: self, action: #selector(openSlidingView))
         swapLeftGestrue.direction = .Right
         self.view.addGestureRecognizer(swapLeftGestrue)
+        
+        DBOperaCityList()
     }
     
     // MARK: - －－－－－－－－－－－－－－－－－－－－ 自己的方法 －－－－－－－－－－－－－－－－－－

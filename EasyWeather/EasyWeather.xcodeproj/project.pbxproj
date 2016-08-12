@@ -16,9 +16,9 @@
 		0A3AA0971D5C47C400F5DF24 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA0961D5C47C400F5DF24 /* LocationTableViewCell.swift */; };
 		0A3AA0991D5C47CE00F5DF24 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA0981D5C47CE00F5DF24 /* SearchTableViewCell.swift */; };
 		0A3AA09B1D5C48C800F5DF24 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AA09A1D5C48C800F5DF24 /* citydict.plist */; };
-		0A3AA09D1D5C5A1400F5DF24 /* DBOperaCityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA09C1D5C5A1400F5DF24 /* DBOperaCityList.swift */; };
 		0AB797121D5AFD91007CD372 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797111D5AFD91007CD372 /* SettingViewController.swift */; };
 		0AB797151D5AFE9D007CD372 /* FrostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */; };
+		0ADB36441D5D9D9800E56D9F /* DBOperaCityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */; };
 		3B63C58C3C5592D12EBF6BC6 /* Pods_EasyWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6970E933E995F6BD17D20F /* Pods_EasyWeather.framework */; };
 		9D49BFC01D4ADC6D002E540E /* SlidingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49BFBF1D4ADC6D002E540E /* SlidingView.swift */; };
 		9D9009781D49846E00CAF7CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9009771D49846E00CAF7CE /* AppDelegate.swift */; };
@@ -68,9 +68,9 @@
 		0A3AA0961D5C47C400F5DF24 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		0A3AA0981D5C47CE00F5DF24 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A3AA09A1D5C48C800F5DF24 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
-		0A3AA09C1D5C5A1400F5DF24 /* DBOperaCityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperaCityList.swift; sourceTree = "<group>"; };
 		0AB797111D5AFD91007CD372 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedTableViewCell.swift; sourceTree = "<group>"; };
+		0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperaCityList.swift; sourceTree = "<group>"; };
 		182A0C677B6063F8825A78FC /* Pods-EasyWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather/Pods-EasyWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		228C0991A752F4EB265CD692 /* Pods-EasyWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather/Pods-EasyWeather.release.xcconfig"; sourceTree = "<group>"; };
 		9D49BFBF1D4ADC6D002E540E /* SlidingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingView.swift; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 				9D9009B11D498B8000CAF7CE /* Toast.swift */,
 				9D9009B51D498BBA00CAF7CE /* SaveImageToDocment.swift */,
 				9D9009B61D498BBA00CAF7CE /* SingleManager.swift */,
-				0A3AA09C1D5C5A1400F5DF24 /* DBOperaCityList.swift */,
+				0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -509,7 +509,7 @@
 				9D9009BA1D498CD500CAF7CE /* BackgroundImageView.swift in Sources */,
 				9D9009B81D498BBA00CAF7CE /* SingleManager.swift in Sources */,
 				0A3AA0821D5C01C800F5DF24 /* SettingTableView.swift in Sources */,
-				0A3AA09D1D5C5A1400F5DF24 /* DBOperaCityList.swift in Sources */,
+				0ADB36441D5D9D9800E56D9F /* DBOperaCityList.swift in Sources */,
 				0A3AA0891D5C461400F5DF24 /* AddViewController.swift in Sources */,
 				0AB797151D5AFE9D007CD372 /* FrostedTableViewCell.swift in Sources */,
 				9D9009EA1D49BAF900CAF7CE /* OtherWeatherInfoTableViewCell.swift in Sources */,
