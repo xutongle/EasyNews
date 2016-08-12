@@ -25,6 +25,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     let clLocationManager: CLLocationManager = CLLocationManager()
     
+    // 需要刷新
+    var needRefresh = false
+    
     // 重写方法让那个状态栏变白
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -93,11 +96,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.chooseOverShowWeather(cityName as String)
         }
         
+        // 侧划点按cell
+        clickCellBlock = {city, province in
+            self.getWeather(city, Over: { (cityName, province) in  })
+        }
+        
         let swapLeftGestrue = UISwipeGestureRecognizer(target: self, action: #selector(openSlidingView))
         swapLeftGestrue.direction = .Right
         self.view.addGestureRecognizer(swapLeftGestrue)
-        
-        DBOperaCityList()
     }
     
     // MARK: - －－－－－－－－－－－－－－－－－－－－ 自己的方法 －－－－－－－－－－－－－－－－－－
@@ -150,34 +156,59 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 let json = JSON(response.result.value!)
                 // 如果获得天气成功
                 if json["retCode"].intValue == 200 {
-                    TopView.topView.location = Tools.getUserDefaults("city") as! String
                     
+                    // 存放存入数据库的信息 拍好序了
+                    var tempArray: [String]! = []
                     let allInfo = json["result"].arrayValue[0].dictionaryValue
                     let futureInfo = allInfo["future"]
                     
+                    Tools.setUserDefaults(key: "province", andVluew: allInfo["province"]!.stringValue)
+                    Tools.setUserDefaults(key: "city", andVluew: allInfo["city"]!.stringValue)
+                    TopView.topView.location = Tools.getUserDefaults("city") as! String
+                    
+                    tempArray.append(allInfo["city"]!.stringValue)
+                    tempArray.append(allInfo["province"]!.stringValue)
                     // 天气信息
                     self.mainTableView.weatherInfoDict = NSMutableDictionary()
                     var temperature_future = futureInfo![0]["temperature"].stringValue
-                    let range = temperature_future.rangeOfString("/")
-                    let max_temperature = temperature_future.substringToIndex(range!.startIndex.advancedBy(-1))
-                    let min_temperature = temperature_future.substringFromIndex(range!.startIndex.advancedBy(2))
-                    temperature_future = max_temperature + "\n" + min_temperature
-                    print(max_temperature, "-" ,min_temperature)
+                    // 字符串够长再裁剪
+                    if (temperature_future as NSString).length > 4 {
+                        let range = temperature_future.rangeOfString("/")
+                        let max_temperature = temperature_future.substringToIndex(range!.startIndex.advancedBy(-1))
+                        let min_temperature = temperature_future.substringFromIndex(range!.startIndex.advancedBy(2))
+                        temperature_future = max_temperature + "\n" + min_temperature
+                        print(max_temperature, "-" ,min_temperature)
+                    }
                     self.mainTableView.weatherInfoDict =
                         ["temperature_now": allInfo["temperature"]!.stringValue,
                             "weather": allInfo["weather"]!.stringValue,
                             "temperature_future": temperature_future]
+                    // 缓存用
+                    tempArray.append(allInfo["temperature"]!.stringValue)
+                    tempArray.append(allInfo["weather"]!.stringValue)
+                    tempArray.append(temperature_future)
                     // 其他天气信息
                     self.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
                     self.mainTableView.otherWeatherInfoDict =
                         ["wind": allInfo["wind"]!.stringValue,
                             "humidity": allInfo["humidity"]!.stringValue,
                             "coldIndex": allInfo["coldIndex"]!.stringValue]
+                    tempArray.append(allInfo["wind"]!.stringValue)
+                    tempArray.append(allInfo["humidity"]!.stringValue)
+                    tempArray.append(allInfo["coldIndex"]!.stringValue)
                     // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
                         if NSInteger(index) > 0 {
-                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] = ["week":value["week"].stringValue, "dayTime":value["dayTime"].stringValue, "temperature":value["temperature"].stringValue]
+                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
+                                ["week": value["week"].stringValue,
+                                    "dayTime": value["dayTime"].stringValue,
+                                    "temperature": value["temperature"].stringValue]
+                            if (NSInteger(index)! - 1 < 3) {
+                                tempArray.append(value["week"].stringValue)
+                                tempArray.append(value["dayTime"].stringValue)
+                                tempArray.append(value["temperature"].stringValue)
+                            }
                         }
                     }
                     // 其他信息
@@ -185,9 +216,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.mainTableView.otherInfoDict =
                         ["washIndex": allInfo["washIndex"]!.stringValue,
                             "airCondition": allInfo["airCondition"]!.stringValue,
-                            "dressingIndex":allInfo["dressingIndex"]!.stringValue,
+                            "dressingIndex": allInfo["dressingIndex"]!.stringValue,
                             "exerciseIndex": allInfo["exerciseIndex"]!.stringValue]
-                    
+                    tempArray.append(allInfo["washIndex"]!.stringValue)
+                    tempArray.append(allInfo["airCondition"]!.stringValue)
+                    tempArray.append(allInfo["dressingIndex"]!.stringValue)
+                    tempArray.append(allInfo["exerciseIndex"]!.stringValue)
+                    //
+                    let result = DBOperaCityList.dbOperaCityList.insertWeatherTable(tempArray)
+                    if (result != nil && result == true) {
+                        self.view.show("获得天气成功", block: { })
+                    }
                     print(allInfo)
                     Over(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
                     self.mainTableView.reloadData()
@@ -198,7 +237,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func refreshDataWithSliding() -> Void {
+        dispatch_async(dispatch_queue_create("selectQuque", DISPATCH_QUEUE_CONCURRENT)) {
+            DBOperaCityList.dbOperaCityList.queryCityAndProvince { (cityInfo) in
+                self.view.getSlidingView_zly().dataForTableView = cityInfo
+                self.view.getSlidingView_zly().reloadData()
+            }
+        }
+    }
+    
     func openSlidingView() -> Void {
+        if self.view.getSlidingView_zly().dataForTableView.count == 0 {
+            print("刷新1")
+            refreshDataWithSliding()
+        }else if needRefresh {
+            print("刷新2")
+            refreshDataWithSliding()
+        }
         slidingView.toggleSldingView(true)
     }
     
@@ -279,5 +334,4 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
         self.view.show("无法获取定位, 使用上次位置") { }
     }
-    
 }

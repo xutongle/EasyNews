@@ -10,6 +10,7 @@ import UIKit
 
 // 设置按钮的回调
 var setttingBlock: (() -> Void)!
+var clickCellBlock: ((city: String, province: String) -> Void)!
 
 // MARK: - ----------------------- extension ----------------------------------
 
@@ -24,7 +25,7 @@ extension UIView {
         return slidingView
     }
     
-    func getSlidingView() -> SlidingView {
+    func getSlidingView_zly() -> SlidingView {
         return slidingView
     }
 }
@@ -33,7 +34,7 @@ extension UIView {
 
 class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 数据源
-    var dataForTableView: NSMutableArray!
+    var dataForTableView: [[String:String]]!
     // tableview
     var tableview: UITableView!
     // 顶部视图
@@ -48,7 +49,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clearColor()
-        dataForTableView = NSMutableArray()
+        dataForTableView = []
         // 膜
         alphaView = UIView(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
         alphaView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
@@ -95,20 +96,56 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     // MARK: - ----------------------- tableview 协议 ----------------------------------
+    
+    // 返回cell数量
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataForTableView.count
     }
     
+    // 配置cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = SlidingViewCell.getSlidingViewCellWith(tableView)
-        if indexPath.row == 0 {
-            cell.backgroundColor = DARK_GRAY
-        }
+        
+        let view = UIView()
+        view.backgroundColor = DARK_GRAY
+        cell.selectedBackgroundView = view
+        
+        let dict = dataForTableView[indexPath.row]
+        cell.leftLabel.text =  dict["city"]
+        cell.rightLabel.text =  dict["province"]
+        
         return cell
     }
     
+    // cell高度
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 40
+    }
+    
+    // 点击cell
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 去首页刷新天气
+        clickCellBlock(city: dataForTableView[indexPath.row]["city"]!, province: dataForTableView[indexPath.row]["province"]!)
+    }
+    
+    // 是否允许删除
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
+        if (editingStyle == .Delete) {
+            let result = DBOperaCityList.dbOperaCityList.delectByCityName(dataForTableView[indexPath.row]["city"]!)
+            if result != nil && result != false {
+                dataForTableView.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }else {
+                self.show("删除失败", block: { })
+            }
+        }
+        else if (editingStyle == .Insert) {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
     }
     
     // MARK: - ----------------------- 自己的方法 ----------------------------------
@@ -119,7 +156,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 重载数据
     func reloadData() -> Void {
-        tableview.reloadData()
+        self.tableview.reloadData()
     }
     
     // 开关侧滑
@@ -175,21 +212,19 @@ class SlidingStyle: NSObject {
 
 // MARK: - ------------------- 侧滑的cell ----------------------------------
 class SlidingViewCell: UITableViewCell {
-    private var leftLabel: UILabel!
-    private var rightLabel: UILabel!
+    var leftLabel: UILabel!
+    var rightLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .None
+        //self.selectionStyle = .None
         self.separatorInset = UIEdgeInsetsZero
         self.layoutMargins = UIEdgeInsetsZero
         
         leftLabel = UILabel(frame: CGRectMake(0 , 0 ,SlidingStyle.slidingStyle.slidingViewSize / 2, 40))
         leftLabel.textAlignment = .Center
-        leftLabel.text = "广东"
         rightLabel = UILabel(frame: CGRectMake(SlidingStyle.slidingStyle.slidingViewSize / 2, 0, SlidingStyle.slidingStyle.slidingViewSize / 2, 40))
         rightLabel.textAlignment = .Center
-        rightLabel.text = "深圳"
         self.addSubview(leftLabel)
         self.addSubview(rightLabel)
     }

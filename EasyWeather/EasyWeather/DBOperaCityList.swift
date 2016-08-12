@@ -48,8 +48,10 @@ class DBOperaCityList: NSObject {
     
     override init() {
         super.init()
+        if (Tools.getUserDefaults("isCreateTable") != nil) {
+            isCreate = Tools.getUserDefaults("isCreateTable") as! Bool
+        }
         
-        isCreate = Tools.getUserDefaults("isCreateTable") as! Bool
         self.createDB()
     }
     
@@ -64,63 +66,64 @@ class DBOperaCityList: NSObject {
         // 裁剪
         databasePath = (strForDocument.substringFromIndex(7) as String) + "WeatherCache.sqlite3"
         
+        city = Expression<String>("city")
+        province = Expression<String>("province")
+        temperature_now = Expression<String>("temperature_now")
+        weather = Expression<String>("weather")
+        temperature_future = Expression<String>("temperature_future")
+        wind = Expression<String>("wind")
+        humidity = Expression<String>("humidity")
+        coldIndex = Expression<String>("coldIndex")
+        week1 = Expression<String>("week1")
+        week2 = Expression<String>("week2")
+        week3 = Expression<String>("week3")
+        dayTime1 = Expression<String>("dayTime1")
+        dayTime2 = Expression<String>("dayTime2")
+        dayTime3 = Expression<String>("dayTime3")
+        temperature1 = Expression<String>("temperature1")
+        temperature2 = Expression<String>("temperature2")
+        temperature3 = Expression<String>("temperature3")
+        washIndex = Expression<String>("washIndex")
+        airCondition = Expression<String>("airCondition")
+        dressingIndex = Expression<String>("dressingIndex")
+        exerciseIndex = Expression<String>("exerciseIndex")
+        
+        // 表对象
+        weather_list_table = Table("weather_list")
+        
         print(databasePath)
         
-        if !fileManager.fileExistsAtPath(databasePath) {
-            do {
-                // 连接数据库 (不存在会自动创建)
-                db = try Connection(databasePath)
-                
-                city = Expression<String>("city")
-                province = Expression<String>("province")
-                temperature_now = Expression<String>("temperature_now")
-                weather = Expression<String>("weather")
-                temperature_future = Expression<String>("temperature_future")
-                wind = Expression<String>("wind")
-                humidity = Expression<String>("humidity")
-                coldIndex = Expression<String>("coldIndex")
-                week1 = Expression<String>("week1")
-                week2 = Expression<String>("week2")
-                week3 = Expression<String>("week3")
-                dayTime1 = Expression<String>("dayTime1")
-                dayTime2 = Expression<String>("dayTime2")
-                dayTime3 = Expression<String>("dayTime3")
-                temperature1 = Expression<String>("temperature1")
-                temperature2 = Expression<String>("temperature2")
-                temperature3 = Expression<String>("temperature3")
-                washIndex = Expression<String>("washIndex")
-                airCondition = Expression<String>("airCondition")
-                dressingIndex = Expression<String>("dressingIndex")
-                exerciseIndex = Expression<String>("exerciseIndex")
-                
-                // 表对象
-                weather_list_table = Table("weather_list")
-                
-                if fileManager.fileExistsAtPath(databasePath) {
-                    print("文件存在可以创建")
-                    if Tools.getUserDefaults("isCreateTable") != nil {
-                        print("未创建表")
-                        if (Tools.getUserDefaults("isCreateTable") as! Bool) != true {
-                            
-                            print("开始创建2")
-                            createIt()
-                        } else{
-                            print("上次创建过表")
-                        }
-                    }else {
-                        print("开始创建1")
+        do {
+            // 连接数据库 (不存在会自动创建)
+            db = try Connection(databasePath)
+            
+            if fileManager.fileExistsAtPath(databasePath) {
+                print("文件存在可以创建")
+                if Tools.getUserDefaults("isCreateTable") != nil {
+                    print("上次创建过表,不一定成功")
+                    if (Tools.getUserDefaults("isCreateTable") as! Bool) != true {
+                        
+                        print("开始创建2")
                         createIt()
+                    } else{
+                        print("上次创建过表,一定成功")
                     }
                 }else {
-                    print("文件不存在，无法创建表")
+                    print("开始创建1")
+                    createIt()
                 }
-            }catch {
-                print("打开数据库异常:\(error)")
+            }else {
+                print("文件不存在，无法创建表")
             }
+        }catch {
+            print("打开数据库异常:\(error)")
         }
     }
     
     private func createIt() -> Void {
+        if Tools.getUserDefaults("isCreateTable") != nil {
+            if Tools.getUserDefaults("isCreateTable") as! Bool { return }
+        }
         do {
             // 创建表
             try db.run(weather_list_table.create(block: { (tableBuilder) in
@@ -155,9 +158,9 @@ class DBOperaCityList: NSObject {
     }
     
     // ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊  增删改查部分  ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
- 
+    
     // 查询
-    func queryWithWeatherTable() -> [[String: String]]? {
+    func queryWithAllWeatherTable() -> [[String: String]]? {
         let fileManager = NSFileManager.defaultManager()
         do{
             if !fileManager.fileExistsAtPath(databasePath) || !isCreate {
@@ -197,7 +200,85 @@ class DBOperaCityList: NSObject {
         }
     }
     
+    // 只查询地理位置
+    func queryCityAndProvince(queryOne: (cityInfo: [[String:String]]) -> Void) -> Bool? {
+        let fileManager = NSFileManager.defaultManager()
+        do {
+            if !fileManager.fileExistsAtPath(databasePath) || !isCreate {
+                return nil
+            }else {
+                var array_allInfo: [[String:String]] = []
+                for citys in try db.prepare(weather_list_table.select(city, province)) {
+                    var dict_cityinfo: [String:String] = [:]
+                    dict_cityinfo["city"] = citys[city]
+                    dict_cityinfo["province"] = citys[province]
+                    array_allInfo.append(dict_cityinfo)
+                }
+                queryOne(cityInfo: array_allInfo)
+                return true
+            }
+        }catch {
+            print("查询城市信息失败:\(error)")
+            return false
+        }
+    }
+    
     // 插入
+    func insertWeatherTable(info: [String]) -> Bool? {
+        let fileManager = NSFileManager.defaultManager()
+        do{
+            if !fileManager.fileExistsAtPath(databasePath) || !isCreate {
+                return nil
+            }else {
+                try db.run(
+                    weather_list_table.insert(
+                        or: .Replace,
+                        province <- info[1],
+                        temperature_now <- info[2],
+                        weather <- info[3],
+                        temperature_future <- info[4],
+                        wind <- info[5],
+                        humidity <- info[6],
+                        coldIndex <- info[7],
+                        week1 <- info[8],
+                        week2 <- info[9],
+                        week3 <- info[10],
+                        dayTime1 <- info[11],
+                        dayTime2 <- info[12],
+                        dayTime3 <- info[13],
+                        temperature1 <- info[14],
+                        temperature2 <- info[15],
+                        temperature3 <- info[16],
+                        washIndex <- info[17],
+                        airCondition <- info[18],
+                        dressingIndex <- info[19],
+                        exerciseIndex <- info[20],
+                        city <- info[0]
+                    )
+                )
+                return true
+            }
+        }catch{
+            print("插入失败:\(error)")
+            return false
+        }
+    }
     
-    
+    // 删除
+    func delectByCityName(cityName: String) -> Bool? {
+        let fileManager = NSFileManager.defaultManager()
+        do{
+            if !fileManager.fileExistsAtPath(databasePath) || !isCreate {
+                return nil
+            }else {
+                let city = weather_list_table.filter(self.city == cityName)
+                if try db.run(city.delete()) > 0 {
+                    return true
+                }
+            }
+        } catch {
+            print("delete failed: \(error)")
+        }
+        return false
+    }
 }
