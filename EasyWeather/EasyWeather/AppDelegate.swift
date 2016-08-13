@@ -23,7 +23,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //在上述名为Main的故事板中依据名字rootVC找到相应的页面，并且将该页面设置为主窗口的根页面
         self.window!.rootViewController = MainViewController();
         
+        if #available(iOS 9.1, *) {
+            if Tools.getUserDefaults("weather") != nil && Tools.getUserDefaults("temperature_now") != nil{
+                let myIcon: UIApplicationShortcutIcon! = UIApplicationShortcutIcon.init(type: .Home)
+                let str = (Tools.getUserDefaults("weather") as! String) + "&" + (Tools.getUserDefaults("temperature_now") as! String)
+                //
+                let shortcutItem: UIMutableApplicationShortcutItem! = UIMutableApplicationShortcutItem.init(type: "ShowWeather", localizedTitle: "天气", localizedSubtitle: str, icon: myIcon, userInfo: ["version/2":"2"])
+                UIApplication.sharedApplication().shortcutItems = [shortcutItem]
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+
+        
         return true
+    }
+    
+    // 3dTouch之后的事情
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void){
+        if shortcutItem.type == "ShowWeather" {
+            // TODO
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

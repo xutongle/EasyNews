@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 
-class MainViewController: UIViewController, CLLocationManagerDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewControllerPreviewingDelegate {
     
     //mob天气的相关
     let url = "http://apicloud.mob.com/v1/weather/query"
@@ -70,6 +70,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         refreshTimeLabel = UILabel.init(frame: CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20))
         refreshTimeLabel.textAlignment = .Center
         refreshTimeLabel.textColor = UIColor.orangeColor()
+        refreshTimeLabel.userInteractionEnabled = true
         self.view.addSubview(refreshTimeLabel)
         
         if Tools.getUserDefaults("updateWeatherTime") != nil {
@@ -79,6 +80,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
         // 获得侧划对象
         slidingView = self.view.addSlidingView_zly()
+        
+        self.check3dTouch()
         
         // TopView
         btnAction = {whichButton in
@@ -173,7 +176,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let parameters = ["key":APP_KEY,
                           "city": chooseCity,
                           "province": tempProvince]
-        
+        refreshTimeLabel.text = "加载中..."
         Alamofire.request(.POST, url, parameters: parameters).responseJSON { (response) in
             let result = response.result
             if result.isSuccess {
@@ -200,6 +203,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.mainTableView.weatherInfoDict =
                         ["temperature_now": allInfo["temperature"]!.stringValue, "weather": allInfo["weather"]!.stringValue,
                             "temperature_future": temperature_future]
+                    
+                    Tools.setUserDefaults(key: "temperature_now", andVluew: allInfo["temperature"]!.stringValue)
+                    Tools.setUserDefaults(key: "weather", andVluew: allInfo["weather"]!.stringValue)
+                    
                     // 缓存用
                     tempArray.append(allInfo["temperature"]!.stringValue)
                     tempArray.append(allInfo["weather"]!.stringValue)
@@ -380,6 +387,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func check3dTouch() -> Void {
+        // 检测3D Touch是否可用，如果可用就注册
+        if (self.traitCollection.forceTouchCapability == .Available) {
+            self.registerForPreviewingWithDelegate(self, sourceView: refreshTimeLabel)
+        }
+    }
+    
     // MARK: - ----------------------------- 定位的协议 -----------------------------
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
@@ -437,4 +451,38 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
         self.view.show("无法获取定位, 使用上次位置") { }
     }
+    
+    //MARK: ******************** 3D Touch *********************
+    
+    // 当3dtouch状态改变
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        check3dTouch()
+    }
+    
+    //MARK: ******************** UIViewControllerPreviewingDelegate *********************
+    
+    // Peek手势相关处理
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController?{
+        // 防止重复加入
+        if ((self.presentedViewController?.isKindOfClass(PeekViewController.classForKeyedUnarchiver())) != nil) {
+            return nil
+        }
+        print("加入一次")
+        return PeekViewController()
+    }
+    
+    //Pop手势相关处理
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController){
+        
+    }
+    
+    //MARK: ******************** UIViewControllerPreviewingDelegate *********************
+
+    //
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        // 摁的越重值越大
+        print(touch?.force)
+    }
+    
 }
