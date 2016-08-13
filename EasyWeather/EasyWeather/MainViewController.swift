@@ -66,8 +66,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // 主视图
         mainTableView = MainTableView(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
         self.view.addSubview(mainTableView)
-        // 获得侧划对象
-        slidingView = self.view.addSlidingView_zly()
         // 刷新的时间
         refreshTimeLabel = UILabel.init(frame: CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20))
         refreshTimeLabel.textAlignment = .Center
@@ -79,6 +77,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }else {
             refreshTimeLabel.text = "无"
         }
+        // 获得侧划对象
+        slidingView = self.view.addSlidingView_zly()
         
         // TopView
         btnAction = {whichButton in
