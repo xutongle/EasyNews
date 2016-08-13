@@ -27,7 +27,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.view.addSubview(SettingTableView.settinsgTableView)
         
-        okButton = UIButton(frame: CGRectMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50, 40, 40))
+        okButton = UIButton(frame: CGRectMake(SCREEN_WIDTH - 60, SCREEN_HEIGHT - 60, 50, 50))
         okButton.setImage(UIImage(named: "okBtn"), forState: .Normal)
         okButton.addTarget(self, action: #selector(backOf), forControlEvents: .TouchUpInside)
         self.view.addSubview(okButton)

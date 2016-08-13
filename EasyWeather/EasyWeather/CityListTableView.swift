@@ -28,7 +28,7 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView = UITableView.init(frame: CGRectMake(0, 0, frame.size.width, frame.size.height), style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.bounces = false
+        //tableView.bounces = false
         
         // 头视图看起来和谐点
         let view = UIView.init(frame: CGRectMake(0, 0, SCREEN_WIDTH, 15))

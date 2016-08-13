@@ -222,6 +222,49 @@ class DBOperaCityList: NSObject {
             return false
         }
     }
+    // 根据city要求查询
+    
+    func queryWithCityName(cityName: String, provinceName: String, backInfo: ((info: [String]?) -> Void)) -> Bool? {
+        let fileManager = NSFileManager.defaultManager()
+        do{
+            if !fileManager.fileExistsAtPath(databasePath) || !isCreate {
+                return nil
+            }else {
+                var tempArray: [String] = []
+                let query = weather_list_table.filter(city == cityName && province == provinceName)
+                
+                for onceInfo in try db.prepare(query) {
+                    tempArray = []
+                    tempArray.append(onceInfo[city])
+                    tempArray.append(onceInfo[province])
+                    tempArray.append(onceInfo[temperature_now])
+                    tempArray.append(onceInfo[weather])
+                    tempArray.append(onceInfo[temperature_future])
+                    tempArray.append(onceInfo[wind])
+                    tempArray.append(onceInfo[humidity])
+                    tempArray.append(onceInfo[coldIndex])
+                    tempArray.append(onceInfo[week1])
+                    tempArray.append(onceInfo[week2])
+                    tempArray.append(onceInfo[week3])
+                    tempArray.append(onceInfo[dayTime1])
+                    tempArray.append(onceInfo[dayTime2])
+                    tempArray.append(onceInfo[dayTime3])
+                    tempArray.append(onceInfo[temperature1])
+                    tempArray.append(onceInfo[temperature2])
+                    tempArray.append(onceInfo[temperature3])
+                    tempArray.append(onceInfo[washIndex])
+                    tempArray.append(onceInfo[airCondition])
+                    tempArray.append(onceInfo[dressingIndex])
+                    tempArray.append(onceInfo[exerciseIndex])
+                }
+                backInfo(info: tempArray)
+                return true
+            }
+        }catch {
+            print("查询city失败:\(error)")
+            return false
+        }
+    }
     
     // 插入
     func insertWeatherTable(info: [String]) -> Bool? {

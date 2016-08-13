@@ -98,6 +98,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         // 侧划点按cell
         clickCellBlock = {city, province in
+            Tools.setUserDefaults(key: "province", andVluew: province)
+            Tools.setUserDefaults(key: "city", andVluew: city)
+            
             self.getWeather(city, Over: { (cityName, province) in  })
         }
         
@@ -146,9 +149,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // 获取天气
     func getWeather(city: String?, Over: (cityName: String, province: String?) -> Void) -> Void {
         
+        let chooseCity = (city == nil ?  Tools.getUserDefaults("city")! : city!)
+        let tempProvince = (Tools.getUserDefaults("province") == nil ? "" : Tools.getUserDefaults("province")!)
         let parameters = ["key":APP_KEY,
-                          "city":city == nil ?  Tools.getUserDefaults("city")! : city!,
-                          "province":Tools.getUserDefaults("province") == nil ? "" : Tools.getUserDefaults("province")!]
+                          "city": chooseCity,
+                          "province": tempProvince]
         
         Alamofire.request(.POST, url, parameters: parameters).responseJSON { (response) in
             let result = response.result
@@ -170,15 +175,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     tempArray.append(allInfo["province"]!.stringValue)
                     // 天气信息
                     self.mainTableView.weatherInfoDict = NSMutableDictionary()
-                    var temperature_future = futureInfo![0]["temperature"].stringValue
-                    // 字符串够长再裁剪
-                    if (temperature_future as NSString).length > 4 {
-                        let range = temperature_future.rangeOfString("/")
-                        let max_temperature = temperature_future.substringToIndex(range!.startIndex.advancedBy(-1))
-                        let min_temperature = temperature_future.substringFromIndex(range!.startIndex.advancedBy(2))
-                        temperature_future = max_temperature + "\n" + min_temperature
-                        print(max_temperature, "-" ,min_temperature)
-                    }
+                    // 裁剪string的方法
+                    let temperature_future = self.subString(futureInfo![0]["temperature"].stringValue)
+                    
                     self.mainTableView.weatherInfoDict =
                         ["temperature_now": allInfo["temperature"]!.stringValue,
                             "weather": allInfo["weather"]!.stringValue,
@@ -227,26 +226,99 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     if (result != nil && result == true) {
                         self.view.show("获得天气成功", block: { })
                     }
-                    print(allInfo)
+                    
+                    //
+                    self.view.getSlidingView_zly().lightCell()
+                    // 是否需要重新刷新侧划
+                    self.needRefresh = true
+                    //print(allInfo)
                     Over(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
                     self.mainTableView.reloadData()
                 }else {
                     self.view.show("获取天气失败", block: { })
+                    print("使用缓存1")
+                    // 使用缓存
+                    self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
                 }
+            }else {
+                print("使用缓存2")
+                // 使用缓存
+                self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
             }
         }
     }
     
+    func getCacheWithSqlAndSet(cityName: String, provinceName: String) -> Void {
+        // 异步线程 内的同步执行。。。。。
+        dispatch_async(dispatch_queue_create("queryOne", DISPATCH_QUEUE_SERIAL)) {
+            let result =  DBOperaCityList.dbOperaCityList.queryWithCityName(cityName, provinceName: provinceName, backInfo: { (info) in
+                print("\(cityName)\(provinceName)\n\(info)")
+                if info != nil && info!.count == 21 {
+                    //
+                    self.mainTableView.weatherInfoDict = ["temperature_now": info![2], "weather": info![3], "temperature_future": info![4]]
+                    //
+                    self.mainTableView.otherWeatherInfoDict = ["wind": info![5], "humidity": info![6], "coldIndex": info![7]]
+                    //
+                    let dict1 = ["week": info![8], "dayTime":info![9], "temperature":info![10]]
+                    let dict2 = ["week": info![11], "dayTime":info![12], "temperature":info![13]]
+                    let dict3 = ["week": info![14], "dayTime":info![15], "temperature":info![16]]
+                    self.mainTableView.lastdayWeatherInfo = [dict1,dict2,dict3]
+                    //
+                    self.mainTableView.otherInfoDict = ["washIndex": info![17], "airCondition": info![18], "dressingIndex": info![19], "exerciseIndex": info![20]]
+                    //
+                    dispatch_async(dispatch_get_main_queue(), {
+                        // 头视图
+                        TopView.topView.location = cityName
+                        
+                        self.view.show("请检查网络,使用上次天气信息", block: { })
+                        self.mainTableView.reloadData()
+                    })
+                }else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.view.show("请检查网络", block: { })
+                    })
+                }
+            })
+            
+            if result == nil || result == false {
+                self.view.show("请检查网络,并重试", block: { })
+            }
+            
+        }
+    }
+    
+    func subString(temperature :String) -> String {
+        var temperature_future = temperature
+        
+        // 字符串够长再裁剪
+        if (temperature_future as NSString).length > 4 {
+            let rang = temperature_future.componentsSeparatedByString("/")
+            var max_temperature = rang[0]
+            max_temperature = (max_temperature as NSString).substringToIndex((max_temperature as NSString).length - 1)
+            var min_temperature = rang[1]
+            min_temperature = (min_temperature as NSString).substringFromIndex(1)
+            temperature_future = max_temperature + "\n" + min_temperature
+            //print(max_temperature, "-" ,min_temperature)
+        }
+        return temperature_future
+    }
+    
+    // 刷新侧划数据
     func refreshDataWithSliding() -> Void {
+        self.needRefresh = false
         dispatch_async(dispatch_queue_create("selectQuque", DISPATCH_QUEUE_CONCURRENT)) {
             DBOperaCityList.dbOperaCityList.queryCityAndProvince { (cityInfo) in
                 self.view.getSlidingView_zly().dataForTableView = cityInfo
-                self.view.getSlidingView_zly().reloadData()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.getSlidingView_zly().reloadData()
+                    self.view.getSlidingView_zly().lightCell()
+                })
             }
         }
     }
     
     func openSlidingView() -> Void {
+        
         if self.view.getSlidingView_zly().dataForTableView.count == 0 {
             print("刷新1")
             refreshDataWithSliding()
@@ -254,6 +326,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             print("刷新2")
             refreshDataWithSliding()
         }
+        
         slidingView.toggleSldingView(true)
     }
     
@@ -277,7 +350,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // MARK: - -----------------------------定位的协议-----------------------------
+    // MARK: - ----------------------------- 定位的协议 -----------------------------
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         //

@@ -36,7 +36,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 数据源
     var dataForTableView: [[String:String]]!
     // tableview
-    var tableview: UITableView!
+    private var tableview: UITableView!
     // 顶部视图
     private var topView: UIView!
     // 膜
@@ -89,6 +89,8 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
         let swipGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(gesTrueAction))
         swipGesture.direction = .Left
         self.addGestureRecognizer(swipGesture)
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -107,7 +109,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
         let cell = SlidingViewCell.getSlidingViewCellWith(tableView)
         
         let view = UIView()
-        view.backgroundColor = DARK_GRAY
+        view.backgroundColor = ORANGE_COLOR
         cell.selectedBackgroundView = view
         
         let dict = dataForTableView[indexPath.row]
@@ -150,6 +152,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - ----------------------- 自己的方法 ----------------------------------
     
+    // 手势关闭侧划
     func gesTrueAction() -> Void {
         toggleSldingView(false)
     }
@@ -180,6 +183,18 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 设置按钮事件
     func settingAction() -> Void {
         setttingBlock()
+    }
+    
+    // 让cell一来选中默认的cell
+    func lightCell() -> Void {
+        print("lightcell")
+        var n = 0
+        for dict in dataForTableView {
+            if dict["city"] == TopView.topView.location {
+                tableview.selectRowAtIndexPath(NSIndexPath.init(forRow: n, inSection: 0), animated: true, scrollPosition: .None)
+            }
+            n += 1
+        }
     }
 }
 
