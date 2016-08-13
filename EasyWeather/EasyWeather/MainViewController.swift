@@ -19,7 +19,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var slidingView: SlidingView!
     
-    //
+    // 主视图tableview
     var mainTableView: MainTableView!
     
     //
@@ -27,6 +27,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // 需要刷新
     var needRefresh = false
+    
+    // 
+    var refreshTimeLabel: UILabel!
     
     // 重写方法让那个状态栏变白
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -56,14 +59,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             }
         })
         
+        //背景
         self.view.addSubview(background)
-        
+        // 头视图
         self.view.addSubview(TopView.topView)
-        
+        // 主视图
         mainTableView = MainTableView(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
         self.view.addSubview(mainTableView)
-        
+        // 获得侧划对象
         slidingView = self.view.addSlidingView_zly()
+        // 刷新的时间
+        refreshTimeLabel = UILabel.init(frame: CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20))
+        refreshTimeLabel.textAlignment = .Center
+        refreshTimeLabel.textColor = UIColor.orangeColor()
+        self.view.addSubview(refreshTimeLabel)
+        
+        if Tools.getUserDefaults("updateWeatherTime") != nil {
+            refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
+        }else {
+            refreshTimeLabel.text = "无"
+        }
         
         // TopView
         btnAction = {whichButton in
@@ -104,9 +119,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.getWeather(city, Over: { (cityName, province) in  })
         }
         
+        // 划出侧划页面的手势
         let swapLeftGestrue = UISwipeGestureRecognizer(target: self, action: #selector(openSlidingView))
         swapLeftGestrue.direction = .Right
         self.view.addGestureRecognizer(swapLeftGestrue)
+        
+        // 刷新的通知 (重新定位， 重新获取天气)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reGetWeather_Locatin), name: "ReGetLocationAndReGetWeather", object: nil)
     }
     
     // MARK: - －－－－－－－－－－－－－－－－－－－－ 自己的方法 －－－－－－－－－－－－－－－－－－
@@ -179,8 +198,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     let temperature_future = self.subString(futureInfo![0]["temperature"].stringValue)
                     
                     self.mainTableView.weatherInfoDict =
-                        ["temperature_now": allInfo["temperature"]!.stringValue,
-                            "weather": allInfo["weather"]!.stringValue,
+                        ["temperature_now": allInfo["temperature"]!.stringValue, "weather": allInfo["weather"]!.stringValue,
                             "temperature_future": temperature_future]
                     // 缓存用
                     tempArray.append(allInfo["temperature"]!.stringValue)
@@ -189,8 +207,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     // 其他天气信息
                     self.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
                     self.mainTableView.otherWeatherInfoDict =
-                        ["wind": allInfo["wind"]!.stringValue,
-                            "humidity": allInfo["humidity"]!.stringValue,
+                        ["wind": allInfo["wind"]!.stringValue, "humidity": allInfo["humidity"]!.stringValue,
                             "coldIndex": allInfo["coldIndex"]!.stringValue]
                     tempArray.append(allInfo["wind"]!.stringValue)
                     tempArray.append(allInfo["humidity"]!.stringValue)
@@ -198,16 +215,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
-                        if NSInteger(index) > 0 {
+                        if NSInteger(index) > 0 && NSInteger(index) < 4 {
                             self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
-                                ["week": value["week"].stringValue,
-                                    "dayTime": value["dayTime"].stringValue,
+                                ["week": value["week"].stringValue, "dayTime": value["dayTime"].stringValue,
                                     "temperature": value["temperature"].stringValue]
-                            if (NSInteger(index)! - 1 < 3) {
-                                tempArray.append(value["week"].stringValue)
-                                tempArray.append(value["dayTime"].stringValue)
-                                tempArray.append(value["temperature"].stringValue)
-                            }
+                            //
+                            tempArray.append(value["week"].stringValue)
+                            tempArray.append(value["dayTime"].stringValue)
+                            tempArray.append(value["temperature"].stringValue)
                         }
                     }
                     // 其他信息
@@ -227,6 +242,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         self.view.show("获得天气成功", block: { })
                     }
                     
+                    // 更新时间
+                    Tools.setUserDefaults(key: "updateWeatherTime", andVluew: self.getCurrentTime())
+                    self.refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
                     //
                     self.view.getSlidingView_zly().lightCell()
                     // 是否需要重新刷新侧划
@@ -287,6 +305,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // 获得当前时间
+    func getCurrentTime() -> String {
+        let date = NSDate()
+        let sec = date.timeIntervalSinceNow
+        let currentTime = NSDate(timeIntervalSinceNow: sec)
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+        let time = dateFormat.stringFromDate(currentTime)
+        return time
+    }
+    
+    // 混搭字符串
     func subString(temperature :String) -> String {
         var temperature_future = temperature
         

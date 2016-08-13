@@ -44,7 +44,7 @@ extension UIView{
             toastView.frame = CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH / 2)) / 2, 84, SCREEN_WIDTH / 2, 40)
             break
         case .InCente:
-            toastView.frame = CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH / 2)) / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, 40)
+            toastView.frame = CGRectMake(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2 - 20, SCREEN_WIDTH / 2, 40)
             break
         default:
             // 默认为Bottom所以直接不做修改
