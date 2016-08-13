@@ -222,8 +222,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
-                        if NSInteger(index) > 0 && NSInteger(index) < 4 {
-                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
+                        if NSInteger(index) >= 2 && NSInteger(index) <= 4 {
+                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 2] =
                                 ["week": value["week"].stringValue, "dayTime": value["dayTime"].stringValue,
                                     "temperature": value["temperature"].stringValue]
                             //
