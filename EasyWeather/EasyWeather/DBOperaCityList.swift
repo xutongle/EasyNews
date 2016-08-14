@@ -18,36 +18,37 @@ class DBOperaCityList: NSObject {
     private var databasePath: String!
     //
     static let dbOperaCityList = DBOperaCityList()
-    var isCreate = false
+    private var isCreate = false
     
     // 字段
-    var city: Expression<String>!
-    var province: Expression<String>!
-    var temperature_now: Expression<String>!
-    var weather: Expression<String>!
-    var temperature_future: Expression<String>!
-    var wind: Expression<String>!
-    var humidity: Expression<String>!
-    var coldIndex: Expression<String>!
-    var week1: Expression<String>!
-    var week2: Expression<String>!
-    var week3: Expression<String>!
-    var dayTime1: Expression<String>!
-    var dayTime2: Expression<String>!
-    var dayTime3: Expression<String>!
-    var temperature1: Expression<String>!
-    var temperature2: Expression<String>!
-    var temperature3: Expression<String>!
-    var washIndex: Expression<String>!
-    var airCondition: Expression<String>!
-    var dressingIndex: Expression<String>!
-    var exerciseIndex: Expression<String>!
+    private var city: Expression<String>!
+    private var province: Expression<String>!
+    private var temperature_now: Expression<String>!
+    private var weather: Expression<String>!
+    private var temperature_future: Expression<String>!
+    private var wind: Expression<String>!
+    private var humidity: Expression<String>!
+    private var coldIndex: Expression<String>!
+    private var week1: Expression<String>!
+    private var week2: Expression<String>!
+    private var week3: Expression<String>!
+    private var dayTime1: Expression<String>!
+    private var dayTime2: Expression<String>!
+    private var dayTime3: Expression<String>!
+    private var temperature1: Expression<String>!
+    private var temperature2: Expression<String>!
+    private var temperature3: Expression<String>!
+    private var washIndex: Expression<String>!
+    private var airCondition: Expression<String>!
+    private var dressingIndex: Expression<String>!
+    private var exerciseIndex: Expression<String>!
     
     // 表对象
-    var weather_list_table: Table!
+    private var weather_list_table: Table!
     
     override init() {
         super.init()
+        
         if (Tools.getUserDefaults("isCreateTable") != nil) {
             isCreate = Tools.getUserDefaults("isCreateTable") as! Bool
         }

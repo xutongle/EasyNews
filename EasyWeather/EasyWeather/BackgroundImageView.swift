@@ -39,7 +39,7 @@ class BackgroundImageView: UIImageView {
         //设置毛玻璃view的视图
         visualView.frame = frame
         
-        //visualView.alpha = 1
+        visualView.alpha = 1
         visualView.alpha = CGFloat(blurValue)
         
         //添加到背景上

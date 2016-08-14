@@ -9,7 +9,7 @@
 import UIKit
 
 class PeekViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.orangeColor()
@@ -33,24 +33,24 @@ class PeekViewController: UIViewController {
         self.view.addSubview(label)
         
     }
-
+    
     //MARK: ******************** 来自UIViewController *********************
     
     override func previewActionItems() -> [UIPreviewActionItem] {
         let firstAction = UIPreviewAction(title: "这是提示1", style: .Default) { (previewAction, viewController) in
-            print("firstAction")
+            self.view.show("这是提示1", block: {})
         }
         let secondAction = UIPreviewAction(title: "这是提示2", style: .Default) { (previewAction, viewController) in
-            print("secondAction")
+            self.view.show("这是提示2", block: {})
         }
         
         let thirdAction = UIPreviewAction(title: "这是提示3", style: .Destructive) { (previewAction, viewController) in
-            print("thirdAction")
+            self.view.show("这是提示3", block: {})
         }
         
         // 塞到UIPreviewActionGroup中
-        let group1 = UIPreviewActionGroup(title: "Default", style: .Default, actions: [firstAction, secondAction])
-        let group2 = UIPreviewActionGroup(title: "Destructive", style: .Default, actions: [thirdAction])
+        let group1 = UIPreviewActionGroup(title: "第一组", style: .Default, actions: [firstAction, secondAction])
+        let group2 = UIPreviewActionGroup(title: "第二组", style: .Default, actions: [thirdAction])
         return [group1, group2]
     }
     

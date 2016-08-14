@@ -40,6 +40,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         super.viewWillAppear(animated)
         
         if Tools.getUserDefaults("first") == nil {
+            DBOperaCityList().queryWithAllWeatherTable()
             Tools.setUserDefaults(key: "first", andVluew: false)
             Tools.setUserDefaults(key: "BlurValue", andVluew: 0.5)
         }
@@ -473,7 +474,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     
     //Pop手势相关处理
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController){
-        
+        self.presentViewController(PopViewController(), animated: true, completion: nil)
     }
     
     //MARK: ******************** UIViewControllerPreviewingDelegate *********************

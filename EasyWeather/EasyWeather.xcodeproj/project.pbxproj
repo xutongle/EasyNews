@@ -17,6 +17,7 @@
 		0A3AA0991D5C47CE00F5DF24 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA0981D5C47CE00F5DF24 /* SearchTableViewCell.swift */; };
 		0A3AA09B1D5C48C800F5DF24 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AA09A1D5C48C800F5DF24 /* citydict.plist */; };
 		0A4698FC1D5F740900B3E059 /* PeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4698FB1D5F740900B3E059 /* PeekViewController.swift */; };
+		0A53CA0F1D604A4600A91B64 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53CA0E1D604A4600A91B64 /* PopViewController.swift */; };
 		0AB797121D5AFD91007CD372 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797111D5AFD91007CD372 /* SettingViewController.swift */; };
 		0AB797151D5AFE9D007CD372 /* FrostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */; };
 		0ADB36441D5D9D9800E56D9F /* DBOperaCityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */; };
@@ -70,6 +71,7 @@
 		0A3AA0981D5C47CE00F5DF24 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A3AA09A1D5C48C800F5DF24 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
 		0A4698FB1D5F740900B3E059 /* PeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekViewController.swift; sourceTree = "<group>"; };
+		0A53CA0E1D604A4600A91B64 /* PopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewController.swift; sourceTree = "<group>"; };
 		0AB797111D5AFD91007CD372 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedTableViewCell.swift; sourceTree = "<group>"; };
 		0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperaCityList.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				0AB797111D5AFD91007CD372 /* SettingViewController.swift */,
 				0A3AA0881D5C461400F5DF24 /* AddViewController.swift */,
 				0A4698FB1D5F740900B3E059 /* PeekViewController.swift */,
+				0A53CA0E1D604A4600A91B64 /* PopViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				0A3AA0921D5C47A300F5DF24 /* CityListTableView.swift in Sources */,
 				0A3AA0941D5C47AC00F5DF24 /* SearchView.swift in Sources */,
 				9D9009BC1D49938500CAF7CE /* TopView.swift in Sources */,
+				0A53CA0F1D604A4600A91B64 /* PopViewController.swift in Sources */,
 				9D9009B71D498BBA00CAF7CE /* SaveImageToDocment.swift in Sources */,
 				9D49BFC01D4ADC6D002E540E /* SlidingView.swift in Sources */,
 				0A4698FC1D5F740900B3E059 /* PeekViewController.swift in Sources */,
