@@ -222,8 +222,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     // 剩下几天的天气信息
                     self.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
-                        if NSInteger(index) >= 2 && NSInteger(index) <= 4 {
-                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 2] =
+                        if NSInteger(index) >= 1 && NSInteger(index) <= 3 {
+                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
                                 ["week": value["week"].stringValue, "dayTime": value["dayTime"].stringValue,
                                     "temperature": value["temperature"].stringValue]
                             //
@@ -312,7 +312,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         }
     }
     
-    // 获得当前时间
+    // 获得当前格式化的时间
     func getCurrentTime() -> String {
         let date = NSDate()
         let sec = date.timeIntervalSinceNow
@@ -481,8 +481,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     //
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
+
         // 摁的越重值越大
-        print(touch?.force)
+        if touch != nil && touch!.view == refreshTimeLabel {
+            refreshTimeLabel.textColor = UIColor(red: (touch!.force) / 5 / 255.0, green: 1 / 255.0, blue: 1 / 255.0, alpha: 1)
+        }
+    }
+    
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        refreshTimeLabel.textColor = UIColor.orangeColor()
     }
     
 }

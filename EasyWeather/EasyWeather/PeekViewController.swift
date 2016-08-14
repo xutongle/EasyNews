@@ -14,6 +14,18 @@ class PeekViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.orangeColor()
         
+        let bg = UIImageView(frame: self.view.frame)
+        bg.contentMode = .ScaleAspectFill
+        self.view.addSubview(bg)
+        
+        bg.image = UIImage(named: "weather_temp")
+        // 从沙盒中取到图片
+        SaveImageToDocment.saveImageToDocment.getImage({ (image) in
+            if image != nil {
+                bg.image = image
+            }
+        })
+        
         let label = UILabel(frame: CGRectMake(0, SCREEN_HEIGHT / 2 - 20,SCREEN_WIDTH, 40))
         label.textAlignment = .Center
         label.textColor = WHITE_COLOR

@@ -26,16 +26,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 9.1, *) {
             if Tools.getUserDefaults("weather") != nil && Tools.getUserDefaults("temperature_now") != nil{
                 let myIcon: UIApplicationShortcutIcon! = UIApplicationShortcutIcon.init(type: .Home)
-                let str = (Tools.getUserDefaults("weather") as! String) + "&" + (Tools.getUserDefaults("temperature_now") as! String)
                 //
-                let shortcutItem: UIMutableApplicationShortcutItem! = UIMutableApplicationShortcutItem.init(type: "ShowWeather", localizedTitle: "天气", localizedSubtitle: str, icon: myIcon, userInfo: ["version/2":"2"])
+                let shortcutItem: UIMutableApplicationShortcutItem! = UIMutableApplicationShortcutItem.init(type: "ShowWeather", localizedTitle: "天气", localizedSubtitle: "查看当前天气", icon: myIcon, userInfo: ["version/3":"1"])
                 UIApplication.sharedApplication().shortcutItems = [shortcutItem]
             }
         } else {
             // Fallback on earlier versions
         }
         
+        // 通知权限请求
+        if (UIApplication.instancesRespondToSelector(#selector(UIApplication.registerUserNotificationSettings(_:)))) {
+                UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        }
+        
+        // 先取消通知
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        let localNotification = UILocalNotification()
 
+        // 当前时间
+        let currentDate = NSDate()
+        let timeZone = NSTimeZone.systemTimeZone()
+        let interval = timeZone.secondsFromGMTForDate(currentDate)
+        let localDate = currentDate.dateByAddingTimeInterval(Double(interval))
+        print("当前时间\(localDate)")
+        // 明天8点
+//        let tomorrowEightTime = NSDate.init(timeInterval: 24 * 60 * 60, sinceDate: localDate)
+//        let data = tomorrowEightTime.laterDate(localDate)
+//        print(tomorrowEightTime)
+        
+        let format = NSDateFormatter()
+        format.dateFormat = "HH:mm:ss"
+        let date = format.dateFromString("08:00:00")
+        print(date)
+        //let fireDate = NSDate().dateByAddingTimeInterval(3)
+        // 通知时间
+        localNotification.fireDate = date
+        // 设置时区
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        // 通知上显示的主题内容
+        localNotification.alertBody = "新的一天开始，看看天气怎么样吧"
+        // 收到通知时播放的声音，默认消息声音
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        // 重复周期
+        localNotification.repeatInterval = .Day
+        //待机界面的滑动动作提示
+        localNotification.alertAction = "打开应用"
+        // 应用程序图标右上角显示的消息数
+        localNotification.applicationIconBadgeNumber = 1
+        // 通知上绑定的其他信息，为键值对
+        localNotification.userInfo = ["id": "1",  "name": "xxxx"]
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         
         return true
     }
@@ -45,6 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if shortcutItem.type == "ShowWeather" {
             // TODO
         }
+    }
+    
+    // 应用在正在运行(在前台或后台运行)，点击通知后触发appDelegate代理方法:：didReceiveLocalNotification
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        print("运行了代理:\(notification.userInfo)")
+        application.applicationIconBadgeNumber = 0
+    }
+    
+    // 应用未运行，点击通知启动app，走appDelegate代理方法:didFinishLaunchingWithOptions
+    func applicationDidFinishLaunching(application: UIApplication) {
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
