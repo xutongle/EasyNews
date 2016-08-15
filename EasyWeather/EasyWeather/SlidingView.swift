@@ -45,6 +45,8 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     private var settingButton: UIButton!
     // 是否侧滑
     var isSliding = false
+    // 记录上次高亮的哪一个cell
+    var lightCellId = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,10 +110,6 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = SlidingViewCell.getSlidingViewCellWith(tableView)
         
-        let view = UIView()
-        view.backgroundColor = ORANGE_COLOR
-        cell.selectedBackgroundView = view
-        
         let dict = dataForTableView[indexPath.row]
         cell.leftLabel.text =  dict["city"]
         cell.rightLabel.text =  dict["province"]
@@ -126,6 +124,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 点击cell
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        lightCell()
         // 去首页刷新天气
         clickCellBlock(city: dataForTableView[indexPath.row]["city"]!, province: dataForTableView[indexPath.row]["province"]!)
     }
@@ -191,7 +190,9 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
         var n = 0
         for dict in dataForTableView {
             if dict["city"] == TopView.topView.location {
-                tableview.selectRowAtIndexPath(NSIndexPath.init(forRow: n, inSection: 0), animated: true, scrollPosition: .None)
+                tableview.cellForRowAtIndexPath(NSIndexPath(forRow: lightCellId, inSection: 0))?.backgroundColor = UIColor.whiteColor()
+                lightCellId = n
+                tableview.cellForRowAtIndexPath(NSIndexPath(forRow: n, inSection: 0))?.backgroundColor = UIColor.orangeColor()
             }
             n += 1
         }
@@ -232,7 +233,7 @@ class SlidingViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //self.selectionStyle = .None
+        self.selectionStyle = .None
         self.separatorInset = UIEdgeInsetsZero
         self.layoutMargins = UIEdgeInsetsZero
         

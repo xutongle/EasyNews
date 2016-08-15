@@ -120,7 +120,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
             Tools.setUserDefaults(key: "province", andVluew: province)
             Tools.setUserDefaults(key: "city", andVluew: city)
             
-            self.getWeather(city, Over: { (cityName, province) in  })
+            self.getWeather(city, Over: nil)
         }
         
         // 划出侧划页面的手势
@@ -170,7 +170,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     }
     
     // 获取天气
-    func getWeather(city: String?, Over: (cityName: String, province: String?) -> Void) -> Void {
+    func getWeather(city: String?, Over: ((cityName: String, province: String?) -> Void)?) -> Void {
         
         let chooseCity = (city == nil ?  Tools.getUserDefaults("city")! : city!)
         let tempProvince = (Tools.getUserDefaults("province") == nil ? "" : Tools.getUserDefaults("province")!)
@@ -258,7 +258,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     // 是否需要重新刷新侧划
                     self.needRefresh = true
                     //print(allInfo)
-                    Over(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
+                    if Over != nil {
+                        Over!(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
+                    }
                     self.mainTableView.reloadData()
                 }else {
                     self.view.show("获取天气失败", block: { })
@@ -426,9 +428,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 Tools.setUserDefaults(key: "city", andVluew: trueCity)
                 
                 // 获取天气
-                self.getWeather(trueCity, Over: {cityName, province in
-                    
-                })
+                self.getWeather(trueCity, Over: nil)
             })
         }
     }
@@ -446,9 +446,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         print("[OTTLocationManager locationManager:didFailWithError] 无法获取到定位")
         if Tools.getUserDefaults("city") != nil {
             
-            getWeather(Tools.getUserDefaults("city") as? String, Over: {cityName, province in
-                
-            })
+            getWeather(Tools.getUserDefaults("city") as? String, Over: nil)
         }
         self.view.show("无法获取定位, 使用上次位置") { }
     }
