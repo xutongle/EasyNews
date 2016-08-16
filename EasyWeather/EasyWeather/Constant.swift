@@ -27,7 +27,7 @@ let SETTING_BACKGROUND_COLOR: UIColor = UIColor(red:0/255.0, green:139/255.0, bl
 // 设置页面cell的高度
 let SETTING_CELL_HEIGHT: CGFloat = 40
 // 设置CELL的数量
-let SETTING_CELL_NUM: Int = 2
+let SETTING_CELL_NUM: Int = 3
 
 /********************** 颜色常量 *************************/
 

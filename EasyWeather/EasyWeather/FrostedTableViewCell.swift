@@ -26,6 +26,7 @@ class FrostedTableViewCell: UITableViewCell {
         showFrostedLabel.backgroundColor = SETTING_BACKGROUND_COLOR
         showFrostedLabel.textColor = WHITE_COLOR
         showFrostedLabel.textAlignment = .Center
+        showFrostedLabel.font = UIFont.systemFontOfSize(14)
         self.addSubview(showFrostedLabel)
         
         frostedAdjustSeekbar = UISlider(frame: CGRectMake(SCREEN_WIDTH / 4, 0, SCREEN_WIDTH / 4 * 3, SETTING_CELL_HEIGHT))

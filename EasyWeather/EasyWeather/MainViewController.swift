@@ -483,12 +483,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
 
         // 摁的越重值越大
         if touch != nil && touch!.view == refreshTimeLabel {
-            refreshTimeLabel.textColor = UIColor(red: (touch!.force) / 5 / 255.0, green: 1 / 255.0, blue: 1 / 255.0, alpha: 1)
+            if touch!.force < 1 {
+                refreshTimeLabel.textColor = UIColor.orangeColor()
+            }else {
+                refreshTimeLabel.textColor = UIColor(red: (touch!.force) / 2 * 100 / 255.0, green: 1 / 255.0, blue: 1 / 255.0, alpha: 1)
+            }
         }
     }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        refreshTimeLabel.textColor = UIColor.orangeColor()
-    }
-    
 }

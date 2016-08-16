@@ -25,11 +25,13 @@ class ChangeBackgroundTableViewCell: UITableViewCell {
         changeBGBtn.backgroundColor = DARK_GRAY
         changeBGBtn.setTitle("选择图片以做背景", forState: .Normal)
         changeBGBtn.setTitleColor(WHITE_COLOR, forState: .Normal)
+        changeBGBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
         changeBGBtn.addTarget(self, action: #selector(choosePicMakeBg), forControlEvents: .TouchUpInside)
         self.addSubview(changeBGBtn)
         
         backDefaultBtn = UIButton(frame: CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SETTING_CELL_HEIGHT))
         backDefaultBtn.backgroundColor = DARK_GRAY
+        backDefaultBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
         backDefaultBtn.setTitle("恢复默认背景", forState: .Normal)
         backDefaultBtn.setTitleColor(WHITE_COLOR, forState: .Normal)
         backDefaultBtn.addTarget(self, action: #selector(backDefault), forControlEvents: .TouchUpInside)

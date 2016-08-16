@@ -93,6 +93,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.dismissViewControllerAnimated(true) { 
             Tools.setUserDefaults(key: "BlurValue", andVluew: SingleManager.singleManager.getValue(Key: "BlurValue")!)
+            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: SingleManager.singleManager.getValue(Key: "TurnOnOrOffNotifation")!)
         }
     }
     

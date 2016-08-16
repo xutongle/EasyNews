@@ -42,18 +42,57 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         case 1:
             return ChangeBackgroundTableViewCell.getChangeBackgroundTableViewCell(tableView)
         default:
-            return UITableViewCell()
+            return ChooseNotificationTimeTableViewCell.getChooseNotificationTimeTableViewCell(tableView)
         }
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if indexPath.row == 2 {
+            let alerView = AlertViewWithDatePicker(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+            alerView.alpha = 0
+            self.addSubview(alerView)
+            UIView.animateWithDuration(0.25, animations: { 
+                alerView.alpha = 1
+            })
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         return SETTING_CELL_HEIGHT
+    }
+    
+}
+
+var chooseDateBlock: ((chooseDate: NSDate) -> Void)!
+
+// 弹出日期选择
+class AlertViewWithDatePicker: UIView {
+    var datePicker: UIDatePicker!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
+        
+        datePicker = UIDatePicker(frame: CGRectMake(0, SCREEN_HEIGHT / 4 - 100, SCREEN_WIDTH, SCREEN_HEIGHT / 2))
+        datePicker.datePickerMode = .Time
+        datePicker.date = NSDate()
+        self.addSubview(datePicker)
+
+        let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(confimAction))
+        self.addGestureRecognizer(tapGestrue)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    func confimAction() -> Void {
+        self.removeFromSuperview()
+        //chooseDateBlock(chooseDate: datePicker.date)
     }
     
 }
