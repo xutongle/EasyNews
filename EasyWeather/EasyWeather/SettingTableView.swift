@@ -42,19 +42,24 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         case 1:
             return ChangeBackgroundTableViewCell.getChangeBackgroundTableViewCell(tableView)
         default:
-            return ChooseNotificationTimeTableViewCell.getChooseNotificationTimeTableViewCell(tableView)
+            let cell = ChooseNotificationTimeTableViewCell.getChooseNotificationTimeTableViewCell(tableView)
+            SingleManager.singleManager.add(Key: "ChooseNotificationTimeTableViewCell", andValue: cell)
+            return cell
         }
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 2 {
-            let alerView = AlertViewWithDatePicker(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
-            alerView.alpha = 0
-            self.addSubview(alerView)
-            UIView.animateWithDuration(0.25, animations: { 
-                alerView.alpha = 1
-            })
+            // 开了通知才弹窗
+            if Tools.readSettingPlist("TurnOnNotification") != nil && Tools.readSettingPlist("TurnOnNotification") as! Bool {
+                let alerView = AlertViewWithDatePicker(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 20))
+                alerView.alpha = 0
+                self.addSubview(alerView)
+                UIView.animateWithDuration(0.25, animations: {
+                    alerView.alpha = 1
+                })
+            }
         }
     }
     
@@ -67,21 +72,39 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
 
 var chooseDateBlock: ((chooseDate: NSDate) -> Void)!
 
-// 弹出日期选择
+// 弹出日期选择的View
 class AlertViewWithDatePicker: UIView {
+    
+    private var tipLabel: UILabel!
     var datePicker: UIDatePicker!
+    var okButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
+        self.backgroundColor = DARK_GRAY
+        SettingViewController.settingViewController.okButton.alpha = 0
         
-        datePicker = UIDatePicker(frame: CGRectMake(0, SCREEN_HEIGHT / 4 - 100, SCREEN_WIDTH, SCREEN_HEIGHT / 2))
+        datePicker = UIDatePicker(frame: CGRectMake(0, 30, SCREEN_WIDTH, SCREEN_HEIGHT / 2))
         datePicker.datePickerMode = .Time
+        
         datePicker.date = NSDate()
         self.addSubview(datePicker)
-
-        let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(confimAction))
+        
+        tipLabel = UILabel(frame: CGRectMake(0, 20, SCREEN_WIDTH, 30))
+        tipLabel.text = "您可前往设置开关通知或者在这修改提醒时间"
+        tipLabel.textAlignment = .Center
+        tipLabel.adjustsFontSizeToFitWidth = true
+        tipLabel.textColor = UIColor.groupTableViewBackgroundColor()
+        self.addSubview(tipLabel)
+        
+        // 覆盖掉设置的按钮
+        okButton = UIButton(frame: CGRectMake(frame.width - 60, frame.height - 60, 50, 50))
+        okButton.setImage(UIImage(named: "okBtn"), forState: .Normal)
+        okButton.addTarget(self, action: #selector(confimAction), forControlEvents: .TouchUpInside)
+        self.addSubview(okButton)
+        
+        let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(removeSelf))
         self.addGestureRecognizer(tapGestrue)
     }
     
@@ -89,10 +112,21 @@ class AlertViewWithDatePicker: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc
     func confimAction() -> Void {
-        self.removeFromSuperview()
-        //chooseDateBlock(chooseDate: datePicker.date)
+        
+        let cell = SingleManager.singleManager.getValue(Key: "ChooseNotificationTimeTableViewCell") as! ChooseNotificationTimeTableViewCell
+        let format = NSDateFormatter()
+        format.setLocalizedDateFormatFromTemplate("HH:mm:ss")
+        let dataString = format.stringFromDate(datePicker.date)
+        cell.showText = dataString
+        
+        Tools.setUserDefaults(key: "Notification_Time", andVluew: dataString)
+        
+        removeSelf()
     }
     
+    func removeSelf() -> Void {
+        SettingViewController.settingViewController.okButton.alpha = 1
+        self.removeFromSuperview()
+    }
 }

@@ -66,18 +66,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkNotificationOpen(application: UIApplication) -> Void {
         //
         let setting = UIApplication.sharedApplication().currentUserNotificationSettings()
+        let cell = SingleManager.singleManager.getValue(Key: "ChooseNotificationTimeTableViewCell") as? ChooseNotificationTimeTableViewCell
+
         // 说明开启了通知
         if setting != nil && setting!.types != .None {
-            
+            print("开通知")
             Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: true)
+            Tools.writeSettingPlist(key: "TurnOnNotification", writeValue: true)
+
+            if (cell != nil) {
+                cell!.showText = Tools.getUserDefaults("Notification_Time") != nil ? (Tools.getUserDefaults("Notification_Time") as! String) : "08:00:00"
+                cell!.turnOnOrOffNotifationValue = Tools.readSettingPlist("TurnOnNotification") as! Bool
+            }
             
             // 开启通知
             checkNotification(application)
-            
         }else {
+             print("关通知")
             // 如果未开启通知 那么我这里开了通知也发送不出去, 而且此处也不运行通知 而是取消通知
             UIApplication.sharedApplication().cancelAllLocalNotifications()
             Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: false)
+            Tools.writeSettingPlist(key: "TurnOnNotification", writeValue: false)
+
+            // 实时的改变状态
+            if (cell != nil) {
+                cell!.showText = "未开启通知"
+                cell!.turnOnOrOffNotifationValue = Tools.readSettingPlist("TurnOnNotification") as! Bool
+            }
         }
     }
     
@@ -87,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 通知的权限请求
         if (UIApplication.instancesRespondToSelector(#selector(UIApplication.registerUserNotificationSettings(_:)))) {
             UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+            NSThread.sleepForTimeInterval(1000)
         }
     }
     
@@ -107,7 +123,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 每天8点
         let format = NSDateFormatter()
         format.dateFormat = "HH:mm:ss"
-        let date = format.dateFromString("08:00:00")
+        
+        var date:NSDate!
+        if Tools.getUserDefaults("Notification_Time") != nil {
+            date = format.dateFromString(Tools.getUserDefaults("Notification_Time") as! String)
+            print(Tools.getUserDefaults("Notification_Time"))
+        }else {
+            date = format.dateFromString("08:00:00")
+            Tools.setUserDefaults(key: "Notification_Time", andVluew: "08:00:00")
+        }
         // 通知时间
         localNotification.fireDate = date
         // 设置时区

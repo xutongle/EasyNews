@@ -13,6 +13,8 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // MARK: - -------------------属性-------------------------
     
+    static let settingViewController = SettingViewController()
+    
     var imagePicker:UIImagePickerController? = nil
     
     var okButton: UIButton!
@@ -93,7 +95,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.dismissViewControllerAnimated(true) { 
             Tools.setUserDefaults(key: "BlurValue", andVluew: SingleManager.singleManager.getValue(Key: "BlurValue")!)
-            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: SingleManager.singleManager.getValue(Key: "TurnOnOrOffNotifation")!)
+            //Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: SingleManager.singleManager.getValue(Key: "TurnOnOrOffNotifation")!)
         }
     }
     

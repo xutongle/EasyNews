@@ -86,13 +86,40 @@ class Tools: NSObject {
         
         let filePath = NSBundle.mainBundle().pathForResource("citydict", ofType: "plist")
         let fileManager = NSFileManager.defaultManager()
-        if (filePath != nil) {
-            if fileManager.fileExistsAtPath(filePath!) {
-                // 城市
-                citysDict = NSDictionary.init(contentsOfFile: filePath!)
-            }
+        if (filePath != nil && fileManager.fileExistsAtPath(filePath!)) {
+            // 城市
+            citysDict = NSDictionary.init(contentsOfFile: filePath!)
         }
         return citysDict
     }
     
+    // 读取设置
+    static func readSettingPlist(key: String?) -> AnyObject? {
+        var settingDict: NSDictionary! = nil
+        
+        let filePath = NSBundle.mainBundle().pathForResource("setting", ofType: "plist")
+        let fileManager = NSFileManager.defaultManager()
+        if filePath != nil && fileManager.fileExistsAtPath(filePath!) {
+            settingDict = NSDictionary.init(contentsOfFile: filePath!)
+        }
+        if key != nil {
+            return settingDict[key!]
+        }else{
+            return key
+        }
+    }
+    
+    static func writeSettingPlist(key key: String?, writeValue value: AnyObject?) -> Bool {
+        if key == nil || value == nil {
+            return false
+        }
+        
+        let settingDict = NSDictionary(object: value!, forKey: key!)
+        let filePath = NSBundle.mainBundle().pathForResource("setting", ofType: "plist")
+        let fileManager = NSFileManager.defaultManager()
+        if filePath != nil && fileManager.fileExistsAtPath(filePath!) {
+            settingDict.writeToFile(filePath!, atomically: true)
+        }
+        return true
+    }
 }

@@ -102,7 +102,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         // 设置按钮回调
         setttingBlock = {
             self.closeSlidingView()
-            self.presentViewController(SettingViewController(), animated: true, completion: nil)
+            self.presentViewController(SettingViewController.settingViewController, animated: true, completion: nil)
         }
         
         // 城市选择
