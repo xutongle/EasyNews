@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if setting != nil && setting!.types != .None {
             print("开通知")
             Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: true)
-            Tools.writeSettingPlist(key: "TurnOnNotification", writeValue: true)
 
             if (cell != nil) {
                 cell!.showText = Tools.getUserDefaults("Notification_Time") != nil ? (Tools.getUserDefaults("Notification_Time") as! String) : "08:00:00"
@@ -86,7 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 如果未开启通知 那么我这里开了通知也发送不出去, 而且此处也不运行通知 而是取消通知
             UIApplication.sharedApplication().cancelAllLocalNotifications()
             Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: false)
-            Tools.writeSettingPlist(key: "TurnOnNotification", writeValue: false)
 
             // 实时的改变状态
             if (cell != nil) {
@@ -102,7 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 通知的权限请求
         if (UIApplication.instancesRespondToSelector(#selector(UIApplication.registerUserNotificationSettings(_:)))) {
             UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
-            NSThread.sleepForTimeInterval(1000)
         }
     }
     

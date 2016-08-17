@@ -17,7 +17,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
     // titleLabel的值
     var showText: String! {
         didSet{
-            if Tools.readSettingPlist("TurnOnNotification") != nil && Tools.readSettingPlist("TurnOnNotification") as! Bool {
+            if Tools.getUserDefaults("TurnOnOrOffNotifation") != nil && Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool {
                 titleLabel.text = "天气提醒:" + showText
             }else {
                 titleLabel.text = showText
@@ -26,7 +26,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
     }
     
     // turnOnOrOffNotifation的值
-    var turnOnOrOffNotifationValue: Bool! = Tools.readSettingPlist("TurnOnNotification") as! Bool  {
+    var turnOnOrOffNotifationValue: Bool! {
         didSet{
             turnOnOrOffNotifation.on = turnOnOrOffNotifationValue
         }
@@ -44,7 +44,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
         titleLabel.textAlignment = .Center
         titleLabel.textColor = UIColor.whiteColor()
         
-        if Tools.readSettingPlist("TurnOnNotification") != nil && Tools.readSettingPlist("TurnOnNotification") as! Bool {
+        if Tools.getUserDefaults("TurnOnOrOffNotifation") != nil && Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool {
             showText = Tools.getUserDefaults("Notification_Time") == nil ? "天气提醒:08:00:00" : "天气提醒:" + (Tools.getUserDefaults("Notification_Time") as! String)
         }else {
             showText = "未开通知提醒"
@@ -59,8 +59,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
         turnOnOrOffNotifation.userInteractionEnabled = false
         turnOnOrOffNotifation.addTarget(self, action: #selector(checkTurnOnOrOffNotifation), forControlEvents: .ValueChanged)
         self.addSubview(turnOnOrOffNotifation)
-        turnOnOrOffNotifation.on = turnOnOrOffNotifationValue
-        SingleManager.singleManager.add(Key: "TurnOnOrOffNotifation", andValue: turnOnOrOffNotifation.on)
+        turnOnOrOffNotifation.on = Tools.getUserDefaults("TurnOnOrOffNotifation") != nil ? Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool : false
     }
     
     required init?(coder aDecoder: NSCoder) {

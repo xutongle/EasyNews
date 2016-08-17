@@ -52,7 +52,7 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 2 {
             // 开了通知才弹窗
-            if Tools.readSettingPlist("TurnOnNotification") != nil && Tools.readSettingPlist("TurnOnNotification") as! Bool {
+            if Tools.getUserDefaults("TurnOnOrOffNotifation") != nil && Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool {
                 let alerView = AlertViewWithDatePicker(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 20))
                 alerView.alpha = 0
                 self.addSubview(alerView)

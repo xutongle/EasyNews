@@ -118,7 +118,7 @@ class Tools: NSObject {
         let filePath = NSBundle.mainBundle().pathForResource("setting", ofType: "plist")
         let fileManager = NSFileManager.defaultManager()
         if filePath != nil && fileManager.fileExistsAtPath(filePath!) {
-            settingDict.writeToFile(filePath!, atomically: true)
+            settingDict.writeToFile(filePath!, atomically: false)
         }
         return true
     }
