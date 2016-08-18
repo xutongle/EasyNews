@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        print("didFinishLaunchingWithOptions")
         //初始化app窗口,将窗口设置为全屏
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 检查用户是否允许发送通知 允许就设置通知，不允许就取消通知
         checkNotificationOpen(application)
         
+        // 监听当用户修改了通知的时间就修改通知时间。。。。
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(checkNotification), name: "CHANGE_NOTIFICATION", object: nil)
+        
         return true
     }
     
@@ -49,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void){
         if shortcutItem.type == "ShowWeather" {
             // TODO
+            print("performActionForShortcutItem")
         }
     }
     
@@ -60,38 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // 应用未运行，点击通知启动app，走appDelegate代理方法:didFinishLaunchingWithOptions
     func applicationDidFinishLaunching(application: UIApplication) {
-        
-    }
-    
-    func checkNotificationOpen(application: UIApplication) -> Void {
-        //
-        let setting = UIApplication.sharedApplication().currentUserNotificationSettings()
-        let cell = SingleManager.singleManager.getValue(Key: "ChooseNotificationTimeTableViewCell") as? ChooseNotificationTimeTableViewCell
-
-        // 说明开启了通知
-        if setting != nil && setting!.types != .None {
-            print("开通知")
-            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: true)
-
-            if (cell != nil) {
-                cell!.showText = Tools.getUserDefaults("Notification_Time") != nil ? (Tools.getUserDefaults("Notification_Time") as! String) : "08:00:00"
-                cell!.turnOnOrOffNotifationValue = Tools.readSettingPlist("TurnOnNotification") as! Bool
-            }
-            
-            // 开启通知
-            checkNotification(application)
-        }else {
-             print("关通知")
-            // 如果未开启通知 那么我这里开了通知也发送不出去, 而且此处也不运行通知 而是取消通知
-            UIApplication.sharedApplication().cancelAllLocalNotifications()
-            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: false)
-
-            // 实时的改变状态
-            if (cell != nil) {
-                cell!.showText = "未开启通知"
-                cell!.turnOnOrOffNotifationValue = Tools.readSettingPlist("TurnOnNotification") as! Bool
-            }
-        }
+        print("applicationDidFinishLaunching")
+        application.applicationIconBadgeNumber = 0
     }
     
     // 检查通知权限
@@ -103,11 +77,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func checkNotificationOpen(application: UIApplication) -> Void {
+        //
+        let setting = UIApplication.sharedApplication().currentUserNotificationSettings()
+        let cell = SingleManager.singleManager.getValue(Key: "ChooseNotificationTimeTableViewCell") as? ChooseNotificationTimeTableViewCell
+
+        // 说明开启了通知
+        if setting != nil && setting!.types != .None {
+            print("开通知")
+            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andValue: true)
+
+            if (cell != nil) {
+                cell!.showText = Tools.getUserDefaults("Notification_Time") != nil ? (Tools.getUserDefaults("Notification_Time") as! String) : "08:00:00"
+                cell!.turnOnOrOffNotifationValue = true
+            }
+            
+            // 开启通知
+            checkNotification()
+        }else {
+             print("关通知")
+            // 如果未开启通知 那么我这里开了通知也发送不出去, 而且此处也不运行通知 而是取消通知
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+            Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andValue: false)
+
+            // 实时的改变状态
+            if (cell != nil) {
+                cell!.showText = "未开启通知"
+                cell!.turnOnOrOffNotifationValue = false
+            }
+        }
+    }
+    
     // 检查发送通知 并且设定
-    func checkNotification(application: UIApplication) -> Void {
+    func checkNotification() -> Void {
         // 先取消通知
         UIApplication.sharedApplication().cancelAllLocalNotifications()
-        application.applicationIconBadgeNumber = 0
         let localNotification = UILocalNotification()
         
         // 当前时间
@@ -127,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(Tools.getUserDefaults("Notification_Time"))
         }else {
             date = format.dateFromString("08:00:00")
-            Tools.setUserDefaults(key: "Notification_Time", andVluew: "08:00:00")
+            Tools.setUserDefaults(key: "Notification_Time", andValue: "08:00:00")
         }
         // 通知时间
         localNotification.fireDate = date
@@ -152,11 +156,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // 进入后台
     func applicationDidEnterBackground(application: UIApplication) {
-        
+        print("applicationDidEnterBackground")
     }
     
     // 进入前台
     func applicationWillEnterForeground(application: UIApplication) {
+        print("applicationWillEnterForeground")
         NSNotificationCenter.defaultCenter().postNotificationName("ReGetLocationAndReGetWeather", object: nil)
         // 检查用户是否允许发送通知 允许就设置通知，不允许就取消通知
         checkNotificationOpen(application)

@@ -28,8 +28,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     // 需要刷新
     var needRefresh = false
     
-    // 
+    // 底部的label
     var refreshTimeLabel: UILabel!
+    // 控制刷新速度 当一次请求完毕再执行第二次
+    var isRefresh = false
     
     // 重写方法让那个状态栏变白
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -41,14 +43,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         if Tools.getUserDefaults("first") == nil {
             DBOperaCityList().queryWithAllWeatherTable()
-            Tools.setUserDefaults(key: "first", andVluew: false)
-            Tools.setUserDefaults(key: "BlurValue", andVluew: 0.5)
+            Tools.setUserDefaults(key: "first", andValue: false)
+            Tools.setUserDefaults(key: "BlurValue", andValue: 0.5)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initailLocation()
         
         let background = BackgroundImageView.backgroundImageView
@@ -117,8 +118,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         // 侧划点按cell
         clickCellBlock = {city, province in
-            Tools.setUserDefaults(key: "province", andVluew: province)
-            Tools.setUserDefaults(key: "city", andVluew: city)
+            Tools.setUserDefaults(key: "province", andValue: province)
+            Tools.setUserDefaults(key: "city", andValue: city)
             
             self.getWeather(city, Over: nil)
         }
@@ -162,8 +163,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         getWeather(cityName) { cityName, province in
             if province != nil {
-                Tools.setUserDefaults(key: "province", andVluew: province!)
-                Tools.setUserDefaults(key: "city", andVluew: cityName)
+                Tools.setUserDefaults(key: "province", andValue: province!)
+                Tools.setUserDefaults(key: "city", andValue: cityName)
                 TopView.topView.location = Tools.getUserDefaults("city") as! String
             }
         }
@@ -190,8 +191,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     let allInfo = json["result"].arrayValue[0].dictionaryValue
                     let futureInfo = allInfo["future"]
                     
-                    Tools.setUserDefaults(key: "province", andVluew: allInfo["province"]!.stringValue)
-                    Tools.setUserDefaults(key: "city", andVluew: allInfo["city"]!.stringValue)
+                    Tools.setUserDefaults(key: "province", andValue: allInfo["province"]!.stringValue)
+                    Tools.setUserDefaults(key: "city", andValue: allInfo["city"]!.stringValue)
                     TopView.topView.location = Tools.getUserDefaults("city") as! String
                     
                     tempArray.append(allInfo["city"]!.stringValue)
@@ -205,8 +206,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                         ["temperature_now": allInfo["temperature"]!.stringValue, "weather": allInfo["weather"]!.stringValue,
                             "temperature_future": temperature_future]
                     
-                    Tools.setUserDefaults(key: "temperature_now", andVluew: allInfo["temperature"]!.stringValue)
-                    Tools.setUserDefaults(key: "weather", andVluew: allInfo["weather"]!.stringValue)
+                    Tools.setUserDefaults(key: "temperature_now", andValue: allInfo["temperature"]!.stringValue)
+                    Tools.setUserDefaults(key: "weather", andValue: allInfo["weather"]!.stringValue)
                     
                     // 缓存用
                     tempArray.append(allInfo["temperature"]!.stringValue)
@@ -251,7 +252,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     }
                     
                     // 更新时间
-                    Tools.setUserDefaults(key: "updateWeatherTime", andVluew: self.getCurrentTime())
+                    Tools.setUserDefaults(key: "updateWeatherTime", andValue: self.getCurrentTime())
                     self.refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
                     //
                     self.view.getSlidingView_zly().lightCell()
@@ -262,6 +263,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                         Over!(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
                     }
                     self.mainTableView.reloadData()
+                    self.isRefresh = false
                 }else {
                     self.view.show("获取天气失败", block: { })
                     print("使用缓存1")
@@ -409,9 +411,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
             
             //逆地理位置的回调
             getLocationName(currLocation, complete: { (province, city) in
-                
-                var trueProvince:String!
-                var trueCity:String!
+                if self.isRefresh {
+                    return
+                }
+                var trueProvince: String!
+                var trueCity: String!
                 // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
                 let shi = city.substringWithRange(NSRange.init(location: city.length - 1, length: 1))
                 print("--------->>>>", shi)
@@ -424,13 +428,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     trueCity = city as String
                 }
                 
-                Tools.setUserDefaults(key: "province", andVluew: trueProvince)
-                Tools.setUserDefaults(key: "city", andVluew: trueCity)
+                Tools.setUserDefaults(key: "province", andValue: trueProvince)
+                Tools.setUserDefaults(key: "city", andValue: trueCity)
                 
-                // 获取天气
-                self.getWeather(trueCity, Over: nil)
+                self.getWeatherTemp(trueCity)
             })
         }
+    }
+    
+    func getWeatherTemp(trueCity: String) -> Void {
+        isRefresh = true
+        // 获取天气
+        self.getWeather(trueCity, Over: nil)
     }
     
     //定位错误信息

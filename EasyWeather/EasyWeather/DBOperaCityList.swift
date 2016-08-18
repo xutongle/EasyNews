@@ -150,10 +150,10 @@ class DBOperaCityList: NSObject {
                 tableBuilder.column(dressingIndex)
                 tableBuilder.column(exerciseIndex)
             }))
-            Tools.setUserDefaults(key: "isCreateTable", andVluew: true)
+            Tools.setUserDefaults(key: "isCreateTable", andValue: true)
             print("创建完成")
         }catch {
-            Tools.setUserDefaults(key: "isCreateTable", andVluew: false)
+            Tools.setUserDefaults(key: "isCreateTable", andValue: false)
             print("创建表异常\(error)")
         }
     }

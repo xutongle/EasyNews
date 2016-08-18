@@ -77,7 +77,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
             //设置图片选择器类型
             imagePicker!.sourceType = type
             //设置选中的媒体文件是否能被编辑
-            imagePicker!.allowsEditing = true;
+            imagePicker!.allowsEditing = false;
             //设置可以被选择的媒体文件的类型
             imagePicker!.mediaTypes = [kUTTypeImage as String]
             
@@ -94,15 +94,14 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     func backOf() -> Void {
         
         self.dismissViewControllerAnimated(true) { 
-            Tools.setUserDefaults(key: "BlurValue", andVluew: SingleManager.singleManager.getValue(Key: "BlurValue")!)
-            //Tools.setUserDefaults(key: "TurnOnOrOffNotifation", andVluew: SingleManager.singleManager.getValue(Key: "TurnOnOrOffNotifation")!)
+            Tools.setUserDefaults(key: "BlurValue", andValue: SingleManager.singleManager.getValue(Key: "BlurValue")!)
         }
     }
     
     // MARK: - UIImagePickerControllerDelegate协议
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as! UIImage;
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage;
         
         // 保存图片并显示图片
         SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") { (compltete, backImage) in
@@ -111,7 +110,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
                 BackgroundImageView.backgroundImageView.image = backImage
                 
                 self.view.show("存储成功，更换背景成功", block: {
-                    Tools.setUserDefaults(key: "BlurValue", andVluew: SingleManager.singleManager.getValue(Key: "BlurValue")!)
+                    Tools.setUserDefaults(key: "BlurValue", andValue: SingleManager.singleManager.getValue(Key: "BlurValue")!)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }else {

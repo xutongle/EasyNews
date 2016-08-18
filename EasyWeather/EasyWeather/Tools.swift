@@ -23,7 +23,7 @@ class Tools: NSObject {
     }
     
     //设置用户变量
-    static func setUserDefaults(key key: String, andVluew value:AnyObject) -> Void {
+    static func setUserDefaults(key key: String, andValue value:AnyObject) -> Void {
         
         if NSUserDefaults.standardUserDefaults().objectForKey(key) != nil {
             NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
@@ -93,6 +93,9 @@ class Tools: NSObject {
         return citysDict
     }
     
+    /**************************************************
+     *                      拿来读取设置的 暂时不用
+    ************************************************
     // 读取设置
     static func readSettingPlist(key: String?) -> AnyObject? {
         var settingDict: NSDictionary! = nil
@@ -122,4 +125,6 @@ class Tools: NSObject {
         }
         return true
     }
+     ************************************************
+    *************************************************/
 }

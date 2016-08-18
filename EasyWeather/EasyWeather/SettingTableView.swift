@@ -120,8 +120,8 @@ class AlertViewWithDatePicker: UIView {
         let dataString = format.stringFromDate(datePicker.date)
         cell.showText = dataString
         
-        Tools.setUserDefaults(key: "Notification_Time", andVluew: dataString)
-        
+        Tools.setUserDefaults(key: "Notification_Time", andValue: dataString)
+        NSNotificationCenter.defaultCenter().postNotificationName("CHANGE_NOTIFICATION", object: nil)
         removeSelf()
     }
     

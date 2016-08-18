@@ -18,7 +18,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
     var showText: String! {
         didSet{
             if Tools.getUserDefaults("TurnOnOrOffNotifation") != nil && Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool {
-                titleLabel.text = "天气提醒:" + showText
+                titleLabel.text = "天气提醒:" + showText.subStringWith(start: 0, end: 3)
             }else {
                 titleLabel.text = showText
             }
@@ -46,10 +46,11 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
         
         if Tools.getUserDefaults("TurnOnOrOffNotifation") != nil && Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool {
             showText = Tools.getUserDefaults("Notification_Time") == nil ? "天气提醒:08:00:00" : "天气提醒:" + (Tools.getUserDefaults("Notification_Time") as! String)
+            showText = showText.subStringWith(start: 0, end: 3)
         }else {
             showText = "未开通知提醒"
         }
-        
+
         titleLabel.text = showText
 
         titleLabel.font = UIFont.systemFontOfSize(14)
@@ -57,7 +58,7 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
         
         turnOnOrOffNotifation = UISwitch(frame: CGRectMake(SCREEN_WIDTH / 5 * 4 - 51, (SETTING_CELL_HEIGHT - 31) / 2, 51, 31))
         turnOnOrOffNotifation.userInteractionEnabled = false
-        turnOnOrOffNotifation.addTarget(self, action: #selector(checkTurnOnOrOffNotifation), forControlEvents: .ValueChanged)
+        //turnOnOrOffNotifation.addTarget(self, action: #selector(checkTurnOnOrOffNotifation), forControlEvents: .ValueChanged)
         self.addSubview(turnOnOrOffNotifation)
         turnOnOrOffNotifation.on = Tools.getUserDefaults("TurnOnOrOffNotifation") != nil ? Tools.getUserDefaults("TurnOnOrOffNotifation") as! Bool : false
     }
@@ -67,9 +68,9 @@ class ChooseNotificationTimeTableViewCell: UITableViewCell {
     }
     
     //
-    func checkTurnOnOrOffNotifation(turnOnOrOffNotifation: UISwitch) -> Void {
-        SingleManager.singleManager.add(Key: "TurnOnOrOffNotifation", andValue: turnOnOrOffNotifation.on)
-    }
+//    func checkTurnOnOrOffNotifation(turnOnOrOffNotifation: UISwitch) -> Void {
+//        SingleManager.singleManager.add(Key: "TurnOnOrOffNotifation", andValue: turnOnOrOffNotifation.on)
+//    }
     
     // 初始化并复用这个cell
     static func getChooseNotificationTimeTableViewCell(tableview: UITableView) -> ChooseNotificationTimeTableViewCell {

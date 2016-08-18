@@ -35,13 +35,7 @@ class SaveImageToDocment: NSObject {
         
         let filePath = getDocumentPath() + fileName_in
         
-        //print(filePath)
-        
-        //let saveImage = scaleImage(image: image, firSize: CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT))
-        
-        //let saveImage = clipToImage(image: image, firSize: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
-        
-        var queue = dispatch_queue_create("SaveQueue", DISPATCH_QUEUE_CONCURRENT)
+        let queue = dispatch_queue_create("SaveQueue", DISPATCH_QUEUE_CONCURRENT)
         var imageGai: UIImage!
         //自己创建一个线程保存图片
         dispatch_async(queue) {
@@ -53,7 +47,6 @@ class SaveImageToDocment: NSObject {
                 // 回去显示图片要用到主线程 抛回去
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(compltete: true, backImage: imageGai)
-                    queue = nil
                 })
             }catch {
                 print(error)
@@ -61,7 +54,6 @@ class SaveImageToDocment: NSObject {
                 // 回去显示图片要用到主线程
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(compltete: false, backImage: imageGai)
-                    queue = nil
                 })
             }
         }
@@ -104,6 +96,11 @@ class SaveImageToDocment: NSObject {
         queue.addOperation(opera)
     }
     
+    /*****************************************************
+     ******************    图片处理开了新坑    ********************
+     ******************************************************/
+    
+    /*
     // 图片缩放
     func scaleImage(image image: UIImage, firSize size:CGSize) -> UIImage {
         // 创建一个bitmap的context
@@ -207,4 +204,5 @@ class SaveImageToDocment: NSObject {
         
         return image
     }
+    */
 }
