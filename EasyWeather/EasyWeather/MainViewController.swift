@@ -54,6 +54,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         let background = BackgroundImageView.backgroundImageView
         background.weather = "多云"
+
         // 从沙盒中取到图片
         SaveImageToDocment.saveImageToDocment.getImage({ (image) in
             if image != nil {
@@ -183,6 +184,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
             let result = response.result
             if result.isSuccess {
                 let json = JSON(response.result.value!)
+                print(json)
                 // 如果获得天气成功
                 if json["retCode"].intValue == 200 {
                     
@@ -236,13 +238,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     }
                     // 其他信息
                     self.mainTableView.otherInfoDict = NSMutableDictionary()
+                    let airCondition = allInfo["airCondition"]?.stringValue == nil ? "无" : allInfo["airCondition"]!.stringValue
                     self.mainTableView.otherInfoDict =
                         ["washIndex": allInfo["washIndex"]!.stringValue,
-                            "airCondition": allInfo["airCondition"]!.stringValue,
+                            "airCondition": airCondition,
                             "dressingIndex": allInfo["dressingIndex"]!.stringValue,
                             "exerciseIndex": allInfo["exerciseIndex"]!.stringValue]
                     tempArray.append(allInfo["washIndex"]!.stringValue)
-                    tempArray.append(allInfo["airCondition"]!.stringValue)
+                    tempArray.append(airCondition)
                     tempArray.append(allInfo["dressingIndex"]!.stringValue)
                     tempArray.append(allInfo["exerciseIndex"]!.stringValue)
                     //
@@ -265,12 +268,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     self.mainTableView.reloadData()
                     self.isRefresh = false
                 }else {
+                    self.refreshTimeLabel.text = "加载失败"
                     self.view.show("获取天气失败", block: { })
                     print("使用缓存1")
                     // 使用缓存
                     self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
                 }
             }else {
+                self.refreshTimeLabel.text = "加载失败"
                 print("使用缓存2")
                 // 使用缓存
                 self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
@@ -353,6 +358,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 self.view.getSlidingView_zly().dataForTableView = cityInfo
                 dispatch_async(dispatch_get_main_queue(), {
                     self.view.getSlidingView_zly().reloadData()
+                    // 使cell高亮
                     self.view.getSlidingView_zly().lightCell()
                 })
             }
@@ -361,9 +367,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     
     func openSlidingView() -> Void {
         
+        // 没有数据要刷新
         if self.view.getSlidingView_zly().dataForTableView.count == 0 {
             print("刷新1")
             refreshDataWithSliding()
+            // 需要刷新也刷新
         }else if needRefresh {
             print("刷新2")
             refreshDataWithSliding()
@@ -392,8 +400,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         }
     }
     
+    // 检测3D Touch是否可用，如果可用就注册
     func check3dTouch() -> Void {
-        // 检测3D Touch是否可用，如果可用就注册
         if (self.traitCollection.forceTouchCapability == .Available) {
             self.registerForPreviewingWithDelegate(self, sourceView: refreshTimeLabel)
         }
@@ -485,11 +493,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     }
     
     //MARK: ******************** UIViewControllerPreviewingDelegate *********************
-
+    
     //
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
-
+        
         // 摁的越重值越大
         if touch != nil && touch!.view == refreshTimeLabel {
             if touch!.force < 1 {

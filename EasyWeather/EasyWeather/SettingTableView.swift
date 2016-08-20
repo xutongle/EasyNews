@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 设置页面
 class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     static let settinsgTableView = SettingTableView(frame: CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT), style: .Plain)
@@ -70,6 +71,7 @@ class SettingTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     
 }
 
+// block
 var chooseDateBlock: ((chooseDate: NSDate) -> Void)!
 
 // 弹出日期选择的View

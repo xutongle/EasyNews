@@ -46,7 +46,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherValueBtn = UIButton.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2, 0, weatherValueBtnWidth, weatherValueBtnHeigh))
         weatherValueBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         weatherValueBtn.setTitle("23°", forState: .Normal)
-        weatherValueBtn.titleLabel?.font = UIFont.systemFontOfSize(50)
+        weatherValueBtn.titleLabel?.font = UIFont(name: "InputMono-Light", size: 45)
         weatherValueBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         self.addSubview(weatherValueBtn)
         

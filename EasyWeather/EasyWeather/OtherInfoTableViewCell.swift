@@ -28,25 +28,25 @@ class OtherInfoTableViewCell: UITableViewCell {
         washIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 10, SCREEN_WIDTH * 2 / 3, 30))
         washIndexLabel.backgroundColor = UIColor.clearColor()
         washIndexLabel.textColor = WHITE_COLOR
-        washIndexLabel.font = UIFont.systemFontOfSize(18)
+        washIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
         self.addSubview(washIndexLabel)
         
         exerciseIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 50, SCREEN_WIDTH * 2 / 3, 30))
         exerciseIndexLabel.backgroundColor = UIColor.clearColor()
         exerciseIndexLabel.textColor = WHITE_COLOR
-        exerciseIndexLabel.font = UIFont.systemFontOfSize(18)
+        exerciseIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
         self.addSubview(exerciseIndexLabel)
         
         airConditionLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 90, SCREEN_WIDTH * 2 / 3, 30))
         airConditionLabel.backgroundColor = UIColor.clearColor()
         airConditionLabel.textColor = WHITE_COLOR
-        airConditionLabel.font = UIFont.systemFontOfSize(18)
+        airConditionLabel.font = UIFont(name: "InputMono-Light", size: 18)
         self.addSubview(airConditionLabel)
         
         dressingIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 130, SCREEN_WIDTH * 2 / 3, 30))
         dressingIndexLabel.backgroundColor = UIColor.clearColor()
         dressingIndexLabel.textColor = WHITE_COLOR
-        dressingIndexLabel.font = UIFont.systemFontOfSize(18)
+        dressingIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
         self.addSubview(dressingIndexLabel)
         
     }

@@ -186,7 +186,6 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 让cell一来选中默认的cell
     func lightCell() -> Void {
-        print("lightcell")
         var n = 0
         for dict in dataForTableView {
             if dict["city"] == TopView.topView.location {

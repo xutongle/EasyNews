@@ -25,12 +25,6 @@ class PopViewController: UIViewController {
             }
         })
         
-        let label = UILabel(frame: CGRectMake(0, SCREEN_HEIGHT / 2 - 20,SCREEN_WIDTH, 40))
-        label.textAlignment = .Center
-        label.textColor = WHITE_COLOR
-        label.text = "下滑关闭"
-        self.view.addSubview(label)
-        
         // 添加dissmiss的手势
         let gestrue = UISwipeGestureRecognizer.init(target: self, action: #selector(dissmissMe))
         gestrue.direction = .Down

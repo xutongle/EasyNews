@@ -22,6 +22,7 @@
 		0AB217FD1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB217FC1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift */; };
 		0AB797121D5AFD91007CD372 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797111D5AFD91007CD372 /* SettingViewController.swift */; };
 		0AB797151D5AFE9D007CD372 /* FrostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */; };
+		0AB9FE971D6829460028E7FA /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB9FE961D6829460028E7FA /* InputMono-Light.ttf */; };
 		0ADB36441D5D9D9800E56D9F /* DBOperaCityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */; };
 		3B63C58C3C5592D12EBF6BC6 /* Pods_EasyWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6970E933E995F6BD17D20F /* Pods_EasyWeather.framework */; };
 		9D49BFC01D4ADC6D002E540E /* SlidingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49BFBF1D4ADC6D002E540E /* SlidingView.swift */; };
@@ -78,6 +79,7 @@
 		0AB217FC1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseNotificationTimeTableViewCell.swift; sourceTree = "<group>"; };
 		0AB797111D5AFD91007CD372 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0AB797141D5AFE9D007CD372 /* FrostedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedTableViewCell.swift; sourceTree = "<group>"; };
+		0AB9FE961D6829460028E7FA /* InputMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InputMono-Light.ttf"; sourceTree = "<group>"; };
 		0ADB36431D5D9D9800E56D9F /* DBOperaCityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBOperaCityList.swift; sourceTree = "<group>"; };
 		182A0C677B6063F8825A78FC /* Pods-EasyWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather/Pods-EasyWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		228C0991A752F4EB265CD692 /* Pods-EasyWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather/Pods-EasyWeather.release.xcconfig"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		9D9009AB1D4984A000CAF7CE /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				0AB9FE961D6829460028E7FA /* InputMono-Light.ttf */,
 				0A3AA09A1D5C48C800F5DF24 /* citydict.plist */,
 				9D9009771D49846E00CAF7CE /* AppDelegate.swift */,
 				9D9009811D49846E00CAF7CE /* Assets.xcassets */,
@@ -440,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D9009851D49846E00CAF7CE /* LaunchScreen.storyboard in Resources */,
+				0AB9FE971D6829460028E7FA /* InputMono-Light.ttf in Resources */,
 				0A3AA09B1D5C48C800F5DF24 /* citydict.plist in Resources */,
 				9D9009821D49846E00CAF7CE /* Assets.xcassets in Resources */,
 			);
