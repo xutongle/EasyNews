@@ -15,12 +15,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="Rem" translatesAutoresizingMaskIntoConstraints="NO" id="CPp-y1-uXl">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy it all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzD-Xt-TkR">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="45W-rh-8Ls"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="hzD-Xt-TkR" secondAttribute="bottom" id="326-Bc-loR"/>
+                            <constraint firstItem="hzD-Xt-TkR" firstAttribute="top" secondItem="CPp-y1-uXl" secondAttribute="bottom" id="FA8-j7-zLT"/>
+                            <constraint firstAttribute="trailing" secondItem="CPp-y1-uXl" secondAttribute="trailing" id="ISx-AN-LEM"/>
+                            <constraint firstItem="hzD-Xt-TkR" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Whi-gb-OmK"/>
+                            <constraint firstItem="CPp-y1-uXl" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="YMY-Lk-AKY"/>
+                            <constraint firstItem="CPp-y1-uXl" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="rbP-De-6q9"/>
+                            <constraint firstAttribute="trailing" secondItem="hzD-Xt-TkR" secondAttribute="trailing" id="vex-e1-ivA"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="206" y="279"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Rem" width="362" height="512"/>
+    </resources>
 </document>
