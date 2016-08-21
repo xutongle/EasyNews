@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 监听当用户修改了通知的时间就修改通知时间。。。。
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(checkNotification), name: "CHANGE_NOTIFICATION", object: nil)
         
+        //
+        application.applicationIconBadgeNumber = 0
+
         return true
     }
     

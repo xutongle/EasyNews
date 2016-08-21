@@ -152,7 +152,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
             clLocationManager.startUpdatingLocation()
         }
     }
-    
     // 开启定位
     func reGetWeather_Locatin() -> Void {
         clLocationManager.startUpdatingLocation()
