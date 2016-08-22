@@ -18,6 +18,8 @@
 		0A3AA09B1D5C48C800F5DF24 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AA09A1D5C48C800F5DF24 /* citydict.plist */; };
 		0A4698FC1D5F740900B3E059 /* PeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4698FB1D5F740900B3E059 /* PeekViewController.swift */; };
 		0A53CA0F1D604A4600A91B64 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53CA0E1D604A4600A91B64 /* PopViewController.swift */; };
+		0A88470C1D6B297D00910079 /* My_Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A88470B1D6B297D00910079 /* My_Label.swift */; };
+		0A88470E1D6B312B00910079 /* My_Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A88470D1D6B312B00910079 /* My_Button.swift */; };
 		0A9049081D654862007315AC /* MyExtesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9049071D654862007315AC /* MyExtesion.swift */; };
 		0AB217FD1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB217FC1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift */; };
 		0AB797121D5AFD91007CD372 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB797111D5AFD91007CD372 /* SettingViewController.swift */; };
@@ -76,6 +78,8 @@
 		0A3AA09A1D5C48C800F5DF24 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
 		0A4698FB1D5F740900B3E059 /* PeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekViewController.swift; sourceTree = "<group>"; };
 		0A53CA0E1D604A4600A91B64 /* PopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewController.swift; sourceTree = "<group>"; };
+		0A88470B1D6B297D00910079 /* My_Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = My_Label.swift; sourceTree = "<group>"; };
+		0A88470D1D6B312B00910079 /* My_Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = My_Button.swift; sourceTree = "<group>"; };
 		0A9049071D654862007315AC /* MyExtesion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyExtesion.swift; sourceTree = "<group>"; };
 		0AB217FC1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseNotificationTimeTableViewCell.swift; sourceTree = "<group>"; };
 		0AB797111D5AFD91007CD372 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +181,15 @@
 				0A3AA0981D5C47CE00F5DF24 /* SearchTableViewCell.swift */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		0A88470A1D6B295100910079 /* MyUse */ = {
+			isa = PBXGroup;
+			children = (
+				0A88470B1D6B297D00910079 /* My_Label.swift */,
+				0A88470D1D6B312B00910079 /* My_Button.swift */,
+			);
+			name = MyUse;
 			sourceTree = "<group>";
 		};
 		0AB797131D5AFE24007CD372 /* SettingView */ = {
@@ -299,6 +312,7 @@
 		9D9009AC1D4984A500CAF7CE /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				0A88470A1D6B295100910079 /* MyUse */,
 				9D9009B31D498B9900CAF7CE /* Constant.swift */,
 				9D9009AF1D4989BD00CAF7CE /* Tools.swift */,
 				9D9009B11D498B8000CAF7CE /* Toast.swift */,
@@ -529,12 +543,14 @@
 				0AB217FD1D62DCEB0019C9C3 /* ChooseNotificationTimeTableViewCell.swift in Sources */,
 				9D9009801D49846E00CAF7CE /* EasyWeather.xcdatamodeld in Sources */,
 				9D9009B21D498B8000CAF7CE /* Toast.swift in Sources */,
+				0A88470C1D6B297D00910079 /* My_Label.swift in Sources */,
 				0AB797121D5AFD91007CD372 /* SettingViewController.swift in Sources */,
 				0A3AA0871D5C1EBF00F5DF24 /* OtherInfoTableViewCell.swift in Sources */,
 				9D9009BA1D498CD500CAF7CE /* BackgroundImageView.swift in Sources */,
 				9D9009B81D498BBA00CAF7CE /* SingleManager.swift in Sources */,
 				0A3AA0821D5C01C800F5DF24 /* SettingTableView.swift in Sources */,
 				0ADB36441D5D9D9800E56D9F /* DBOperaCityList.swift in Sources */,
+				0A88470E1D6B312B00910079 /* My_Button.swift in Sources */,
 				0A3AA0891D5C461400F5DF24 /* AddViewController.swift in Sources */,
 				0AB797151D5AFE9D007CD372 /* FrostedTableViewCell.swift in Sources */,
 				9D9009EA1D49BAF900CAF7CE /* OtherWeatherInfoTableViewCell.swift in Sources */,

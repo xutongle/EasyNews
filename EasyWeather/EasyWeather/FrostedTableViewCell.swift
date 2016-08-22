@@ -21,14 +21,10 @@ class FrostedTableViewCell: UITableViewCell {
         
         self.selectionStyle = .None
         
-        showFrostedLabel = UILabel(frame: CGRectMake(0, 0, SCREEN_WIDTH / 4, SETTING_CELL_HEIGHT))
-        showFrostedLabel.text = "透明度"
-        showFrostedLabel.backgroundColor = SETTING_BACKGROUND_COLOR
-        showFrostedLabel.textColor = WHITE_COLOR
-        showFrostedLabel.textAlignment = .Center
-        showFrostedLabel.font = UIFont.systemFontOfSize(14)
+        showFrostedLabel = My_Label(frame: CGRectMake(0, 0, SCREEN_WIDTH / 4, SETTING_CELL_HEIGHT), title: "透明度", bgColor: SETTING_BACKGROUND_COLOR, textColor: WHITE_COLOR, textFontName: nil, textSize: 14, textPostion: .Center)
         self.addSubview(showFrostedLabel)
         
+        //
         frostedAdjustSeekbar = UISlider(frame: CGRectMake(SCREEN_WIDTH / 4, 0, SCREEN_WIDTH / 4 * 3, SETTING_CELL_HEIGHT))
         frostedAdjustSeekbar.backgroundColor = SETTING_BACKGROUND_COLOR
         frostedAdjustSeekbar.maximumTrackTintColor = UIColor.blackColor()

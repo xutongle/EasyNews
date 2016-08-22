@@ -21,20 +21,16 @@ class ChangeBackgroundTableViewCell: UITableViewCell {
         
         self.selectionStyle = .None
         
-        changeBGBtn = UIButton(frame: CGRectMake(0, 0, SCREEN_WIDTH / 2, SETTING_CELL_HEIGHT))
-        changeBGBtn.backgroundColor = DARK_GRAY
-        changeBGBtn.setTitle("选择图片以做背景", forState: .Normal)
-        changeBGBtn.setTitleColor(WHITE_COLOR, forState: .Normal)
+        changeBGBtn = My_Button(frame: CGRectMake(0, 0, SCREEN_WIDTH / 2, SETTING_CELL_HEIGHT), title: "选择图片以做背景", bgColor: DARK_GRAY, titleColor: WHITE_COLOR, touchUpInsideBlock: {
+            self.choosePicMakeBg()
+        })
         changeBGBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
-        changeBGBtn.addTarget(self, action: #selector(choosePicMakeBg), forControlEvents: .TouchUpInside)
         self.addSubview(changeBGBtn)
         
-        backDefaultBtn = UIButton(frame: CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SETTING_CELL_HEIGHT))
-        backDefaultBtn.backgroundColor = DARK_GRAY
+        backDefaultBtn = My_Button(frame: CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SETTING_CELL_HEIGHT), title: "恢复默认背景", bgColor: DARK_GRAY, titleColor: WHITE_COLOR, touchUpInsideBlock: { 
+            self.backDefault()
+        })
         backDefaultBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
-        backDefaultBtn.setTitle("恢复默认背景", forState: .Normal)
-        backDefaultBtn.setTitleColor(WHITE_COLOR, forState: .Normal)
-        backDefaultBtn.addTarget(self, action: #selector(backDefault), forControlEvents: .TouchUpInside)
         self.addSubview(backDefaultBtn)
     }
     

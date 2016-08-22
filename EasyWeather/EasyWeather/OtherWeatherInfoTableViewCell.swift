@@ -20,22 +20,13 @@ class OtherWeatherInfoTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.clearColor()
         self.selectionStyle = .None
         
-        leftLabel = UILabel.init(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 60))
-        leftLabel.textColor = UIColor.whiteColor()
-        leftLabel.textAlignment = .Center
-        leftLabel.font = UIFont.systemFontOfSize(14)
+        leftLabel = My_Label(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 60), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: 14, textPostion: .Center)
         self.addSubview(leftLabel)
         
-        centerLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3, 60))
-        centerLabel.textColor = UIColor.whiteColor()
-        centerLabel.textAlignment = .Center
-        centerLabel.font = UIFont.systemFontOfSize(14)
+        centerLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3, 60), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: 14, textPostion: .Center)
         self.addSubview(centerLabel)
         
-        rightLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3 * 2, 0, SCREEN_WIDTH / 3, 60))
-        rightLabel.textColor = UIColor.whiteColor()
-        rightLabel.textAlignment = .Center
-        rightLabel.font = UIFont.systemFontOfSize(14)
+        rightLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3 * 2, 0, SCREEN_WIDTH / 3, 60), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: 14, textPostion: .Center)
         self.addSubview(rightLabel)
         
     }

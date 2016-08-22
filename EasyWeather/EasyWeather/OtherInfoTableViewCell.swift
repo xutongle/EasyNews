@@ -25,28 +25,16 @@ class OtherInfoTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.clearColor()
         self.selectionStyle = .None
 
-        washIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 10, SCREEN_WIDTH * 2 / 3, 30))
-        washIndexLabel.backgroundColor = UIColor.clearColor()
-        washIndexLabel.textColor = WHITE_COLOR
-        washIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
+        washIndexLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 10, SCREEN_WIDTH * 2 / 3, 30), title: nil, bgColor: UIColor.clearColor(), textColor: WHITE_COLOR, textFontName: INPUT_MONO, textSize: 18, textPostion: nil)
         self.addSubview(washIndexLabel)
         
-        exerciseIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 50, SCREEN_WIDTH * 2 / 3, 30))
-        exerciseIndexLabel.backgroundColor = UIColor.clearColor()
-        exerciseIndexLabel.textColor = WHITE_COLOR
-        exerciseIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
+        exerciseIndexLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 50, SCREEN_WIDTH * 2 / 3, 30), title: nil, bgColor: UIColor.clearColor(), textColor: WHITE_COLOR, textFontName: INPUT_MONO, textSize: 18, textPostion: nil)
         self.addSubview(exerciseIndexLabel)
         
-        airConditionLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 90, SCREEN_WIDTH * 2 / 3, 30))
-        airConditionLabel.backgroundColor = UIColor.clearColor()
-        airConditionLabel.textColor = WHITE_COLOR
-        airConditionLabel.font = UIFont(name: "InputMono-Light", size: 18)
+        airConditionLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 90, SCREEN_WIDTH * 2 / 3, 30), title: nil, bgColor: UIColor.clearColor(), textColor: WHITE_COLOR, textFontName: INPUT_MONO, textSize: 18, textPostion: nil)
         self.addSubview(airConditionLabel)
         
-        dressingIndexLabel = UILabel(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 130, SCREEN_WIDTH * 2 / 3, 30))
-        dressingIndexLabel.backgroundColor = UIColor.clearColor()
-        dressingIndexLabel.textColor = WHITE_COLOR
-        dressingIndexLabel.font = UIFont(name: "InputMono-Light", size: 18)
+        dressingIndexLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3 - 80, 130, SCREEN_WIDTH * 2 / 3, 30), title: nil, bgColor: UIColor.clearColor(), textColor: WHITE_COLOR, textFontName: INPUT_MONO, textSize: 18, textPostion: nil)
         self.addSubview(dressingIndexLabel)
         
     }

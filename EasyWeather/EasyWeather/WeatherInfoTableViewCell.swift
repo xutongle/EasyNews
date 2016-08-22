@@ -57,26 +57,17 @@ class WeatherInfoTableViewCell: UITableViewCell {
         self.addSubview(weatherIconImageView)
         
         // 当天最高/最低温度
-        maxminTemperatureLabel = UILabel.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 + weatherValueBtnWidth - 5, 0, maxminTemperatureLabelWidth, weatherValueBtnHeigh))
-        maxminTemperatureLabel.textColor = UIColor.whiteColor()
+        let rect = CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 + weatherValueBtnWidth - 5, 0, maxminTemperatureLabelWidth, weatherValueBtnHeigh)
+        maxminTemperatureLabel = My_Label(frame: rect, title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: 14, textPostion: .Center)
         maxminTemperatureLabel.numberOfLines = 0
-        maxminTemperatureLabel.font = UIFont.systemFontOfSize(14)
-        maxminTemperatureLabel.textAlignment = .Center
         self.addSubview(maxminTemperatureLabel)
         
         // 当前天气状态 和天气图标对应，比如 多云 等
-        weatherStateLabel = UILabel.init(frame: CGRectMake(0, weatherValueBtnHeigh, weatherStateLabelWidth, 15))
-        weatherStateLabel.textColor = UIColor.whiteColor()
-        weatherStateLabel.font = UIFont.systemFontOfSize(15)
-        weatherStateLabel.textAlignment = .Center
+        weatherStateLabel = My_Label(frame: CGRectMake(0, weatherValueBtnHeigh, weatherStateLabelWidth, 15), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: 15, textPostion: .Center)
         self.addSubview(weatherStateLabel)
         
         // 体感温度（暂时未写）
-        feelTemperatureLabel = UILabel.init(frame: CGRectMake(0, weatherValueBtnHeigh + 20, feelTemperatureLabelWidth, 15))
-        feelTemperatureLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-        feelTemperatureLabel.font = UIFont.systemFontOfSize(14)
-        feelTemperatureLabel.textAlignment = .Center
-        feelTemperatureLabel.text = "体感温度 40°C"
+        feelTemperatureLabel = My_Label(frame: CGRectMake(0, weatherValueBtnHeigh + 20, feelTemperatureLabelWidth, 15), title: "体感温度 40°C", bgColor: nil, textColor: UIColor.whiteColor().colorWithAlphaComponent(0.5), textFontName: nil, textSize: 14, textPostion: .Center)
         self.addSubview(feelTemperatureLabel)
     }
     

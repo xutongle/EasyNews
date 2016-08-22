@@ -18,15 +18,11 @@ class LastWeatherInfoTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None
         self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
-        
-        dayLabel = UILabel.init(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 40))
-        dayLabel.textAlignment = .Center
-        dayLabel.textColor = UIColor.whiteColor()
+                
+        dayLabel = My_Label(frame: CGRectMake(0, 0, SCREEN_WIDTH / 3, 40), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: nil, textPostion: .Center)
         self.addSubview(dayLabel)
         
-        weatherStateAndWeatherLabel = UILabel.init(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3 * 2, 40))
-        weatherStateAndWeatherLabel.textAlignment = .Center
-        weatherStateAndWeatherLabel.textColor = UIColor.whiteColor()
+        weatherStateAndWeatherLabel = My_Label(frame: CGRectMake(SCREEN_WIDTH / 3, 0, SCREEN_WIDTH / 3 * 2, 40), title: nil, bgColor: nil, textColor: WHITE_COLOR, textFontName: nil, textSize: nil, textPostion: .Center)
         self.addSubview(weatherStateAndWeatherLabel)
     }
     

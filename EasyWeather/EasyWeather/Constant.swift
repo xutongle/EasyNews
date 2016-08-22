@@ -34,3 +34,7 @@ let SETTING_CELL_NUM: Int = 3
 let DARK_GRAY: UIColor = UIColor(red:0/255.0, green:139/255.0, blue:139/255.0, alpha: 1)
 let WHITE_COLOR: UIColor = UIColor.whiteColor()
 let ORANGE_COLOR: UIColor = UIColor.orangeColor()
+
+/********************** 字体常量 *************************/
+
+let INPUT_MONO = "InputMono-Light"
