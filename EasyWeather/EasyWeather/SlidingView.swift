@@ -191,7 +191,7 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
             if dict["city"] == TopView.topView.location {
                 tableview.cellForRowAtIndexPath(NSIndexPath(forRow: lightCellId, inSection: 0))?.backgroundColor = UIColor.whiteColor()
                 lightCellId = n
-                tableview.cellForRowAtIndexPath(NSIndexPath(forRow: n, inSection: 0))?.backgroundColor = UIColor.orangeColor()
+                tableview.cellForRowAtIndexPath(NSIndexPath(forRow: n, inSection: 0))?.backgroundColor = UIColor.randomColor()
             }
             n += 1
         }

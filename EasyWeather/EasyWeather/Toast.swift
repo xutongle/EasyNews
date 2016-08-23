@@ -26,7 +26,7 @@ public enum ToastPostion {
 // MARK: - ---------------------全局变量---------------------
 
 // 初始化出Toast
-private let toastView:UIView = Toast.init(frame: CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH / 2)) / 2, SCREEN_HEIGHT - 80, SCREEN_WIDTH / 2, 40))
+private let toastView:UIView = Toast.init(frame: CGRectMake(SCREEN_WIDTH / 4, SCREEN_HEIGHT - 80, SCREEN_WIDTH / 2, 40))
 
 // Toast上的文字
 private var label:UILabel = UILabel()
@@ -38,10 +38,10 @@ extension UIView{
     // MARK: - ---------------------在viewcontroller直接调用---------------------
     
     // 使用ToastPostion的位置
-    func show(message: String, style: ToastStyle, postion: ToastPostion, block: ()->Void) -> Void {
-        switch postion {
+    func show(message: String , toastPostion: ToastPostion, block: ()->Void) -> Void {
+        switch toastPostion {
         case .InTop:
-            toastView.frame = CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH / 2)) / 2, 84, SCREEN_WIDTH / 2, 40)
+            toastView.frame = CGRectMake(SCREEN_WIDTH / 4, 84, SCREEN_WIDTH / 2, 40)
             break
         case .InCente:
             toastView.frame = CGRectMake(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2 - 20, SCREEN_WIDTH / 2, 40)
@@ -51,14 +51,14 @@ extension UIView{
             break
         }
         
-        show(message, style: style, block: block)
+        show(message, block: block)
     }
     
     // 自定义的输入totast的位置
-    func show(message: String, style: ToastStyle, postion: CGRect, block: ()->Void) -> Void {
+    func show(message: String, postion: CGRect, block: ()->Void) -> Void {
         
         toastView.frame = postion
-        show(message, style: style, block: block)
+        show(message, block: block)
     }
     
     // 输入自定义样式
@@ -88,7 +88,7 @@ extension UIView{
         let rect = messageStr.boundingRectWithSize(CGSizeMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil)
         
         var useSize: CGSize = rect.size
-        print("自适应的大小－>", useSize)
+        //print("自适应的大小－>", useSize)
         if rect.width < SCREEN_WIDTH / 2 {
             useSize.width = SCREEN_WIDTH / 2
             label.textAlignment = .Center
@@ -98,7 +98,7 @@ extension UIView{
             label.textAlignment = .Center
         }
 
-        toastView.frame = CGRectMake(SCREEN_WIDTH / 4 - 5, SCREEN_HEIGHT - useSize.height - 80 - 5, useSize.width + 10, useSize.height + 10)
+        toastView.frame = CGRectMake(toastView.frame.origin.x, toastView.frame.origin.y, useSize.width + 10, useSize.height + 10)
         // 初始化label
         label.frame = CGRectMake(5, 5, useSize.width, useSize.height)
         

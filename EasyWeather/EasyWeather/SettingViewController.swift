@@ -57,9 +57,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         backDefaultBackground = {
             if SaveImageToDocment.saveImageToDocment.removeImage() {
                 BackgroundImageView.backgroundImageView.image = UIImage.init(named: "weather_temp")
-                self.view.show("恢复成功", style: ToastStyle(), postion: .InCente, block: {
-                    
-                })
+                self.view.show("恢复成功", toastPostion: .InCente, block: { })
             }else {
                 self.view.show("恢复失败，稍后试试", block: { })
             }

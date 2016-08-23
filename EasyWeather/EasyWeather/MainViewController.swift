@@ -159,7 +159,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     
     // 选择天气后
     func chooseOverShowWeather(cityName: String) -> Void {
-        self.view.show("已选\(cityName)", style: ToastStyle(), postion: .InCente, block: {})
+        self.view.show("已选\(cityName)", toastPostion: .InCente, block: {})
         
         getWeather(cityName) { cityName, province in
             if province != nil {
