@@ -35,14 +35,14 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view.addSubview(okButton)
         
         // 设置的第二个cell
-        chooseToMakeBackground = {
+        chooseToMakeBackground = { [weak self] in
             // 弹出提示从哪里选择图片
             let alert = UIAlertController.init(title: "", message: "选择图片自", preferredStyle: .ActionSheet)
             let photoLibrayAction = UIAlertAction.init(title: "图库", style: .Default, handler: { (action) in
-                self.choosePic(.PhotoLibrary)
+                self!.choosePic(.PhotoLibrary)
             })
             let cameraAction = UIAlertAction.init(title: "相机", style: .Default, handler: { (action) in
-                self.choosePic(.Camera)
+                self!.choosePic(.Camera)
             })
             let cancleAction = UIAlertAction.init(title: "取消", style: .Cancel, handler: nil)
             
@@ -50,16 +50,16 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
             alert.addAction(cameraAction)
             alert.addAction(cancleAction)
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self!.presentViewController(alert, animated: true, completion: nil)
         }
         
         // 第二个cell 恢复默认背景
-        backDefaultBackground = {
+        backDefaultBackground = { [weak self] in
             if SaveImageToDocment.saveImageToDocment.removeImage() {
                 BackgroundImageView.backgroundImageView.image = UIImage.init(named: "weather_temp")
-                self.view.show("恢复成功", toastPostion: .InCente, block: { })
+                self!.view.show("恢复成功", toastPostion: .InCente, block: { })
             }else {
-                self.view.show("恢复失败，稍后试试", block: { })
+                self!.view.show("恢复失败，稍后试试", block: { })
             }
         }
     }

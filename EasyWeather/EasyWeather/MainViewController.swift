@@ -42,7 +42,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         super.viewWillAppear(animated)
         
         if Tools.getUserDefaults("first") == nil {
-            DBOperaCityList().queryWithAllWeatherTable()
+            DBOperaCityList.dbOperaCityList.queryWithAllWeatherTable()
             Tools.setUserDefaults(key: "first", andValue: false)
             Tools.setUserDefaults(key: "BlurValue", andValue: 0.5)
         }
@@ -87,42 +87,42 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         self.check3dTouch()
         
         // TopView
-        btnAction = {whichButton in
+        btnAction = { [weak self] whichButton in
             switch whichButton {
             case .isDrawUpButton:
                 // 打开侧滑
-                self.slidingView.toggleSldingView(true)
+                self!.slidingView.toggleSldingView(true)
                 break
             case .isLocationButton:
                 break
             case .isAddLocationButton:
-                self.presentViewController(AddViewController.addViewController, animated: true, completion: nil)
+                self!.presentViewController(AddViewController.addViewController, animated: true, completion: nil)
                 break
             }
         }
         
         // 设置按钮回调
-        setttingBlock = {
-            self.closeSlidingView()
-            self.presentViewController(SettingViewController.settingViewController, animated: true, completion: nil)
+        setttingBlock = { [weak self] in
+            self!.closeSlidingView()
+            self!.presentViewController(SettingViewController.settingViewController, animated: true, completion: nil)
         }
         
         // 城市选择
-        backCityBlock = {cityName in
-            self.chooseOverShowWeather(cityName)
+        backCityBlock = { [weak self] cityName in
+            self!.chooseOverShowWeather(cityName)
         }
         
         // 来自AddViewController
-        backSearchViewBlock = {cityName in
-            self.chooseOverShowWeather(cityName as String)
+        backSearchViewBlock = { [weak self] cityName in
+            self!.chooseOverShowWeather(cityName as String)
         }
         
         // 侧划点按cell
-        clickCellBlock = {city, province in
+        clickCellBlock = { [weak self] city, province in
             Tools.setUserDefaults(key: "province", andValue: province)
             Tools.setUserDefaults(key: "city", andValue: city)
             
-            self.getWeather(city, Over: nil)
+            self!.getWeather(city, Over: nil)
         }
         
         // 划出侧划页面的手势
@@ -179,7 +179,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                           "city": chooseCity,
                           "province": tempProvince]
         refreshTimeLabel.text = "加载中..."
-        Alamofire.request(.POST, url, parameters: parameters).responseJSON { (response) in
+        Alamofire.request(.POST, url, parameters: parameters).responseJSON { [weak self] (response) in
             let result = response.result
             if result.isSuccess {
                 let json = JSON(response.result.value!)
@@ -199,11 +199,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     tempArray.append(allInfo["city"]!.stringValue)
                     tempArray.append(allInfo["province"]!.stringValue)
                     // 天气信息
-                    self.mainTableView.weatherInfoDict = NSMutableDictionary()
+                    self!.mainTableView.weatherInfoDict = NSMutableDictionary()
                     // 裁剪string的方法
-                    let temperature_future = self.subString(futureInfo![0]["temperature"].stringValue)
+                    let temperature_future = self!.subString(futureInfo![0]["temperature"].stringValue)
                     
-                    self.mainTableView.weatherInfoDict =
+                    self!.mainTableView.weatherInfoDict =
                         ["temperature_now": allInfo["temperature"]!.stringValue, "weather": allInfo["weather"]!.stringValue,
                             "temperature_future": temperature_future]
                     
@@ -215,18 +215,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     tempArray.append(allInfo["weather"]!.stringValue)
                     tempArray.append(temperature_future)
                     // 其他天气信息
-                    self.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
-                    self.mainTableView.otherWeatherInfoDict =
+                    self!.mainTableView.otherWeatherInfoDict = NSMutableDictionary()
+                    self!.mainTableView.otherWeatherInfoDict =
                         ["wind": allInfo["wind"]!.stringValue, "humidity": allInfo["humidity"]!.stringValue,
                             "coldIndex": allInfo["coldIndex"]!.stringValue]
                     tempArray.append(allInfo["wind"]!.stringValue)
                     tempArray.append(allInfo["humidity"]!.stringValue)
                     tempArray.append(allInfo["coldIndex"]!.stringValue)
                     // 剩下几天的天气信息
-                    self.mainTableView.lastdayWeatherInfo = NSMutableArray()
+                    self!.mainTableView.lastdayWeatherInfo = NSMutableArray()
                     for (index: index, subJson: value) in futureInfo!{
                         if NSInteger(index) >= 1 && NSInteger(index) <= 3 {
-                            self.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
+                            self!.mainTableView.lastdayWeatherInfo[NSInteger(index)! - 1] =
                                 ["week": value["week"].stringValue, "dayTime": value["dayTime"].stringValue,
                                     "temperature": value["temperature"].stringValue]
                             //
@@ -236,9 +236,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                         }
                     }
                     // 其他信息
-                    self.mainTableView.otherInfoDict = NSMutableDictionary()
+                    self!.mainTableView.otherInfoDict = NSMutableDictionary()
                     let airCondition = allInfo["airCondition"]?.stringValue == nil ? "无" : allInfo["airCondition"]!.stringValue
-                    self.mainTableView.otherInfoDict =
+                    self!.mainTableView.otherInfoDict =
                         ["washIndex": allInfo["washIndex"]!.stringValue,
                             "airCondition": airCondition,
                             "dressingIndex": allInfo["dressingIndex"]!.stringValue,
@@ -250,34 +250,34 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                     //
                     let result = DBOperaCityList.dbOperaCityList.insertWeatherTable(tempArray)
                     if (result != nil && result == true) {
-                        self.view.show("获得天气成功", block: { })
+                        self!.view.show("获得天气成功", block: { })
                     }
                     
                     // 更新时间
-                    Tools.setUserDefaults(key: "updateWeatherTime", andValue: self.getCurrentTime())
-                    self.refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
+                    Tools.setUserDefaults(key: "updateWeatherTime", andValue: self!.getCurrentTime())
+                    self!.refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
                     //
-                    self.view.getSlidingView_zly().lightCell()
+                    self!.view.getSlidingView_zly().lightCell()
                     // 是否需要重新刷新侧划
-                    self.needRefresh = true
+                    self!.needRefresh = true
                     //print(allInfo)
                     if Over != nil {
                         Over!(cityName: allInfo["city"]!.stringValue, province: allInfo["province"]!.stringValue)
                     }
-                    self.mainTableView.reloadData()
-                    self.isRefresh = false
+                    self!.mainTableView.reloadData()
+                    self!.isRefresh = false
                 }else {
-                    self.refreshTimeLabel.text = "加载失败"
-                    self.view.show("获取天气失败", block: { })
+                    self!.refreshTimeLabel.text = "加载失败"
+                    self!.view.show("获取天气失败", block: { })
                     print("使用缓存1")
                     // 使用缓存
-                    self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
+                    self!.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
                 }
             }else {
-                self.refreshTimeLabel.text = "加载失败"
+                self!.refreshTimeLabel.text = "加载失败"
                 print("使用缓存2")
                 // 使用缓存
-                self.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
+                self!.getCacheWithSqlAndSet(chooseCity as! String, provinceName: tempProvince as! String)
             }
         }
     }
@@ -285,31 +285,31 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     func getCacheWithSqlAndSet(cityName: String, provinceName: String) -> Void {
         // 异步线程 内的同步执行。。。。。
         dispatch_async(dispatch_queue_create("queryOne", DISPATCH_QUEUE_SERIAL)) {
-            let result =  DBOperaCityList.dbOperaCityList.queryWithCityName(cityName, provinceName: provinceName, backInfo: { (info) in
+            let result =  DBOperaCityList.dbOperaCityList.queryWithCityName(cityName, provinceName: provinceName, backInfo: { [weak self] (info) in
                 print("\(cityName)\(provinceName)\n\(info)")
                 if info != nil && info!.count == 21 {
                     //
-                    self.mainTableView.weatherInfoDict = ["temperature_now": info![2], "weather": info![3], "temperature_future": info![4]]
+                    self!.mainTableView.weatherInfoDict = ["temperature_now": info![2], "weather": info![3], "temperature_future": info![4]]
                     //
-                    self.mainTableView.otherWeatherInfoDict = ["wind": info![5], "humidity": info![6], "coldIndex": info![7]]
+                    self!.mainTableView.otherWeatherInfoDict = ["wind": info![5], "humidity": info![6], "coldIndex": info![7]]
                     //
                     let dict1 = ["week": info![8], "dayTime":info![9], "temperature":info![10]]
                     let dict2 = ["week": info![11], "dayTime":info![12], "temperature":info![13]]
                     let dict3 = ["week": info![14], "dayTime":info![15], "temperature":info![16]]
-                    self.mainTableView.lastdayWeatherInfo = [dict1,dict2,dict3]
+                    self!.mainTableView.lastdayWeatherInfo = [dict1,dict2,dict3]
                     //
-                    self.mainTableView.otherInfoDict = ["washIndex": info![17], "airCondition": info![18], "dressingIndex": info![19], "exerciseIndex": info![20]]
+                    self!.mainTableView.otherInfoDict = ["washIndex": info![17], "airCondition": info![18], "dressingIndex": info![19], "exerciseIndex": info![20]]
                     //
                     dispatch_async(dispatch_get_main_queue(), {
                         // 头视图
                         TopView.topView.location = cityName
                         
-                        self.view.show("请检查网络,使用上次天气信息", block: { })
-                        self.mainTableView.reloadData()
+                        self!.view.show("请检查网络,使用上次天气信息", block: { })
+                        self!.mainTableView.reloadData()
                     })
                 }else {
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.view.show("请检查网络", block: { })
+                        self!.view.show("请检查网络", block: { })
                     })
                 }
             })
@@ -352,13 +352,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     // 刷新侧划数据
     func refreshDataWithSliding() -> Void {
         self.needRefresh = false
-        dispatch_async(dispatch_queue_create("selectQuque", DISPATCH_QUEUE_CONCURRENT)) {
+        dispatch_async(dispatch_queue_create("selectQuque", DISPATCH_QUEUE_CONCURRENT)) { [weak self] in
             DBOperaCityList.dbOperaCityList.queryCityAndProvince { (cityInfo) in
-                self.view.getSlidingView_zly().dataForTableView = cityInfo
+                self!.view.getSlidingView_zly().dataForTableView = cityInfo
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.view.getSlidingView_zly().reloadData()
+                    self!.view.getSlidingView_zly().reloadData()
                     // 使cell高亮
-                    self.view.getSlidingView_zly().lightCell()
+                    self!.view.getSlidingView_zly().lightCell()
                 })
             }
         }
@@ -386,7 +386,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     //反地理编码
     func getLocationName(location: CLLocation, complete:(province: NSString,city :NSString) -> Void) -> Void {
         //苹果自带反地理编码
-        CLGeocoder().reverseGeocodeLocation(location) { (placemakes: [CLPlacemark]?, error: NSError?) -> Void in
+        CLGeocoder().reverseGeocodeLocation(location) { [weak self] (placemakes: [CLPlacemark]?, error: NSError?) -> Void in
             let placemake = placemakes?.first
             
             //成功获得地址
@@ -394,7 +394,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 complete(province: placemake!.administrativeArea!, city: placemake!.locality!)
                 //print(placemake?.locality,placemake?.administrativeArea)
             }else{
-                self.view.show("无法获得定位信息，请稍后重试", block: {})
+                self!.view.show("无法获得定位信息，请稍后重试", block: {})
             }
         }
     }
@@ -417,15 +417,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
             clLocationManager.stopUpdatingLocation()
             
             //逆地理位置的回调
-            getLocationName(currLocation, complete: { (province, city) in
-                if self.isRefresh {
+            getLocationName(currLocation, complete: { [weak self] (province, city) in
+                if self!.isRefresh {
                     return
                 }
                 var trueProvince: String!
                 var trueCity: String!
                 // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
                 let shi = city.substringWithRange(NSRange.init(location: city.length - 1, length: 1))
-                print("--------->>>>", shi)
                 // 如果有市 根据接口需要的话 需要裁掉市
                 if shi == "市" {
                     trueProvince = province.substringToIndex(province.length - 1)
@@ -438,7 +437,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 Tools.setUserDefaults(key: "province", andValue: trueProvince)
                 Tools.setUserDefaults(key: "city", andValue: trueCity)
                 
-                self.getWeatherTemp(trueCity)
+                self!.getWeatherTemp(trueCity)
             })
         }
     }

@@ -14,22 +14,17 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     // 自己
     static let addViewController = AddViewController()
-    
     // 搜索输入框
     private var searchTextField:UITextField!
-    
     // 搜索的View
     let searchView = SearchView.searchView
-    
     // 所有城市的字典
     var dataDict:NSDictionary! = nil
-    
     //
     var queue:dispatch_queue_t! = nil
     var myqueue: NSOperationQueue! = nil
     var timer:NSTimer! = nil
     var operation:NSBlockOperation? = nil
-    
     //
     var pinyinStr: NSString! = nil
     
@@ -143,28 +138,28 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             operation = nil
         }
         
-        operation = NSBlockOperation.init(block: {
+        operation = NSBlockOperation.init(block: { [weak self] in
             
-            for allData in self.dataDict {
+            for allData in self!.dataDict {
                 for dict in allData.value as! NSArray {
                     // 汉字
                     let cityName = dict["name"] as! String
                     
-                    let dict = self.subStr(cityName)
+                    let dict = self!.subStr(cityName)
                     // pinyin
                     let subCityName = dict["subStr"] as! String
                     // 首字母
                     let strSubHead = dict["strSubHead"] as! String
                     // 对比
-                    if subCityName == self.pinyinStr || strSubHead == self.pinyinStr{
-                        self.searchView.dataArray?.addObject(cityName)
+                    if subCityName == self!.pinyinStr || strSubHead == self!.pinyinStr{
+                        self!.searchView.dataArray?.addObject(cityName)
                     }
                 }
             }
             
             // 抛回去
             dispatch_async(dispatch_get_main_queue(), {
-                self.searchView.tableview.reloadData()
+                self!.searchView.tableview.reloadData()
             })
             
         })
