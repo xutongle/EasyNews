@@ -22,6 +22,7 @@ class PeekViewController: UIViewController {
         // 从沙盒中取到图片
         SaveImageToDocment.saveImageToDocment.getImage({ (image) in
             if image != nil {
+                bg.image = nil
                 bg.image = image
             }
         })

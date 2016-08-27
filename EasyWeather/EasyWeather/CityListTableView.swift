@@ -14,7 +14,7 @@ class CityListTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private var tableView:UITableView! = nil
     private var citysDict:NSDictionary!
-    private var citysKey:Array<String>!
+    private var citysKey: [String]!
     
     static let cityListTableView = CityListTableView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64))
     

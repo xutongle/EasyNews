@@ -51,17 +51,23 @@ class TopView: UIView {
     
     // 左侧按钮
     private func setSlidingButton() -> Void {
-        drawUpButton = UIButton.init(frame: CGRectMake(0, 10, 39, heandViewHeight - 25))
+        drawUpButton = UIButton()
         drawUpButton.setImage(UIImage.init(named: "menu"), forState: .Normal)
         drawUpButton.imageView?.contentMode = .ScaleAspectFit
-        
         drawUpButton.addTarget(self, action: #selector(self.slidingAction), forControlEvents: .TouchUpInside)
         self.addSubview(drawUpButton)
+        
+        drawUpButton.snp_makeConstraints { (make) in
+            make.width.equalTo(39)
+            make.height.equalTo(heandViewHeight - 25)
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(10)
+        }
     }
     
     // 显示位置按钮
     private func setLocationButton() -> Void {
-        locationButton = UIButton.init(frame: CGRectMake((SCREEN_WIDTH - locationLabelWidth) / 2, 5,locationLabelWidth, heandViewHeight - 10))
+        locationButton = UIButton()
         //locationButton.frame = CGRectMake((SCREEN_WIDTH - locationLabelWidth) / 2, 5,locationLabelWidth, selfHeght - 10)
         //locationButton.imageEdgeInsets.right = 20
         //locationButton.titleEdgeInsets.left = 20
@@ -76,6 +82,12 @@ class TopView: UIView {
         locationButton.addTarget(self, action: #selector(self.slidingAction), forControlEvents: .TouchUpInside)
         
         self.addSubview(locationButton)
+        locationButton.snp_makeConstraints { (make) in
+            make.left.equalTo(self).offset((SCREEN_WIDTH - locationLabelWidth) / 2)
+            make.top.equalTo(self).offset(5)
+            make.width.equalTo(locationLabelWidth)
+            make.height.equalTo(heandViewHeight - 10)
+        }
     }
     
     // 加号按钮

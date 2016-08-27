@@ -13,8 +13,10 @@ var searchChooseCityBlock: ((cityName: String) -> Void)!
 class SearchView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var dataArray: NSMutableArray? = NSMutableArray()
+    // 搜索结果
     var tableview: UITableView!
     
+    //
     static let searchView = SearchView.init(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64))
     
     override init(frame: CGRect) {

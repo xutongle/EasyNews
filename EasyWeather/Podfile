@@ -15,4 +15,7 @@ pod 'SQLite.swift', '~> 0.10.1'
 # Json
 pod 'SwiftyJSON'
 
+# 布局
+pod 'SnapKit', '~> 0.15.0'
+
 end

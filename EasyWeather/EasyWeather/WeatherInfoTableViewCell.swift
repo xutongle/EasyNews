@@ -42,6 +42,12 @@ class WeatherInfoTableViewCell: UITableViewCell {
         // 体感温度 宽度
         let feelTemperatureLabelWidth = SCREEN_WIDTH
         
+        // 天气图标
+        weatherIconImageView = UIImageView.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 - weatherIconImageViewWidth, 30, weatherIconImageViewWidth, 35))
+        weatherIconImageView.clipsToBounds = true
+        weatherIconImageView.contentMode = .ScaleAspectFit
+        self.addSubview(weatherIconImageView)
+        
         // 当前天气温度
         weatherValueBtn = UIButton.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2, 0, weatherValueBtnWidth, weatherValueBtnHeigh))
         weatherValueBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -49,12 +55,12 @@ class WeatherInfoTableViewCell: UITableViewCell {
         weatherValueBtn.titleLabel?.font = UIFont(name: "InputMono-Light", size: 45)
         weatherValueBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         self.addSubview(weatherValueBtn)
-        
-        // 天气图标
-        weatherIconImageView = UIImageView.init(frame: CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 - weatherIconImageViewWidth, 30, weatherIconImageViewWidth, 35))
-        weatherIconImageView.clipsToBounds = true
-        weatherIconImageView.contentMode = .ScaleAspectFit
-        self.addSubview(weatherIconImageView)
+//        weatherValueBtn.snp_makeConstraints { (make) in
+//            make.left.equalTo(weatherIconImageView).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.width.equalTo(weatherIconImageViewWidth)
+//            make.height.equalTo(40)
+//        }
         
         // 当天最高/最低温度
         let rect = CGRectMake((SCREEN_WIDTH - weatherValueBtnWidth) / 2 + weatherValueBtnWidth - 5, 0, maxminTemperatureLabelWidth, weatherValueBtnHeigh)

@@ -1,18 +1,21 @@
 PODS:
   - Alamofire (3.4.1)
+  - SnapKit (0.15.0)
   - SQLite.swift (0.10.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - SnapKit (~> 0.15.0)
   - SQLite.swift (~> 0.10.1)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: d6bf942ff1809d1918371cb1b6be1dc408f2da2e
+PODFILE CHECKSUM: d616fefce147f432798752bff97754bb152b56a9
 
 COCOAPODS: 1.1.0.beta.1

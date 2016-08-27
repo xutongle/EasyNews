@@ -29,10 +29,18 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.view.addSubview(SettingTableView.settinsgTableView)
         
-        okButton = UIButton(frame: CGRectMake(SCREEN_WIDTH - 60, SCREEN_HEIGHT - 60, 50, 50))
+        okButton = UIButton()
         okButton.setImage(UIImage(named: "okBtn"), forState: .Normal)
-        okButton.addTarget(self, action: #selector(backOf), forControlEvents: .TouchUpInside)
+        okButton.setStyle(nil, bgColor: nil, color: nil) { [weak self] button in
+            self!.backOf()
+        }
         self.view.addSubview(okButton)
+        okButton.snp_makeConstraints { (make) in
+            make.width.equalTo(60)
+            make.height.equalTo(60)
+            make.right.equalTo(self.view).offset(-10)
+            make.bottom.equalTo(self.view).offset(-10)
+        }
         
         // 设置的第二个cell
         chooseToMakeBackground = { [weak self] in
@@ -57,7 +65,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         backDefaultBackground = { [weak self] in
             if SaveImageToDocment.saveImageToDocment.removeImage() {
                 BackgroundImageView.backgroundImageView.image = UIImage.init(named: "weather_temp")
-                self!.view.show("恢复成功", toastPostion: .InCente, block: { })
+                self!.view.show("恢复成功", block: { })
             }else {
                 self!.view.show("恢复失败，稍后试试", block: { })
             }
@@ -91,7 +99,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func backOf() -> Void {
         
-        self.dismissViewControllerAnimated(true) { 
+        self.dismissViewControllerAnimated(true) {
             Tools.setUserDefaults(key: "BlurValue", andValue: SingleManager.singleManager.getValue(Key: "BlurValue")!)
         }
     }
@@ -102,17 +110,17 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage;
         
         // 保存图片并显示图片
-        SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") { (compltete, backImage) in
+        SaveImageToDocment.saveImageToDocment.save(image: image, withName: "currentImage.png") {[weak self] (compltete, backImage) in
             if compltete {
                 // 存储成功直接给背景图
                 BackgroundImageView.backgroundImageView.image = backImage
                 
-                self.view.show("存储成功，更换背景成功", block: {
+                self!.view.show("存储成功，更换背景成功", block: {
                     Tools.setUserDefaults(key: "BlurValue", andValue: SingleManager.singleManager.getValue(Key: "BlurValue")!)
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self!.dismissViewControllerAnimated(true, completion: nil)
                 })
             }else {
-                self.view.show("存储失败，更换背景失败", block: {
+                self!.view.show("存储失败，更换背景失败", block: {
                     //self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }

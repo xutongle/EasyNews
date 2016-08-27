@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import CoreLocation
+import SnapKit
 
 class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewControllerPreviewingDelegate {
     
@@ -58,6 +59,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         // 从沙盒中取到图片
         SaveImageToDocment.saveImageToDocment.getImage({ (image) in
             if image != nil {
+                BackgroundImageView.backgroundImageView.image = nil
                 BackgroundImageView.backgroundImageView.image = image
             }
         })
@@ -67,14 +69,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         // 头视图
         self.view.addSubview(TopView.topView)
         // 主视图
-        mainTableView = MainTableView(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
+        mainTableView = MainTableView()  //(frame: CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64), style: .Plain)
         self.view.addSubview(mainTableView)
+
+        mainTableView.snp_makeConstraints { (make) in
+            make.top.equalTo(self.view).offset(64)
+            make.left.equalTo(self.view).offset(0)
+            make.right.equalTo(self.view).offset(0)
+            make.bottom.equalTo(self.view).offset(0)
+        }
+        mainTableView.reloadData()
+        
         // 刷新的时间
-        refreshTimeLabel = UILabel.init(frame: CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20))
-        refreshTimeLabel.textAlignment = .Center
-        refreshTimeLabel.textColor = UIColor.orangeColor()
+        refreshTimeLabel = UILabel()
+        refreshTimeLabel.setStyle("稍等", bgColor: nil, color: UIColor.orangeColor(), fontName: nil, textSize: nil, alignment: .Center)
         refreshTimeLabel.userInteractionEnabled = true
         self.view.addSubview(refreshTimeLabel)
+        refreshTimeLabel.snp_makeConstraints { (make) in
+            make.width.equalTo(SCREEN_WIDTH)
+            make.height.equalTo(30)
+            make.left.equalTo(self.view).offset(0)
+            make.bottom.equalTo(self.view).offset(0)
+        }
         
         if Tools.getUserDefaults("updateWeatherTime") != nil {
             refreshTimeLabel.text = Tools.getUserDefaults("updateWeatherTime") as? String
@@ -103,7 +119,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         // 设置按钮回调
         setttingBlock = { [weak self] in
-            self!.closeSlidingView()
+            //self!.closeSlidingView()
             self!.presentViewController(SettingViewController.settingViewController, animated: true, completion: nil)
         }
         
@@ -159,7 +175,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     
     // 选择天气后
     func chooseOverShowWeather(cityName: String) -> Void {
-        self.view.show("已选\(cityName)", toastPostion: .InCente, block: {})
+        self.view.show("已选\(cityName)", block: {})
         
         getWeather(cityName) { cityName, province in
             if province != nil {
@@ -179,6 +195,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                           "city": chooseCity,
                           "province": tempProvince]
         refreshTimeLabel.text = "加载中..."
+        
         Alamofire.request(.POST, url, parameters: parameters).responseJSON { [weak self] (response) in
             let result = response.result
             if result.isSuccess {
@@ -187,7 +204,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 // 如果获得天气成功
                 if json["retCode"].intValue == 200 {
                     
-                    // 存放存入数据库的信息 拍好序了
+                    // 存放存入数据库的信息 排好序了
                     var tempArray: [String]! = []
                     let allInfo = json["result"].arrayValue[0].dictionaryValue
                     let futureInfo = allInfo["future"]
@@ -282,6 +299,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         }
     }
     
+    // 从缓存取值
     func getCacheWithSqlAndSet(cityName: String, provinceName: String) -> Void {
         // 异步线程 内的同步执行。。。。。
         dispatch_async(dispatch_queue_create("queryOne", DISPATCH_QUEUE_SERIAL)) {
@@ -368,11 +386,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
         
         // 没有数据要刷新
         if self.view.getSlidingView_zly().dataForTableView.count == 0 {
-            print("刷新1")
             refreshDataWithSliding()
             // 需要刷新也刷新
         }else if needRefresh {
-            print("刷新2")
             refreshDataWithSliding()
         }
         

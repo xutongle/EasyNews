@@ -79,8 +79,8 @@ extension UIView{
         label.numberOfLines = 0
         // 截断新内容
         label.lineBreakMode = .ByCharWrapping
-//        // 设置字体
-//        label.font = UIFont.systemFontOfSize(15)
+        // 设置字体
+        label.font = UIFont.systemFontOfSize(15)
         label.textAlignment = .Left
         label.textColor = UIColor.whiteColor()
         
@@ -88,7 +88,7 @@ extension UIView{
         let rect = messageStr.boundingRectWithSize(CGSizeMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil)
         
         var useSize: CGSize = rect.size
-        //print("自适应的大小－>", useSize)
+        print("自适应的大小－>", useSize)
         if rect.width < SCREEN_WIDTH / 2 {
             useSize.width = SCREEN_WIDTH / 2
             label.textAlignment = .Center
@@ -99,6 +99,8 @@ extension UIView{
         }
 
         toastView.frame = CGRectMake(toastView.frame.origin.x, toastView.frame.origin.y, useSize.width + 10, useSize.height + 10)
+        print("ToastFrame\(toastView.frame)")
+        
         // 初始化label
         label.frame = CGRectMake(5, 5, useSize.width, useSize.height)
         
@@ -107,12 +109,13 @@ extension UIView{
         
         toastView.alpha = 0
         UIView.animateWithDuration(0.25) {
-            self.addSubview(toastView)
+            UIApplication.sharedApplication().keyWindow!.addSubview(toastView)
             toastView.alpha = 1
         }
         
         // 延时几秒后消失
         self.delay(1.25) {
+            label.removeFromSuperview()
             toastView.removeFromSuperview()
             block()
         }

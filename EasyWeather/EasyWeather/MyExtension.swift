@@ -32,3 +32,40 @@ extension CGSize {
         return CGSize(width: OrginSize.width / 2, height: OrginSize.height / 2)
     }
 }
+
+extension UILabel {
+    // 设置label的样式 其中设置了字体大小 才能设置字体
+    func setStyle(title: String?, bgColor: UIColor?, color: UIColor?, fontName: String?, textSize: CGFloat?, alignment: NSTextAlignment?) -> Void {
+        if title != nil { self.text = title }
+        if bgColor != nil { self.backgroundColor = bgColor }
+        if color != nil { self.textColor = color }
+        if textSize != nil {
+            self.font = UIFont.systemFontOfSize(textSize!)
+            
+            if fontName != nil { self.font = UIFont(name: fontName!,size: textSize!) }
+        }
+        if alignment != nil { self.textAlignment = alignment! }
+    }
+}
+
+private var _touchUpInsideBlick: ((button: UIButton)->Void)!
+
+extension UIButton {
+    // 带点击事件的按钮
+    func setStyle(title: String?, bgColor: UIColor?, color: UIColor?, touchUpInsideBlock:((button: UIButton)->Void)?) -> Void {
+        
+        if title != nil { self.setTitle(title, forState: .Normal) }
+        if bgColor != nil { self.backgroundColor = bgColor }
+        if color != nil { self.setTitleColor(color, forState: .Normal) }
+        //
+        if (touchUpInsideBlock != nil) {
+            _touchUpInsideBlick = touchUpInsideBlock
+            self.addTarget(self, action: #selector(TouchUpInsideAction), forControlEvents: .TouchUpInside)
+        }
+    }
+    
+    @objc
+    private func TouchUpInsideAction(button: UIButton) -> Void {
+        _touchUpInsideBlick(button: button)
+    }
+}
