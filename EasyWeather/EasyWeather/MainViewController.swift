@@ -17,6 +17,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
     //mob天气的相关
     let url = "http://apicloud.mob.com/v1/weather/query"
     let APP_KEY = "12c3624ad5993"
+    // https://api.heweather.com/x3/weather?key=e66a51b533c9451b87163c0a3c10eb2f&city=shenzhen
     
     var slidingView: SlidingView!
     
@@ -441,7 +442,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIViewCon
                 var trueCity: String!
                 // 判断最后一个字是不是"市"字 碰到了没有市的 比如江苏 苏州
                 let shi = city.substringWithRange(NSRange.init(location: city.length - 1, length: 1))
-                // 如果有市 根据接口需要的话 需要裁掉市
+                // 如果有市 根据接口需要的话 需要裁掉市(接口不能有市)
                 if shi == "市" {
                     trueProvince = province.substringToIndex(province.length - 1)
                     trueCity = city.substringToIndex(city.length - 1)

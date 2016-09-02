@@ -31,7 +31,7 @@ private let toastView:UIView = Toast.init(frame: CGRectMake(SCREEN_WIDTH / 4, SC
 // Toast上的文字
 private var label:UILabel = UILabel()
 
-// MARK: - ---------------------extension继承？---------------------
+// MARK: - --------------------- extension ---------------------
 
 extension UIView{
     
@@ -72,7 +72,7 @@ extension UIView{
     }
     
     // 输入自定义的文字
-    func show(message: String, block: () -> Void) -> Void {
+    func show(message: String, block: (() -> Void)?) -> Void {
         
         label.text = message
         // 行数自适应
@@ -80,7 +80,7 @@ extension UIView{
         // 截断新内容
         label.lineBreakMode = .ByCharWrapping
         // 设置字体
-        label.font = UIFont.systemFontOfSize(15)
+        label.font = UIFont(name: "InputSans-Black", size: 17)
         label.textAlignment = .Left
         label.textColor = UIColor.whiteColor()
         
@@ -88,7 +88,7 @@ extension UIView{
         let rect = messageStr.boundingRectWithSize(CGSizeMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil)
         
         var useSize: CGSize = rect.size
-        print("自适应的大小－>", useSize)
+        //print("自适应的大小－>", useSize)
         if rect.width < SCREEN_WIDTH / 2 {
             useSize.width = SCREEN_WIDTH / 2
             label.textAlignment = .Center
@@ -97,10 +97,8 @@ extension UIView{
             useSize.height = 30
             label.textAlignment = .Center
         }
-
-        toastView.frame = CGRectMake(toastView.frame.origin.x, toastView.frame.origin.y, useSize.width + 10, useSize.height + 10)
-        print("ToastFrame\(toastView.frame)")
         
+        toastView.frame = CGRectMake(toastView.frame.origin.x, toastView.frame.origin.y, useSize.width + 10, useSize.height + 10)
         // 初始化label
         label.frame = CGRectMake(5, 5, useSize.width, useSize.height)
         
@@ -115,9 +113,8 @@ extension UIView{
         
         // 延时几秒后消失
         self.delay(1.25) {
-            label.removeFromSuperview()
             toastView.removeFromSuperview()
-            block()
+            if block != nil { block!() }
         }
     }
     
@@ -193,6 +190,5 @@ class ToastStyle{
     
     // Toast透明度
     var toastAlpha = 0.8
-    
     
 }

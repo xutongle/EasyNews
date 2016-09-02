@@ -21,7 +21,7 @@ extension UIView {
     func addSlidingView_zly() -> SlidingView {
         slidingView.tableview.delegate = slidingView
         slidingView.tableview.dataSource = slidingView
-        self.addSubview(slidingView)
+        UIApplication.sharedApplication().keyWindow!.addSubview(slidingView)
         return slidingView
     }
     
