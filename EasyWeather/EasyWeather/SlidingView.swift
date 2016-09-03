@@ -21,7 +21,7 @@ extension UIView {
     func addSlidingView_zly() -> SlidingView {
         slidingView.tableview.delegate = slidingView
         slidingView.tableview.dataSource = slidingView
-        UIApplication.sharedApplication().keyWindow!.addSubview(slidingView)
+        self.addSubview(slidingView)
         return slidingView
     }
     
@@ -72,6 +72,9 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableview = UITableView.init(frame: CGRectMake(0, 64, SlidingStyle.slidingStyle.slidingViewSize, SCREEN_HEIGHT - 124), style: .Plain)
         tableview.separatorInset = UIEdgeInsetsZero
         tableview.layoutMargins = UIEdgeInsetsZero
+        tableview.tableFooterView = UIView()
+        // 比协议高效率一点
+        tableview.rowHeight = 40
         self.addSubview(tableview)
         
         // 设置按钮
@@ -91,8 +94,6 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
         let swipGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(gesTrueAction))
         swipGesture.direction = .Left
         self.addGestureRecognizer(swipGesture)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,9 +119,9 @@ class SlidingView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     // cell高度
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 40
-    }
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 40
+//    }
     
     // 点击cell
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
