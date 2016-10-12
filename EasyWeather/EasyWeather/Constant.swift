@@ -8,7 +8,7 @@
 
 import UIKit
 
-/********************** 通用常量 *************************/
+/********************** 通用常量 ************************/
 
 // 屏幕宽高
 let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
