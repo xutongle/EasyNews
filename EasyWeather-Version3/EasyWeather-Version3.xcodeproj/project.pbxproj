@@ -12,6 +12,7 @@
 		0AEE63A91DAE633F00A1545C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63A71DAE633F00A1545C /* Main.storyboard */; };
 		0AEE63AB1DAE633F00A1545C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63AA1DAE633F00A1545C /* Assets.xcassets */; };
 		0AEE63AE1DAE633F00A1545C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63AC1DAE633F00A1545C /* LaunchScreen.storyboard */; };
+		B177137C0486E33E026BE3FF /* Pods_EasyWeather_Version3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		0AEE63AA1DAE633F00A1545C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AEE63AD1DAE633F00A1545C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AEE63AF1DAE633F00A1545C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyWeather_Version3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.release.xcconfig"; sourceTree = "<group>"; };
+		E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B177137C0486E33E026BE3FF /* Pods_EasyWeather_Version3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				0AEE63A21DAE633F00A1545C /* EasyWeather-Version3 */,
 				0AEE63A11DAE633F00A1545C /* Products */,
+				B09DBE72B1D9522EC72FA4F7 /* Pods */,
+				83B79A0F2BE5F4D74BC48117 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = "EasyWeather-Version3";
 			sourceTree = "<group>";
 		};
+		83B79A0F2BE5F4D74BC48117 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B09DBE72B1D9522EC72FA4F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */,
+				D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AEE63B21DAE633F00A1545C /* Build configuration list for PBXNativeTarget "EasyWeather-Version3" */;
 			buildPhases = (
+				450B50BB8A575DC19AD66564 /* [CP] Check Pods Manifest.lock */,
 				0AEE639C1DAE633F00A1545C /* Sources */,
 				0AEE639D1DAE633F00A1545C /* Frameworks */,
 				0AEE639E1DAE633F00A1545C /* Resources */,
+				894AF34D8B5AF4F591FB51B6 /* [CP] Embed Pods Frameworks */,
+				E94FF88E2A317F3495578BBD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		450B50BB8A575DC19AD66564 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		894AF34D8B5AF4F591FB51B6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E94FF88E2A317F3495578BBD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0AEE639C1DAE633F00A1545C /* Sources */ = {
@@ -256,6 +331,7 @@
 		};
 		0AEE63B31DAE633F00A1545C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";
@@ -268,6 +344,7 @@
 		};
 		0AEE63B41DAE633F00A1545C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";
@@ -297,6 +374,7 @@
 				0AEE63B41DAE633F00A1545C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

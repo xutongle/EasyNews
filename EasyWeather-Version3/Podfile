@@ -1,0 +1,10 @@
+# defalut
+platform :ios, '10.0'
+use_frameworks!
+
+target 'EasyWeather-Version3' do
+
+# layout
+pod 'SnapKit'
+
+end
