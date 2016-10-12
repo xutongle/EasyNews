@@ -11,6 +11,15 @@
 		0AEE63E61DAE65C300A1545C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63E51DAE65C300A1545C /* Assets.xcassets */; };
 		0AEE63E91DAE65C300A1545C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63E71DAE65C300A1545C /* LaunchScreen.storyboard */; };
 		0AEE63F61DAE66E900A1545C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63F51DAE66E900A1545C /* WeatherViewController.swift */; };
+		0AEE64001DAE676800A1545C /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63F71DAE676800A1545C /* ColorConstants.swift */; };
+		0AEE64011DAE676800A1545C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63F81DAE676800A1545C /* Constants.swift */; };
+		0AEE64021DAE676800A1545C /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63F91DAE676800A1545C /* CycleView.swift */; };
+		0AEE64031DAE676800A1545C /* LocalContants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FA1DAE676800A1545C /* LocalContants.swift */; };
+		0AEE64041DAE676800A1545C /* SingleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FB1DAE676800A1545C /* SingleManager.swift */; };
+		0AEE64051DAE676800A1545C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FC1DAE676800A1545C /* Toast.swift */; };
+		0AEE64061DAE676800A1545C /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FD1DAE676800A1545C /* Tools.swift */; };
+		0AEE64071DAE676800A1545C /* ZLY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FE1DAE676800A1545C /* ZLY_Extension.swift */; };
+		0AEE64081DAE676800A1545C /* ZLY_SlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63FF1DAE676800A1545C /* ZLY_SlidingViewController.swift */; };
 		CE142DE28CD27A08A6747131 /* Pods_EasyWeather_Version3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D185CA999E2D760414BEB5 /* Pods_EasyWeather_Version3.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +30,15 @@
 		0AEE63E81DAE65C300A1545C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AEE63EA1DAE65C300A1545C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AEE63F51DAE66E900A1545C /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		0AEE63F71DAE676800A1545C /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		0AEE63F81DAE676800A1545C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0AEE63F91DAE676800A1545C /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
+		0AEE63FA1DAE676800A1545C /* LocalContants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalContants.swift; sourceTree = "<group>"; };
+		0AEE63FB1DAE676800A1545C /* SingleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleManager.swift; sourceTree = "<group>"; };
+		0AEE63FC1DAE676800A1545C /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		0AEE63FD1DAE676800A1545C /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		0AEE63FE1DAE676800A1545C /* ZLY_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLY_Extension.swift; sourceTree = "<group>"; };
+		0AEE63FF1DAE676800A1545C /* ZLY_SlidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLY_SlidingViewController.swift; sourceTree = "<group>"; };
 		8FC709B646901A2177FB26A6 /* Pods-EasyWeather-Version3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.debug.xcconfig"; sourceTree = "<group>"; };
 		D8D185CA999E2D760414BEB5 /* Pods_EasyWeather_Version3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyWeather_Version3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F907338ED23A601232A6918F /* Pods-EasyWeather-Version3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +100,15 @@
 		0AEE63F11DAE668300A1545C /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				0AEE63F71DAE676800A1545C /* ColorConstants.swift */,
+				0AEE63F81DAE676800A1545C /* Constants.swift */,
+				0AEE63F91DAE676800A1545C /* CycleView.swift */,
+				0AEE63FA1DAE676800A1545C /* LocalContants.swift */,
+				0AEE63FB1DAE676800A1545C /* SingleManager.swift */,
+				0AEE63FC1DAE676800A1545C /* Toast.swift */,
+				0AEE63FD1DAE676800A1545C /* Tools.swift */,
+				0AEE63FE1DAE676800A1545C /* ZLY_Extension.swift */,
+				0AEE63FF1DAE676800A1545C /* ZLY_SlidingViewController.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -248,8 +275,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEE64001DAE676800A1545C /* ColorConstants.swift in Sources */,
+				0AEE64071DAE676800A1545C /* ZLY_Extension.swift in Sources */,
+				0AEE64051DAE676800A1545C /* Toast.swift in Sources */,
+				0AEE64041DAE676800A1545C /* SingleManager.swift in Sources */,
+				0AEE64081DAE676800A1545C /* ZLY_SlidingViewController.swift in Sources */,
 				0AEE63DF1DAE65C300A1545C /* AppDelegate.swift in Sources */,
 				0AEE63F61DAE66E900A1545C /* WeatherViewController.swift in Sources */,
+				0AEE64031DAE676800A1545C /* LocalContants.swift in Sources */,
+				0AEE64061DAE676800A1545C /* Tools.swift in Sources */,
+				0AEE64021DAE676800A1545C /* CycleView.swift in Sources */,
+				0AEE64011DAE676800A1545C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +321,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -334,6 +371,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -362,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8FC709B646901A2177FB26A6 /* Pods-EasyWeather-Version3.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";
@@ -376,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F907338ED23A601232A6918F /* Pods-EasyWeather-Version3.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";

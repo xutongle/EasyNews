@@ -10,9 +10,17 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.white
+        
         
     }
 
