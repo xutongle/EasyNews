@@ -7,100 +7,137 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AEE63A41DAE633F00A1545C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63A31DAE633F00A1545C /* AppDelegate.swift */; };
-		0AEE63A61DAE633F00A1545C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63A51DAE633F00A1545C /* ViewController.swift */; };
-		0AEE63A91DAE633F00A1545C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63A71DAE633F00A1545C /* Main.storyboard */; };
-		0AEE63AB1DAE633F00A1545C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63AA1DAE633F00A1545C /* Assets.xcassets */; };
-		0AEE63AE1DAE633F00A1545C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63AC1DAE633F00A1545C /* LaunchScreen.storyboard */; };
-		B177137C0486E33E026BE3FF /* Pods_EasyWeather_Version3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */; };
+		0AEE63DF1DAE65C300A1545C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63DE1DAE65C300A1545C /* AppDelegate.swift */; };
+		0AEE63E61DAE65C300A1545C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63E51DAE65C300A1545C /* Assets.xcassets */; };
+		0AEE63E91DAE65C300A1545C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEE63E71DAE65C300A1545C /* LaunchScreen.storyboard */; };
+		0AEE63F61DAE66E900A1545C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE63F51DAE66E900A1545C /* WeatherViewController.swift */; };
+		CE142DE28CD27A08A6747131 /* Pods_EasyWeather_Version3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D185CA999E2D760414BEB5 /* Pods_EasyWeather_Version3.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0AEE63A01DAE633F00A1545C /* EasyWeather-Version3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyWeather-Version3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AEE63A31DAE633F00A1545C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AEE63A51DAE633F00A1545C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0AEE63A81DAE633F00A1545C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0AEE63AA1DAE633F00A1545C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0AEE63AD1DAE633F00A1545C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0AEE63AF1DAE633F00A1545C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyWeather_Version3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.release.xcconfig"; sourceTree = "<group>"; };
-		E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.debug.xcconfig"; sourceTree = "<group>"; };
+		0AEE63DB1DAE65C300A1545C /* EasyWeather-Version3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyWeather-Version3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AEE63DE1DAE65C300A1545C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0AEE63E51DAE65C300A1545C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0AEE63E81DAE65C300A1545C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0AEE63EA1DAE65C300A1545C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AEE63F51DAE66E900A1545C /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		8FC709B646901A2177FB26A6 /* Pods-EasyWeather-Version3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.debug.xcconfig"; sourceTree = "<group>"; };
+		D8D185CA999E2D760414BEB5 /* Pods_EasyWeather_Version3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyWeather_Version3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F907338ED23A601232A6918F /* Pods-EasyWeather-Version3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyWeather-Version3.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0AEE639D1DAE633F00A1545C /* Frameworks */ = {
+		0AEE63D81DAE65C300A1545C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B177137C0486E33E026BE3FF /* Pods_EasyWeather_Version3.framework in Frameworks */,
+				CE142DE28CD27A08A6747131 /* Pods_EasyWeather_Version3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0AEE63971DAE633F00A1545C = {
+		0AEE63D21DAE65C300A1545C = {
 			isa = PBXGroup;
 			children = (
-				0AEE63A21DAE633F00A1545C /* EasyWeather-Version3 */,
-				0AEE63A11DAE633F00A1545C /* Products */,
-				B09DBE72B1D9522EC72FA4F7 /* Pods */,
-				83B79A0F2BE5F4D74BC48117 /* Frameworks */,
+				0AEE63DD1DAE65C300A1545C /* EasyWeather-Version3 */,
+				0AEE63DC1DAE65C300A1545C /* Products */,
+				23DDEE98BF92EB380DACEE8F /* Pods */,
+				79AD54E7FD5474190A251E93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		0AEE63A11DAE633F00A1545C /* Products */ = {
+		0AEE63DC1DAE65C300A1545C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0AEE63A01DAE633F00A1545C /* EasyWeather-Version3.app */,
+				0AEE63DB1DAE65C300A1545C /* EasyWeather-Version3.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0AEE63A21DAE633F00A1545C /* EasyWeather-Version3 */ = {
+		0AEE63DD1DAE65C300A1545C /* EasyWeather-Version3 */ = {
 			isa = PBXGroup;
 			children = (
-				0AEE63A31DAE633F00A1545C /* AppDelegate.swift */,
-				0AEE63A51DAE633F00A1545C /* ViewController.swift */,
-				0AEE63A71DAE633F00A1545C /* Main.storyboard */,
-				0AEE63AA1DAE633F00A1545C /* Assets.xcassets */,
-				0AEE63AC1DAE633F00A1545C /* LaunchScreen.storyboard */,
-				0AEE63AF1DAE633F00A1545C /* Info.plist */,
+				0AEE63F01DAE666C00A1545C /* Other */,
+				0AEE63F11DAE668300A1545C /* Tool */,
+				0AEE63F41DAE66A200A1545C /* Controller */,
+				0AEE63F31DAE669E00A1545C /* View */,
+				0AEE63F21DAE669900A1545C /* Model */,
 			);
 			path = "EasyWeather-Version3";
 			sourceTree = "<group>";
 		};
-		83B79A0F2BE5F4D74BC48117 /* Frameworks */ = {
+		0AEE63F01DAE666C00A1545C /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				D4618E577750FBD5B8A2FA95 /* Pods_EasyWeather_Version3.framework */,
+				0AEE63DE1DAE65C300A1545C /* AppDelegate.swift */,
+				0AEE63E71DAE65C300A1545C /* LaunchScreen.storyboard */,
+				0AEE63EA1DAE65C300A1545C /* Info.plist */,
+				0AEE63E51DAE65C300A1545C /* Assets.xcassets */,
 			);
-			name = Frameworks;
+			name = Other;
 			sourceTree = "<group>";
 		};
-		B09DBE72B1D9522EC72FA4F7 /* Pods */ = {
+		0AEE63F11DAE668300A1545C /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */,
-				D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
+		0AEE63F21DAE669900A1545C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0AEE63F31DAE669E00A1545C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0AEE63F41DAE66A200A1545C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0AEE63F51DAE66E900A1545C /* WeatherViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		23DDEE98BF92EB380DACEE8F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8FC709B646901A2177FB26A6 /* Pods-EasyWeather-Version3.debug.xcconfig */,
+				F907338ED23A601232A6918F /* Pods-EasyWeather-Version3.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		79AD54E7FD5474190A251E93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8D185CA999E2D760414BEB5 /* Pods_EasyWeather_Version3.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0AEE639F1DAE633F00A1545C /* EasyWeather-Version3 */ = {
+		0AEE63DA1DAE65C300A1545C /* EasyWeather-Version3 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0AEE63B21DAE633F00A1545C /* Build configuration list for PBXNativeTarget "EasyWeather-Version3" */;
+			buildConfigurationList = 0AEE63ED1DAE65C300A1545C /* Build configuration list for PBXNativeTarget "EasyWeather-Version3" */;
 			buildPhases = (
-				450B50BB8A575DC19AD66564 /* [CP] Check Pods Manifest.lock */,
-				0AEE639C1DAE633F00A1545C /* Sources */,
-				0AEE639D1DAE633F00A1545C /* Frameworks */,
-				0AEE639E1DAE633F00A1545C /* Resources */,
-				894AF34D8B5AF4F591FB51B6 /* [CP] Embed Pods Frameworks */,
-				E94FF88E2A317F3495578BBD /* [CP] Copy Pods Resources */,
+				D3B5A8490D10A018729A34EC /* [CP] Check Pods Manifest.lock */,
+				0AEE63D71DAE65C300A1545C /* Sources */,
+				0AEE63D81DAE65C300A1545C /* Frameworks */,
+				0AEE63D91DAE65C300A1545C /* Resources */,
+				77B9F9B9DF00DB214FEBD157 /* [CP] Embed Pods Frameworks */,
+				472BA617980B4286AAD0EEEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -108,26 +145,27 @@
 			);
 			name = "EasyWeather-Version3";
 			productName = "EasyWeather-Version3";
-			productReference = 0AEE63A01DAE633F00A1545C /* EasyWeather-Version3.app */;
+			productReference = 0AEE63DB1DAE65C300A1545C /* EasyWeather-Version3.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0AEE63981DAE633F00A1545C /* Project object */ = {
+		0AEE63D31DAE65C300A1545C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = zly;
 				TargetAttributes = {
-					0AEE639F1DAE633F00A1545C = {
+					0AEE63DA1DAE65C300A1545C = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = L9N5AGWHDF;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 0AEE639B1DAE633F00A1545C /* Build configuration list for PBXProject "EasyWeather-Version3" */;
+			buildConfigurationList = 0AEE63D61DAE65C300A1545C /* Build configuration list for PBXProject "EasyWeather-Version3" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -135,61 +173,30 @@
 				en,
 				Base,
 			);
-			mainGroup = 0AEE63971DAE633F00A1545C;
-			productRefGroup = 0AEE63A11DAE633F00A1545C /* Products */;
+			mainGroup = 0AEE63D21DAE65C300A1545C;
+			productRefGroup = 0AEE63DC1DAE65C300A1545C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0AEE639F1DAE633F00A1545C /* EasyWeather-Version3 */,
+				0AEE63DA1DAE65C300A1545C /* EasyWeather-Version3 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0AEE639E1DAE633F00A1545C /* Resources */ = {
+		0AEE63D91DAE65C300A1545C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AEE63AE1DAE633F00A1545C /* LaunchScreen.storyboard in Resources */,
-				0AEE63AB1DAE633F00A1545C /* Assets.xcassets in Resources */,
-				0AEE63A91DAE633F00A1545C /* Main.storyboard in Resources */,
+				0AEE63E91DAE65C300A1545C /* LaunchScreen.storyboard in Resources */,
+				0AEE63E61DAE65C300A1545C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		450B50BB8A575DC19AD66564 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		894AF34D8B5AF4F591FB51B6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E94FF88E2A317F3495578BBD /* [CP] Copy Pods Resources */ = {
+		472BA617980B4286AAD0EEEB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,33 +211,55 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		77B9F9B9DF00DB214FEBD157 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyWeather-Version3/Pods-EasyWeather-Version3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3B5A8490D10A018729A34EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0AEE639C1DAE633F00A1545C /* Sources */ = {
+		0AEE63D71DAE65C300A1545C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AEE63A61DAE633F00A1545C /* ViewController.swift in Sources */,
-				0AEE63A41DAE633F00A1545C /* AppDelegate.swift in Sources */,
+				0AEE63DF1DAE65C300A1545C /* AppDelegate.swift in Sources */,
+				0AEE63F61DAE66E900A1545C /* WeatherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0AEE63A71DAE633F00A1545C /* Main.storyboard */ = {
+		0AEE63E71DAE65C300A1545C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0AEE63A81DAE633F00A1545C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0AEE63AC1DAE633F00A1545C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0AEE63AD1DAE633F00A1545C /* Base */,
+				0AEE63E81DAE65C300A1545C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -238,7 +267,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0AEE63B01DAE633F00A1545C /* Debug */ = {
+		0AEE63EB1DAE65C300A1545C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -287,7 +316,7 @@
 			};
 			name = Debug;
 		};
-		0AEE63B11DAE633F00A1545C /* Release */ = {
+		0AEE63EC1DAE65C300A1545C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -329,11 +358,12 @@
 			};
 			name = Release;
 		};
-		0AEE63B31DAE633F00A1545C /* Debug */ = {
+		0AEE63EE1DAE65C300A1545C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E72E41995227C0B637597361 /* Pods-EasyWeather-Version3.debug.xcconfig */;
+			baseConfigurationReference = 8FC709B646901A2177FB26A6 /* Pods-EasyWeather-Version3.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zly.private.EasyWeather-Version3";
@@ -342,11 +372,12 @@
 			};
 			name = Debug;
 		};
-		0AEE63B41DAE633F00A1545C /* Release */ = {
+		0AEE63EF1DAE65C300A1545C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7B2FEEB2D647C8DD4AAEC24 /* Pods-EasyWeather-Version3.release.xcconfig */;
+			baseConfigurationReference = F907338ED23A601232A6918F /* Pods-EasyWeather-Version3.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = "EasyWeather-Version3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zly.private.EasyWeather-Version3";
@@ -358,25 +389,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0AEE639B1DAE633F00A1545C /* Build configuration list for PBXProject "EasyWeather-Version3" */ = {
+		0AEE63D61DAE65C300A1545C /* Build configuration list for PBXProject "EasyWeather-Version3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0AEE63B01DAE633F00A1545C /* Debug */,
-				0AEE63B11DAE633F00A1545C /* Release */,
+				0AEE63EB1DAE65C300A1545C /* Debug */,
+				0AEE63EC1DAE65C300A1545C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0AEE63B21DAE633F00A1545C /* Build configuration list for PBXNativeTarget "EasyWeather-Version3" */ = {
+		0AEE63ED1DAE65C300A1545C /* Build configuration list for PBXNativeTarget "EasyWeather-Version3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0AEE63B31DAE633F00A1545C /* Debug */,
-				0AEE63B41DAE633F00A1545C /* Release */,
+				0AEE63EE1DAE65C300A1545C /* Debug */,
+				0AEE63EF1DAE65C300A1545C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0AEE63981DAE633F00A1545C /* Project object */;
+	rootObject = 0AEE63D31DAE65C300A1545C /* Project object */;
 }
