@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-            
-        self.window!.rootViewController = WeatherViewController()
+        
+        let zly_sliding = ZLY_SlidingViewController(mainVC: WeatherViewController(), leftVC: LeftSlidingViewController())
+        self.window!.rootViewController = zly_sliding
             
         self.window!.makeKeyAndVisible()
         

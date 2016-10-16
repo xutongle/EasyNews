@@ -110,53 +110,11 @@ extension NSObject{
         }) 
         
         // 延时几秒后消失
-        self.delay(1.25) {
+        let delay = DispatchTime.now() + DispatchTimeInterval.seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) {
             toastView.removeFromSuperview()
             if block != nil { block!() }
         }
-    }
-    
-    // MARK: - ---------------------线程延时---------------------
-    
-    //线程延时
-    typealias Task = (_ cancel : Bool) -> Void
-    
-    fileprivate func delay(_ time:TimeInterval, task:@escaping ()->()) ->  Void {
-        
-        func dispatch_later(_ block:@escaping ()->()) {
-            //现场何时开始，延时几秒，在这做完
-            let timeController = DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            //在什么线程执行
-            DispatchQueue.main.asyncAfter(deadline: timeController,execute: block)
-        }
-        
-        var closure: ( ()->() )? = task
-        var result: Task?
-        
-        let delayedClosure: Task = {cancel in
-            if let internalClosure = closure {
-                if (cancel == false) {
-                    DispatchQueue.main.async(execute: internalClosure);
-                }
-            }
-            closure = nil
-            result = nil
-        }
-        
-        result = delayedClosure
-        
-        dispatch_later {
-            if let delayedClosure = result {
-                delayedClosure(false)
-            }
-        }
-        
-        //return result;
-    }
-    
-    //取消线程
-    fileprivate func cancel(_ task:Task?) {
-        task?(true)
     }
 }
 

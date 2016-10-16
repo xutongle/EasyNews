@@ -61,21 +61,6 @@ class ZLY_SlidingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.leftViewController = LeftTableViewController()
-        //self.view.addSubview(self.leftViewController.view)
-        // 先隐藏
-        //self.leftViewController.view.isHidden = true
-        
-        //let rootController = MainViewController()
-        // 带导航栏的mainview
-        //self.mainViewController = UINavigationController(rootViewController: rootController)
-        //self.view.addSubview(self.mainViewController.view)
-        
-        // 添加滑动手势
-        //let panGestrue = UIPanGestureRecognizer(target: self, action: #selector(openSliding))
-        //panGestrue.maximumNumberOfTouches = 1
-        //self.mainViewController.view.addGestureRecognizer(panGestrue)
     }
     
     // 滑动手势事件
