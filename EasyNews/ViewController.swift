@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func WeatherAction(_ sender: UIButton) {
-        
+        self.present(WeatherViewController(), animated: true, completion: nil)
     }
     
 }

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AE6C22B1DFAF15500B20518 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2221DFAF15500B20518 /* ColorConstants.swift */; };
+		0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2231DFAF15500B20518 /* Constants.swift */; };
+		0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2241DFAF15500B20518 /* CycleView.swift */; };
+		0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2251DFAF15500B20518 /* SingleManager.swift */; };
+		0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2261DFAF15500B20518 /* Toast.swift */; };
+		0AE6C2301DFAF15500B20518 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2271DFAF15500B20518 /* Tools.swift */; };
+		0AE6C2311DFAF15500B20518 /* ZLY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2281DFAF15500B20518 /* ZLY_Extension.swift */; };
+		0AE6C2321DFAF15500B20518 /* ZLY_SlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C2291DFAF15500B20518 /* ZLY_SlidingViewController.swift */; };
+		0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C22A1DFAF15500B20518 /* ZLY_TransationView.swift */; };
+		0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEB5F801DFAF9220057B822 /* TodayView.swift */; };
 		0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802921DFA7CF7002C825F /* AppDelegate.swift */; };
 		0AF802951DFA7CF7002C825F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802941DFA7CF7002C825F /* ViewController.swift */; };
 		0AF802981DFA7CF7002C825F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF802961DFA7CF7002C825F /* Main.storyboard */; };
@@ -20,6 +30,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AE6C2221DFAF15500B20518 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		0AE6C2231DFAF15500B20518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0AE6C2241DFAF15500B20518 /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
+		0AE6C2251DFAF15500B20518 /* SingleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleManager.swift; sourceTree = "<group>"; };
+		0AE6C2261DFAF15500B20518 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		0AE6C2271DFAF15500B20518 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		0AE6C2281DFAF15500B20518 /* ZLY_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLY_Extension.swift; sourceTree = "<group>"; };
+		0AE6C2291DFAF15500B20518 /* ZLY_SlidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLY_SlidingViewController.swift; sourceTree = "<group>"; };
+		0AE6C22A1DFAF15500B20518 /* ZLY_TransationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLY_TransationView.swift; sourceTree = "<group>"; };
+		0AEB5F801DFAF9220057B822 /* TodayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		0AF8028F1DFA7CF7002C825F /* EasyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF802921DFA7CF7002C825F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AF802941DFA7CF7002C825F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				0AF802AB1DFA7E51002C825F /* WeatherTableView.swift */,
+				0AEB5F801DFAF9220057B822 /* TodayView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -127,6 +148,15 @@
 			isa = PBXGroup;
 			children = (
 				0AF802B11DFA93C9002C825F /* NetTool.swift */,
+				0AE6C2221DFAF15500B20518 /* ColorConstants.swift */,
+				0AE6C2231DFAF15500B20518 /* Constants.swift */,
+				0AE6C2241DFAF15500B20518 /* CycleView.swift */,
+				0AE6C2251DFAF15500B20518 /* SingleManager.swift */,
+				0AE6C2261DFAF15500B20518 /* Toast.swift */,
+				0AE6C2271DFAF15500B20518 /* Tools.swift */,
+				0AE6C2281DFAF15500B20518 /* ZLY_Extension.swift */,
+				0AE6C2291DFAF15500B20518 /* ZLY_SlidingViewController.swift */,
+				0AE6C22A1DFAF15500B20518 /* ZLY_TransationView.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -272,12 +302,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */,
 				0AF802951DFA7CF7002C825F /* ViewController.swift in Sources */,
+				0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */,
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
+				0AE6C2301DFAF15500B20518 /* Tools.swift in Sources */,
+				0AE6C22B1DFAF15500B20518 /* ColorConstants.swift in Sources */,
+				0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */,
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0AF802AC1DFA7E51002C825F /* WeatherTableView.swift in Sources */,
+				0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */,
+				0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */,
 				0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */,
+				0AE6C2321DFAF15500B20518 /* ZLY_SlidingViewController.swift in Sources */,
+				0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */,
+				0AE6C2311DFAF15500B20518 /* ZLY_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

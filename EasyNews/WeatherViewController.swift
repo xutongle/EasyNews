@@ -8,17 +8,25 @@
 
 import UIKit
 import Alamofire
+import SnapKit
 
 class WeatherViewController: UIViewController {
     
     private var models: [WeatherModel] = []
     private var tableview: WeatherTableView!
     
+    // state bar变白
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        get{
+            return .lightContent
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        tableview = WeatherTableView(frame: self.view.bounds, style: .plain)
+        tableview = WeatherTableView(frame: self.view.bounds)
         self.view.addSubview(tableview)
         
         // 请求天气数据
