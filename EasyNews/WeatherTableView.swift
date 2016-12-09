@@ -8,10 +8,14 @@
 
 import UIKit
 
-class WeatherView: UITableView {
+class WeatherTableView: UITableView {
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
+        self.backgroundColor = UIColor.clear
+        
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
