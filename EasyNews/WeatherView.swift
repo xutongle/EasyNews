@@ -8,10 +8,10 @@
 
 import UIKit
 
-class WeatherView: UIView {
+class WeatherView: UITableView {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: style)
     }
     
     required init?(coder aDecoder: NSCoder) {
