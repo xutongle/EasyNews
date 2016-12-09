@@ -4,6 +4,7 @@ use_frameworks!
 
 target 'EasyNews' do
 
+    pod 'Alamofire'
     pod 'SnapKit'
 
 end

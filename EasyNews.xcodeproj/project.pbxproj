@@ -14,6 +14,8 @@
 		0AF8029D1DFA7CF7002C825F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8029B1DFA7CF7002C825F /* LaunchScreen.storyboard */; };
 		0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802A81DFA7DF8002C825F /* WeatherViewController.swift */; };
 		0AF802AC1DFA7E51002C825F /* WeatherTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802AB1DFA7E51002C825F /* WeatherTableView.swift */; };
+		0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802AE1DFA9338002C825F /* WeatherModel.swift */; };
+		0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802B11DFA93C9002C825F /* NetTool.swift */; };
 		A5585B4DF9A749A95C00E74D /* Pods_EasyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D416B0A468B85135A2AE2434 /* Pods_EasyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		0AF8029E1DFA7CF7002C825F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AF802A81DFA7DF8002C825F /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		0AF802AB1DFA7E51002C825F /* WeatherTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableView.swift; sourceTree = "<group>"; };
+		0AF802AE1DFA9338002C825F /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		0AF802B11DFA93C9002C825F /* NetTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetTool.swift; sourceTree = "<group>"; };
 		2DC3CA7561E6282788F27415 /* Pods-EasyNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyNews.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyNews/Pods-EasyNews.debug.xcconfig"; sourceTree = "<group>"; };
 		8DA7B603CB3CAB5C4E60CF0C /* Pods-EasyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyNews.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyNews/Pods-EasyNews.release.xcconfig"; sourceTree = "<group>"; };
 		D416B0A468B85135A2AE2434 /* Pods_EasyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				0AF802AA1DFA7E26002C825F /* Other */,
+				0AF802B01DFA93B9002C825F /* Tools */,
 				0AF802A41DFA7D33002C825F /* WeatherComponent */,
 				0AF802941DFA7CF7002C825F /* ViewController.swift */,
 				0AF802961DFA7CF7002C825F /* Main.storyboard */,
@@ -86,6 +91,7 @@
 		0AF802A51DFA7D6C002C825F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0AF802AE1DFA9338002C825F /* WeatherModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,6 +121,14 @@
 				0AF8029E1DFA7CF7002C825F /* Info.plist */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		0AF802B01DFA93B9002C825F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				0AF802B11DFA93C9002C825F /* NetTool.swift */,
+			);
+			name = Tools;
 			sourceTree = "<group>";
 		};
 		19A0A7C7709203B12FB9D6F7 /* Pods */ = {
@@ -259,9 +273,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AF802951DFA7CF7002C825F /* ViewController.swift in Sources */,
+				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0AF802AC1DFA7E51002C825F /* WeatherTableView.swift in Sources */,
+				0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

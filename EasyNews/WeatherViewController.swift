@@ -7,12 +7,36 @@
 //
 
 import UIKit
+import Alamofire
 
 class WeatherViewController: UIViewController {
-
+    
+    private var models: [WeatherModel] = []
+    private var tableview: WeatherTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        
+        tableview = WeatherTableView(frame: self.view.bounds, style: .plain)
+        self.view.addSubview(tableview)
+        
+        // 请求天气数据
+        Alamofire.request(NetTool.weathereUrl, method: .get, parameters: nil).responseJSON { (response) in
+            guard let result = response.result.value as? [String : Any] else {
+                return
+            }
+            guard let results = result["results"] as? [String : Any] else {
+                return
+            }
+            guard let daily = results["daily"] as? [[String : String]] else {
+                return
+            }
+            for model in daily {
+                self.models.append(WeatherModel(fromDictionary: model as NSDictionary))
+            }
+            
+        }
         
         
     }

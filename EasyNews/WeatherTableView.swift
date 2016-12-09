@@ -8,14 +8,25 @@
 
 import UIKit
 
-class WeatherTableView: UITableView {
-
+class WeatherTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    
+    var models: [WeatherModel] = []
+    
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         self.backgroundColor = UIColor.clear
         
+        self.delegate = self
+        self.dataSource = self
         
-        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
