@@ -8,33 +8,50 @@
 
 import UIKit
 
-class WeatherTableView: UIView {
-    
-    var models: [WeatherModel] = []
+class WeatherView: UIView {
     
     private var topSpaceView: UIView!
     private var todayView: TodayView!
-    private var tomorrowView: UIView!
-    private var dayATView: UIView!
+    private var tomorrowView: LastWeatherView!
+    private var dayATView: LastWeatherView!
+    
+    var models: [WeatherModel] = [] {
+        didSet{
+            guard models.count >= 3 else { return }
+            // 数据分发
+            self.todayView.model = models[0]
+            self.tomorrowView.model = models[1]
+            self.dayATView.model = models[2]
+        }
+    }
+    
+    var todayViewModel: TodayViewModel = TodayViewModel() {
+        didSet{
+            self.todayView.todayViewModel = todayViewModel
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
         
-        self.todayView = TodayView()
-        self.tomorrowView = UIView()
-        self.dayATView = UIView()
         self.topSpaceView = UIView()
+        self.todayView = TodayView()
+        self.tomorrowView = LastWeatherView()
+        self.dayATView = LastWeatherView()
         
         self.addSubview(topSpaceView)
         self.addSubview(todayView)
         self.addSubview(tomorrowView)
         self.addSubview(dayATView)
         
-        self.topSpaceView.backgroundColor = #colorLiteral(red: 0.1892951131, green: 0.3956444263, blue: 0.6074239612, alpha: 1)
-        self.todayView.backgroundColor = #colorLiteral(red: 0.1892951131, green: 0.3956444263, blue: 0.6074239612, alpha: 1)
-        self.tomorrowView.backgroundColor = #colorLiteral(red: 0.1396533847, green: 0.7808837295, blue: 0.5760399103, alpha: 1)
+        self.topSpaceView.backgroundColor = #colorLiteral(red: 0.181648761, green: 0.3840782344, blue: 0.5875621438, alpha: 1)
+        self.todayView.backgroundColor = #colorLiteral(red: 0.181648761, green: 0.3840782344, blue: 0.5875621438, alpha: 1)
+        self.todayView.setInfoBG(color: #colorLiteral(red: 0.3978720903, green: 0.3872858286, blue: 0.811239779, alpha: 1))
+        self.tomorrowView.backgroundColor = #colorLiteral(red: 0, green: 0.6040758491, blue: 0.3943479657, alpha: 1)
+        self.tomorrowView.setInfoBG(color: #colorLiteral(red: 0, green: 0.6040758491, blue: 0.3943479657, alpha: 1))
         self.dayATView.backgroundColor = #colorLiteral(red: 1, green: 0.3950144053, blue: 0.385025084, alpha: 1)
+        self.dayATView.setInfoBG(color: #colorLiteral(red: 1, green: 0.3950144053, blue: 0.385025084, alpha: 1))
         
     }
     

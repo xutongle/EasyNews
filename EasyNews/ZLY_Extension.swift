@@ -206,10 +206,11 @@ extension UILabel {
 
 extension UIButton {
 
-    func setStyle(_ title: String?, bgColor: UIColor?, color: UIColor?) -> Void {
+    func setStyle(_ title: String?, bgColor: UIColor?, textSize: CGFloat?, color: UIColor?) -> Void {
         
         if title != nil { self.setTitle(title, for: UIControlState()) }
         if bgColor != nil { self.backgroundColor = bgColor }
+        if textSize != nil { self.titleLabel?.font = UIFont.systemFont(ofSize: textSize!) }
         if color != nil { self.setTitleColor(color, for: UIControlState()) }
     }
     

@@ -12,8 +12,10 @@ fileprivate var transationView: ZLY_TransationView?
 
 extension UIViewController {
     func showTransationView(style: UIBlurEffectStyle) -> Void {
-        transationView = ZLY_TransationView(frame: SCREEN_BOUNDS, style: style)
-        UIApplication.shared.keyWindow?.addSubview(transationView!)
+        if transationView == nil {
+            transationView = ZLY_TransationView(frame: SCREEN_BOUNDS, style: style)
+            UIApplication.shared.keyWindow?.addSubview(transationView!)
+        }
     }
     
     func removeTransationView() -> Void {
@@ -35,7 +37,8 @@ fileprivate class ZLY_TransationView: UIView {
     
     init(frame: CGRect, style: UIBlurEffectStyle) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+//        self.backgroundColor = UIColor.clear
+        self.isOpaque = true
         
         let blurEffect = UIBlurEffect(style: style)
         let visView = UIVisualEffectView(effect: blurEffect)

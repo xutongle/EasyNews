@@ -10,20 +10,25 @@ import Foundation
 
 class WeatherModel: NSObject {
     
-    var codeDay : String!
-    var codeNight : String!
-    var date : String!
-    var high : String!
-    var low : String!
-    var precip : String!
-    var textDay : String!
-    var textNight : String!
-    var windDirection : String!
-    var windDirectionDegree : String!
-    var windScale : String!
-    var windSpeed : String!
+    var codeDay : String! = ""
+    var codeNight : String! = ""
+    var date : String! = ""
+    var high : String! = ""
+    var low : String! = ""
+    var precip : String! = ""
+    var textDay : String! = ""
+    var textNight : String! = ""
+    var windDirection : String! = ""
+    var windDirectionDegree : String! = ""
+    var windScale : String! = ""
+    var windSpeed : String! = ""
+    
+    override init() {
+        super.init()
+    }
     
     init(fromDictionary dictionary: NSDictionary){
+        super.init()
         codeDay = dictionary["code_day"] as? String
         codeNight = dictionary["code_night"] as? String
         date = dictionary["date"] as? String

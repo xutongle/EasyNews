@@ -11,6 +11,8 @@ import CoreLocation
 
 class Tools: NSObject {
     
+    static let locationManage = CLLocationManager()
+    
     private override init() {}
     
     // 指定日历的算法
