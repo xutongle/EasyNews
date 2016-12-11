@@ -209,18 +209,16 @@ class Tools: NSObject {
     }
     
     // 读取plist
-    static func readPlist(key: String) -> String {
+    static func readPlist(complete: @escaping (_ dict: NSDictionary) -> Void) -> Void {
         
-        let filePath = Bundle.main.path(forResource: "baby_info", ofType: "plist")
+        let filePath = Bundle.main.path(forResource: "city", ofType: "plist")
         let fileManager = FileManager.default
         guard filePath != nil && fileManager.fileExists(atPath: filePath!) else {
-            return "宝宝数据丢失"
+            return
         }
+        
         if let dict = NSDictionary(contentsOfFile: filePath!) {
-            if let message = dict[key] as? String {
-                return message
-            }
+            complete(dict)
         }
-        return "无此刻数据"
     }
 }

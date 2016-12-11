@@ -13,7 +13,8 @@ import CoreLocation
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
-    private var tableview: WeatherView!
+    //private var weatherScrollView.getWeatherView(): WeatherView!
+    private var weatherScrollView: WeatherScrollView!
     
     private let locationManager = Tools.locationManage
     
@@ -24,10 +25,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     private var isRequest = [false, false] {
         didSet{
-            if !isRequest[0] && !isRequest[1] {  // 两个网路都请求完毕
-                self.tableview.models = models
-                self.tableview.todayViewModel = nowModel
-                self.removeTransationView()
+            if !isRequest[0] && !isRequest[1] {  // 两个网络都请求完毕
+                self.weatherScrollView.getWeatherView().models = models
+                self.weatherScrollView.getWeatherView().todayViewModel = nowModel
+                self.removeTransationView()      // 移除过渡动画
             }
         }
     }
@@ -42,13 +43,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        
-        tableview = WeatherView(frame: self.view.bounds)
-        self.view.addSubview(tableview)
      
+        self.weatherScrollView = WeatherScrollView(frame: self.view.bounds)
+        self.view.addSubview(self.weatherScrollView)
+        self.weatherScrollView.getSearchTableView().reloadData()
+        
         // 准备定位
         self.getLocationPre()
         
+        // 清除手势
         gestrue = UISwipeGestureRecognizer(target: self, action: #selector(closeMe))
         gestrue.direction = .down
         self.view.addGestureRecognizer(gestrue)
@@ -62,6 +65,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // 手势
     func closeMe() -> Void {
         self.dismiss(animated: true, completion: nil)
     }
@@ -104,10 +108,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func requestThreeDayWeather(city: String) -> Void {
         Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { (response) in
             self.isRequest[1] = false
-            if response.result.isFailure {
+            if response.result.isFailure { // 请求出错
                 Toast.toast.show(message: "天气数据获取出错", duration: .nomal, block: nil)
             }
-            guard let result = response.result.value as? [String : Any] else {
+            guard let result = response.result.value as? [String : Any] else { // 获得数据
                 return
             }
             guard let resultArr = result["results"] as? [[String : Any]?] else {
@@ -122,7 +126,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             for model in daily {
                 self.models.append(WeatherModel(fromDictionary: model as NSDictionary))
             }
-            self.tableview.models = self.models
+            self.weatherScrollView.getWeatherView().models = self.models
         }
     }
     

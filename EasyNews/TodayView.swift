@@ -69,9 +69,9 @@ class TodayView: UIView {
         self.addSubview(weatherStateIV)
         self.addSubview(weatherInfoView)
         
-        self.citylabel.setStyle("深圳", bgColor: nil, color: WHITE, fontName: nil, textSize: 23, alignment: .center)
-        self.updateTimeButton.setStyle(Date().toString(formatString: "yyyy-MM-dd"), bgColor: nil, textSize: 15, color: WHITE)
-        self.temperatureLabel.setStyle("15°", bgColor: nil, color: WHITE, fontName: nil, textSize: 140, alignment: .center)
+        self.citylabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 23, alignment: .center)
+        self.updateTimeButton.setStyle("null", bgColor: nil, textSize: 15, color: WHITE)
+        self.temperatureLabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 140, alignment: .center)
         
         self.weatherStateIV.image = #imageLiteral(resourceName: "晴")
         self.weatherStateIV.contentMode = .scaleAspectFit

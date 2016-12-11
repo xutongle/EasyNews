@@ -41,7 +41,7 @@ class LastWeatherView: UIView {
 
         self.weatherStateIV.image = #imageLiteral(resourceName: "晴")
         self.weatherStateIV.contentMode = .scaleAspectFit
-        timeButton.setStyle(Date().toString(formatString: "yyyy-MM-dd"), bgColor: nil, textSize: 21, color: WHITE)
+        timeButton.setStyle("null", bgColor: nil, textSize: 21, color: WHITE)
     }
     
     override func layoutSubviews() {

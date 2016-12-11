@@ -59,10 +59,10 @@ class WeatherInfoView: UIView {
         self.addSubview(lowLabel)
         self.addSubview(wind_speedLabel)
         
-        self.text_dayLabel.setStyle("晴", bgColor: nil, color: WHITE, fontName: nil, textSize: 17, alignment: .center)
-        self.highLabel.setStyle("Max: 20°", bgColor: nil, color: WHITE, fontName: nil, textSize: 15, alignment: .center)
-        self.lowLabel.setStyle("Min: 10°", bgColor: nil, color: WHITE, fontName: nil, textSize: 15, alignment: .center)
-        self.wind_speedLabel.setStyle("风速10", bgColor: nil, color: WHITE, fontName: nil, textSize: 17, alignment: .center)
+        self.text_dayLabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 17, alignment: .center)
+        self.highLabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 15, alignment: .center)
+        self.lowLabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 15, alignment: .center)
+        self.wind_speedLabel.setStyle("", bgColor: nil, color: WHITE, fontName: nil, textSize: 17, alignment: .center)
     }
     
     override func layoutSubviews() {
