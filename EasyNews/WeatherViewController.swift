@@ -11,23 +11,29 @@ import Alamofire
 import SnapKit
 import CoreLocation
 
+/// 天气控制器
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
-    //private var weatherScrollView.getWeatherView(): WeatherView!
     private var weatherScrollView: WeatherScrollView!
     
     private let locationManager = Tools.locationManage
     
     private var gestrue: UISwipeGestureRecognizer!
     
-    private var nowModel: TodayViewModel = TodayViewModel()
+    private var nowModel: TodayViewModel!
     private var models: [WeatherModel] = []
     
+    /// 是否正在请求数据
     private var isRequest = [false, false] {
         didSet{
-            if !isRequest[0] && !isRequest[1] {  // 两个网络都请求完毕
+            guard !isRequest[0], !isRequest[1] else {  // 两个数据请求完成 notRequest
+                return
+            }
+            if nowModel != nil && models.count > 0 {  // 展示完成的结果
                 self.weatherScrollView.getWeatherView().models = models
                 self.weatherScrollView.getWeatherView().todayViewModel = nowModel
+                // 提示
+                Toast.toast.show(message: "数据请求成功", duration: .nomal, block: nil)
                 self.removeTransationView()      // 移除过渡动画
             }
         }
@@ -46,7 +52,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
      
         self.weatherScrollView = WeatherScrollView(frame: self.view.bounds)
         self.view.addSubview(self.weatherScrollView)
-        self.weatherScrollView.getSearchTableView().reloadData()
         
         // 准备定位
         self.getLocationPre()
@@ -55,6 +60,19 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         gestrue = UISwipeGestureRecognizer(target: self, action: #selector(closeMe))
         gestrue.direction = .down
         self.view.addGestureRecognizer(gestrue)
+        
+        // 监听通知 需要改变Scroll的位置
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { notification in
+            //
+            self.weatherScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            guard let info = notification.userInfo else {
+                return
+            }
+            guard let city = info["city"] as? String else {
+                return
+            }
+            self.requestWeather(city: city)
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +92,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         if isRequest[0] || isRequest[1] || city == nil{
             return
         }
+        self.showTransationView(style: .dark)
         isRequest = [true, true]
         requestCurrentWeather(city: city!)
         requestThreeDayWeather(city: city!)
@@ -81,15 +100,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     // 当时天气
     func requestCurrentWeather(city: String) -> Void {
+        self.nowModel = nil
         Alamofire.request(NetTool.currentUrl, method: .get, parameters: NetTool.getCurrentUrlParam(city: city)).responseJSON { (response) in
-            self.isRequest[0] = false
-            if response.result.isFailure {
-                Toast.toast.show(message: "当前天气获取出错", duration: .nomal, block: nil)
-            }
             guard let result = response.result.value as? [String : Any] else {
                 return
             }
             guard let resultsArr = result["results"] as? [[String : Any]?] else {
+                Toast.toast.show(message: "当前数据请求失败", duration: .nomal, block: nil)
+                self.removeTransationView()      // 移除过渡动画
+                self.isRequest = [false, false]
                 return
             }
             guard let results = resultsArr[0] else {
@@ -101,20 +120,21 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let location = NetTool.toString(any: locations["name"])
             let now = NetTool.toString(any: nows["temperature"])
             self.nowModel = TodayViewModel(cityName: location, temperature: now)
+            self.isRequest[0] = false
         }
     }
     
     // 请求天气数据
     func requestThreeDayWeather(city: String) -> Void {
+        self.models.removeAll()
         Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { (response) in
-            self.isRequest[1] = false
-            if response.result.isFailure { // 请求出错
-                Toast.toast.show(message: "天气数据获取出错", duration: .nomal, block: nil)
-            }
             guard let result = response.result.value as? [String : Any] else { // 获得数据
                 return
             }
             guard let resultArr = result["results"] as? [[String : Any]?] else {
+                Toast.toast.show(message: "其余数据请求失败", duration: .nomal, block: nil)
+                self.removeTransationView()      // 移除过渡动画
+                self.isRequest = [false, false]
                 return
             }
             guard let results = resultArr[0] else {
@@ -123,10 +143,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             guard let daily = results["daily"] as? [[String : String]] else {
                 return
             }
+
             for model in daily {
                 self.models.append(WeatherModel(fromDictionary: model as NSDictionary))
             }
             self.weatherScrollView.getWeatherView().models = self.models
+            self.isRequest[1] = false
         }
     }
     

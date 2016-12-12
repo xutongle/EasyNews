@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */; };
 		0A11B93F1DFD06DE00779E04 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B93E1DFD06DE00779E04 /* city.plist */; };
 		0A11B9411DFD07B300779E04 /* WeatherScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */; };
 		0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9441DFD117700779E04 /* SearchTableView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConstant.swift; sourceTree = "<group>"; };
 		0A11B93E1DFD06DE00779E04 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherScrollView.swift; sourceTree = "<group>"; };
 		0A11B9441DFD117700779E04 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				0AF802991DFA7CF7002C825F /* Assets.xcassets */,
 				0AF8029E1DFA7CF7002C825F /* Info.plist */,
 				0A11B93E1DFD06DE00779E04 /* city.plist */,
+				0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */,
 				0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */,
 				0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */,
+				0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */,
 				0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */,
 				0AE6C2321DFAF15500B20518 /* ZLY_SlidingViewController.swift in Sources */,
 				0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */,

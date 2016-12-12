@@ -8,21 +8,22 @@
 
 import UIKit
 
-class WeatherScrollView: UIScrollView {
+class WeatherScrollView: UIScrollView, UIScrollViewDelegate {
 
     private var weatherView: WeatherView!
     private var searchTableView: SearchTableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.delegate = self
+        self.backgroundColor = UIColor.groupTableViewBackground
         self.isPagingEnabled = true
         self.contentSize = CGSize(width: SCREEN_WIDTH * 2, height: SCREEN_HEIGHT)
         
         weatherView = WeatherView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         self.addSubview(weatherView)
         
-        searchTableView = SearchTableView(frame: CGRect(x: SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: .grouped)
+        searchTableView = SearchTableView(frame: CGRect(x: SCREEN_WIDTH, y: 20, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 20), style: .grouped)
         self.addSubview(searchTableView)
     }
     
@@ -30,8 +31,8 @@ class WeatherScrollView: UIScrollView {
         return weatherView
     }
     
-    func getSearchTableView() -> SearchTableView {
-        return searchTableView
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.endEditing(true)
     }
     
     required init?(coder aDecoder: NSCoder) {

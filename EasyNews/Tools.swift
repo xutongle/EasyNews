@@ -56,7 +56,7 @@ class Tools: NSObject {
     /**
      * 汉字转拼音
      */
-    static func hanZiZhuanPinYin(hanzi: String, yinbiao: Bool) -> String? {
+    static func hanZiZhuanPinYin(hanzi: String, yinbiao: Bool) -> String {
         
         let str = NSMutableString.init(string: hanzi) as CFMutableString
         
@@ -212,13 +212,15 @@ class Tools: NSObject {
     static func readPlist(complete: @escaping (_ dict: NSDictionary) -> Void) -> Void {
         
         let filePath = Bundle.main.path(forResource: "city", ofType: "plist")
-        let fileManager = FileManager.default
-        guard filePath != nil && fileManager.fileExists(atPath: filePath!) else {
+        guard filePath != nil else {
             return
         }
         
-        if let dict = NSDictionary(contentsOfFile: filePath!) {
-            complete(dict)
+        DispatchQueue.global().async { 
+            if let dict = NSDictionary(contentsOfFile: filePath!) {
+                complete(dict)
+            }
         }
+        //
     }
 }

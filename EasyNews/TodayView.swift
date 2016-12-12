@@ -35,7 +35,6 @@ class TodayView: UIView {
     var model: WeatherModel = WeatherModel() {
         didSet{
             self.updateTimeButton.setTitle(NetTool.toString(any: model.date), for: .normal)
-            self.updateTimeButton.setTitle(NetTool.toString(any: model.date), for: .normal)
             self.weatherStateIV.image = UIImage(named: NetTool.toString(any: model.textDay))
             self.weatherInfoView.model = WeatherInfoViewModel(
                 text_day: NetTool.toString(any: model.textDay),
