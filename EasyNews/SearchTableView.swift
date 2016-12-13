@@ -142,7 +142,7 @@ class SearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-class SearchHeaderView: UIView {
+class SearchHeaderView: UIView, UITextFieldDelegate {
     
     private var searchTextField: UITextField!
     var valueChange: ((_ value: String) -> Void)?
@@ -155,6 +155,7 @@ class SearchHeaderView: UIView {
         searchTextField.layer.cornerRadius = 5
         searchTextField.textAlignment = .center
         searchTextField.placeholder = "输入搜索的城市名称"
+        searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(valueChange(textField:)), for: .editingChanged)
         self.addSubview(searchTextField)
     }
@@ -171,6 +172,11 @@ class SearchHeaderView: UIView {
             make.top.left.equalTo(self).offset(5)
             make.right.bottom.equalTo(self).offset(-5)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
     }
     
     required init?(coder aDecoder: NSCoder) {
