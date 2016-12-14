@@ -8,15 +8,16 @@
 
 import UIKit
 
-class WeatherScrollView: UIScrollView, UIScrollViewDelegate {
+class WeatherScrollView: UIScrollView {
 
     private var weatherView: WeatherView!
     private var searchTableView: SearchTableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
+        
         self.backgroundColor = UIColor.groupTableViewBackground
+        self.keyboardDismissMode = .onDrag  // 拖动ScrollView键盘消失
         self.isPagingEnabled = true
         self.contentSize = CGSize(width: SCREEN_WIDTH * 2, height: SCREEN_HEIGHT)
         
@@ -29,10 +30,6 @@ class WeatherScrollView: UIScrollView, UIScrollViewDelegate {
     
     func getWeatherView() -> WeatherView {
         return weatherView
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.endEditing(true)
     }
     
     required init?(coder aDecoder: NSCoder) {

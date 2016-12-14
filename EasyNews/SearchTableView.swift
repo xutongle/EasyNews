@@ -22,9 +22,11 @@ class SearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         self.delegate = self
         self.dataSource = self
         
+        self.keyboardDismissMode = .onDrag
+        self.separatorStyle = .none
+        
         self.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         
-        self.separatorStyle = .none
         // 顶部搜索视图
         let searchHeaderView = SearchHeaderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
         self.tableHeaderView = searchHeaderView
@@ -131,10 +133,6 @@ class SearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let dict = ["city" : self.orginData[self.keys[indexPath.section]]![indexPath.row]]
         NotificationCenter.default.post(name: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, userInfo: dict)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.endEditing(true)
     }
     
     required init?(coder aDecoder: NSCoder) {
