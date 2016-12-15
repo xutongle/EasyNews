@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB8D51E02460F00336B6B /* FileUDPServer.c */; };
 		0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */; };
 		0A11B93F1DFD06DE00779E04 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B93E1DFD06DE00779E04 /* city.plist */; };
 		0A11B9411DFD07B300779E04 /* WeatherScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */; };
@@ -43,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0CB8D01E02350700336B6B /* EasyNews-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyNews-Bridging-Header.h"; sourceTree = "<group>"; };
+		0A0CB8D41E02460F00336B6B /* FileUDPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUDPServer.h; sourceTree = "<group>"; };
+		0A0CB8D51E02460F00336B6B /* FileUDPServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileUDPServer.c; sourceTree = "<group>"; };
 		0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConstant.swift; sourceTree = "<group>"; };
 		0A11B93E1DFD06DE00779E04 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherScrollView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A0CB8CF1E0234E600336B6B /* SocketCompoent */ = {
+			isa = PBXGroup;
+			children = (
+				0A0CB8D41E02460F00336B6B /* FileUDPServer.h */,
+				0A0CB8D51E02460F00336B6B /* FileUDPServer.c */,
+				0A0CB8D01E02350700336B6B /* EasyNews-Bridging-Header.h */,
+			);
+			name = SocketCompoent;
+			sourceTree = "<group>";
+		};
 		0A11B9421DFD109200779E04 /* WeatherView */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +224,7 @@
 				0AF802B01DFA93B9002C825F /* Tools */,
 				0ABBAF0D1DFFA49E00D84C94 /* NewsCompoent */,
 				0AF802A41DFA7D33002C825F /* WeatherComponent */,
+				0A0CB8CF1E0234E600336B6B /* SocketCompoent */,
 			);
 			path = EasyNews;
 			sourceTree = "<group>";
@@ -333,6 +348,7 @@
 					0AF8028E1DFA7CF7002C825F = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = L9N5AGWHDF;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -439,6 +455,7 @@
 				0ABBAF191DFFBD0000D84C94 /* NewsNavViewController.swift in Sources */,
 				0ABBAF161DFFBC4F00D84C94 /* TabBarViewController.swift in Sources */,
 				0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */,
+				0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */,
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */,
@@ -566,12 +583,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = EasyNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zly.private.EasyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyNews/EasyNews-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -582,12 +602,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = L9N5AGWHDF;
 				INFOPLIST_FILE = EasyNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zly.private.EasyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyNews/EasyNews-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

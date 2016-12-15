@@ -8,8 +8,15 @@
 
 import UIKit
 
+// 往左往右滚
 enum ScrollLeftOrRight {
     case Left
+    case Right
+}
+
+enum ScrollPostionType {
+    case Left
+    case Center
     case Right
 }
 
@@ -20,6 +27,9 @@ class NewsTopScrollView: UIScrollView, UIScrollViewDelegate {
     private var rightImageView: UIImageView!
     
     private var needScroll: ScrollLeftOrRight?
+    
+    private var scrollType: ScrollPostionType?
+    var needChangePageControll: ((_ type: ScrollPostionType) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +67,27 @@ class NewsTopScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     /* ScrollView 协议 */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offset = scrollView.contentOffset.x
+        var type: ScrollPostionType?    // 用来和上次的对比
+        if offset < SCREEN_WIDTH  {
+            type = .Left
+        }else if offset >= SCREEN_WIDTH && offset < SCREEN_WIDTH * 2 {
+            type = .Center
+        }else if offset >= SCREEN_WIDTH * 2 {
+            type = .Right
+        }
+        // 判断是否为空
+        guard type != nil else {
+            return
+        }
+        if self.scrollType != type {   // 如果和上次的位置是一样的就不动
+            self.scrollType = type
+            needChangePageControll?(scrollType!)
+        }
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView.contentOffset.x > SCREEN_WIDTH * 2 {
             needScroll = .Left

@@ -10,6 +10,8 @@ import UIKit
 
 class LocalConstant: NSObject {
 
+    // 选择完城市后发送通知滚到天气界面
     static let NeedChangeScrollPostion = "NeedChangeScrollPostion"
-    
+    // 指示器改变
+    static let HintNeedCHange = "HintNeedCHange"
 }

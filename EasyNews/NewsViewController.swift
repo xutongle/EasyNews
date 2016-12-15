@@ -34,6 +34,33 @@ class NewsViewController: UIViewController {
             make.left.right.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-39)
         }
+        
+        DispatchQueue.global().async {
+            let utf8Str = ("127.0.0.1" as NSString).utf8String
+            let point = UnsafeMutablePointer<Int8>(mutating: utf8Str)
+            guard Listener(point, 11223) == 1 else {
+                return
+            }
+            
+            while true {
+                guard Accept() == 1 else{
+                    return
+                }
+                
+                let path_utf8Str = (Tools.getCacheDirectory(name: "temp") as NSString).utf8String
+                let path_point = UnsafeMutablePointer<Int8>(mutating: path_utf8Str)
+                guard CreateFile(path_point) == 1 else {
+                    return
+                }
+                
+                while getState() > 2{
+                    Reciver()
+                }
+                // 关闭客户端
+                CloseServer(S_SHUT_RD);
+            }
+        }
+        
     }
     
     func rightAction() -> Void {

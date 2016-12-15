@@ -8,22 +8,25 @@
 
 import UIKit
 
-class NewsView: UIView {
+class NewsView: UITableView {
 
     private var newsTopScrollView: NewsTopScrollView!
     
     private var pageController: UIPageControl!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: style)
+        
         self.backgroundColor = UIColor.white
         
-        self.newsTopScrollView = NewsTopScrollView()
+        self.newsTopScrollView = NewsTopScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120 * WScale))
+        self.tableHeaderView = self.newsTopScrollView
         
-        self.addSubview(self.newsTopScrollView)
+        self.newsTopScrollView.needChangePageControll = { type in
+            self.pageController.currentPage = type.hashValue
+        }
         
         pageController = UIPageControl()
-        pageController.currentPage = 1
         pageController.numberOfPages = 3
         self.addSubview(pageController)
     }
@@ -35,11 +38,6 @@ class NewsView: UIView {
             make.bottom.equalTo(self.newsTopScrollView.snp.bottom).offset(-5)
             make.left.right.equalTo(self.newsTopScrollView)
             make.height.equalTo(10)
-        }
-        
-        self.newsTopScrollView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(self)
-            make.height.equalTo(120 * WScale)
         }
     }
     
