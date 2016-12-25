@@ -93,7 +93,7 @@ class Tools: NSObject {
     }
     
     /* 自适应文字布局返回的frame */
-    static func getLabelSize(font: UIFont,text: NSString,maxSize: CGSize)->CGRect {
+    static func getLabelSize(font: UIFont,text: String,maxSize: CGSize)->CGRect {
         var newFrame: CGRect!
         newFrame = text.boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font], context: nil)
         return newFrame

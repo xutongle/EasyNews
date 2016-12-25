@@ -18,7 +18,7 @@ class NewsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "right_light"), style: .done, target: self, action: #selector(rightAction))
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
+                
         self.navigationItem.title = "科技要闻"
     }
     
@@ -35,10 +35,22 @@ class NewsViewController: UIViewController {
             make.bottom.equalTo(self.view).offset(-39)
         }
         
+        
+    }
+    
+    func rightAction() -> Void {
+        // 前往天气页面
+         self.present(WeatherViewController(), animated: true, completion: nil)
+        
+        //UDPServer()
+    }
+    
+    // UDP SERVER
+    func UDPServer() -> Void {
         DispatchQueue.global().async {
             let utf8Str = ("127.0.0.1" as NSString).utf8String
             let point = UnsafeMutablePointer<Int8>(mutating: utf8Str)
-            guard Listener(point, 11223) == 1 else {
+            guard Listener(point, 8080) == 1 else {
                 return
             }
             
@@ -60,12 +72,6 @@ class NewsViewController: UIViewController {
                 CloseServer(S_SHUT_RD);
             }
         }
-        
-    }
-    
-    func rightAction() -> Void {
-        // 前往天气页面
-        self.present(WeatherViewController(), animated: true, completion: nil)
     }
 
 }

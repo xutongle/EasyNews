@@ -41,8 +41,8 @@ int Listener(char* ip, int port){
         return 0;
     }
     
-    /* 监听 队列长度20 */
-    if (listen(sock, 20) < 0) {
+    /* 监听 队列长度 1 */
+    if (listen(sock, 1) < 0) {
         printf("listen_error_server \n");
         return 0;
     }
@@ -91,7 +91,7 @@ int CreateFile(char* filePath) {
      */
     printf("%s \n", filePath);
     // 新建并打开
-    file = fopen(filePath, "w");
+    file = fopen(filePath, "wb");
     if (file == NULL) {
         printf("create file error");
         return 0;
@@ -113,6 +113,7 @@ void Reciver() {
     }else {
         // 写入文件
         fwrite(buffer, length, 1, file);
+        fflush(file);
         state = (int)length;
     }
 }

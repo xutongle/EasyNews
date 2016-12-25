@@ -14,13 +14,15 @@ class GirlViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationItem.title = "妹子"
+        
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        
+        self.view.addSubview(ItemScrollView(frame: CGRect(x: 0, y: 64, width: SCREEN_WIDTH, height: 20)))
         
     }
 
