@@ -6,5 +6,6 @@ target 'EasyNews' do
 
     pod 'Alamofire'
     pod 'SnapKit'
+    pod 'Kingfisher'
 
 end

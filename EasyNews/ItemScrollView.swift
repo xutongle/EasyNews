@@ -8,31 +8,39 @@
 
 import UIKit
 
-class ItemScrollView: UIScrollView {
+protocol ItemScrollViewDelegate {
+    func ItemCilck()
+}
 
-    var items: [String] = ["科技资讯", "美女如云", "强势入驻", "CSDOLDLWKNDLQWND", "实在想不到写还是呢么"] {
+class ItemScrollView: UIScrollView {
+    
+    var item_delegate: ItemScrollViewDelegate?
+    
+    var items: [GirlTypeModel] = [GirlTypeModel(keywords: "暂无数据")] {
         didSet{
-            
+            createView()
         }
     }
+    
     private var itemManage: [UILabel] = []
     private var remberX: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 30))
         self.backgroundColor = UIColor.white
-        
-        createView()
     }
     
     /// 创建view
     private func createView() -> Void {
-        for str in items {
-            let rect = Tools.getLabelSize(font: UIFont.systemFont(ofSize: 15), text: str, maxSize: CGSize(width: SCREEN_WIDTH, height: 30))
+        // 先移除
+        removeAllView()
+        
+        for model in items {
+            let rect = Tools.getLabelSize(font: UIFont.systemFont(ofSize: 15), text: model.keywords, maxSize: CGSize(width: SCREEN_WIDTH, height: 30))
             let item = UILabel(frame: CGRect(x: remberX + 5, y: 0, width: rect.size.width, height: 30))
             // 记录
             remberX += rect.size.width + 5
-            item.setStyle(str, bgColor: nil, color: MY_BLACK_ALPHA_70, fontName: nil, textSize: 15, alignment: .center)
+            item.setStyle(model.keywords, bgColor: nil, color: MY_BLACK_ALPHA_70, fontName: nil, textSize: 15, alignment: .center)
             self.addSubview(item)
             item.isUserInteractionEnabled = true
             let gestrue = UITapGestureRecognizer(target: self, action: #selector(itemGestrue(gestrue:)))
@@ -41,6 +49,21 @@ class ItemScrollView: UIScrollView {
         }
         
         self.contentSize = CGSize(width: remberX, height: 20)
+        
+        if itemManage.count > 0 {
+            // 设置第0和颜色高亮
+            setItemColor(itemManage[0])
+        }
+    }
+    
+    func removeAllView() -> Void {
+        guard itemManage.count > 0 else {
+            return
+        }
+        for label in itemManage {
+            label.removeFromSuperview()
+        }
+        items.removeAll()
     }
     
     /// view的action
@@ -49,7 +72,8 @@ class ItemScrollView: UIScrollView {
             return
         }
         setItemColor(mview)
-        print(mview.text ?? "None")
+        
+        item_delegate?.ItemCilck()
     }
     
     /// 设置字体颜色
