@@ -9,9 +9,13 @@
 import UIKit
 import Alamofire
 
-class GirlViewController: UIViewController {
+class GirlViewController: UIViewController, ItemScrollViewDelegate {
 
-    private var userVC: UserActionViewController!
+    private var userVC: UserActionViewController!     // 用户登录
+    private var collectionView: GirlsCollectionView!  // 主体CollectionView
+    private var itemScrollView: ItemScrollView!       // 顶部仿网易的滚动的view
+    
+    private var oldID: Int = 1
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,14 +31,30 @@ class GirlViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        let itemScrollView = ItemScrollView(frame: CGRect(x: 0, y: 64, width: SCREEN_WIDTH, height: 20))
+        //
+        itemScrollView = ItemScrollView(x: 0, y: 64, width: self.view.frame.size.width)
         self.view.addSubview(itemScrollView)
         
+        //
         userVC = UserActionViewController()
         
+        // 获得妹子的类型 有缓存
+        getGirlType()
+        
+        //
+        collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
+        self.view.addSubview(collectionView)
+        
+        // 获得分类为1的妹子
+        getGirlPic(id: oldID)
+        
+        itemScrollView.item_delegate = self
+    }
+    
+    func getGirlType() -> Void {
         // 先判断缓存中是否有数据 没有就从网络获取
         if let models = NSKeyedUnarchiver.unarchiveObject(withFile: Tools.getCacheDirectory(name: "TG_DATA.models")) as? [GirlTypeModel] {
-            itemScrollView.items = models
+            self.itemScrollView.items = models
         }else {
             // 获得图片分类
             Alamofire.request(NetTool.tiangou_image_sort_url, method: .post, parameters: nil).responseJSON { (response) in
@@ -48,7 +68,7 @@ class GirlViewController: UIViewController {
                 for tg in tngou {
                     models.append(GirlTypeModel(fromDictionary: tg))
                 }
-                itemScrollView.items = models
+                self.itemScrollView.items = models
                 NSKeyedArchiver.archiveRootObject(models, toFile: Tools.getCacheDirectory(name: "TG_DATA.models"))
             }
         }
@@ -56,7 +76,7 @@ class GirlViewController: UIViewController {
     
     // 获得图片list 包含图片的网址
     func getGirlPic(id: Int) -> Void {
-        Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["id" : id]).responseJSON { (response) in
+        Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["id" : id, "rows" : 18]).responseJSON { (response) in
             guard let result = response.result.value as? NSDictionary else {
                 return
             }
@@ -68,7 +88,14 @@ class GirlViewController: UIViewController {
                 models.append(GirlModel(fromDictionary: tg))
             }
             
+            self.collectionView.models = models
+            
         }
+    }
+    
+    // 协议
+    func ItemCilck(girlType: GirlTypeModel) {
+        
     }
     
     @objc

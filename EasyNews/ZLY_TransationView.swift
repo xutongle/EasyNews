@@ -27,7 +27,7 @@ extension UIViewController {
     
 }
 
-fileprivate class ZLY_TransationView: UIView {
+class ZLY_TransationView: UIView {
     
     let bWidth: CGFloat = 30
     let sWidth: CGFloat = 30
@@ -37,7 +37,6 @@ fileprivate class ZLY_TransationView: UIView {
     
     init(frame: CGRect, style: UIBlurEffectStyle) {
         super.init(frame: frame)
-//        self.backgroundColor = UIColor.clear
         self.isOpaque = true
         
         let blurEffect = UIBlurEffect(style: style)
@@ -76,7 +75,7 @@ fileprivate class ZLY_TransationView: UIView {
     }
     
     // 创建CAKeyframeAnimation
-    func makeAnimation(isBig: Bool, beginTime: CFTimeInterval) -> CAKeyframeAnimation {
+    private func makeAnimation(isBig: Bool, beginTime: CFTimeInterval) -> CAKeyframeAnimation {
         
         let transformAnimation = CAKeyframeAnimation(keyPath: "transform")
         transformAnimation.isRemovedOnCompletion = false

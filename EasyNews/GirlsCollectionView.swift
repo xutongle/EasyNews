@@ -10,26 +10,61 @@ import UIKit
 
 class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    private var width: CGFloat = 0
+    private var height: CGFloat = 0
+    
+    var models: [GirlModel] = [] {
+        didSet{
+            self.reloadData()
+        }
+    }
+    
     init(frame: CGRect) {
         let mlayout = UICollectionViewFlowLayout()
-        let width: CGFloat = SCREEN_WIDTH / 3.0 - 20
-        mlayout.headerReferenceSize = CGSize(width: width, height: width / 2 * 3)
-        
+        width = SCREEN_WIDTH / 3.0 - 4.5 // 4.5是 3 + 1.5
+        height = width / 2 * 3
+        mlayout.itemSize = CGSize(width: width, height: height)                   // 每个Item的大小
+        mlayout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3) // 设置每组的cell的边界 距离屏幕的上下左右位置
+        mlayout.minimumLineSpacing = 3      // cell的最小行间距
+        mlayout.minimumInteritemSpacing = 3 // cell的最小列间距
         super.init(frame: frame, collectionViewLayout: mlayout)
         
+        self.backgroundColor = UIColor.groupTableViewBackground
+        
+        self.delegate = self
+        self.dataSource = self
+        
+        self.register(GirlCollectionViewCell.self, forCellWithReuseIdentifier: "GirlCollectionViewCell")
+    }
+    
+    //返回section个数
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    // 每个section的item个数
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return models.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let cell = GirlCollectionViewCell.cellWith(collectionView: collectionView, indexPath: indexPath, width: width, height: height)
+        cell.setImageURL(url: NetTool.tiangou_image_base_url + models[indexPath.row].img + "_" + (width * 1.5).toStringValue + "x" + (height * 1.5).toStringValue)
+        return cell
+    }
+    
+    // cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: width, height: height)
+    }
+    
+    // cell被选择时被调用
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        return UICollectionViewCell()
     }
     
 }

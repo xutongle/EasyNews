@@ -140,6 +140,12 @@ extension Float {
     }
 }
 
+extension CGFloat {
+    var toStringValue: String {
+        return String(describing: self)
+    }
+}
+
 extension String {
     // 裁剪从头start个字符  然后从结尾开始往前裁剪end个字符  
     // na｜meI｜sZly  start=2 end=4的结果 meI

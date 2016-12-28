@@ -37,7 +37,7 @@ class NetTool: NSObject {
        return getTiangouListURL(id: id, page: 1)
     }
     static func getTiangouListURL(id: Int, page: Int) -> String {
-       return getTiangouListURL(id: id, page: page, rows: 20)
+       return getTiangouListURL(id: id, page: page, rows: 18)
     }
     /// 获得图片列表
     ///

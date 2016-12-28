@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ItemScrollViewDelegate {
-    func ItemCilck()
+    func ItemCilck(girlType: GirlTypeModel)
 }
 
 class ItemScrollView: UIScrollView {
@@ -25,8 +25,9 @@ class ItemScrollView: UIScrollView {
     private var itemManage: [UILabel] = []
     private var remberX: CGFloat = 0
     
-    override init(frame: CGRect) {
-        super.init(frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 30))
+    init(x: CGFloat, y: CGFloat, width: CGFloat) {
+        super.init(frame: CGRect(x: x, y: y, width: width, height: 40))
+        
         self.backgroundColor = UIColor.white
     }
     
@@ -37,7 +38,7 @@ class ItemScrollView: UIScrollView {
         
         for model in items {
             let rect = Tools.getLabelSize(font: UIFont.systemFont(ofSize: 15), text: model.keywords, maxSize: CGSize(width: SCREEN_WIDTH, height: 30))
-            let item = UILabel(frame: CGRect(x: remberX + 5, y: 0, width: rect.size.width, height: 30))
+            let item = UILabel(frame: CGRect(x: remberX + 5, y: 0, width: rect.size.width, height: 40))
             // 记录
             remberX += rect.size.width + 5
             item.setStyle(model.keywords, bgColor: nil, color: MY_BLACK_ALPHA_70, fontName: nil, textSize: 15, alignment: .center)
@@ -72,8 +73,6 @@ class ItemScrollView: UIScrollView {
             return
         }
         setItemColor(mview)
-        
-        item_delegate?.ItemCilck()
     }
     
     /// 设置字体颜色
@@ -82,6 +81,9 @@ class ItemScrollView: UIScrollView {
             lab.textColor = MY_BLACK_ALPHA_70
             if lab.isEqual(label) {
                 label.textColor = UIColor.orange
+                // 走一遍协议 其中lab 必定是itemManage的成员 所以可以加!号
+                let index = itemManage.index(of: lab)!
+                item_delegate?.ItemCilck(girlType: items[index])
             }
         }
     }
