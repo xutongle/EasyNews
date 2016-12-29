@@ -42,11 +42,14 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate {
         getGirlType()
         
         //
-        collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
-        self.view.addSubview(collectionView)
+        //collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
+        //self.view.addSubview(collectionView)
+        
+        let gVC = GirlsScrollView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
+        self.view.addSubview(gVC)
         
         // 获得分类为1的妹子
-        getGirlPic(id: oldID)
+        //getGirlPic(id: oldID)
         
         itemScrollView.item_delegate = self
     }

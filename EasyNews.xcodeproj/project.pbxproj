@@ -14,6 +14,7 @@
 		0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9441DFD117700779E04 /* SearchTableView.swift */; };
 		0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */; };
 		0A11B9491DFD171100779E04 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */; };
+		0A38ABDA1E14F067007EDAB8 /* GirlsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38ABD91E14F067007EDAB8 /* GirlsScrollView.swift */; };
 		0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */; };
 		0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25F1E12695A002C7442 /* GirlModel.swift */; };
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
@@ -60,6 +61,7 @@
 		0A11B9441DFD117700779E04 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		0A38ABD91E14F067007EDAB8 /* GirlsScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsScrollView.swift; sourceTree = "<group>"; };
 		0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTypeModel.swift; sourceTree = "<group>"; };
 		0A3CA25F1E12695A002C7442 /* GirlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlModel.swift; sourceTree = "<group>"; };
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */,
+				0A38ABD91E14F067007EDAB8 /* GirlsScrollView.swift */,
 				0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */,
 				0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */,
 			);
@@ -470,6 +473,7 @@
 				0ACCB7451E00F3BF003F3A3D /* NewsTopScrollView.swift in Sources */,
 				0ABBAF1C1DFFC4A000D84C94 /* GirlNavViewController.swift in Sources */,
 				0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */,
+				0A38ABDA1E14F067007EDAB8 /* GirlsScrollView.swift in Sources */,
 				0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */,
 				0A3CA2641E127175002C7442 /* GirlCollectionViewCell.swift in Sources */,
 				0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */,
