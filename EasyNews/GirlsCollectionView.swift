@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol GirlCollectionProtocol {
+    func needAdd()
+}
+
 class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
 
     private var width: CGFloat = 0
     private var height: CGFloat = 0
+    
+    var girl_delegate: GirlCollectionProtocol?
     
     var models: [GirlModel] = [] {
         didSet{
@@ -63,8 +69,19 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentSize.height < frame.size.height {
+            if scrollView.contentOffset.y > 20 {
+                //print("cool")
+            }
+        }else {
+            if (scrollView.contentSize.height - frame.size.height - frame.size.height / 3 < scrollView.contentOffset.y) {
+                girl_delegate?.needAdd()
+            }
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

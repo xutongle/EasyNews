@@ -9,13 +9,15 @@
 import UIKit
 import Alamofire
 
-class GirlViewController: UIViewController, ItemScrollViewDelegate {
+class GirlViewController: UIViewController, ItemScrollViewDelegate, GirlCollectionProtocol{
 
     private var userVC: UserActionViewController!     // 用户登录
     private var collectionView: GirlsCollectionView!  // 主体CollectionView
     private var itemScrollView: ItemScrollView!       // 顶部仿网易的滚动的view
     
     private var oldID: Int = 1
+    private var page: Int = 1
+    private var isRequest: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,14 +44,12 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate {
         getGirlType()
         
         //
-        //collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
-        //self.view.addSubview(collectionView)
-        
-        let gVC = GirlsScrollView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
-        self.view.addSubview(gVC)
+        collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
+        collectionView.girl_delegate = self
+        self.view.addSubview(collectionView)
         
         // 获得分类为1的妹子
-        //getGirlPic(id: oldID)
+        getGirlPic(id: oldID)
         
         itemScrollView.item_delegate = self
     }
@@ -79,7 +79,9 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate {
     
     // 获得图片list 包含图片的网址
     func getGirlPic(id: Int) -> Void {
-        Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["id" : id, "rows" : 18]).responseJSON { (response) in
+        isRequest = true
+        Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["page" : page, "id" : id, "rows" : 18]).responseJSON { (response) in
+            self.isRequest = false
             guard let result = response.result.value as? NSDictionary else {
                 return
             }
@@ -91,14 +93,31 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate {
                 models.append(GirlModel(fromDictionary: tg))
             }
             
-            self.collectionView.models = models
-            
+            if self.page > 1 {
+                self.collectionView.models += models
+            } else {
+                self.collectionView.models = models
+            }
         }
     }
     
     // 协议
     func ItemCilck(girlType: GirlTypeModel) {
-        
+        if oldID == girlType.id {
+            return
+        }
+        page = 1
+        oldID = girlType.id
+        getGirlPic(id: girlType.id)
+    }
+    
+    func needAdd() -> Void {
+        // 在请求就不要再请求一次了
+        if self.isRequest {
+            return
+        }
+        page += 1
+        getGirlPic(id: oldID)
     }
     
     @objc
