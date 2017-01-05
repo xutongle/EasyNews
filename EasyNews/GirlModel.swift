@@ -76,7 +76,7 @@ class GirlModel : NSObject, NSCoding{
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         count = aDecoder.decodeObject(forKey: "count") as? Int
         fcount = aDecoder.decodeObject(forKey: "fcount") as? Int

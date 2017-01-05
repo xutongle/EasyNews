@@ -29,6 +29,8 @@ class NetTool: NSObject {
         return ["key" : key, "language" : "zh-Hans", "location" : city]
     }
     
+    // ==================================
+    
     // 图片 分类
     static let tiangou_image_sort_url = "http://www.tngou.net/tnfs/api/classify"
     // 图片列表
@@ -53,9 +55,15 @@ class NetTool: NSObject {
             + "&rows=" + rows.toStringValue
     }
     
-    // 获得图片
+    // 获得图片的基本url
     static let tiangou_image_base_url = "http://tnfs.tngou.net/image"
     
+    // 最新图片
+    static let tiangou_new_image_url = "http://www.tngou.net/tnfs/api/news"
+    
+    // ===========================================
+    
+    // 语言
     private static func getLanage() -> String {
         if let lanage = Tools.getCurrentLanage() {
             if lanage.hasPrefix("zh") {
@@ -68,6 +76,7 @@ class NetTool: NSObject {
         return "en"   // 不是中文
     }
     
+    // toString
     static func toString(any: Any?) -> String {
         if any == nil {
             return "null"

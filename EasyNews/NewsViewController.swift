@@ -42,7 +42,7 @@ class NewsViewController: UIViewController {
         // 前往天气页面
          self.present(WeatherViewController(), animated: true, completion: nil)
         
-        //UDPServer()
+        
     }
     
     // UDP SERVER

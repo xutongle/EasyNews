@@ -28,7 +28,7 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     init(frame: CGRect) {
         let mlayout = UICollectionViewFlowLayout()
         width = SCREEN_WIDTH / 3.0 - 4.5 // 4.5是 3 + 1.5
-        height = width / 2 * 3
+        height = width /// 2 * 3
         mlayout.itemSize = CGSize(width: width, height: height)                   // 每个Item的大小
         mlayout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3) // 设置每组的cell的边界 距离屏幕的上下左右位置
         mlayout.minimumLineSpacing = 3      // cell的最小行间距

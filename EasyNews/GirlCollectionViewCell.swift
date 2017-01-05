@@ -19,7 +19,8 @@ class GirlCollectionViewCell: UICollectionViewCell {
         
         imageView = UIImageView()
         imageView.backgroundColor = UIColor.clear
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         self.addSubview(imageView)
     }
     
