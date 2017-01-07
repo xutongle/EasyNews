@@ -14,12 +14,11 @@
 		0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9441DFD117700779E04 /* SearchTableView.swift */; };
 		0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */; };
 		0A11B9491DFD171100779E04 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */; };
-		0A2004F11E1DF5C800451514 /* GirlsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2004F01E1DF5C800451514 /* GirlsDataManager.swift */; };
-		0A2004F51E1E185300451514 /* NewGirlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2004F41E1E185300451514 /* NewGirlsView.swift */; };
 		0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */; };
 		0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25F1E12695A002C7442 /* GirlModel.swift */; };
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
 		0A3CA2641E127175002C7442 /* GirlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */; };
+		0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */; };
 		0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */; };
 		0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */; };
 		0ABBAF141DFFBBEF00D84C94 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */; };
@@ -62,12 +61,11 @@
 		0A11B9441DFD117700779E04 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		0A2004F01E1DF5C800451514 /* GirlsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsDataManager.swift; sourceTree = "<group>"; };
-		0A2004F41E1E185300451514 /* NewGirlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGirlsView.swift; sourceTree = "<group>"; };
 		0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTypeModel.swift; sourceTree = "<group>"; };
 		0A3CA25F1E12695A002C7442 /* GirlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlModel.swift; sourceTree = "<group>"; };
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
 		0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildGirlViewController.swift; sourceTree = "<group>"; };
 		0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
 		0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		0ABBAF101DFFA4D700D84C94 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A2004F01E1DF5C800451514 /* GirlsDataManager.swift */,
 				0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */,
 				0A3CA25F1E12695A002C7442 /* GirlModel.swift */,
 			);
@@ -200,6 +197,7 @@
 			children = (
 				0ABBAF1B1DFFC4A000D84C94 /* GirlNavViewController.swift */,
 				0ABBAF1D1DFFC4B500D84C94 /* GirlViewController.swift */,
+				0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */,
 			);
 			name = GirlController;
 			sourceTree = "<group>";
@@ -216,7 +214,6 @@
 		0ACCB7431E00F24E003F3A3D /* Girls */ = {
 			isa = PBXGroup;
 			children = (
-				0A2004F41E1E185300451514 /* NewGirlsView.swift */,
 				0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */,
 				0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */,
 				0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */,
@@ -478,13 +475,11 @@
 				0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */,
 				0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */,
 				0A3CA2641E127175002C7442 /* GirlCollectionViewCell.swift in Sources */,
-				0A2004F11E1DF5C800451514 /* GirlsDataManager.swift in Sources */,
 				0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */,
 				0AEB5F871DFBD3A60057B822 /* LastWeatherView.swift in Sources */,
 				0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */,
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */,
-				0A2004F51E1E185300451514 /* NewGirlsView.swift in Sources */,
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,
 				0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */,
 				0AEB5F851DFBB8840057B822 /* WeatherInfoView.swift in Sources */,
@@ -493,6 +488,7 @@
 				0AE6C2301DFAF15500B20518 /* Tools.swift in Sources */,
 				0AE6C22B1DFAF15500B20518 /* ColorConstants.swift in Sources */,
 				0ABBAF191DFFBD0000D84C94 /* NewsNavViewController.swift in Sources */,
+				0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */,
 				0ABBAF161DFFBC4F00D84C94 /* TabBarViewController.swift in Sources */,
 				0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */,
 				0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */,

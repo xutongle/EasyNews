@@ -9,13 +9,17 @@
 import UIKit
 import Alamofire
 
-class GirlViewController: UIViewController, ItemScrollViewDelegate, GirlCollectionProtocol{
+class GirlViewController: UIViewController, ItemScrollViewDelegate{
 
-    private var collectionView: GirlsCollectionView!  // 主体CollectionView
-    private var itemScrollView: ItemScrollView!       // 顶部仿网易的滚动的view
+    private var itemScrollView: ItemScrollView!                   // 顶部滚动的view
     private var newGirlscollectionView: GirlsCollectionView!      // 只看最新的妹子
     
     private var isAnimationed = false
+    
+    // 容器
+    private var containerView: UIView!
+    // 当前容器上的view
+    private var currentContainerVC: ChildGirlViewController!
     
     // 正常的图片分类分类
     private var oldID: Int = 1
@@ -23,7 +27,6 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate, GirlCollecti
     
     // 只看最新的页码
     private var newPage: Int = 1
-    private var isRequest: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,31 +43,44 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate, GirlCollecti
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
         // 只看最新的妹子
-        newGirlscollectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - 39))
-        self.view.addSubview(newGirlscollectionView)
+        newGirlscollectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - 49))
+        self.view.insertSubview(newGirlscollectionView, at: 0)
         
         // 分类看妹子
         itemScrollView = ItemScrollView(x: 0, y: 64, width: self.view.frame.size.width)
         self.view.addSubview(itemScrollView)
         itemScrollView.item_delegate = self
         
-        collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 94 - 39 - 13))
-        collectionView.girl_delegate = self
-        self.view.addSubview(collectionView)
+        // 容器
+        containerView = UIView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 104 - 49))
+        containerView.backgroundColor = UIColor.groupTableViewBackground
+        self.view.insertSubview(containerView, at: 2)
+        
         
         // 获得妹子的类型 有缓存
-        getGirlType()
-        
-        // 获得分类为1的妹子
-        getGirlPic(id: oldID)
+        getGirlType { (models) in
+            self.itemScrollView.items = models
+            
+            // 加入
+            for m in self.itemScrollView.items {
+                let childVC = ChildGirlViewController()
+                
+                self.addChildViewController(childVC)
+                //
+                childVC.setFrame(mframe: CGRect(x: 0, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height), mid: m.id)
+            }
+            // 显示第一个
+            self.containerView.addSubview(self.childViewControllers.first!.view)
+            self.currentContainerVC = self.childViewControllers.first as! ChildGirlViewController
+        }
     }
     
     // 获得图片的类型
-    func getGirlType() -> Void {
+    func getGirlType(complete: @escaping (_ models: [GirlTypeModel]) -> Void) -> Void {
         // 先判断缓存中是否有数据 没有就从网络获取
         if let models = NSKeyedUnarchiver.unarchiveObject(withFile: Tools.getCacheDirectory(name: "TG_DATA.models")) as? [GirlTypeModel] {
-            self.itemScrollView.items = models
-        }else {
+            complete(models)
+        } else {
             // 获得图片分类
             Alamofire.request(NetTool.tiangou_image_sort_url, method: .post, parameters: nil).responseJSON { (response) in
                 guard let result = response.result.value as? NSDictionary else {
@@ -77,59 +93,30 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate, GirlCollecti
                 for tg in tngou {
                     models.append(GirlTypeModel(fromDictionary: tg))
                 }
-                self.itemScrollView.items = models
                 NSKeyedArchiver.archiveRootObject(models, toFile: Tools.getCacheDirectory(name: "TG_DATA.models"))
+                complete(models)
             }
         }
-    }
-    
-    // 获得图片list 包含图片的网址
-    func getGirlPic(id: Int) -> Void {
-        isRequest = true
-        Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["page" : page, "id" : id, "rows" : 18]).responseJSON { (response) in
-            self.isRequest = false
-            guard let result = response.result.value as? NSDictionary else {
-                return
-            }
-            guard let tngou = result["tngou"] as? [NSDictionary] else {
-                return
-            }
-            var models: [GirlModel] = []
-            for tg in tngou {
-                models.append(GirlModel(fromDictionary: tg))
-            }
-            
-            if self.page > 1 {
-                self.collectionView.models += models
-            } else {
-                self.collectionView.models = models
-            }
-        }
-    }
-    
-    // 获得最新图片
-    func getNewPic() -> Void {
-        
-        newPage += 1
     }
     
     // 协议
     func ItemCilck(girlType: GirlTypeModel) {
-        if oldID == girlType.id {
+        guard childViewControllers.count >= girlType.id else {
             return
         }
-        page = 1
-        oldID = girlType.id
-        getGirlPic(id: girlType.id)
-    }
-    
-    func needAdd() -> Void {
-        // 正在请求就不要再请求一次了
-        if self.isRequest {
+        let vc = childViewControllers[girlType.id - 1] as! ChildGirlViewController
+        if currentContainerVC.isEqual(vc) {
             return
         }
-        page += 1
-        getGirlPic(id: oldID)
+        
+        self.transition(from: currentContainerVC, to: vc, duration: 0.5, options: .transitionCrossDissolve, animations: nil) { (over) in
+            vc.didMove(toParentViewController: self)
+            self.currentContainerVC = vc
+            
+            // 老得移除 貌似不用
+            // self.currentContainerVC.willMove(toParentViewController: nil)
+            // self.currentContainerVC.removeFromParentViewController()
+        }
     }
     
     @objc
