@@ -35,7 +35,7 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "只看最新", style: .done, target: self, action: #selector(rightAction))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "只看最新", style: .done, target: self, action: #selector(rightAction))
     }
     
     override func viewDidLoad() {
@@ -59,10 +59,10 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
         
         // 获得妹子的类型 有缓存
         getGirlType { (models) in
-            self.itemScrollView.items = models
+            self.itemScrollView.itemModels = models
             
             // 加入
-            for m in self.itemScrollView.items {
+            for m in self.itemScrollView.itemModels {
                 let childVC = ChildGirlViewController()
                 
                 self.addChildViewController(childVC)

@@ -9,17 +9,20 @@
 import UIKit
 import Alamofire
 
+/// 每一个collectionView的Controller
 class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
 
     private var collectionView: GirlsCollectionView!  // 主体CollectionView
     
+    // page
     var page: Int = 1 {
         didSet{
             getGirlPic()
         }
     }
     
-    var id: Int = 1 {
+    // id 每一会从缓存或者网络给值过来
+    private var id: Int = 1 {
         didSet{
             getGirlPic()
         }
@@ -38,12 +41,13 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
     }
     
     func setFrame(mframe: CGRect, mid: Int) -> Void {
-        self.id = mid
         
         self.view.frame = mframe
         collectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 0, width: mframe.width, height: mframe.height))
         collectionView.girl_delegate = self
         self.view.addSubview(collectionView)
+        
+        self.id = mid
     }
     
     // 获得图片list 包含图片的网址
@@ -70,12 +74,17 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
         }
     }
     
-    // 协议
+    // 协议 滚动
     internal func needAdd() {
         if isRequest {
             return
         }
         page += 1
+    }
+    
+    // 点按了cell
+    internal func cellSelector(girlModel: GirlModel, mframe: CGRect) {
+        self.showImage(url: NetTool.tiangou_image_base_url + girlModel.img, mframe: mframe)
     }
 
     override func didReceiveMemoryWarning() {

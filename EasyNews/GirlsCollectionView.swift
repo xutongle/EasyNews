@@ -10,6 +10,7 @@ import UIKit
 
 protocol GirlCollectionProtocol {
     func needAdd()
+    func cellSelector(girlModel: GirlModel, mframe: CGRect)
 }
 
 class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -66,7 +67,16 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     
     // cell被选择时被调用
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
         
+        var mframe: CGRect!
+        if cell != nil {
+            mframe = cell?.frame
+        }else {
+            mframe = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }
+        
+        girl_delegate?.cellSelector(girlModel: models[indexPath.row], mframe: mframe)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

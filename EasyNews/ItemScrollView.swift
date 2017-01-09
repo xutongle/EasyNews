@@ -12,11 +12,13 @@ protocol ItemScrollViewDelegate {
     func ItemCilck(girlType: GirlTypeModel)
 }
 
+
+/// 这个就是横向滚动的 妹子的type
 class ItemScrollView: UIScrollView {
     
     var item_delegate: ItemScrollViewDelegate?
     
-    var items: [GirlTypeModel] = [GirlTypeModel(keywords: "暂无数据")] {
+    var itemModels: [GirlTypeModel] = [GirlTypeModel(keywords: "暂无数据")] {
         didSet{
             createView()
         }
@@ -36,7 +38,7 @@ class ItemScrollView: UIScrollView {
         // 先移除
         removeAllView()
         
-        for model in items {
+        for model in itemModels {
             let rect = Tools.getLabelSize(font: UIFont.systemFont(ofSize: 15), text: model.keywords, maxSize: CGSize(width: SCREEN_WIDTH, height: 30))
             let item = UILabel(frame: CGRect(x: remberX + 5, y: 0, width: rect.size.width, height: 40))
             // 记录
@@ -64,7 +66,7 @@ class ItemScrollView: UIScrollView {
         for label in itemManage {
             label.removeFromSuperview()
         }
-        items.removeAll()
+        itemModels.removeAll()
     }
     
     /// view的action
@@ -81,9 +83,9 @@ class ItemScrollView: UIScrollView {
             lab.textColor = MY_BLACK_ALPHA_70
             if lab.isEqual(label) {
                 label.textColor = UIColor.orange
-                // 走一遍协议 其中lab 必定是itemManage的成员 所以可以加!号
+                // 走一遍协议 其中lab 必定是itemManage的成员
                 let index = itemManage.index(of: lab)!
-                item_delegate?.ItemCilck(girlType: items[index])
+                item_delegate?.ItemCilck(girlType: itemModels[index])
             }
         }
     }

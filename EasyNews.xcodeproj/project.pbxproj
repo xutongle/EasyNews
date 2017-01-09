@@ -19,6 +19,7 @@
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
 		0A3CA2641E127175002C7442 /* GirlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */; };
 		0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */; };
+		0A9886A71E238C4B0019E17A /* BigPicGirlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */; };
 		0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */; };
 		0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */; };
 		0ABBAF141DFFBBEF00D84C94 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */; };
@@ -66,6 +67,7 @@
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
 		0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildGirlViewController.swift; sourceTree = "<group>"; };
+		0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicGirlView.swift; sourceTree = "<group>"; };
 		0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
 		0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */,
 				0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */,
 				0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */,
+				0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */,
 			);
 			name = Girls;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				0ABBAF161DFFBC4F00D84C94 /* TabBarViewController.swift in Sources */,
 				0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */,
 				0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */,
+				0A9886A71E238C4B0019E17A /* BigPicGirlView.swift in Sources */,
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0ADB92D21E0FF3A000D35F9E /* UserActionViewController.swift in Sources */,
