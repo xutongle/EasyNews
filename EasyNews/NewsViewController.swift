@@ -29,13 +29,28 @@ class NewsViewController: UIViewController {
         self.newsView = NewsView()
         self.view.addSubview(self.newsView)
         
+        
+        let cycleView = CycleView(frame: CGRect(x: 50, y: 200, width: 200, height: 200))
+        cycleView.needLabel = true
+        self.view.addSubview(cycleView)
+        
+        var i = 1
+        DispatchQueue.global().async {
+            while i < 100 {
+                Thread.sleep(forTimeInterval: 1)
+                
+                DispatchQueue.main.async {
+                    i += 10
+                    cycleView.progress = Double(i)
+                }
+            }
+        }
+        
         self.newsView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-39)
         }
-        
-        
     }
     
     func rightAction() -> Void {

@@ -12,6 +12,14 @@ import UIKit
 class CycleView: UIView {
     
     private var isLoad = false
+    private var oldProgress: Double = 0  // 记住旧的进度条
+    
+    private var label: UILabel!
+    var needLabel = false {
+        didSet{
+            //label.isOpaque = needLabel
+        }
+    }
     
     /* 进度条 */
     @IBInspectable
@@ -21,9 +29,14 @@ class CycleView: UIView {
                 return
             }
             
+            self.animation.fromValue = oldProgress / 100.0
+            self.animation.toValue = progress / 100.0
+            
+            self.shapeLayer.add(animation, forKey: nil)  // 动画
             self.setCyclePath(_progress: progress)       // 重新设置圆
-            self.shapeLayer.add(animation, forKey: "strokeEndAnimation")  // 动画
             self.shapeLayer.path = self.cyclePath.cgPath // 重新给定圆
+            
+            oldProgress = progress
         }
     }
     
@@ -41,8 +54,10 @@ class CycleView: UIView {
         super.init(coder: aDecoder)
     }
     
-    /* 万恶之源 */
+    //
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         if !isLoad {
             self.initView()
             isLoad = true
@@ -52,6 +67,15 @@ class CycleView: UIView {
     /* 初始化视图 */
     func initView() -> Void {
         self.backgroundColor = MY_GOUP_GRAY
+        
+        let w = frame.width / 2
+        let h = frame.height / 2
+        
+        label = UILabel(frame: CGRect(x: w / 2, y: h / 2, width: w, height: h))
+        label.isOpaque = false
+        label.backgroundColor = MY_GOUP_GRAY
+        label.textColor = MY_TSUYUKUSA
+        self.addSubview(label)
         
         /* 背部视图 */
         self.setGuiderCycle()
@@ -72,6 +96,8 @@ class CycleView: UIView {
         let startPoint = -M_PI_2                                                       // 圆的起点位置
         let endPoint = -M_PI_2 + M_PI * 2 * (_progress / 100)                          // 圆的终点
         self.cyclePath = UIBezierPath(arcCenter: cycleCenter, radius: radius, startAngle: CGFloat(startPoint), endAngle: CGFloat(endPoint), clockwise: true)                                               // 圆的路径
+        
+        label.text = String(_progress) + "%"
     }
     
     // ============== 背部的向导园形 ===============
@@ -145,13 +171,13 @@ class CycleView: UIView {
         self.animation.fromValue = 0.0
         self.animation.toValue = 1.0
         self.animation.duration = 0.25
-        self.animation.autoreverses = false   // 返回去再执行一次
+        //self.animation.autoreverses = false   // 返回去再执行一次
         self.animation.fillMode = kCAFillModeForwards  //
-        self.animation.isRemovedOnCompletion = true  // 动画执行完后是否移除
-        self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn) //
+        self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        self.animation.isRemovedOnCompletion = false  // 动画执行完后是否移除
         
-        // self.shapeLayer.autoreverses = false
-        self.shapeLayer.add(animation, forKey: "strokeEndAnimation")
+        self.shapeLayer.autoreverses = false
+        self.shapeLayer.add(animation, forKey: nil)
         
         // 设置遮罩
         maskLayer.mask = self.shapeLayer
