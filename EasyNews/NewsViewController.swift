@@ -34,14 +34,14 @@ class NewsViewController: UIViewController {
         cycleView.needLabel = true
         self.view.addSubview(cycleView)
         
-        var i = 1
+        var i: Double = 0
         DispatchQueue.global().async {
-            while i < 100 {
-                Thread.sleep(forTimeInterval: 1)
+            while i != 90 {
+                Thread.sleep(forTimeInterval: 0.1)
                 
                 DispatchQueue.main.async {
-                    i += 10
-                    cycleView.progress = Double(i)
+                    i += 0.1
+                    cycleView.progress = i
                 }
             }
         }

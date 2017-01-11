@@ -11,8 +11,8 @@ import UIKit
 @IBDesignable
 class CycleView: UIView {
     
-    private var isLoad = false
-    private var oldProgress: Double = 0  // 记住旧的进度条
+    private var isLoad = false                // 是否加载
+    private var endPoint: Double = M_PI_2 * 3 // 默认的结束点
     
     private var label: UILabel!
     var needLabel = false {
@@ -29,14 +29,10 @@ class CycleView: UIView {
                 return
             }
             
-            self.animation.fromValue = oldProgress / 100.0
-            self.animation.toValue = progress / 100.0
+            self.setAnimation(fromValue: CGFloat(oldValue / 100.0), toValue: CGFloat(progress / 100.0))
             
-            self.shapeLayer.add(animation, forKey: nil)  // 动画
             self.setCyclePath(_progress: progress)       // 重新设置圆
             self.shapeLayer.path = self.cyclePath.cgPath // 重新给定圆
-            
-            oldProgress = progress
         }
     }
     
@@ -74,6 +70,7 @@ class CycleView: UIView {
         label = UILabel(frame: CGRect(x: w / 2, y: h / 2, width: w, height: h))
         label.isOpaque = false
         label.backgroundColor = MY_GOUP_GRAY
+        label.textAlignment = .center
         label.textColor = MY_TSUYUKUSA
         self.addSubview(label)
         
@@ -84,7 +81,7 @@ class CycleView: UIView {
         self.setCyclePath(_progress: progress)
         
         /* 设置遮罩和绘图的shapeLayer */
-        self.setGradientLayer()
+        self.setDrawLayer()
     }
     
     //  ============= 圆的路径 _progress(0 - 100) =================
@@ -93,11 +90,12 @@ class CycleView: UIView {
         let cycleCenter = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2) // 圆心
         let radius: CGFloat = self.bounds.size.width / 2 - self.lineWidth              // 半径
         /* 相当于x轴的中心开始 而不是x轴的最右侧开始 */
-        let startPoint = -M_PI_2                                                       // 圆的起点位置
-        let endPoint = -M_PI_2 + M_PI * 2 * (_progress / 100)                          // 圆的终点
-        self.cyclePath = UIBezierPath(arcCenter: cycleCenter, radius: radius, startAngle: CGFloat(startPoint), endAngle: CGFloat(endPoint), clockwise: true)                                               // 圆的路径
+        let startPoint = M_PI_2 * 3                                                        // 圆的起点位置
+        let endPoint = startPoint + M_PI * 2 * (_progress / 100)                           // 圆的终点
+
+        self.cyclePath = UIBezierPath(arcCenter: cycleCenter, radius: radius, startAngle: CGFloat(startPoint), endAngle: CGFloat(endPoint), clockwise: true)                                                   // 圆的路径
         
-        label.text = String(_progress) + "%"
+        label.text = String(format: "%.2f", _progress) + "%"
     }
     
     // ============== 背部的向导园形 ===============
@@ -118,7 +116,7 @@ class CycleView: UIView {
     }
     
     // ============= 给layer设定渐变层 =================
-    func setGradientLayer() -> Void {
+    func getGradientLayer() -> CALayer {
         /* 要设置两个渐变色的图层 */
         let gradientLayer = CALayer()
         gradientLayer.frame = self.bounds
@@ -143,12 +141,11 @@ class CycleView: UIView {
         /* 添加这个有渐变色的layer */
         self.layer.addSublayer(gradientLayer)
         
-        /* 把遮罩给到shapeLayer */
-        self.setDrawLayerWith(maskLayer: gradientLayer)
+        return gradientLayer
     }
     
     // ============== 画图 =================
-    func setDrawLayerWith(maskLayer: CALayer) -> Void {
+    func setDrawLayer() -> Void {
         // 画圆的layer
         self.shapeLayer = CAShapeLayer()
         self.layer.addSublayer(self.shapeLayer)
@@ -163,23 +160,40 @@ class CycleView: UIView {
         self.shapeLayer.lineCap = kCALineCapRound
         self.shapeLayer.lineWidth = self.lineWidth
         
+        //setCyclePath(_progress: 100)
         // 绘制圆
-        self.shapeLayer.path = self.cyclePath.cgPath
+        //self.shapeLayer.path = self.cyclePath.cgPath
         
-        /* 设置动画 还有动画执行完的协议 此处没有用到就省略了 */
-        self.animation = CABasicAnimation(keyPath: "strokeEnd")
-        self.animation.fromValue = 0.0
-        self.animation.toValue = 1.0
-        self.animation.duration = 0.25
-        //self.animation.autoreverses = false   // 返回去再执行一次
-        self.animation.fillMode = kCAFillModeForwards  //
-        self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        self.animation.isRemovedOnCompletion = false  // 动画执行完后是否移除
-        
-        self.shapeLayer.autoreverses = false
-        self.shapeLayer.add(animation, forKey: nil)
+        //shapeLayer.strokeStart = 0
+        //shapeLayer.strokeEnd = CGFloat(progress)
         
         // 设置遮罩
-        maskLayer.mask = self.shapeLayer
+        self.getGradientLayer().mask = self.shapeLayer
+    }
+    
+    //
+    func setAnimation(fromValue: CGFloat, toValue: CGFloat) -> Void {
+        if self.animation == nil {
+            
+            /* 设置动画 还有动画执行完的协议 此处没有用到就省略了 */
+            self.animation = CABasicAnimation(keyPath: "strokEnd")
+            self.animation.duration = 0.25
+            
+            self.animation.autoreverses = false            // 返回去再执行一次
+            //self.animation.fillMode = kCAFillModeBackwards
+            //self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            //self.animation.isRemovedOnCompletion = false   // 动画执行完后是否移除
+        }
+        self.animation.fromValue = fromValue
+        self.animation.toValue = toValue
+        
+        self.shapeLayer.add(animation, forKey: "anima")
+        
+//        CATransaction.begin()
+//        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+//        
+//        shapeLayer.strokeEnd = CGFloat(progress)
+//
+//        CATransaction.commit()
     }
 }
