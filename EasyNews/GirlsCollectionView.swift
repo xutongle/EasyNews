@@ -56,7 +56,15 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = GirlCollectionViewCell.cellWith(collectionView: collectionView, indexPath: indexPath, width: width, height: height)
+        
         cell.setImageURL(url: NetTool.tiangou_image_base_url + models[indexPath.row].img + "_" + (width * 1.5).toStringValue + "x" + (height * 1.5).toStringValue)
+        
+//        if cell.imageView.image == nil {
+//            cell.canDismiss = false
+//        }else {
+//            cell.canDismiss = true
+//        }
+        
         return cell
     }
     

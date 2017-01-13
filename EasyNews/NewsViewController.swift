@@ -29,23 +29,6 @@ class NewsViewController: UIViewController {
         self.newsView = NewsView()
         self.view.addSubview(self.newsView)
         
-        
-        let cycleView = CycleView(frame: CGRect(x: 50, y: 200, width: 200, height: 200))
-        cycleView.needLabel = true
-        self.view.addSubview(cycleView)
-        
-        var i: Double = 0
-        DispatchQueue.global().async {
-            while i != 90 {
-                Thread.sleep(forTimeInterval: 0.1)
-                
-                DispatchQueue.main.async {
-                    i += 0.1
-                    cycleView.progress = i
-                }
-            }
-        }
-        
         self.newsView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
@@ -53,11 +36,14 @@ class NewsViewController: UIViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+    }
+    
     func rightAction() -> Void {
         // 前往天气页面
          self.present(WeatherViewController(), animated: true, completion: nil)
-        
-        
     }
     
     // UDP SERVER

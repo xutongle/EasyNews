@@ -17,7 +17,9 @@ class WeatherScrollView: UIScrollView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.groupTableViewBackground
+        
         self.keyboardDismissMode = .onDrag  // 拖动ScrollView键盘消失
+        
         self.isPagingEnabled = true
         self.contentSize = CGSize(width: SCREEN_WIDTH * 2, height: SCREEN_HEIGHT)
         

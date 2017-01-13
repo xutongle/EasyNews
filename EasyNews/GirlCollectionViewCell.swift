@@ -11,7 +11,7 @@ import Kingfisher
 
 class GirlCollectionViewCell: UICollectionViewCell {
     
-    private var imageView: UIImageView!
+    var imageView: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +21,14 @@ class GirlCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        self.addSubview(imageView)
+        self.contentView.addSubview(imageView)
+        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
     }
     
     override func layoutSubviews() {
@@ -32,21 +39,13 @@ class GirlCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
     func setImageURL(url: String) -> Void {
         guard let murl = URL(string: url) else {
-            
             return
         }
         
         // 加载图片
-        imageView.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: nil) { (image, error, cacheType, url) in
-            if error == nil {
-                
-            }else {
-                
-            }
-        }
+        imageView.kf.setImage(with: murl, placeholder: nil, options: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,9 +54,10 @@ class GirlCollectionViewCell: UICollectionViewCell {
     
     static func cellWith(collectionView: UICollectionView, indexPath: IndexPath, width: CGFloat, height: CGFloat) -> GirlCollectionViewCell {
         let ID = "GirlCollectionViewCell"
+        
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath) as? GirlCollectionViewCell
         if cell == nil {
-            cell = GirlCollectionViewCell.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            cell = GirlCollectionViewCell(frame: CGRect(x: 0, y: 0, width: width, height: height))
         }
         return cell!
     }

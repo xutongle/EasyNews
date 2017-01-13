@@ -65,6 +65,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { notification in
             //
             self.weatherScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
+            self.setEditing(false, animated: true)
+            
             guard let info = notification.userInfo else {
                 return
             }

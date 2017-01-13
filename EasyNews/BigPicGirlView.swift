@@ -9,14 +9,16 @@
 import UIKit
 
 extension UIViewController {
-    func showImage(url: String, mframe: CGRect) -> Void {
+    func showImage(url: String) -> Void {
         
-        let bigPicGirlView = BigPicGirlView(frame: mframe)
+        let bigPicGirlView = BigPicGirlView(frame: CGRect(x: -SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         bigPicGirlView.url = url
         UIApplication.shared.keyWindow?.addSubview(bigPicGirlView)
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, animations: { 
             bigPicGirlView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }) { (o) in
+            
         }
     }
 }
@@ -25,6 +27,16 @@ extension UIViewController {
 class BigPicGirlView: UIImageView {
     
     private var removeMeGestrue: UITapGestureRecognizer!
+    
+    // 进度条
+    private lazy var progressView: CycleView = {
+        let w = SCREEN_WIDTH / 4
+        let h = SCREEN_HEIGHT / 4
+        
+        let progressView = CycleView(frame: CGRect(x: SCREEN_WIDTH_2 - (w / 2), y: SCREEN_HEIGHT_2 - (w / 2), width: w, height: w), needLabel: true)
+        
+        return progressView
+    }()
     
     var url: String = "" {
         didSet{
@@ -41,6 +53,8 @@ class BigPicGirlView: UIImageView {
         self.isUserInteractionEnabled = true
         removeMeGestrue = UITapGestureRecognizer(target: self, action: #selector(removeMe))
         self.addGestureRecognizer(removeMeGestrue)
+        
+        self.addSubview(progressView)
     }
     
     private func makePic() {
@@ -49,15 +63,21 @@ class BigPicGirlView: UIImageView {
         }
         
         self.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: { (a, b) in
-            
+            DispatchQueue.main.async(execute: {
+                self.progressView.progress = CGFloat(a) / CGFloat(b)
+            })
         }) { (image, error, cache, url) in
-            
+            self.progressView.removeFromSuperview()
         }
     }
     
     @objc private func removeMe() {
-        self.removeFromSuperview()
-        self.removeMeGestrue = nil
+        UIView.animate(withDuration: 0.3, animations: { 
+            self.frame = CGRect(x: SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }) { (o) in
+            self.removeFromSuperview()
+            self.removeMeGestrue = nil
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -84,7 +84,7 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
     
     // 点按了cell
     internal func cellSelector(girlModel: GirlModel, mframe: CGRect) {
-        self.showImage(url: NetTool.tiangou_image_base_url + girlModel.img, mframe: mframe)
+        self.showImage(url: NetTool.tiangou_image_base_url + girlModel.img)
     }
 
     override func didReceiveMemoryWarning() {
