@@ -57,9 +57,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         self.getLocationPre()
         
         // 清除手势
-        gestrue = UISwipeGestureRecognizer(target: self, action: #selector(closeMe))
-        gestrue.direction = .down
-        self.view.addGestureRecognizer(gestrue)
+//        gestrue = UISwipeGestureRecognizer(target: self, action: #selector(closeMe))
+//        gestrue.direction = .down
+//        self.view.addGestureRecognizer(gestrue)
         
         // 监听通知 需要改变Scroll的位置
         NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { notification in

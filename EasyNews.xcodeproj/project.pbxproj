@@ -14,6 +14,9 @@
 		0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9441DFD117700779E04 /* SearchTableView.swift */; };
 		0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */; };
 		0A11B9491DFD171100779E04 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */; };
+		0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */; };
+		0A1FDCCC1E2A8104000E34CA /* SpringShowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */; };
+		0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */; };
 		0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */; };
 		0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25F1E12695A002C7442 /* GirlModel.swift */; };
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
@@ -62,6 +65,9 @@
 		0A11B9441DFD117700779E04 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransationGestrue.swift; sourceTree = "<group>"; };
+		0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringShowAnimation.swift; sourceTree = "<group>"; };
+		0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DissmissGestrueAnimation.swift; sourceTree = "<group>"; };
 		0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTypeModel.swift; sourceTree = "<group>"; };
 		0A3CA25F1E12695A002C7442 /* GirlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlModel.swift; sourceTree = "<group>"; };
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
@@ -145,6 +151,32 @@
 				0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */,
 			);
 			name = SearchView;
+			sourceTree = "<group>";
+		};
+		0A1FDCC61E2A7FFE000E34CA /* TransationComponent */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FDCCA1E2A80F1000E34CA /* Animation */,
+				0A1FDCC91E2A80E7000E34CA /* Gestrue */,
+			);
+			name = TransationComponent;
+			sourceTree = "<group>";
+		};
+		0A1FDCC91E2A80E7000E34CA /* Gestrue */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */,
+			);
+			name = Gestrue;
+			sourceTree = "<group>";
+		};
+		0A1FDCCA1E2A80F1000E34CA /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */,
+				0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */,
+			);
+			name = Animation;
 			sourceTree = "<group>";
 		};
 		0ABBAF0D1DFFA49E00D84C94 /* NewsCompoent */ = {
@@ -258,6 +290,7 @@
 				0AF802B01DFA93B9002C825F /* Tools */,
 				0ADB92D01E0FF36700D35F9E /* UserCompoent */,
 				0ABBAF0D1DFFA49E00D84C94 /* NewsCompoent */,
+				0A1FDCC61E2A7FFE000E34CA /* TransationComponent */,
 				0AF802A41DFA7D33002C825F /* WeatherComponent */,
 				0A0CB8CF1E0234E600336B6B /* SocketCompoent */,
 			);
@@ -473,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1FDCCC1E2A8104000E34CA /* SpringShowAnimation.swift in Sources */,
 				0ACCB7451E00F3BF003F3A3D /* NewsTopScrollView.swift in Sources */,
 				0ABBAF1C1DFFC4A000D84C94 /* GirlNavViewController.swift in Sources */,
 				0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */,
@@ -481,6 +515,7 @@
 				0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */,
 				0AEB5F871DFBD3A60057B822 /* LastWeatherView.swift in Sources */,
 				0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */,
+				0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */,
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */,
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,
@@ -502,6 +537,7 @@
 				0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */,
 				0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */,
 				0ABBAF1E1DFFC4B500D84C94 /* GirlViewController.swift in Sources */,
+				0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */,
 				0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */,
 				0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */,
 				0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */,

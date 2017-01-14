@@ -12,6 +12,9 @@ class NewsViewController: UIViewController {
 
     private var newsView: NewsView!
     
+    // 转场
+    let transationGestrue = TransationGestrue()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -29,6 +32,10 @@ class NewsViewController: UIViewController {
         self.newsView = NewsView()
         self.view.addSubview(self.newsView)
         
+        initLayout()
+    }
+    
+    func initLayout() -> Void {
         self.newsView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
@@ -36,14 +43,14 @@ class NewsViewController: UIViewController {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-    }
-    
     func rightAction() -> Void {
+        let weatherVC = WeatherViewController()
+        
+        weatherVC.transitioningDelegate = self
+        transationGestrue.wire(to: weatherVC)
+        
         // 前往天气页面
-         self.present(WeatherViewController(), animated: true, completion: nil)
+         self.present(weatherVC, animated: true, completion: nil)
     }
     
     // UDP SERVER
@@ -75,4 +82,29 @@ class NewsViewController: UIViewController {
         }
     }
 
+}
+
+extension NewsViewController: UIViewControllerTransitioningDelegate{
+    
+    // 跳转的动画
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return SpringShowAnimation()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return DissmissGestrueAnimation()
+    }
+    
+    // 交互式控制器
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        
+        return nil
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
+        
+        return transationGestrue.interactionInProgress ? transationGestrue : nil
+    }
 }
