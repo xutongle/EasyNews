@@ -53,6 +53,34 @@ class NewsViewController: UIViewController {
          self.present(weatherVC, animated: true, completion: nil)
     }
     
+}
+
+extension NewsViewController: UIViewControllerTransitioningDelegate{
+    
+    // 跳转的动画
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return SpringShowAnimation()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return DissmissGestrueAnimation()
+    }
+    
+    // 交互式控制器
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        
+        return nil
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
+        
+        return transationGestrue.interactionInProgress ? transationGestrue : nil
+    }
+}
+
+extension NewsViewController {
     // UDP SERVER
     func UDPServer() -> Void {
         DispatchQueue.global().async {
@@ -80,31 +108,5 @@ class NewsViewController: UIViewController {
                 CloseServer(S_SHUT_RD);
             }
         }
-    }
-
-}
-
-extension NewsViewController: UIViewControllerTransitioningDelegate{
-    
-    // 跳转的动画
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        return SpringShowAnimation()
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        return DissmissGestrueAnimation()
-    }
-    
-    // 交互式控制器
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        
-        return nil
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
-        
-        return transationGestrue.interactionInProgress ? transationGestrue : nil
     }
 }

@@ -45,9 +45,7 @@ class TransationGestrue: UIPercentDrivenInteractiveTransition {
         let translation = gestureRecognizer.translation(in: gestrueView.superview)
         var progress = Float(translation.y / (gestrueView.frame.size.height / 4))
         progress = fminf(fmaxf(progress, 0.0), 1.0)
-        
-        print(progress)
-        
+                
         switch gestureRecognizer.state {
             
         case .began:

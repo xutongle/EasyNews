@@ -12,19 +12,19 @@ import SnapKit
 import CoreLocation
 
 /// 天气控制器
-class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+class WeatherViewController: UIViewController {
     
-    private var weatherScrollView: WeatherScrollView!
+    fileprivate var weatherScrollView: WeatherScrollView!
     
-    private let locationManager = Tools.locationManage
+    fileprivate let locationManager = Tools.locationManage
     
-    private var gestrue: UISwipeGestureRecognizer!
+    fileprivate var nowModel: TodayViewModel!
+    fileprivate var models: [WeatherModel] = []
     
-    private var nowModel: TodayViewModel!
-    private var models: [WeatherModel] = []
+    fileprivate var isShow = false
     
     /// 是否正在请求数据
-    private var isRequest = [false, false] {
+    fileprivate var isRequest = [false, false] {
         didSet{
             guard !isRequest[0], !isRequest[1] else {  // 两个数据请求完成 notRequest
                 return
@@ -46,6 +46,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !isShow {
+            // 展示提示的view
+            showHelperCircle()
+            isShow = !isShow
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -55,11 +65,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         // 准备定位
         self.getLocationPre()
-        
-        // 清除手势
-//        gestrue = UISwipeGestureRecognizer(target: self, action: #selector(closeMe))
-//        gestrue.direction = .down
-//        self.view.addGestureRecognizer(gestrue)
         
         // 监听通知 需要改变Scroll的位置
         NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { notification in
@@ -78,24 +83,34 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    //
+    func showHelperCircle(){
+        let center = CGPoint(x: view.bounds.width * 0.5, y: 100)
+        let small = CGSize(width: 30, height: 30)
+        let circle = UIView(frame: CGRect(origin: center, size: small))
+        circle.layer.cornerRadius = circle.frame.width/2
+        circle.backgroundColor = UIColor.white
+        circle.layer.shadowOpacity = 0.8
+        circle.layer.shadowOffset = CGSize.zero
+        view.addSubview(circle)
         
-        if gestrue != nil {
-            self.view.removeGestureRecognizer(gestrue)
+        UIView.animate(withDuration: 0.5, delay: 0.25, options: .curveEaseIn, animations: { 
+            circle.frame.origin.y += 200
+            circle.layer.opacity = 0
+        }) { (finsh) in
+            circle.removeFromSuperview()
         }
     }
-    
-    // 手势
-    func closeMe() -> Void {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+}
+
+extension WeatherViewController {
+    // 总的
     func requestWeather(city: String?) -> Void {
         if isRequest[0] || isRequest[1] || city == nil{
             return
         }
-        self.showTransationView(style: .dark)
+        
+        //self.showTransationView(style: .dark)
         isRequest = [true, true]
         requestCurrentWeather(city: city!)
         requestThreeDayWeather(city: city!)
@@ -146,7 +161,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             guard let daily = results["daily"] as? [[String : String]] else {
                 return
             }
-
+            
             for model in daily {
                 self.models.append(WeatherModel(fromDictionary: model as NSDictionary))
             }
@@ -154,10 +169,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             self.isRequest[1] = false
         }
     }
-    
+}
+
+extension WeatherViewController: CLLocationManagerDelegate {
     // MARK: - ======== 定位=========
     func getLocationPre() -> Void {
-
+        
         // 开启了定位
         if (CLLocationManager.locationServicesEnabled()) {
             // 请求允许使用定位
@@ -179,7 +196,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation = locations.last {
             
-            self.showTransationView(style: .dark)  // 展示过场动画 当isRequest的两个值都为false 都不在请求网络时 消失 通过KVO
+            //self.showTransationView(style: .dark)  // 展示过场动画 当isRequest的两个值都为false 都不在请求网络时 消失 通过KVO
             
             self.reverseGeocodeLocation(location: newLocation, complete: { [weak self] (city) in
                 if let strongSelf = self {
@@ -223,5 +240,4 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             
         })
     }
-    
 }
