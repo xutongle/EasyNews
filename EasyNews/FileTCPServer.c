@@ -6,8 +6,9 @@
 //  Copyright © 2016年 zly. All rights reserved.
 //
 
-#import "FileUDPServer.h"
+#import "FileTCPServer.h"
 
+#define BUFF_SIZE 1024
 
 int sock;         // serverSocket
 int clientSocket; // client
@@ -15,6 +16,7 @@ int clientSocket; // client
 FILE* file;       // 存储的文件
 
 int state = -1;
+
 
 /**
  监听IP和端口
@@ -24,9 +26,8 @@ int state = -1;
  @return 是否成功监听 0 失败 1 成功
  */
 int Listener(char* ip, int port){
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    
-    printf("%s : %d \n", ip, port);
+    sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    printf("connect to: %s : %d \n", ip, port);
     
     /* 设置IP 和 端口 协议 等 */
     struct sockaddr_in sockaddrIn;
@@ -37,22 +38,22 @@ int Listener(char* ip, int port){
     
     /* 绑定 */
     if (bind(sock, (struct sockaddr *)&sockaddrIn, sizeof(sockaddrIn)) < 0){
-        printf("bind_error_server \n");
+        printf("bind_error \n");
         return 0;
     }
     
     /* 监听 队列长度 1 */
     if (listen(sock, 1) < 0) {
-        printf("listen_error_server \n");
+        printf("listen_error \n");
         return 0;
     }
     return 1;
 }
 
 int Accept() {
-    struct sockaddr_in _sockaddr;
-    unsigned int size = sizeof(_sockaddr);
-    clientSocket = accept(sock, (struct sockaddr *)&_sockaddr, &size);
+    struct sockaddr _sockaddr;
+    socklen_t size = sizeof(_sockaddr);
+    clientSocket = accept(sock, &_sockaddr, &size);
     if (clientSocket <= 0) {
         return 0;
     }
@@ -99,23 +100,24 @@ int CreateFile(char* filePath) {
     return 1;
 }
 
-void Reciver() {
-    printf("Reciver \n");
+char* Reciver() {
     
     char buffer[BUFF_SIZE] = {0};
     // 接收 返回接收的大小
     size_t length = recv(clientSocket, buffer, BUFF_SIZE, 0);
     
-    printf("data: %s - %zu \n", buffer, length);
+    printf("c_data: %s ", buffer);
     
-    if (length == 0) {
-        state = 0;
-    }else {
-        // 写入文件
-        fwrite(buffer, length, 1, file);
-        fflush(file);
-        state = (int)length;
-    }
+    // 写入文件
+    //fwrite(buffer, length, 1, file);
+    //fflush(file);
+    
+    state = (int)length;
+    
+    char* value = (char*) malloc(length);
+    memcpy(value, buffer, length);
+    
+    return value;
 }
 
 int getState() {

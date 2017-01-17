@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0A0AE2891E2DB8F7006B4414 /* NewsTransationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */; };
-		0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB8D51E02460F00336B6B /* FileUDPServer.c */; };
+		0A0AE28D1E2DC867006B4414 /* GirlCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AE28B1E2DC867006B4414 /* GirlCollectionReusableView.swift */; };
+		0A0AE28E1E2DC867006B4414 /* GirlCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0AE28C1E2DC867006B4414 /* GirlCollectionReusableView.xib */; };
+		0A0CB8D61E02460F00336B6B /* FileTCPServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB8D51E02460F00336B6B /* FileTCPServer.c */; };
 		0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */; };
 		0A11B93F1DFD06DE00779E04 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B93E1DFD06DE00779E04 /* city.plist */; };
 		0A11B9411DFD07B300779E04 /* WeatherScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */; };
@@ -58,9 +60,11 @@
 
 /* Begin PBXFileReference section */
 		0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTransationDelegate.swift; sourceTree = "<group>"; };
+		0A0AE28B1E2DC867006B4414 /* GirlCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionReusableView.swift; sourceTree = "<group>"; };
+		0A0AE28C1E2DC867006B4414 /* GirlCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GirlCollectionReusableView.xib; sourceTree = "<group>"; };
 		0A0CB8D01E02350700336B6B /* EasyNews-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyNews-Bridging-Header.h"; sourceTree = "<group>"; };
-		0A0CB8D41E02460F00336B6B /* FileUDPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUDPServer.h; sourceTree = "<group>"; };
-		0A0CB8D51E02460F00336B6B /* FileUDPServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileUDPServer.c; sourceTree = "<group>"; };
+		0A0CB8D41E02460F00336B6B /* FileTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTCPServer.h; sourceTree = "<group>"; };
+		0A0CB8D51E02460F00336B6B /* FileTCPServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileTCPServer.c; sourceTree = "<group>"; };
 		0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConstant.swift; sourceTree = "<group>"; };
 		0A11B93E1DFD06DE00779E04 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		0A11B9401DFD07B300779E04 /* WeatherScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherScrollView.swift; sourceTree = "<group>"; };
@@ -132,11 +136,20 @@
 			name = Delegate;
 			sourceTree = "<group>";
 		};
+		0A0AE28A1E2DC845006B4414 /* ReusbleView */ = {
+			isa = PBXGroup;
+			children = (
+				0A0AE28B1E2DC867006B4414 /* GirlCollectionReusableView.swift */,
+				0A0AE28C1E2DC867006B4414 /* GirlCollectionReusableView.xib */,
+			);
+			name = ReusbleView;
+			sourceTree = "<group>";
+		};
 		0A0CB8CF1E0234E600336B6B /* SocketCompoent */ = {
 			isa = PBXGroup;
 			children = (
-				0A0CB8D41E02460F00336B6B /* FileUDPServer.h */,
-				0A0CB8D51E02460F00336B6B /* FileUDPServer.c */,
+				0A0CB8D41E02460F00336B6B /* FileTCPServer.h */,
+				0A0CB8D51E02460F00336B6B /* FileTCPServer.c */,
 				0A0CB8D01E02350700336B6B /* EasyNews-Bridging-Header.h */,
 			);
 			name = SocketCompoent;
@@ -263,6 +276,7 @@
 				0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */,
 				0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */,
 				0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */,
+				0A0AE28A1E2DC845006B4414 /* ReusbleView */,
 			);
 			name = Girls;
 			sourceTree = "<group>";
@@ -457,6 +471,7 @@
 			files = (
 				0AF8029D1DFA7CF7002C825F /* LaunchScreen.storyboard in Resources */,
 				0A11B93F1DFD06DE00779E04 /* city.plist in Resources */,
+				0A0AE28E1E2DC867006B4414 /* GirlCollectionReusableView.xib in Resources */,
 				0AF8029A1DFA7CF7002C825F /* Assets.xcassets in Resources */,
 				0A11B9491DFD171100779E04 /* SearchTableViewCell.xib in Resources */,
 			);
@@ -518,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1FDCCC1E2A8104000E34CA /* SpringShowAnimation.swift in Sources */,
+				0A0AE28D1E2DC867006B4414 /* GirlCollectionReusableView.swift in Sources */,
 				0ACCB7451E00F3BF003F3A3D /* NewsTopScrollView.swift in Sources */,
 				0ABBAF1C1DFFC4A000D84C94 /* GirlNavViewController.swift in Sources */,
 				0AE6C22D1DFAF15500B20518 /* CycleView.swift in Sources */,
@@ -541,7 +557,7 @@
 				0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */,
 				0ABBAF161DFFBC4F00D84C94 /* TabBarViewController.swift in Sources */,
 				0AEB5F811DFAF9220057B822 /* TodayView.swift in Sources */,
-				0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */,
+				0A0CB8D61E02460F00336B6B /* FileTCPServer.c in Sources */,
 				0A9886A71E238C4B0019E17A /* BigPicGirlView.swift in Sources */,
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,

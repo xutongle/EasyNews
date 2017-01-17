@@ -99,6 +99,10 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         }
     }
     
+    private func showFooterview() -> Void {
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

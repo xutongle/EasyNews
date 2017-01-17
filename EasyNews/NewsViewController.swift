@@ -34,6 +34,8 @@ class NewsViewController: UIViewController {
         self.view.addSubview(self.newsView)
         
         initLayout()
+        
+        UDPServer()
     }
     
     func initLayout() -> Void {
@@ -59,6 +61,7 @@ class NewsViewController: UIViewController {
 }
 
 extension NewsViewController {
+
     // UDP SERVER
     func UDPServer() -> Void {
         DispatchQueue.global().async {
@@ -73,15 +76,12 @@ extension NewsViewController {
                     return
                 }
                 
-                let path_utf8Str = (Tools.getCacheDirectory(name: "temp") as NSString).utf8String
-                let path_point = UnsafeMutablePointer<Int8>(mutating: path_utf8Str)
-                guard CreateFile(path_point) == 1 else {
-                    return
+                while getState() > 2{
+                    if let value = Reciver() {
+                        print(" swift_data", String(cString: value, encoding: String.Encoding.utf8) ?? "null")
+                    }
                 }
                 
-                while getState() > 2{
-                    Reciver()
-                }
                 // 关闭客户端
                 CloseServer(S_SHUT_RD);
             }

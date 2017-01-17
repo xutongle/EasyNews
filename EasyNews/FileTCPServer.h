@@ -19,8 +19,6 @@
 #include <arpa/inet.h>
 #include <zconf.h>
 
-#define BUFF_SIZE 1024
-
 // 关闭模式
 typedef enum SHUT {
     S_SHUT_RD = 0,
@@ -42,10 +40,10 @@ int Accept();
 /*  关闭 */
 void CloseServer(shut s);
 
-int CreateFile(char* filePath);
+//int CreateFile(char* filePath);
 
 /* 接收到了数据 */
-void Reciver();
+char* Reciver();
 
 /* 等于0表示数据接收完毕 -1 表示未接收到数据 */
 int getState();

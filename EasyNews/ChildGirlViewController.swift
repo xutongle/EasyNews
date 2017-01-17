@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 /// 每一个collectionView的Controller
-class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
+class ChildGirlViewController: UIViewController {
 
     private var collectionView: GirlsCollectionView!  // 主体CollectionView
     
@@ -29,10 +29,11 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
     }
     
     // 是否正在请求数据
-    private var isRequest: Bool = false
+    fileprivate var isRequest: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
@@ -53,6 +54,7 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
     // 获得图片list 包含图片的网址
     private func getGirlPic() -> Void {
         isRequest = true
+        Toast.toast.show(message: "加载中...", duration: .short, block: nil)
         Alamofire.request(NetTool.tiangou_image_list_url, method: .post, parameters: ["page" : page, "id" : id, "rows" : 18]).responseJSON { (response) in
             self.isRequest = false
             guard let result = response.result.value as? NSDictionary else {
@@ -73,21 +75,26 @@ class ChildGirlViewController: UIViewController, GirlCollectionProtocol {
             }
         }
     }
-    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
+
+extension ChildGirlViewController: GirlCollectionProtocol {
     // 协议 滚动
     internal func needAdd() {
         if isRequest {
+            Toast.toast.show(message: "正在加载中，稍等哦", duration: .short, block: nil)
             return
         }
         page += 1
     }
-    
+}
+
+extension ChildGirlViewController {
     // 点按了cell
     internal func cellSelector(girlModel: GirlModel, mframe: CGRect) {
         self.showImage(url: NetTool.tiangou_image_base_url + girlModel.img)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
