@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0AE2891E2DB8F7006B4414 /* NewsTransationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */; };
 		0A0CB8D61E02460F00336B6B /* FileUDPServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB8D51E02460F00336B6B /* FileUDPServer.c */; };
 		0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0FFA1A1DFE96D5007A92AB /* LocalConstant.swift */; };
 		0A11B93F1DFD06DE00779E04 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B93E1DFD06DE00779E04 /* city.plist */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTransationDelegate.swift; sourceTree = "<group>"; };
 		0A0CB8D01E02350700336B6B /* EasyNews-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyNews-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A0CB8D41E02460F00336B6B /* FileUDPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUDPServer.h; sourceTree = "<group>"; };
 		0A0CB8D51E02460F00336B6B /* FileUDPServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileUDPServer.c; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A0AE2871E2DB8E3006B4414 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */,
+			);
+			name = Delegate;
+			sourceTree = "<group>";
+		};
 		0A0CB8CF1E0234E600336B6B /* SocketCompoent */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 		0A1FDCC61E2A7FFE000E34CA /* TransationComponent */ = {
 			isa = PBXGroup;
 			children = (
+				0A0AE2871E2DB8E3006B4414 /* Delegate */,
 				0A1FDCCA1E2A80F1000E34CA /* Animation */,
 				0A1FDCC91E2A80E7000E34CA /* Gestrue */,
 			);
@@ -516,6 +527,7 @@
 				0AEB5F871DFBD3A60057B822 /* LastWeatherView.swift in Sources */,
 				0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */,
 				0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */,
+				0A0AE2891E2DB8F7006B4414 /* NewsTransationDelegate.swift in Sources */,
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */,
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,

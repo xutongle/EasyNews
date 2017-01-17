@@ -23,6 +23,10 @@ class WeatherViewController: UIViewController {
     
     fileprivate var isShow = false
     
+    //fileprivate let weatherArchiverPath = Tools.getCacheDirectory(name: "Weather.model")
+    //fileprivate let modelsStr = "models"
+    //fileprivate let nowModelStr = "nowModel"
+    
     /// 是否正在请求数据
     fileprivate var isRequest = [false, false] {
         didSet{
@@ -32,6 +36,9 @@ class WeatherViewController: UIViewController {
             if nowModel != nil && models.count > 0 {  // 展示完成的结果
                 self.weatherScrollView.getWeatherView().models = models
                 self.weatherScrollView.getWeatherView().todayViewModel = nowModel
+                
+                //let dict: [String : Any] = [modelsStr : models, nowModelStr : nowModel]
+                //NSKeyedArchiver.archiveRootObject(dict, toFile: weatherArchiverPath)
                 // 提示
                 Toast.toast.show(message: "数据请求成功", duration: .nomal, block: nil)
                 self.removeTransationView()      // 移除过渡动画
@@ -50,8 +57,12 @@ class WeatherViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if !isShow {
-            // 展示提示的view
-            showHelperCircle()
+            let count = Tools.getUserDefaults(key: "ShowHelperCircleCount") as? Int ?? 0
+            // 只显示3次
+            if count < 3 {
+                showHelperCircle()
+                Tools.setUserDefaults(key: "ShowHelperCircleCount", andValue: count + 1)
+            }
             isShow = !isShow
         }
     }
@@ -85,16 +96,17 @@ class WeatherViewController: UIViewController {
     
     //
     func showHelperCircle(){
-        let center = CGPoint(x: view.bounds.width * 0.5, y: 100)
-        let small = CGSize(width: 30, height: 30)
-        let circle = UIView(frame: CGRect(origin: center, size: small))
-        circle.layer.cornerRadius = circle.frame.width/2
+        let circle = UIView(frame: CGRect(
+                origin: CGPoint(x: view.bounds.width * 0.5, y: 100),
+                size: CGSize(width: 30, height: 30)
+        ))
+        circle.layer.cornerRadius = circle.frame.width / 2
         circle.backgroundColor = UIColor.white
         circle.layer.shadowOpacity = 0.8
         circle.layer.shadowOffset = CGSize.zero
         view.addSubview(circle)
         
-        UIView.animate(withDuration: 0.5, delay: 0.25, options: .curveEaseIn, animations: { 
+        UIView.animate(withDuration: 0.5, delay: 0.6, options: .curveEaseIn, animations: {
             circle.frame.origin.y += 200
             circle.layer.opacity = 0
         }) { (finsh) in
@@ -110,6 +122,7 @@ extension WeatherViewController {
             return
         }
         
+        // 展示过场动画 当isRequest的两个值都为false 都不在请求网络时 消失 通过KVO
         //self.showTransationView(style: .dark)
         isRequest = [true, true]
         requestCurrentWeather(city: city!)
@@ -195,8 +208,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
     //
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation = locations.last {
-            
-            //self.showTransationView(style: .dark)  // 展示过场动画 当isRequest的两个值都为false 都不在请求网络时 消失 通过KVO
             
             self.reverseGeocodeLocation(location: newLocation, complete: { [weak self] (city) in
                 if let strongSelf = self {

@@ -13,7 +13,8 @@ class NewsViewController: UIViewController {
     private var newsView: NewsView!
     
     // 转场
-    let transationGestrue = TransationGestrue()
+    fileprivate let transationGestrue = TransationGestrue()
+    fileprivate var transationDelegate: NewsTransationDelegate!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,38 +47,15 @@ class NewsViewController: UIViewController {
     func rightAction() -> Void {
         let weatherVC = WeatherViewController()
         
-        weatherVC.transitioningDelegate = self
-        transationGestrue.wire(to: weatherVC)
+        transationDelegate = NewsTransationDelegate(transationGestrue: transationGestrue)
+        weatherVC.transitioningDelegate = transationDelegate
         
+        // 主要是做了手势和协议
+        transationGestrue.wire(to: weatherVC)
         // 前往天气页面
          self.present(weatherVC, animated: true, completion: nil)
     }
     
-}
-
-extension NewsViewController: UIViewControllerTransitioningDelegate{
-    
-    // 跳转的动画
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        return SpringShowAnimation()
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        return DissmissGestrueAnimation()
-    }
-    
-    // 交互式控制器
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        
-        return nil
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
-        
-        return transationGestrue.interactionInProgress ? transationGestrue : nil
-    }
 }
 
 extension NewsViewController {

@@ -9,24 +9,24 @@
 import UIKit
 import Alamofire
 
-class GirlViewController: UIViewController, ItemScrollViewDelegate{
+class GirlViewController: UIViewController {
 
-    private var itemScrollView: ItemScrollView!                   // 顶部滚动的view
-    private var newGirlscollectionView: GirlsCollectionView!      // 只看最新的妹子
+    fileprivate var itemScrollView: ItemScrollView!                   // 顶部滚动的view
+    fileprivate var newGirlscollectionView: GirlsCollectionView!      // 只看最新的妹子
     
-    private var isAnimationed = false
+    fileprivate var isAnimationed = false
     
     // 容器
-    private var containerView: UIView!
+    fileprivate var containerView: UIView!
     // 当前容器上的view
-    private var currentContainerVC: ChildGirlViewController!
+    fileprivate var currentContainerVC: ChildGirlViewController!
     
     // 正常的图片分类分类
-    private var oldID: Int = 1
-    private var page: Int = 1
+    fileprivate var oldID: Int = 1
+    fileprivate var page: Int = 1
     
     // 只看最新的页码
-    private var newPage: Int = 1
+    fileprivate var newPage: Int = 1
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,6 +69,7 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
                 //
                 childVC.setFrame(mframe: CGRect(x: 0, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height), mid: m.id)
             }
+            
             // 显示第一个
             self.containerView.addSubview(self.childViewControllers.first!.view)
             self.currentContainerVC = self.childViewControllers.first as! ChildGirlViewController
@@ -98,18 +99,22 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
             }
         }
     }
-    
+}
+
+// MARK: - ItemScrollViewDelegate协议
+extension GirlViewController: ItemScrollViewDelegate {
     // 协议
     func ItemCilck(girlType: GirlTypeModel) {
         guard childViewControllers.count >= girlType.id else {
             return
         }
         let vc = childViewControllers[girlType.id - 1] as! ChildGirlViewController
+        // 如果当前就是这个
         if currentContainerVC.isEqual(vc) {
             return
         }
         
-        self.transition(from: currentContainerVC, to: vc, duration: 0.5, options: .transitionCrossDissolve, animations: nil) { (over) in
+        self.transition(from: currentContainerVC, to: vc, duration: 0.5, options: .transitionCurlDown, animations: nil) { (over) in
             vc.didMove(toParentViewController: self)
             self.currentContainerVC = vc
             
@@ -118,9 +123,11 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
             // self.currentContainerVC.removeFromParentViewController()
         }
     }
-    
-    @objc
-    private func rightAction() -> Void {
+}
+
+// MARK: - 右侧导航栏按钮事件
+extension GirlViewController {
+    @objc private func rightAction() -> Void {
         if !isAnimationed {
             onlySeeNew()
             isAnimationed = true
@@ -160,5 +167,4 @@ class GirlViewController: UIViewController, ItemScrollViewDelegate{
         self.navigationItem.rightBarButtonItem?.title = "只看最新"
         self.navigationItem.title = "妹子图"
     }
-
 }
