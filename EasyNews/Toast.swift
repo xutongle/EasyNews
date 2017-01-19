@@ -56,30 +56,31 @@ class Toast: UIView {
         label.textColor = UIColor.white
         
         let messageStr = message as NSString
-        let rect = messageStr.boundingRect(with: CGSize(width: SCREEN_WIDTH / 3 * 2, height: SCREEN_HEIGHT), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil)
-        
-        var useSize: CGSize = rect.size
+        var _size = messageStr.boundingRect(with: CGSize(width: SCREEN_WIDTH / 3 * 2, height: SCREEN_HEIGHT), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil).size
         
         label.textAlignment = .left
-        if rect.width <= SCREEN_WIDTH / 2 {
-            useSize.width = SCREEN_WIDTH / 2
+        
+        // 最小宽度
+        if _size.width <= SCREEN_WIDTH / 3 {
+            _size.width = SCREEN_WIDTH / 3
             label.textAlignment = .center
         }
-        if rect.height < 30 {
-            useSize.height = 30
+        // 最小高度
+        if _size.height < 30 {
+            _size.height = 30
             label.textAlignment = .center
         }
         
         let screen_width = UIScreen.main.bounds.width
         let screen_height = UIScreen.main.bounds.height
         
-        let calc_width = useSize.width
-        let calc_height = useSize.height
+        let calc_width = _size.width
+        let calc_height = _size.height
         
-        self.frame = CGRect(x: (screen_width - (calc_width + 10)) / 2 , y: (screen_height - (calc_height + 10)) - 50, width: calc_width + 10, height: calc_height + 10)
+        self.frame = CGRect(x: (screen_width - calc_width) / 2 , y: screen_height - calc_height - 54, width: calc_width, height: calc_height)
         
         // 初始化label
-        label.frame = CGRect(x: 5, y: 5, width: calc_width, height: calc_height)
+        label.frame = CGRect(x: 5, y: 5, width: calc_width - 10, height: calc_height - 10)
         
         self.addSubview(label)
         

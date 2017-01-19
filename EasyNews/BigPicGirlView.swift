@@ -15,9 +15,9 @@ extension UIViewController {
         bigPicGirlView.url = url
         UIApplication.shared.keyWindow?.addSubview(bigPicGirlView)
         
-        UIView.animate(withDuration: 0.3, animations: { 
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { 
             bigPicGirlView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-        }) { (o) in
+        }) { (finshed) in
             
         }
     }
