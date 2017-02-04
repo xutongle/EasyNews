@@ -33,7 +33,8 @@ class BigPicGirlView: UIImageView {
         let w = SCREEN_WIDTH / 4
         let h = SCREEN_HEIGHT / 4
         
-        let progressView = CycleView(frame: CGRect(x: SCREEN_WIDTH_2 - (w / 2), y: SCREEN_HEIGHT_2 - (w / 2), width: w, height: w), needLabel: true)
+        let progressView = CycleView(frame: CGRect(x: SCREEN_WIDTH_2 - (w / 2), y: SCREEN_HEIGHT_2 - (w / 2), width: w, height: w))
+        progressView.needLabel = true
         
         return progressView
     }()

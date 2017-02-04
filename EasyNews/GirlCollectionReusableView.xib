@@ -11,27 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GirlCollectionReusableView" id="U6b-Vx-4bR" customClass="GirlCollectionReusableView" customModule="EasyNews" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRz-8l-lLJ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="TRz-8l-lLJ" secondAttribute="trailing" id="Ej7-v4-J6f"/>
-                <constraint firstItem="TRz-8l-lLJ" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="HiD-Ot-z5B"/>
-                <constraint firstAttribute="bottom" secondItem="TRz-8l-lLJ" secondAttribute="bottom" id="Q5c-7S-UPJ"/>
-                <constraint firstItem="TRz-8l-lLJ" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="tAw-RD-v9U"/>
-            </constraints>
-            <connections>
-                <outlet property="textLabel" destination="TRz-8l-lLJ" id="OHe-J8-okw"/>
-            </connections>
-            <point key="canvasLocation" x="-434" y="43"/>
+            <point key="canvasLocation" x="-647" y="-119"/>
         </collectionReusableView>
     </objects>
 </document>

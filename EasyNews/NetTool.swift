@@ -73,7 +73,7 @@ class NetTool: NSObject {
         }else {
             return "zh-Hans"  //获得语言失败
         }
-        return "en"   // 不是中文
+        return "en"           // 不是中文
     }
     
     // toString

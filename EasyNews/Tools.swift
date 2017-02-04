@@ -18,13 +18,13 @@ class Tools: NSObject {
     // 指定日历的算法
     static let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
     
-    //获得用户变量
+    // 获得用户变量
     static func getUserDefaults(key: String) -> Any? {
         
         return UserDefaults.standard.object(forKey: key)
     }
     
-    //设置用户变量
+    // 设置用户变量
     static func setUserDefaults(key: String, andValue value:Any) -> Void {
         
         if UserDefaults.standard.object(forKey: key) != nil {
@@ -35,7 +35,7 @@ class Tools: NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    //删除用户变量
+    // 删除用户变量
     static func delUserDefaults(key : String) -> Void {
         
         if UserDefaults.standard.object(forKey: key) != nil {
@@ -126,7 +126,7 @@ class Tools: NSObject {
     
     /* 获得 获取指定日期的年，月，日，星期，时,分,秒信息 */
     static func getWeek(dateTime:String, comSet: Set<Calendar.Component>, date: Date) -> DateComponents{
-        //let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        // let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         // set里你给定了什么 .mouth 他就有 当前给定时间的月份 在component 里
         let component = calendar.dateComponents(comSet, from: date)
         return component

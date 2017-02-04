@@ -8,7 +8,7 @@
 
 import UIKit
 
-//@IBDesignable
+@IBDesignable
 class CycleView: UIView {
     
     private var lineWidth: CGFloat = 10       // 画圆那个圈的大小
@@ -16,7 +16,17 @@ class CycleView: UIView {
     
     private var shapeLayer: CAShapeLayer!     // 画圆的layer
     
-    private var needLabel = false
+    @IBInspectable open var needLabel: Bool = false {
+        didSet{
+            if needLabel {
+                self.label.isHidden = false
+            }
+            else {
+                self.label.isHidden = true
+            }
+        }
+    }
+    
     private lazy var label: UILabel = {       // 进度 label
         let w = self.frame.width / 2
         let h = self.frame.height / 2
@@ -29,18 +39,15 @@ class CycleView: UIView {
     }()
     
     /* 进度条 */
-    //@IBInspectable
-    open var progress: CGFloat = 0 {
+    @IBInspectable open var progress: CGFloat = 0 {
         didSet{
             self.setAnimation(toValue: progress)
             self.label.text = String(format: "%.0f", progress * 100) + "%"
         }
     }
     
-    init(frame: CGRect, needLabel: Bool) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.needLabel = needLabel
         
         setNeedsLayout()
         layoutIfNeeded()
@@ -55,6 +62,7 @@ class CycleView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         initView()
     }
     
@@ -112,8 +120,8 @@ class CycleView: UIView {
         let gradientLayer2 = CAGradientLayer()
         gradientLayer2.frame = CGRect(x: self.bounds.width / 2, y: 0, width: self.bounds.width / 2, height: self.bounds.size.height)
         
-        gradientLayer1.locations = [0.1, 0.4, 0.6, 0.9]
-        gradientLayer2.locations = [0.1, 0.4, 0.6, 0.9]
+        gradientLayer1.locations = [0, 0.25, 0.5, 1]
+        gradientLayer2.locations = [0, 0.25, 0.5, 1]
         
         let colors1 = [UIColor(rgba: 0x3DACF7AA), UIColor(rgba: 0xFE6666AA), UIColor(rgba: 0xFFFF02AA), UIColor(rgba: 0x33CC99AA)]
         gradientLayer1.colors = colors1.map {$0.cgColor}
@@ -162,7 +170,7 @@ class CycleView: UIView {
         self.animation = CABasicAnimation(keyPath: "strokEnd")
         self.animation.duration = 0.25
         
-        self.animation.autoreverses = false            // 返回去再执行一次
+        self.animation.autoreverses = false              // 返回去再执行一次
         //self.animation.fillMode = kCAFillModeBackwards
         //self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         //self.animation.isRemovedOnCompletion = false   // 动画执行完后是否移除
@@ -172,7 +180,7 @@ class CycleView: UIView {
         CATransaction.commit()
         
         //
-        self.shapeLayer.strokeEnd = self.progress
+        self.shapeLayer.strokeEnd = 0
         
         // CATransaction.begin()
         // CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)

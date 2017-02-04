@@ -12,6 +12,7 @@ import Foundation
 ///单利类
 class SingleManager: NSObject {
     
+    // 字典存取键值
     private var mutableDictionary: [String: Any]!
     
     // swift的单利 只会初始化一次
@@ -23,19 +24,19 @@ class SingleManager: NSObject {
     }
     
     // 添加
-    func add(Key key: String?, andValue value: Any?) -> Void {
+    func add(key: String?, value: Any?) -> Void {
         if key == nil || value == nil { return }
         mutableDictionary[key!] = value!
     }
     
     // 移除
-    func remove(Key key: String?) -> Void {
+    func remove(key: String?) -> Void {
         if key == nil { return }
         mutableDictionary.removeValue(forKey: key!)
     }
     
     // 取值
-    func getValue(Key key: String?) -> Any? {
+    func getValue(key: String?) -> Any? {
         if key == nil { return nil }
         return mutableDictionary[key!]
     }

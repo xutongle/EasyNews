@@ -33,32 +33,37 @@ public enum ToastDuration {
 class Toast: UIView {
     
     // Toast上的文字
-    private var label:UILabel = UILabel()
+    private var label: UILabel = UILabel()
+    
+    private static let screen_width = UIScreen.main.bounds.width
+    private static let screen_height = UIScreen.main.bounds.height
     //
-    static let toast = Toast(frame: CGRect(x: SCREEN_WIDTH / 4, y: SCREEN_HEIGHT - 80, width: SCREEN_WIDTH / 2, height: 40))
+    static let toast = Toast(frame: CGRect(x: screen_width / 4, y: screen_height - 80, width: screen_width / 2, height: 40))
 
     // Toast 的一些默认设置
     override fileprivate init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.black
-        
         self.layer.cornerRadius = 10
     }
     
-    func show(message: String, duration: ToastDuration, block: (() -> Void)?) -> Void {
+    func show(message: String, duration: ToastDuration, removed: (() -> Void)?) -> Void {
+        
+        let messageStr = message as NSString
         
         label.text = message
         // 行数自适应
         label.numberOfLines = 0
         // 截断新内容
         label.lineBreakMode = .byCharWrapping
-        
         label.textColor = UIColor.white
-        
-        let messageStr = message as NSString
-        var _size = messageStr.boundingRect(with: CGSize(width: SCREEN_WIDTH / 3 * 2, height: SCREEN_HEIGHT), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:label.font], context: nil).size
-        
         label.textAlignment = .left
+        
+        var _size = messageStr.boundingRect(
+            with: CGSize(width: SCREEN_WIDTH / 3 * 2, height: SCREEN_HEIGHT),
+            options: .usesLineFragmentOrigin,
+            attributes: [NSFontAttributeName : label.font],
+            context: nil).size
         
         // 最小宽度
         if _size.width <= SCREEN_WIDTH / 3 {
@@ -71,13 +76,15 @@ class Toast: UIView {
             label.textAlignment = .center
         }
         
-        let screen_width = UIScreen.main.bounds.width
-        let screen_height = UIScreen.main.bounds.height
-        
         let calc_width = _size.width
         let calc_height = _size.height
         
-        self.frame = CGRect(x: (screen_width - calc_width) / 2 , y: screen_height - calc_height - 54, width: calc_width, height: calc_height)
+        self.frame = CGRect(
+            x: (Toast.screen_width - calc_width) / 2 ,
+            y: Toast.screen_height - calc_height - 40,
+            width: calc_width,
+            height: calc_height
+        )
         
         // 初始化label
         label.frame = CGRect(x: 5, y: 5, width: calc_width - 10, height: calc_height - 10)
@@ -90,22 +97,22 @@ class Toast: UIView {
             self.alpha = 1
         })
         
-        // 延迟一秒
-        var delay: DispatchTime!
+        // 延时
+        var delay: Int = 1
         switch duration {
         case .long:
-            delay = DispatchTime.now() + DispatchTimeInterval.seconds(3)
+            delay = 3
             break
         case .nomal:
-            delay = DispatchTime.now() + DispatchTimeInterval.seconds(2)
+            delay = 2
             break
         case .short:
-            delay = DispatchTime.now() + DispatchTimeInterval.seconds(1)
+            delay = 1
             break
         }
-        DispatchQueue.main.asyncAfter(deadline: delay) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
             self.removeFromSuperview()
-            if block != nil { block!() }
+            removed?()
         }
     }
     

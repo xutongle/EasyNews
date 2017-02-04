@@ -40,7 +40,7 @@ class WeatherViewController: UIViewController {
                 //let dict: [String : Any] = [modelsStr : models, nowModelStr : nowModel]
                 //NSKeyedArchiver.archiveRootObject(dict, toFile: weatherArchiverPath)
                 // 提示
-                Toast.toast.show(message: "数据请求成功", duration: .nomal, block: nil)
+                Toast.toast.show(message: "数据请求成功", duration: .nomal, removed: nil)
                 self.removeTransationView()      // 移除过渡动画
             }
         }
@@ -137,7 +137,7 @@ extension WeatherViewController {
                 return
             }
             guard let resultsArr = result["results"] as? [[String : Any]?] else {
-                Toast.toast.show(message: "当前数据请求失败", duration: .nomal, block: nil)
+                Toast.toast.show(message: "当前数据请求失败", duration: .nomal, removed: nil)
                 self.removeTransationView()      // 移除过渡动画
                 self.isRequest = [false, false]
                 return
@@ -163,7 +163,7 @@ extension WeatherViewController {
                 return
             }
             guard let resultArr = result["results"] as? [[String : Any]?] else {
-                Toast.toast.show(message: "其余数据请求失败", duration: .nomal, block: nil)
+                Toast.toast.show(message: "其余数据请求失败", duration: .nomal, removed: nil)
                 self.removeTransationView()      // 移除过渡动画
                 self.isRequest = [false, false]
                 return
@@ -201,7 +201,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             self.locationManager.startUpdatingLocation()
         }else {
             CLLocationManager.authorizationStatus()
-            Toast.toast.show(message: "定位未开启", duration: .nomal, block: nil)
+            Toast.toast.show(message: "定位未开启", duration: .nomal, removed: nil)
         }
     }
     
@@ -221,14 +221,14 @@ extension WeatherViewController: CLLocationManagerDelegate {
     //MARK:定位错误信息
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
         
-        Toast.toast.show(message: "定位出错", duration: .nomal, block: nil)
+        Toast.toast.show(message: "定位出错", duration: .nomal, removed: nil)
     }
     
     //检测是否获取到定位
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //如果未开启定位服务或者获取不到定位，会走此代理方法
         manager.stopUpdatingLocation()
-        Toast.toast.show(message: "未得到位置， 重新获取中...", duration: .nomal, block: nil)
+        Toast.toast.show(message: "未得到位置， 重新获取中...", duration: .nomal, removed: nil)
     }
     
     // MARK: - ============ 逆地理编码 ==================
