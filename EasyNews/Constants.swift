@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 // MARK: - ********************* 长度类 ************************
-
 // 屏幕宽高
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
@@ -23,20 +21,13 @@ let WScale = SCREEN_HEIGHT > 568 ? SCREEN_HEIGHT / 568 : 1
 
 // MARK: - ------------------------  字体大小 -----------------------------
 
-private let SuperBigNum: CGFloat = 24.0
-let Font_SuperBigSize: CGFloat = SuperBigNum * WScale
+let Font_BigNum: CGFloat =  20.0
 
-private let BigNum: CGFloat =  20.0
-let Font_BigSize: CGFloat = BigNum * WScale
+let Font_LitterNum: CGFloat = 18.0
 
-private let LitterNum: CGFloat = 18.0
-let Font_LitterSize: CGFloat = LitterNum * WScale
+let Font_NormalNum: CGFloat = 16.0
 
-private let NormalNum: CGFloat = 16.0
-let Font_NormalSize: CGFloat = WScale * NormalNum
-
-private let SomallNum: CGFloat = 14.0
-let Font_SmallSize: CGFloat = WScale * SomallNum
+let Font_SmallSize: CGFloat = 14.0
 
 
 

@@ -20,6 +20,7 @@
 		0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */; };
 		0A1FDCCC1E2A8104000E34CA /* SpringShowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */; };
 		0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */; };
+		0A3645A91E4864EE003AD989 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0A3645A81E4864EE003AD989 /* README.md */; };
 		0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */; };
 		0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25F1E12695A002C7442 /* GirlModel.swift */; };
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
@@ -74,6 +75,7 @@
 		0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransationGestrue.swift; sourceTree = "<group>"; };
 		0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringShowAnimation.swift; sourceTree = "<group>"; };
 		0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DissmissGestrueAnimation.swift; sourceTree = "<group>"; };
+		0A3645A81E4864EE003AD989 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTypeModel.swift; sourceTree = "<group>"; };
 		0A3CA25F1E12695A002C7442 /* GirlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlModel.swift; sourceTree = "<group>"; };
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		0AF802861DFA7CF7002C825F = {
 			isa = PBXGroup;
 			children = (
+				0A3645A81E4864EE003AD989 /* README.md */,
 				0AF802911DFA7CF7002C825F /* EasyNews */,
 				0AF802901DFA7CF7002C825F /* Products */,
 				19A0A7C7709203B12FB9D6F7 /* Pods */,
@@ -574,6 +577,7 @@
 				0ADB92D41E0FF3DA00D35F9E /* LoginView.swift in Sources */,
 				0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */,
 				0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */,
+				0A3645A91E4864EE003AD989 /* README.md in Sources */,
 				0AE6C2311DFAF15500B20518 /* ZLY_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
