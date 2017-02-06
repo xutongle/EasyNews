@@ -12,17 +12,15 @@ import UIKit
 class CycleView: UIView {
     
     private var lineWidth: CGFloat = 10       // 画圆那个圈的大小
-    private var animation: CABasicAnimation!  // 动画效果
-    
     private var shapeLayer: CAShapeLayer!     // 画圆的layer
     
     @IBInspectable open var needLabel: Bool = false {
         didSet{
             if needLabel {
-                self.label.isHidden = false
+                self.addSubview(label)
             }
             else {
-                self.label.isHidden = true
+                label.removeFromSuperview()
             }
         }
     }
@@ -42,7 +40,9 @@ class CycleView: UIView {
     @IBInspectable open var progress: CGFloat = 0 {
         didSet{
             self.setAnimation(toValue: progress)
-            self.label.text = String(format: "%.0f", progress * 100) + "%"
+            if needLabel {
+                self.label.text = String(format: "%.0f", progress * 100) + "%"
+            }
         }
     }
     
@@ -70,10 +70,6 @@ class CycleView: UIView {
     func initView() -> Void {
         
         lineWidth = frame.width / 15.0
-        
-        if needLabel {
-            self.addSubview(label)
-        }
         
         /* 背部视图 */
         self.setGuiderCycle()
@@ -167,20 +163,20 @@ class CycleView: UIView {
         CATransaction.begin()
         
         /* 设置动画 还有动画执行完的协议 此处没有用到就省略了 */
-        self.animation = CABasicAnimation(keyPath: "strokEnd")
-        self.animation.duration = 0.25
+        let animation = CABasicAnimation(keyPath: "strokEnd")
+        animation.duration = 0.25
         
-        self.animation.autoreverses = false              // 返回去再执行一次
-        //self.animation.fillMode = kCAFillModeBackwards
-        //self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        //self.animation.isRemovedOnCompletion = false   // 动画执行完后是否移除
-        self.animation.fromValue = self.shapeLayer.strokeEnd
-        self.animation.toValue = toValue
+        animation.autoreverses = false              // 返回去再执行一次
+        //animation.fillMode = kCAFillModeBackwards
+        //animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        //animation.isRemovedOnCompletion = false   // 动画执行完后是否移除
+        animation.fromValue = self.shapeLayer.strokeEnd
+        animation.toValue = toValue
         self.shapeLayer.add(animation, forKey: "animateStrokeEnd")
         CATransaction.commit()
         
         //
-        self.shapeLayer.strokeEnd = 0
+        self.shapeLayer.strokeEnd = toValue
         
         // CATransaction.begin()
         // CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)

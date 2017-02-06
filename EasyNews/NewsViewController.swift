@@ -35,7 +35,7 @@ class NewsViewController: UIViewController {
         
         initLayout()
         
-        UDPServer()
+        //UDPServer()
     }
     
     func initLayout() -> Void {

@@ -64,9 +64,13 @@ class BigPicGirlView: UIImageView {
         }
 
         self.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: { (a, b) in
-            self.progressView.progress = CGFloat(a) / CGFloat(b)
+            DispatchQueue.main.async(execute: {
+                self.progressView.progress = CGFloat(a) / CGFloat(b)
+            })
         }) { (image, error, cache, url) in
-            self.progressView.removeFromSuperview()
+            DispatchQueue.main.async(execute: {
+                self.progressView.removeFromSuperview()
+            })
         }
     }
     
