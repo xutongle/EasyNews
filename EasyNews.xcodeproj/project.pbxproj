@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A09ADE31E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09ADE21E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift */; };
+		0A09ADE51E4C4BAC00B2FCF9 /* ToLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09ADE41E4C4BAC00B2FCF9 /* ToLineAnimation.swift */; };
+		0A09ADE71E4C4D3100B2FCF9 /* GirlTransationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09ADE61E4C4D3100B2FCF9 /* GirlTransationDelegate.swift */; };
 		0A0AE2891E2DB8F7006B4414 /* NewsTransationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */; };
 		0A0AE28D1E2DC867006B4414 /* GirlCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AE28B1E2DC867006B4414 /* GirlCollectionReusableView.swift */; };
 		0A0AE28E1E2DC867006B4414 /* GirlCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0AE28C1E2DC867006B4414 /* GirlCollectionReusableView.xib */; };
@@ -28,6 +31,8 @@
 		0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */; };
 		0A9886A71E238C4B0019E17A /* BigPicGirlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */; };
 		0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */; };
+		0ABAAC6B1E4B090400B698AF /* BigPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABAAC6A1E4B090400B698AF /* BigPicViewController.swift */; };
+		0ABAAC6D1E4B099700B698AF /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABAAC6C1E4B099700B698AF /* ImageScrollView.swift */; };
 		0ABBAF0F1DFFA4CE00D84C94 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */; };
 		0ABBAF141DFFBBEF00D84C94 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */; };
 		0ABBAF161DFFBC4F00D84C94 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF151DFFBC4F00D84C94 /* TabBarViewController.swift */; };
@@ -60,6 +65,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A09ADE21E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomSwapGestrue.swift; sourceTree = "<group>"; };
+		0A09ADE41E4C4BAC00B2FCF9 /* ToLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToLineAnimation.swift; sourceTree = "<group>"; };
+		0A09ADE61E4C4D3100B2FCF9 /* GirlTransationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTransationDelegate.swift; sourceTree = "<group>"; };
 		0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTransationDelegate.swift; sourceTree = "<group>"; };
 		0A0AE28B1E2DC867006B4414 /* GirlCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionReusableView.swift; sourceTree = "<group>"; };
 		0A0AE28C1E2DC867006B4414 /* GirlCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GirlCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -83,6 +91,8 @@
 		0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildGirlViewController.swift; sourceTree = "<group>"; };
 		0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicGirlView.swift; sourceTree = "<group>"; };
 		0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
+		0ABAAC6A1E4B090400B698AF /* BigPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicViewController.swift; sourceTree = "<group>"; };
+		0ABAAC6C1E4B099700B698AF /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		0ABBAF0E1DFFA4CE00D84C94 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0ABBAF131DFFBBEF00D84C94 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		0ABBAF151DFFBC4F00D84C94 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0AE2881E2DB8F7006B4414 /* NewsTransationDelegate.swift */,
+				0A09ADE61E4C4D3100B2FCF9 /* GirlTransationDelegate.swift */,
 			);
 			name = Delegate;
 			sourceTree = "<group>";
@@ -192,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */,
+				0A09ADE21E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift */,
 			);
 			name = Gestrue;
 			sourceTree = "<group>";
@@ -201,8 +213,18 @@
 			children = (
 				0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */,
 				0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */,
+				0A09ADE41E4C4BAC00B2FCF9 /* ToLineAnimation.swift */,
 			);
 			name = Animation;
+			sourceTree = "<group>";
+		};
+		0ABAAC6E1E4B09A900B698AF /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0ABAAC6C1E4B099700B698AF /* ImageScrollView.swift */,
+				0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */,
+			);
+			name = ImageView;
 			sourceTree = "<group>";
 		};
 		0ABBAF0D1DFFA49E00D84C94 /* NewsCompoent */ = {
@@ -258,6 +280,7 @@
 				0ABBAF1B1DFFC4A000D84C94 /* GirlNavViewController.swift */,
 				0ABBAF1D1DFFC4B500D84C94 /* GirlViewController.swift */,
 				0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */,
+				0ABAAC6A1E4B090400B698AF /* BigPicViewController.swift */,
 			);
 			name = GirlController;
 			sourceTree = "<group>";
@@ -277,7 +300,7 @@
 				0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */,
 				0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */,
 				0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */,
-				0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */,
+				0ABAAC6E1E4B09A900B698AF /* ImageView */,
 				0A0AE28A1E2DC845006B4414 /* ReusbleView */,
 			);
 			name = Girls;
@@ -547,6 +570,8 @@
 				0AE6C2331DFAF15500B20518 /* ZLY_TransationView.swift in Sources */,
 				0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */,
 				0A0AE2891E2DB8F7006B4414 /* NewsTransationDelegate.swift in Sources */,
+				0ABAAC6B1E4B090400B698AF /* BigPicViewController.swift in Sources */,
+				0ABAAC6D1E4B099700B698AF /* ImageScrollView.swift in Sources */,
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */,
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,
@@ -565,9 +590,11 @@
 				0AF802A91DFA7DF8002C825F /* WeatherViewController.swift in Sources */,
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0ADB92D21E0FF3A000D35F9E /* UserActionViewController.swift in Sources */,
+				0A09ADE31E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift in Sources */,
 				0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */,
 				0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */,
 				0ABBAF1E1DFFC4B500D84C94 /* GirlViewController.swift in Sources */,
+				0A09ADE71E4C4D3100B2FCF9 /* GirlTransationDelegate.swift in Sources */,
 				0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */,
 				0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */,
 				0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */,
@@ -575,6 +602,7 @@
 				0AE6C2321DFAF15500B20518 /* ZLY_SlidingViewController.swift in Sources */,
 				0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */,
 				0ADB92D41E0FF3DA00D35F9E /* LoginView.swift in Sources */,
+				0A09ADE51E4C4BAC00B2FCF9 /* ToLineAnimation.swift in Sources */,
 				0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */,
 				0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */,
 				0A3645A91E4864EE003AD989 /* README.md in Sources */,

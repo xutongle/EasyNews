@@ -1,22 +1,21 @@
 //
-//  NewsTransationDelegate.swift
+//  GirlTransationDelegate.swift
 //  EasyNews
 //
-//  Created by mac_zly on 2017/1/17.
+//  Created by mac_zly on 2017/2/9.
 //  Copyright © 2017年 zly. All rights reserved.
 //
 
 import UIKit
 
-class NewsTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
+class GirlTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
+
+    private var topBottomSwapGestrue: TopBottomSwapGestrue!
     
-    private var transationGestrue: TransationGestrue!
-    
-    init(transationGestrue: TransationGestrue) {
+    init(topBottomSwapGestrue: TopBottomSwapGestrue) {
         super.init()
-        self.transationGestrue = transationGestrue
+        self.topBottomSwapGestrue = topBottomSwapGestrue
     }
-   
     
     // 跳转的动画
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -26,7 +25,7 @@ class NewsTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        return DissmissGestrueAnimation()
+        return ToLineAnimation()
     }
     
     // 交互式控制器
@@ -37,6 +36,6 @@ class NewsTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
         
-        return transationGestrue.interactionInProgress ? transationGestrue : nil
+        return topBottomSwapGestrue.interactionInProgress ? topBottomSwapGestrue : nil
     }
 }

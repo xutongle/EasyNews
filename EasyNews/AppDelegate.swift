@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        let homeIcon = UIApplicationShortcutIcon(type: .pause)
+        let home = UIApplicationShortcutItem(type: "home", localizedTitle: "测试首页", localizedSubtitle: "副标题", icon: homeIcon, userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [home]
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let tabbar = TabBarViewController()
@@ -31,6 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // 3d touch 菜单跳转
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        switch shortcutItem.type {
+        case "home":
+            
+            break
+        default:
+            break
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

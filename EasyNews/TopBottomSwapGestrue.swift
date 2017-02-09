@@ -1,16 +1,16 @@
 //
-//  TransationGestrue.swift
+//  TopBottomSwapGestrue.swift
 //  EasyNews
 //
-//  Created by mac_zly on 2017/1/14.
+//  Created by mac_zly on 2017/2/9.
 //  Copyright © 2017年 zly. All rights reserved.
 //
 
 import UIKit
 
-// 只能下滑
-class TransationGestrue: UIPercentDrivenInteractiveTransition {
-
+// 上下滑动
+class TopBottomSwapGestrue: UIPercentDrivenInteractiveTransition {
+    
     // 是不是在处理手势
     var interactionInProgress = false
     
@@ -29,8 +29,6 @@ class TransationGestrue: UIPercentDrivenInteractiveTransition {
     
     // 设置手势
     private func prepareGestureRecognizer(in view: UIView) {
-//        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleGesture(gestureRecognizer:)))
-//        gesture.edges = .left
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(gestureRecognizer:)))
         gesture.maximumNumberOfTouches = 1
         view.addGestureRecognizer(gesture)
@@ -45,10 +43,11 @@ class TransationGestrue: UIPercentDrivenInteractiveTransition {
         // 1
         let translation = gestureRecognizer.translation(in: gestrueView.superview)
         var progress = Float(translation.y / (gestrueView.frame.size.height / 2))
-        progress = fminf(fmaxf(progress, 0.0), 1.0)
-                
+        
+        //  大小 -1 到 1 之间但是取绝对值
+        progress = fabs(fminf(fmaxf(progress, -1.0), 1.0))
+        
         switch gestureRecognizer.state {
-            
         case .began:
             // 2
             interactionInProgress = true
@@ -67,13 +66,12 @@ class TransationGestrue: UIPercentDrivenInteractiveTransition {
         case .ended:
             // 5
             interactionInProgress = false
-            
             if !shouldCompleteTransition { cancel() } else { finish() }
             break
         default:
-            print("Unsupported")
+            print("UnSupport")
             break
         }
+        
     }
-    
 }

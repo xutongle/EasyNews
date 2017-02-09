@@ -11,6 +11,7 @@ import UIKit
 protocol GirlCollectionProtocol {
     func needAdd()
     func cellSelector(girlModel: GirlModel, mframe: CGRect)
+    func registerCellFor3DTouch(cell: GirlCollectionViewCell)
 }
 
 class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -59,11 +60,9 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         
         cell.setImageURL(url: NetTool.tiangou_image_base_url + models[indexPath.row].img + "_" + (width * 1.5).toStringValue + "x" + (height * 1.5).toStringValue)
         
-//        if cell.imageView.image == nil {
-//            cell.canDismiss = false
-//        }else {
-//            cell.canDismiss = true
-//        }
+        if isSupport3DTouch() {
+            girl_delegate?.registerCellFor3DTouch(cell: cell)
+        }
         
         return cell
     }
@@ -105,5 +104,12 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension GirlsCollectionView {
+    // 是否支持3d touch
+    func isSupport3DTouch() -> Bool {
+        return self.traitCollection.forceTouchCapability == .available
     }
 }

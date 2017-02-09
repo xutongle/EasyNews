@@ -54,6 +54,7 @@ class NewsViewController: UIViewController {
         
         // 主要是做了手势和协议
         transationGestrue.wire(to: weatherVC)
+        
         // 前往天气页面
          self.present(weatherVC, animated: true, completion: nil)
     }
