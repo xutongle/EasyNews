@@ -147,12 +147,23 @@ extension CGFloat {
 }
 
 extension String {
-    // 裁剪从头start个字符  然后从结尾开始往前裁剪end个字符  
-    // na｜meI｜sZly  start=2 end=4的结果 meI
-    func subString(start: Int, end: Int) -> String {
-        let str = self as NSString
-        let range = NSRange.init(location: start, length: str.length - start - end)
-        return str.substring(with: range)
+    
+    func subTo(index: Int) -> String {
+        let i = self.index(self.startIndex, offsetBy: index)
+        return self.substring(to: i)
+    }
+    
+    func subFrom(index: Int) -> String {
+        let i = self.index(self.startIndex, offsetBy: index)
+        return self.substring(from: i)
+    }
+    
+    //
+    func subRange(start: Int, end: Int) -> String {
+        let _start = self.index(self.startIndex, offsetBy: start)  //索引从开始偏移7个位置
+        let _end = self.index(self.endIndex, offsetBy: end)        //所有从末尾往回偏移三个位置
+        let range = _start..<_end
+        return self.substring(with: range)
     }
     
     // 国际化

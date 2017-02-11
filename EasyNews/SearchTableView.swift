@@ -63,31 +63,32 @@ class SearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     // 搜索事件
     func searchIt(value: String) -> Void {
         DispatchQueue.global().async {
-            let whiteSpace = NSCharacterSet.whitespaces // 空格
-            var mvalue: String = ""
-            for val in value.components(separatedBy: whiteSpace){  //  按空格把字符串拆分成数组
-                mvalue = mvalue + val
-            }
-            mvalue = mvalue.lowercased()
+//            let whiteSpace = NSCharacterSet.whitespaces // 空格
+//            for val in value.components(separatedBy: whiteSpace){  //  按空格把字符串拆分成数组
+//                mvalue = mvalue + val
+//            }
+           let mvalue = value.lowercased()
             
             if mvalue == "" {
                 self.keys = self.remberAllkeys
                 self.orginData = self.remberOrginData
             }else {
-                var firstStr = Tools.hanZiZhuanPinYin(hanzi: mvalue, yinbiao: false) // shen zhen
-                firstStr = firstStr.subString(start: 0, end: firstStr.characters.count - 1).uppercased() // S
-                if self.keys.contains(firstStr) {   // 是否包含 S
-                    self.keys = [firstStr]                                // 保存key
-                    let data = self.remberOrginData[firstStr]!            // key 对应的所有城市
-                    self.orginData[firstStr]?.removeAll()                 // 移除所有数据
-                    for hStr in data {                                    // 便利 key 对应的所有城市
+                let firstStr = Tools.hanZiZhuanPinYin(hanzi: mvalue, yinbiao: false).subTo(index: 1).uppercased() // shen zhen
+                if self.remberAllkeys.contains(firstStr) {   // 数据中是否有包含 S
+                    self.keys = [firstStr]                                   // 要显示的key
+                    let keyData = self.remberOrginData[firstStr]!            // key 对应的所有城市
+                    self.orginData[firstStr]?.removeAll()                    // 移除所有数据
+                    for hStr in keyData {                                    // 便利 key 对应的所有城市
                         // 深圳 -> shenzhen
                         let pStr = Tools.hanZiZhuanPinYin(hanzi: hStr, yinbiao: false).replacingOccurrences(of: " ", with: "")
                         // 城市的str是否包含输入的value 包括中文和拼音 和包含空格的
                         if pStr.contains(mvalue) || hStr.contains(mvalue) {
-                            self.orginData[firstStr]?.append(hStr)        // 包含就加入
+                            self.orginData[firstStr]?.append(hStr)           // 包含就加入
                         }
                     }
+                }else { // 不包含直接清空
+                    self.keys = []
+                    self.orginData = [:]
                 }
             }
             

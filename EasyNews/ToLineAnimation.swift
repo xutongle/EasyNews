@@ -12,7 +12,7 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
 
     // 转场时间
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.6
+        return 0.25
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -43,11 +43,10 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         
         UIView.animate(withDuration: transitionDuration, animations: {
             
-            fromView.transform = CGAffineTransform(a: 0.1, b: 0.5, c: 0.5, d: 0.1, tx: 0, ty: 0)
+            fromView.transform = CGAffineTransform(a: 0, b: 0.5, c: 0.5, d: 0, tx: 0, ty: 0)
             
             toView.frame = transitionContext.finalFrame(for: toViewController!)
         }) { (complete) in
-            
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }

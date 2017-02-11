@@ -12,7 +12,7 @@ class SpringShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     // 转场时间
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1
+        return 0.5
     }
     
     //
