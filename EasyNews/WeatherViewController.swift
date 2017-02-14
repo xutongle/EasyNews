@@ -14,37 +14,23 @@ import CoreLocation
 /// 天气控制器
 class WeatherViewController: UIViewController {
     
+    // view
     fileprivate var weatherScrollView: WeatherScrollView!
     
+    // 定位
     fileprivate let locationManager = Tools.locationManage
     
+    // 两个model
     fileprivate var nowModel: TodayViewModel!
-    fileprivate var models: [WeatherModel] = []
-    
+    fileprivate var weatherModels: [WeatherModel] = []
+    fileprivate var isRequest = false
+    // 显示的view
     fileprivate var isShow = false
     
-    //fileprivate let weatherArchiverPath = Tools.getCacheDirectory(name: "Weather.model")
-    //fileprivate let modelsStr = "models"
-    //fileprivate let nowModelStr = "nowModel"
-    
-    /// 是否正在请求数据
-    fileprivate var isRequest = [false, false] {
-        didSet{
-            guard !isRequest[0], !isRequest[1] else {  // 两个数据请求完成 notRequest
-                return
-            }
-            if nowModel != nil && models.count > 0 {  // 展示完成的结果
-                self.weatherScrollView.getWeatherView().models = models
-                self.weatherScrollView.getWeatherView().todayViewModel = nowModel
-                
-                //let dict: [String : Any] = [modelsStr : models, nowModelStr : nowModel]
-                //NSKeyedArchiver.archiveRootObject(dict, toFile: weatherArchiverPath)
-                // 提示
-                Toast.toast.show(message: "数据请求成功", duration: .nomal, removed: nil)
-                self.removeTransationView()      // 移除过渡动画
-            }
-        }
-    }
+    //  线程
+    fileprivate let group = DispatchGroup()
+    let currentQueue = DispatchQueue(label: "com.requestCurrentWeather")
+    let threeQueue = DispatchQueue(label: "com.requestThreeDayWeather")
     
     // state bar变白
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -93,12 +79,106 @@ class WeatherViewController: UIViewController {
             self.requestWeather(city: city)
         })
     }
+}
+
+// MARK: - 网络请求
+extension WeatherViewController {
     
+    func requestWeather(city: String?) -> Void {
+        guard !isRequest && (city != nil) else {
+            return
+        }
+        
+        // 正在请求
+        isRequest = true
+        
+        currentQueue.sync { [weak self] in
+            if let weakSelf = self {
+                // 入
+                weakSelf.group.enter()
+                weakSelf.requestCurrentWeather(city: city!)
+            }
+        }
+        threeQueue.sync { [weak self] in
+            if let weakSelf = self {
+                // 入
+                weakSelf.group.enter()
+                weakSelf.requestThreeDayWeather(city: city!)
+            }
+        }
+        
+        // 网络任务都完成
+        group.notify(queue: DispatchQueue.main) {
+            // 请求完成
+            self.isRequest = false
+            if self.nowModel != nil && self.weatherModels.count > 0 {  // 展示完成的结果
+                self.weatherScrollView.getWeatherView().models = self.weatherModels
+                self.weatherScrollView.getWeatherView().todayViewModel = self.nowModel
+                
+                Toast.toast.show(message: "数据请求成功", duration: .nomal, removed: nil)
+            }else {
+                Toast.toast.show(message: "数据请求失败", duration: .nomal, removed: nil)
+            }
+        }
+    }
+    
+    // 当时天气
+    func requestCurrentWeather(city: String) -> Void {
+        self.nowModel = nil
+        Alamofire.request(NetTool.currentUrl, method: .get, parameters: NetTool.getCurrentUrlParam(city: city)).responseJSON { (response) in
+            // 出
+            self.group.leave()
+            guard let result = response.result.value as? [String : Any] else {
+                return
+            }
+            guard let resultsArr = result["results"] as? [[String : Any]?] else {
+                return
+            }
+            guard let results = resultsArr[0] else {
+                return
+            }
+            guard let locations = results["location"] as? [String : String] ,let nows = results["now"] as? [String : String] else {
+                return
+            }
+            
+            let location = NetTool.toString(any: locations["name"])
+            let now = NetTool.toString(any: nows["temperature"])
+            self.nowModel = TodayViewModel(cityName: location, temperature: now)
+        }
+    }
+    
+    // 请求天气数据
+    func requestThreeDayWeather(city: String) -> Void {
+        self.weatherModels.removeAll()
+        Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { (response) in
+            // 出
+            self.group.leave()
+            guard let result = response.result.value as? [String : Any] else { // 获得数据
+                return
+            }
+            guard let resultArr = result["results"] as? [[String : Any]?] else {
+                return
+            }
+            guard let results = resultArr[0] else {
+                return
+            }
+            guard let daily = results["daily"] as? [[String : String]] else {
+                return
+            }
+            
+            for model in daily {
+                self.weatherModels.append(WeatherModel(fromDictionary: model as NSDictionary))
+            }
+        }
+    }
+}
+
+extension WeatherViewController {
     //
-    func showHelperCircle(){
+    fileprivate func showHelperCircle(){
         let circle = UIView(frame: CGRect(
-                origin: CGPoint(x: view.bounds.width * 0.5, y: 100),
-                size: CGSize(width: 30, height: 30)
+            origin: CGPoint(x: view.bounds.width * 0.5, y: 100),
+            size: CGSize(width: 30, height: 30)
         ))
         circle.layer.cornerRadius = circle.frame.width / 2
         circle.backgroundColor = UIColor.white
@@ -111,75 +191,6 @@ class WeatherViewController: UIViewController {
             circle.layer.opacity = 0
         }) { (finsh) in
             circle.removeFromSuperview()
-        }
-    }
-}
-
-extension WeatherViewController {
-    // 总的
-    func requestWeather(city: String?) -> Void {
-        if isRequest[0] || isRequest[1] || city == nil{
-            return
-        }
-        
-        // 展示过场动画 当isRequest的两个值都为false 都不在请求网络时 消失 通过KVO
-        //self.showTransationView(style: .dark)
-        isRequest = [true, true]
-        requestCurrentWeather(city: city!)
-        requestThreeDayWeather(city: city!)
-    }
-    
-    // 当时天气
-    func requestCurrentWeather(city: String) -> Void {
-        self.nowModel = nil
-        Alamofire.request(NetTool.currentUrl, method: .get, parameters: NetTool.getCurrentUrlParam(city: city)).responseJSON { (response) in
-            guard let result = response.result.value as? [String : Any] else {
-                return
-            }
-            guard let resultsArr = result["results"] as? [[String : Any]?] else {
-                Toast.toast.show(message: "当前数据请求失败", duration: .nomal, removed: nil)
-                self.removeTransationView()      // 移除过渡动画
-                self.isRequest = [false, false]
-                return
-            }
-            guard let results = resultsArr[0] else {
-                return
-            }
-            guard let locations = results["location"] as? [String : String] , let nows = results["now"] as? [String : String] else {
-                return
-            }
-            let location = NetTool.toString(any: locations["name"])
-            let now = NetTool.toString(any: nows["temperature"])
-            self.nowModel = TodayViewModel(cityName: location, temperature: now)
-            self.isRequest[0] = false
-        }
-    }
-    
-    // 请求天气数据
-    func requestThreeDayWeather(city: String) -> Void {
-        self.models.removeAll()
-        Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { (response) in
-            guard let result = response.result.value as? [String : Any] else { // 获得数据
-                return
-            }
-            guard let resultArr = result["results"] as? [[String : Any]?] else {
-                Toast.toast.show(message: "其余数据请求失败", duration: .nomal, removed: nil)
-                self.removeTransationView()      // 移除过渡动画
-                self.isRequest = [false, false]
-                return
-            }
-            guard let results = resultArr[0] else {
-                return
-            }
-            guard let daily = results["daily"] as? [[String : String]] else {
-                return
-            }
-            
-            for model in daily {
-                self.models.append(WeatherModel(fromDictionary: model as NSDictionary))
-            }
-            self.weatherScrollView.getWeatherView().models = self.models
-            self.isRequest[1] = false
         }
     }
 }
@@ -220,7 +231,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
     
     //MARK:定位错误信息
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
-        
         Toast.toast.show(message: "定位出错", duration: .nomal, removed: nil)
     }
     
