@@ -48,6 +48,10 @@ let MY_FIRE_BRICK = #colorLiteral(red: 0.5581019521, green: 0.1080954447, blue: 
 // 灰色
 let MY_GRAY = #colorLiteral(red: 0.3996260166, green: 0.39963606, blue: 0.3996306658, alpha: 1) //UIColor(red:128/255.0, green:128/255.0, blue:128/255.0, alpha: 1)
 
+let MY_TEXT_GRAY = #colorLiteral(red: 0.5490196078, green: 0.5647058824, blue: 0.5764705882, alpha: 1) // 
+let MY_LOGIN_GRAY = #colorLiteral(red: 0.2666666667, green: 0.3098039216, blue: 0.3568627451, alpha: 1) // 68	79	91
+let MY_BACK_GRAY = #colorLiteral(red: 0.1254901961, green: 0.1725490196, blue: 0.2274509804, alpha: 1) // 32	44	58
+
 // some  gray
 let MY_GOUP_GRAY = UIColor.groupTableViewBackground
 

@@ -38,6 +38,12 @@ class NewsViewController: UIViewController {
         //UDPServer()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //self.present(UserActionViewController(), animated: true, completion: nil)
+    }
+    
     func initLayout() -> Void {
         self.newsView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)

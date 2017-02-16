@@ -10,24 +10,25 @@ import UIKit
 
 class LoginView: UIView {
 
-    private var usernameTF: UITextField!
+    private var minputView: InputView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        usernameTF = UITextField()
-        usernameTF.textAlignment = .center
-        usernameTF.placeholder = "输入用户名"
-        self.addSubview(usernameTF)
+        self.backgroundColor = MY_BACK_GRAY
+    
+        minputView = InputView(frame: CGRect.zero)
+        self.addSubview(minputView)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        usernameTF.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(64)
-            make.left.right.equalTo(self)
+        minputView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.bottom.equalTo(self)
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

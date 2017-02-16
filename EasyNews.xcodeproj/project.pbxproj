@@ -39,6 +39,7 @@
 		0ABBAF191DFFBD0000D84C94 /* NewsNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF181DFFBD0000D84C94 /* NewsNavViewController.swift */; };
 		0ABBAF1C1DFFC4A000D84C94 /* GirlNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF1B1DFFC4A000D84C94 /* GirlNavViewController.swift */; };
 		0ABBAF1E1DFFC4B500D84C94 /* GirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBAF1D1DFFC4B500D84C94 /* GirlViewController.swift */; };
+		0AC402CD1E5541FD0094432B /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC402CC1E5541FD0094432B /* InputView.swift */; };
 		0ACCB7451E00F3BF003F3A3D /* NewsTopScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCB7441E00F3BF003F3A3D /* NewsTopScrollView.swift */; };
 		0ADB92D21E0FF3A000D35F9E /* UserActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB92D11E0FF3A000D35F9E /* UserActionViewController.swift */; };
 		0ADB92D41E0FF3DA00D35F9E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB92D31E0FF3DA00D35F9E /* LoginView.swift */; };
@@ -99,6 +100,7 @@
 		0ABBAF181DFFBD0000D84C94 /* NewsNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNavViewController.swift; sourceTree = "<group>"; };
 		0ABBAF1B1DFFC4A000D84C94 /* GirlNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlNavViewController.swift; sourceTree = "<group>"; };
 		0ABBAF1D1DFFC4B500D84C94 /* GirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlViewController.swift; sourceTree = "<group>"; };
+		0AC402CC1E5541FD0094432B /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		0ACCB7441E00F3BF003F3A3D /* NewsTopScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTopScrollView.swift; sourceTree = "<group>"; };
 		0ADB92D11E0FF3A000D35F9E /* UserActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionViewController.swift; sourceTree = "<group>"; };
 		0ADB92D31E0FF3DA00D35F9E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			children = (
 				0ADB92D11E0FF3A000D35F9E /* UserActionViewController.swift */,
 				0ADB92D31E0FF3DA00D35F9E /* LoginView.swift */,
+				0AC402CC1E5541FD0094432B /* InputView.swift */,
 			);
 			name = UserCompoent;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */,
 				0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */,
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,
+				0AC402CD1E5541FD0094432B /* InputView.swift in Sources */,
 				0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */,
 				0AEB5F851DFBB8840057B822 /* WeatherInfoView.swift in Sources */,
 				0ABBAF141DFFBBEF00D84C94 /* NewsView.swift in Sources */,
