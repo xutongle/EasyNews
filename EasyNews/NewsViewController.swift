@@ -41,7 +41,7 @@ class NewsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //self.present(UserActionViewController(), animated: true, completion: nil)
+//        self.present(UserActionViewController(), animated: true, completion: nil)
     }
     
     func initLayout() -> Void {

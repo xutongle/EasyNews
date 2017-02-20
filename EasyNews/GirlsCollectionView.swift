@@ -78,9 +78,11 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         
         var mframe: CGRect!
         if cell != nil {
-            mframe = cell?.frame
+            // 这么多superview指向的是和屏幕大小一样的view
+            let _frame = cell!.frame
+            mframe = cell?.convert(CGRect(x: 0, y: 0, width: _frame.width, height: _frame.height), to: self.superview?.superview?.superview)
         }else {
-            mframe = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+            mframe = CGRect(x: SCREEN_WIDTH / 2 - 50, y: SCREEN_HEIGHT / 2 - 50, width: 100, height: 100)
         }
         
         girl_delegate?.cellSelector(girlModel: models[indexPath.row], mframe: mframe)

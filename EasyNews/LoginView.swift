@@ -10,7 +10,11 @@ import UIKit
 
 class LoginView: UIView {
 
+    // 用户名和密码的View
     private var minputView: InputView!
+    
+    private var chooseLoginButton: UIButton!
+    private var chooseRegisterButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,6 +22,7 @@ class LoginView: UIView {
     
         minputView = InputView(frame: CGRect.zero)
         self.addSubview(minputView)
+        
     }
     
     override func layoutSubviews() {
@@ -26,7 +31,8 @@ class LoginView: UIView {
         minputView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.top.bottom.equalTo(self)
+            make.centerY.equalTo(self)
+            make.height.equalTo(100)
         }
         
     }

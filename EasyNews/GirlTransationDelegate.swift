@@ -11,16 +11,18 @@ import UIKit
 class GirlTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
 
     private var topBottomSwapGestrue: TopBottomSwapGestrue!
+    private var frame: CGRect!
     
-    init(topBottomSwapGestrue: TopBottomSwapGestrue) {
+    init(topBottomSwapGestrue: TopBottomSwapGestrue, mFrame: CGRect) {
         super.init()
         self.topBottomSwapGestrue = topBottomSwapGestrue
+        self.frame = mFrame
     }
     
     // 跳转的动画
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        return SpringShowAnimation()
+        return ScaleShowAnimation(mFrame: self.frame)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {

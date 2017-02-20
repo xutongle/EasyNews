@@ -12,6 +12,7 @@ class BigPicViewController: UIViewController {
     
     // model
     var url: String!
+    var image: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()

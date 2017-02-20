@@ -1,14 +1,21 @@
 //
-//  SpringShowAnimation.swift
+//  ScaleShowAnimation.swift
 //  EasyNews
 //
-//  Created by mac_zly on 2017/1/14.
+//  Created by mac_zly on 2017/2/20.
 //  Copyright © 2017年 zly. All rights reserved.
 //
 
 import UIKit
 
-class SpringShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
+class ScaleShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
+    
+    private var frame: CGRect!
+    
+    init(mFrame: CGRect) {
+        super.init()
+        self.frame = mFrame
+    }
     
     // 转场时间
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -34,7 +41,9 @@ class SpringShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         
         let containerView = transitionContext.containerView
         
-        toView.frame = CGRect(x: -fromView.frame.width, y: fromView.frame.origin.y, width: fromView.frame.width, height: fromView.frame.height)
+        //
+        toView.clipsToBounds = true
+        toView.frame = self.frame
         
         // 在present和dismiss时，必须将toview添加到视图层次中
         containerView.addSubview(toView)
@@ -42,15 +51,10 @@ class SpringShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let transitionDuration = self.transitionDuration(using: transitionContext)
         // 使用spring动画，有弹簧效果，动画结束后一定要调用completeTransition方法
         UIView.animate(withDuration: transitionDuration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveLinear, animations: {
-            
             toView.frame = transitionContext.finalFrame(for: toViewController!)    // 移动到指定位置
         }) { (finished) in
-            
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
-    
-    //    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
-    //
-    //    }
+
 }

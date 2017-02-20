@@ -12,7 +12,7 @@ import Alamofire
 /// 每一个collectionView的Controller
 class ChildGirlViewController: UIViewController {
 
-    private var collectionView: GirlsCollectionView!  // 主体CollectionView
+    fileprivate var collectionView: GirlsCollectionView!  // 主体CollectionView
     
     fileprivate let topBottomSwapGestrue = TopBottomSwapGestrue()
     fileprivate var girlTransationDelegate: GirlTransationDelegate!
@@ -98,11 +98,11 @@ extension ChildGirlViewController: GirlCollectionProtocol {
     
     // 点按了cell
     internal func cellSelector(girlModel: GirlModel, mframe: CGRect) {
-        //self.showImage(url: NetTool.tiangou_image_base_url + girlModel.img)
+        
         let bigPicVC = BigPicViewController()
         bigPicVC.url = NetTool.tiangou_image_base_url + girlModel.img
         
-        girlTransationDelegate = GirlTransationDelegate(topBottomSwapGestrue: topBottomSwapGestrue)
+        girlTransationDelegate = GirlTransationDelegate(topBottomSwapGestrue: topBottomSwapGestrue, mFrame: mframe)
         bigPicVC.transitioningDelegate = girlTransationDelegate
         
         topBottomSwapGestrue.wire(to: bigPicVC)
@@ -114,6 +114,7 @@ extension ChildGirlViewController: GirlCollectionProtocol {
     }
 }
 
+// MARK: - 3d touch
 extension ChildGirlViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {

@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class InputView: UIView {
+class InputView: UIView, UITextFieldDelegate {
 
     private var usernameTF: LoginTF!
     private var passwordTF: LoginTF!
@@ -25,6 +25,9 @@ class InputView: UIView {
         self.passwordTF.placeholder = "密码"
         self.addSubview(self.usernameTF)
         self.addSubview(self.passwordTF)
+        
+        self.usernameTF.delegate = self
+        self.passwordTF.delegate = self
     }
     
     override func layoutSubviews() {
@@ -33,15 +36,23 @@ class InputView: UIView {
         self.usernameTF.snp.makeConstraints { (make) in
             make.left.top.equalTo(self).offset(10)
             make.right.equalTo(self).offset(-10)
-            make.bottom.equalTo(self.passwordTF).offset(-0.5)
         }
         
         self.passwordTF.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.usernameTF)
-            make.top.equalTo(self).offset(0.5)
             make.bottom.equalTo(self).offset(-10)
+            make.top.equalTo(self.usernameTF.snp.bottom).offset(1)
+            make.height.equalTo(self.usernameTF.snp.height)
         }
         
+    }
+    
+    func getUsernameText() -> String? {
+        return usernameTF.text
+    }
+    
+    func getPasswordText() -> String? {
+        return passwordTF.text
     }
     
     override func draw(_ rect: CGRect) {
@@ -54,6 +65,12 @@ class InputView: UIView {
         ctx?.addLines(between: [CGPoint(x: 10 * WScale, y: y),
                                 CGPoint(x: right_x, y: y)])
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

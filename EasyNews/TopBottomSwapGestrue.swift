@@ -53,9 +53,9 @@ class TopBottomSwapGestrue: UIPercentDrivenInteractiveTransition {
         
         // 1
         let translation = gestureRecognizer.translation(in: gestrueView.superview)
-        var progress = Float(translation.y / (gestrueView.frame.size.height / 2))
+        var progress = Float(translation.y / (gestrueView.frame.size.height * 4))
         
-        //  大小 -1 到 1 之间但是取绝对值
+        //  大小 -1 到 1 之间但是取绝对值  这样上下都可以滑动
         progress = fabs(fminf(fmaxf(progress, -1.0), 1.0))
         
         switch gestureRecognizer.state {

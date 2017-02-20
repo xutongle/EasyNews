@@ -29,6 +29,7 @@
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
 		0A3CA2641E127175002C7442 /* GirlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */; };
 		0A518DFE1E20DC5900DCA015 /* ChildGirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */; };
+		0A983E211E5A7FBE0056F030 /* ScaleShowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A983E201E5A7FBE0056F030 /* ScaleShowAnimation.swift */; };
 		0A9886A71E238C4B0019E17A /* BigPicGirlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */; };
 		0AB4A0061E0D2B4A00A65671 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */; };
 		0ABAAC6B1E4B090400B698AF /* BigPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABAAC6A1E4B090400B698AF /* BigPicViewController.swift */; };
@@ -90,6 +91,7 @@
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
 		0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildGirlViewController.swift; sourceTree = "<group>"; };
+		0A983E201E5A7FBE0056F030 /* ScaleShowAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleShowAnimation.swift; sourceTree = "<group>"; };
 		0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicGirlView.swift; sourceTree = "<group>"; };
 		0AB4A0051E0D2B4A00A65671 /* ItemScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
 		0ABAAC6A1E4B090400B698AF /* BigPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */,
+				0A983E201E5A7FBE0056F030 /* ScaleShowAnimation.swift */,
 				0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */,
 				0A09ADE41E4C4BAC00B2FCF9 /* ToLineAnimation.swift */,
 			);
@@ -580,6 +583,7 @@
 				0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */,
 				0AC402CD1E5541FD0094432B /* InputView.swift in Sources */,
 				0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */,
+				0A983E211E5A7FBE0056F030 /* ScaleShowAnimation.swift in Sources */,
 				0AEB5F851DFBB8840057B822 /* WeatherInfoView.swift in Sources */,
 				0ABBAF141DFFBBEF00D84C94 /* NewsView.swift in Sources */,
 				0A11B9411DFD07B300779E04 /* WeatherScrollView.swift in Sources */,

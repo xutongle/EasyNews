@@ -34,8 +34,6 @@ class GirlViewController: UIViewController {
         self.navigationItem.title = "妹子图"
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "只看最新", style: .done, target: self, action: #selector(rightAction))
     }
     
     override func viewDidLoad() {
@@ -127,44 +125,5 @@ extension GirlViewController: ItemScrollViewDelegate {
 
 // MARK: - 右侧导航栏按钮事件
 extension GirlViewController {
-    @objc private func rightAction() -> Void {
-        if !isAnimationed {
-            onlySeeNew()
-            isAnimationed = true
-        }else {
-            backNomal()
-            isAnimationed = false
-        }
-    }
     
-    // 只看最新
-    private func onlySeeNew() {
-        
-        UIView.beginAnimations("change", context: nil)
-        UIView.setAnimationDuration(0.5)
-        UIView.setAnimationCurve(.easeInOut)
-        
-        UIView.setAnimationTransition(.flipFromLeft, for: self.view, cache: true)
-        self.view.exchangeSubview(at: 0, withSubviewAt: 2)
-        
-        UIView.commitAnimations()
-        
-        self.navigationItem.rightBarButtonItem?.title = "按类型查看"
-        self.navigationItem.title = "最新妹子图"
-    }
-    
-    // 恢复正常
-    private func backNomal() {
-        UIView.beginAnimations("change", context: nil)
-        UIView.setAnimationDuration(0.5)
-        UIView.setAnimationCurve(.easeInOut)
-        
-        UIView.setAnimationTransition(.flipFromLeft, for: self.view, cache: true)
-        self.view.exchangeSubview(at: 2, withSubviewAt: 0)
-        
-        UIView.commitAnimations()
-        
-        self.navigationItem.rightBarButtonItem?.title = "只看最新"
-        self.navigationItem.title = "妹子图"
-    }
 }

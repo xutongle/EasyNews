@@ -34,6 +34,7 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let toFrame = transitionContext.finalFrame(for: toViewController!)
         
         fromView.frame = fromFrame
+        toView.clipsToBounds = true
         toView.frame = toFrame
         
         containerView.insertSubview(toView, belowSubview: fromView)
@@ -42,8 +43,18 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let transitionDuration = self.transitionDuration(using: transitionContext)
         
         UIView.animate(withDuration: transitionDuration, animations: {
+            /**
+             a 表示水方向的缩放
+             tx 表示水平方向的偏移
+             d 表示垂直方向的缩放，
+             ty 表示垂直方向的偏移
+             如果 b c 不为 0 的话，那么坑定发生了旋转。
+             
+             CGAffineTransform(a: 0.01, b: 0, c: 0, d: 0.01, tx: 0, ty: 0)
+             **/
             
-            fromView.transform = CGAffineTransform(a: 0, b: 0.5, c: 0.5, d: 0, tx: 0, ty: 0)
+            // 变成一条线消失
+            fromView.frame = CGRect(x: 0, y: SCREEN_HEIGHT / 2 - 1, width: SCREEN_WIDTH, height: 2)
             
             toView.frame = transitionContext.finalFrame(for: toViewController!)
         }) { (complete) in
