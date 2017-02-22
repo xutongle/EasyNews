@@ -45,15 +45,13 @@ class BigPicGirlView: UIImageView {
         }
         
         self.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: { [weak self] (a, b) in
-            DispatchQueue.main.async {
-                if let weakSelf = self {
-                    weakSelf.progressView.progress = CGFloat(a) / CGFloat(b)
-                }
+            if let weakSelf = self {
+                weakSelf.progressView.progress = CGFloat.abs(CGFloat(a)) / CGFloat.abs(CGFloat(b))
             }
-        }) { (image, error, cache, url) in
-            DispatchQueue.main.async(execute: {
-                self.progressView.removeFromSuperview()
-            })
+        }) { [weak self] (image, error, cache, url) in
+            if let weakSelf = self {
+                weakSelf.progressView.removeFromSuperview()
+            }
         }
     }
     
