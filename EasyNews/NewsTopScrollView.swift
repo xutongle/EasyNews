@@ -41,12 +41,12 @@ class NewsTopScrollView: UIScrollView, UIScrollViewDelegate {
         self.centerImageView = UIImageView()
         self.addSubview(self.centerImageView)
         self.centerImageView.contentMode = .scaleAspectFill
-        self.centerImageView.image = UIImage(named: "A1")
+        self.centerImageView.image = #imageLiteral(resourceName: "login-top")
         
         self.leftImageView = UIImageView()
         self.addSubview(self.leftImageView)
         self.leftImageView.contentMode = .scaleAspectFill
-        self.leftImageView.image = UIImage(named: "A2")
+        self.leftImageView.image = #imageLiteral(resourceName: "register-top")
         
         self.rightImageView = UIImageView()
         self.addSubview(self.rightImageView)

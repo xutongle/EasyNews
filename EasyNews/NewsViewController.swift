@@ -35,13 +35,13 @@ class NewsViewController: UIViewController {
         
         initLayout()
         
+        self.present(UserActionViewController(), animated: false, completion: nil)
+        
         //UDPServer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        self.present(UserActionViewController(), animated: true, completion: nil)
     }
     
     func initLayout() -> Void {

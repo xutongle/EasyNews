@@ -9,11 +9,12 @@
 import UIKit
 import SnapKit
 
-class InputView: UIView, UITextFieldDelegate {
+class LoginInputView: UIView, UITextFieldDelegate {
 
     private var usernameTF: LoginTF!
     private var passwordTF: LoginTF!
     
+    /// 生命周期
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
@@ -30,6 +31,7 @@ class InputView: UIView, UITextFieldDelegate {
         self.passwordTF.delegate = self
     }
     
+    /// 布局
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -55,6 +57,7 @@ class InputView: UIView, UITextFieldDelegate {
         return passwordTF.text
     }
     
+    /// 绘制线条
     override func draw(_ rect: CGRect) {
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.setLineWidth(1)
@@ -66,6 +69,7 @@ class InputView: UIView, UITextFieldDelegate {
                                 CGPoint(x: right_x, y: y)])
     }
     
+    // 收回键盘
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
         return true
@@ -76,6 +80,7 @@ class InputView: UIView, UITextFieldDelegate {
     }
 }
 
+/// 自定义的输入框
 class LoginTF: UITextField {
     
     override init(frame: CGRect) {
@@ -93,6 +98,11 @@ class LoginTF: UITextField {
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x: 0, y: 0, width: bounds.height, height: bounds.height)
     }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.height, y: 0, width: bounds.width - bounds.height, height: bounds.height)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

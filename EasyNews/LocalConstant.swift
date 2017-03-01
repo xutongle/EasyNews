@@ -14,4 +14,7 @@ class LocalConstant: NSObject {
     static let NeedChangeScrollPostion = "NeedChangeScrollPostion"
     // 指示器改变
     static let HintNeedCHange = "HintNeedCHange"
+    
+    // 按下了登录按钮
+    static let LoginButtonClickNotification = "LoginButtonClickNotification"
 }
