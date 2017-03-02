@@ -34,14 +34,23 @@ extension UserActionViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        // 处理通知
         makeNotification()
         
+        /// ========================================= ⬇️⬇️⬇️⬇️
         mWindow = UIWindow(frame: CGRect(x: 0, y: 10, width: SCREEN_WIDTH, height: UserActionViewController.WINDOW_HEIGT))
         
-        self.loginAndRegisterBaseView = LoginAndRegisterBaseView(frame: CGRect(x: 0, y: 0, width: mWindow.frame.width, height: mWindow.frame.height))
+        self.loginAndRegisterBaseView = LoginAndRegisterBaseView(frame: CGRect(x: -mWindow.frame.width, y: 0, width: mWindow.frame.width, height: mWindow.frame.height))
         self.loginAndRegisterBaseView.delegate = self
-        mWindow.windowLevel = UIWindowLevelAlert - 1
+        
         mWindow.addSubview(self.loginAndRegisterBaseView)
+        mWindow.windowLevel = UIWindowLevelAlert - 1
+        mWindow.makeKeyAndVisible()
+
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: { 
+            self.loginAndRegisterBaseView.frame = CGRect(x: 0, y: 0, width: self.mWindow.frame.width, height: self.mWindow.frame.height)
+        }, completion: nil)
+        /// ========================================= ⬆️⬆️⬆️⬆️
         
         loginVC = LoginViewController()
         self.addChildViewController(loginVC)
@@ -53,7 +62,6 @@ extension UserActionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mWindow.makeKeyAndVisible()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,7 +79,7 @@ extension UserActionViewController {
 // MARK: - LoginAndRegisterBaseViewButtonProtocol
 extension UserActionViewController: LoginAndRegisterBaseViewButtonProtocol {
     
-    /// 按了登录按钮
+    /// 按了选择登录界面按钮
     func chooseLoginButtonAction() -> Void {
         self.transition(from: self.registerVC, to: self.loginVC, duration: 0.5, options: .transitionFlipFromRight,
                         animations: {
@@ -80,7 +88,7 @@ extension UserActionViewController: LoginAndRegisterBaseViewButtonProtocol {
         }, completion: nil)
     }
     
-    /// 按了注册按钮
+    /// 按了选择注册界面按钮
     func chooseRegisterButtonAction() -> Void {
         self.transition(from: self.loginVC, to: self.registerVC, duration: 0.5, options: .transitionFlipFromLeft,
                         animations: {
@@ -93,10 +101,16 @@ extension UserActionViewController: LoginAndRegisterBaseViewButtonProtocol {
 extension UserActionViewController {
     
     fileprivate func makeNotification() -> Void {
+        // 登录通知
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LocalConstant.LoginButtonClickNotification), object: nil, queue: nil) { (notification) in
             
             self.dismiss(animated: true, completion: nil)
         }
+        
+        // 注册通知
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LocalConstant.RegisterButtonClickNotification), object: nil, queue: nil) { (notification) in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
-    
 }

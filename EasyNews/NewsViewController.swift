@@ -35,7 +35,7 @@ class NewsViewController: UIViewController {
         
         initLayout()
         
-        self.present(UserActionViewController(), animated: false, completion: nil)
+        self.present(UserActionViewController(), animated: true, completion: nil)
         
         //UDPServer()
     }

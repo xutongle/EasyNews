@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
         
         /// 登录按钮的事件
         loginView.loginBlock = {
-            // 昨晚登陆逻辑
+            // 登陆逻辑
             // 然后发送通知dissMiss掉 现在不做登陆逻辑
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalConstant.LoginButtonClickNotification), object: nil)

@@ -18,12 +18,14 @@ class LoginInputView: UIView, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
-        self.layer.cornerRadius = 10
+        //self.layer.cornerRadius = 10
         
         self.usernameTF = LoginTF(frame: CGRect.zero)
         self.usernameTF.placeholder = "用户名"
+        self.usernameTF.clearButtonMode = .whileEditing
         self.passwordTF = LoginTF(frame: CGRect.zero)
         self.passwordTF.placeholder = "密码"
+        self.passwordTF.clearButtonMode = .whileEditing
         self.addSubview(self.usernameTF)
         self.addSubview(self.passwordTF)
         
@@ -43,7 +45,7 @@ class LoginInputView: UIView, UITextFieldDelegate {
         self.passwordTF.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.usernameTF)
             make.bottom.equalTo(self).offset(-10)
-            make.top.equalTo(self.usernameTF.snp.bottom).offset(1)
+            make.top.equalTo(self.usernameTF.snp.bottom).offset(5)
             make.height.equalTo(self.usernameTF.snp.height)
         }
         
@@ -59,14 +61,17 @@ class LoginInputView: UIView, UITextFieldDelegate {
     
     /// 绘制线条
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.setLineWidth(1)
         ctx?.setStrokeColor(MY_TEXT_GRAY.cgColor)
         
-        let y = rect.height / 2 - 0.5
-        let right_x = rect.width - 10 * WScale
-        ctx?.addLines(between: [CGPoint(x: 10 * WScale, y: y),
+        let y = rect.height / 2
+        let right_x = rect.width - 10
+        ctx?.addLines(between: [CGPoint(x: 10 + self.usernameTF.frame.height, y: y),
                                 CGPoint(x: right_x, y: y)])
+        ctx?.strokePath()
     }
     
     // 收回键盘

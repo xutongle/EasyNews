@@ -17,4 +17,6 @@ class LocalConstant: NSObject {
     
     // 按下了登录按钮
     static let LoginButtonClickNotification = "LoginButtonClickNotification"
+    // 按下了注册按钮
+    static let RegisterButtonClickNotification = "RegisterButtonClickNotification"
 }
