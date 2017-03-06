@@ -20,6 +20,7 @@ class UserActionViewController: UIViewController {
     fileprivate var loginAndRegisterBaseView: LoginAndRegisterBaseView!
     /// 盛放注册的登录按钮
     fileprivate var mWindow: UIWindow!
+    
 }
 
 // MARK: - 生命周期
@@ -47,7 +48,7 @@ extension UserActionViewController {
         mWindow.windowLevel = UIWindowLevelAlert - 1
         mWindow.makeKeyAndVisible()
 
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: { 
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.loginAndRegisterBaseView.frame = CGRect(x: 0, y: 0, width: self.mWindow.frame.width, height: self.mWindow.frame.height)
         }, completion: nil)
         /// ========================================= ⬆️⬆️⬆️⬆️
@@ -81,7 +82,7 @@ extension UserActionViewController: LoginAndRegisterBaseViewButtonProtocol {
     
     /// 按了选择登录界面按钮
     func chooseLoginButtonAction() -> Void {
-        self.transition(from: self.registerVC, to: self.loginVC, duration: 0.5, options: .transitionFlipFromRight,
+        self.transition(from: self.registerVC, to: self.loginVC, duration: 0.25, options: .transitionFlipFromRight,
                         animations: {
                             self.loginVC.didMove(toParentViewController: self)
                             
@@ -90,9 +91,9 @@ extension UserActionViewController: LoginAndRegisterBaseViewButtonProtocol {
     
     /// 按了选择注册界面按钮
     func chooseRegisterButtonAction() -> Void {
-        self.transition(from: self.loginVC, to: self.registerVC, duration: 0.5, options: .transitionFlipFromLeft,
+        self.transition(from: self.loginVC, to: self.registerVC, duration: 0.25, options: .transitionFlipFromLeft,
                         animations: {
-            self.registerVC.didMove(toParentViewController: self)
+                            self.registerVC.didMove(toParentViewController: self)
         }, completion: nil)
     }
 }
@@ -104,12 +105,14 @@ extension UserActionViewController {
         // 登录通知
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LocalConstant.LoginButtonClickNotification), object: nil, queue: nil) { (notification) in
             
+            Tools.setUserDefaults(key: LocalConstant.UserIsLogin, andValue: true)
             self.dismiss(animated: true, completion: nil)
         }
         
         // 注册通知
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LocalConstant.RegisterButtonClickNotification), object: nil, queue: nil) { (notification) in
             
+            Tools.setUserDefaults(key: LocalConstant.UserIsLogin, andValue: true)
             self.dismiss(animated: true, completion: nil)
         }
     }

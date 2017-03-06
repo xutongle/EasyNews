@@ -22,7 +22,7 @@ class NewsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "right_light"), style: .done, target: self, action: #selector(rightAction))
         
         self.automaticallyAdjustsScrollViewInsets = false
-                
+        
         self.navigationItem.title = "科技要闻"
     }
     
@@ -34,14 +34,22 @@ class NewsViewController: UIViewController {
         self.view.addSubview(self.newsView)
         
         initLayout()
-        
-        self.present(UserActionViewController(), animated: true, completion: nil)
-        
         //UDPServer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if !(Tools.getUserDefaults(key: LocalConstant.UserIsLogin) as? Bool ?? false) {
+            /// 前往登录
+            /// self.present(, animated: true, completion: nil)
+            /// 出现警告： Presenting view controllers on detached view controllers is discouraged
+            /// 使用下面这个解决问题
+            self.parent?.present(UserActionViewController(), animated: true, completion: nil)
+            
+            /// Unbalanced calls to begin/end appearance transitions for <EasyNews.TabBarViewController: 0x7fe5c8e06ca0>.
+            /// 然后还有这个警告 意思是你试图几乎同时的推两个Controller到栈中去 把这个代码放到viewDidAppear 中就不会和当前的ViewController冲突了
+        }
     }
     
     func initLayout() -> Void {
