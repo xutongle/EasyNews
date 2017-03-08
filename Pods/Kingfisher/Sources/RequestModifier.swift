@@ -1,7 +1,10 @@
 //
-//  SnapKit
+//  RequestModifier.swift
+//  Kingfisher
 //
-//  Copyright (c) 2011-Present SnapKit Team - https://github.com/SnapKit
+//  Created by Wei Wang on 2016/09/05.
+//
+//  Copyright (c) 2017 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +24,30 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if os(iOS) || os(tvOS)
-    import UIKit
-#endif
+import Foundation
+
+/// Request modifier of image downloader.
+public protocol ImageDownloadRequestModifier {
+    func modified(for request: URLRequest) -> URLRequest?
+}
+
+struct NoModifier: ImageDownloadRequestModifier {
+    static let `default` = NoModifier()
+    private init() {}
+    func modified(for request: URLRequest) -> URLRequest? {
+        return request
+    }
+}
+
+public struct AnyModifier: ImageDownloadRequestModifier {
     
+    let block: (URLRequest) -> URLRequest?
     
-@available(iOS 9.0, *)
-public extension ConstraintLayoutGuide {
-    
-    public var snp: ConstraintLayoutGuideDSL {
-        return ConstraintLayoutGuideDSL(guide: self)
+    public func modified(for request: URLRequest) -> URLRequest? {
+        return block(request)
     }
     
+    public init(modify: @escaping (URLRequest) -> URLRequest? ) {
+        block = modify
+    }
 }
