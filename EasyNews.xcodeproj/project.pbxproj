@@ -25,7 +25,6 @@
 		0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */; };
 		0A24D0891E669517008EA95D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A24D0881E669517008EA95D /* LoginViewController.swift */; };
 		0A24D08B1E66958A008EA95D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A24D08A1E66958A008EA95D /* LoginView.swift */; };
-		0A3645A91E4864EE003AD989 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0A3645A81E4864EE003AD989 /* README.md */; };
 		0A3CA25E1E125562002C7442 /* GirlTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */; };
 		0A3CA2601E12695A002C7442 /* GirlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA25F1E12695A002C7442 /* GirlModel.swift */; };
 		0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */; };
@@ -92,11 +91,11 @@
 		0A24D0881E669517008EA95D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A24D08A1E66958A008EA95D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0A28D44C1E7421CD00BCEEF4 /* EasyNews-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EasyNews-Bridging-Header.h"; path = "EasyNews/EasyNews-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		0A3645A81E4864EE003AD989 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0A3CA25D1E125562002C7442 /* GirlTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlTypeModel.swift; sourceTree = "<group>"; };
 		0A3CA25F1E12695A002C7442 /* GirlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlModel.swift; sourceTree = "<group>"; };
 		0A3CA2611E1270BC002C7442 /* GirlsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlsCollectionView.swift; sourceTree = "<group>"; };
 		0A3CA2631E127175002C7442 /* GirlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GirlCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A4B44621E742D8200FC7A5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0A518DFD1E20DC5900DCA015 /* ChildGirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildGirlViewController.swift; sourceTree = "<group>"; };
 		0A983E201E5A7FBE0056F030 /* ScaleShowAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleShowAnimation.swift; sourceTree = "<group>"; };
 		0A9886A61E238C4B0019E17A /* BigPicGirlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigPicGirlView.swift; sourceTree = "<group>"; };
@@ -354,11 +353,11 @@
 		0AF802861DFA7CF7002C825F = {
 			isa = PBXGroup;
 			children = (
+				0A4B44621E742D8200FC7A5B /* README.md */,
 				0AF802911DFA7CF7002C825F /* EasyNews */,
 				CF048DF872E5F0CFFC2D8D47 /* Frameworks */,
 				19A0A7C7709203B12FB9D6F7 /* Pods */,
 				0AF802901DFA7CF7002C825F /* Products */,
-				0A3645A81E4864EE003AD989 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -649,7 +648,6 @@
 				0A3CA2621E1270BC002C7442 /* GirlsCollectionView.swift in Sources */,
 				0AE6C22C1DFAF15500B20518 /* Constants.swift in Sources */,
 				0A24D08B1E66958A008EA95D /* LoginView.swift in Sources */,
-				0A3645A91E4864EE003AD989 /* README.md in Sources */,
 				0AE6C2311DFAF15500B20518 /* ZLY_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

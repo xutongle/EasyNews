@@ -45,7 +45,7 @@ class GirlCollectionViewCell: UICollectionViewCell {
         }
         
         // 加载图片
-        imageView.kf.setImage(with: murl, placeholder: nil, options: nil)
+        imageView.kf.setImage(with: murl, placeholder: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

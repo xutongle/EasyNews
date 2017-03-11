@@ -6,6 +6,7 @@ target 'EasyNews' do
 
     pod 'Alamofire'
     pod 'SnapKit'
+    #pod 'SDWebImage'
     pod 'Kingfisher'
 
 end
