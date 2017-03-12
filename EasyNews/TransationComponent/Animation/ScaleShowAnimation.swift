@@ -50,13 +50,13 @@ class ScaleShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         fromView.isOpaque = true
         toView.clipsToBounds = true
         toView.frame = self.frame
-        
+                
         // 在present和dismiss时，必须将toview添加到视图层次中
         containerView.addSubview(toView)
         
         let transitionDuration = self.transitionDuration(using: transitionContext)
         // 使用spring动画，有弹簧效果，动画结束后一定要调用completeTransition方法
-        UIView.animate(withDuration: transitionDuration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: transitionDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveLinear, animations: {
             toView.frame = transitionContext.finalFrame(for: toViewController)    // 移动到指定位置
         }) { (finished) in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

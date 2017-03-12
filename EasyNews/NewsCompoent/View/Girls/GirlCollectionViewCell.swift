@@ -11,7 +11,11 @@ import Kingfisher
 
 class GirlCollectionViewCell: UICollectionViewCell {
     
-    var imageView: UIImageView!
+    fileprivate var imageView: UIImageView!
+    
+    public static let ID = "GirlCollectionViewCell"
+    
+    fileprivate var indicatorView: UIActivityIndicatorView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,45 +25,55 @@ class GirlCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        
         self.contentView.addSubview(imageView)
         
+        indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        self.addSubview(indicatorView)
     }
     
+    //  准备复用
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        imageView.image = nil
     }
     
+    // 真正的frame
     override func layoutSubviews() {
         super.layoutSubviews()
         
         imageView.snp.makeConstraints { (make) in
             make.left.right.bottom.top.equalTo(self)
         }
+        
+        indicatorView.snp.makeConstraints { (make) in
+            make.left.right.bottom.top.equalTo(self)
+        }
     }
     
+    // 设置图片
     func setImageURL(url: String) -> Void {
+        indicatorView.startAnimating()
+        
         guard let murl = URL(string: url) else {
+            indicatorView.stopAnimating()
             return
         }
         
         // 加载图片
-        imageView.kf.setImage(with: murl, placeholder: nil)
+        imageView.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: nil) { (image, error, type, url) in
+            self.indicatorView.stopAnimating()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func cellWith(collectionView: UICollectionView, indexPath: IndexPath, width: CGFloat, height: CGFloat) -> GirlCollectionViewCell {
-        let ID = "GirlCollectionViewCell"
+    // 获得GirlCollectionViewCell
+    static func cellWith(collectionView: UICollectionView, indexPath: IndexPath) -> GirlCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath)
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath) as? GirlCollectionViewCell
-        if cell == nil {
-            cell = GirlCollectionViewCell(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        }
-        return cell!
+        return cell as! GirlCollectionViewCell
     }
     
 }

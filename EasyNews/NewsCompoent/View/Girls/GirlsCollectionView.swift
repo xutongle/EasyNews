@@ -42,7 +42,7 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         self.delegate = self
         self.dataSource = self
         
-        self.register(GirlCollectionViewCell.self, forCellWithReuseIdentifier: "GirlCollectionViewCell")
+        self.register(GirlCollectionViewCell.self, forCellWithReuseIdentifier: GirlCollectionViewCell.ID)
     }
     
     //返回section个数
@@ -56,7 +56,7 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = GirlCollectionViewCell.cellWith(collectionView: collectionView, indexPath: indexPath, width: width, height: height)
+        let cell = GirlCollectionViewCell.cellWith(collectionView: collectionView, indexPath: indexPath)
         
         cell.setImageURL(url: NetTool.tiangou_image_base_url + models[indexPath.row].img + "_" + (width * 1.5).toStringValue + "x" + (height * 1.5).toStringValue)
         
@@ -74,17 +74,15 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     
     // cell被选择时被调用
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        
-        var mframe: CGRect!
-        if cell != nil {
-            // 这么多superview指向的是和屏幕大小一样的view
-            let _frame = cell!.frame
-            mframe = cell?.convert(CGRect(x: 0, y: 0, width: _frame.width, height: _frame.height), to: self.superview?.superview?.superview)
-        }else {
-            mframe = CGRect(x: SCREEN_WIDTH / 2 - 50, y: SCREEN_HEIGHT / 2 - 50, width: 100, height: 100)
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            Toast.toast.show(message: "内部错误", duration: .nomal, removed: nil)
+            return
         }
         
+        // 这么多superview指向的是和屏幕大小一样的view
+        let mframe = cell.convert(CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height), to: self.superview?.superview?.superview)
+        
+        //
         girl_delegate?.cellSelector(girlModel: models[indexPath.row], mframe: mframe)
     }
     
@@ -98,10 +96,6 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
                 girl_delegate?.needAdd()
             }
         }
-    }
-    
-    private func showFooterview() -> Void {
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

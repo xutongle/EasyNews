@@ -24,6 +24,7 @@ class SpringShowAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         
         var fromView: UIView! = fromViewController?.view
         var toView: UIView! = toViewController?.view
+        
         // iOS8引入了viewForKey方法，尽可能使用这个方法而不是直接访问controller的view属性
         // 比如在form sheet样式中，我们为presentedViewController的view添加阴影或其他decoration，animator会对整个decoration view
         // 添加动画效果，而此时presentedViewController的view只是decoration view的一个子视图

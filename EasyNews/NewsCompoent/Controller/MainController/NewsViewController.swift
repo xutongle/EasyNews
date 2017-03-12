@@ -10,7 +10,7 @@ import UIKit
 
 class NewsViewController: UIViewController {
 
-    private var newsView: NewsView!
+    private var newsView: NewsTableView!
     
     // 转场
     fileprivate let transationGestrue = TransationGestrue()
@@ -30,7 +30,7 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        self.newsView = NewsView()
+        self.newsView = NewsTableView()
         self.view.addSubview(self.newsView)
         
         initLayout()
@@ -53,6 +53,7 @@ class NewsViewController: UIViewController {
     }
     
     func initLayout() -> Void {
+        
         self.newsView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
