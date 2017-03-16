@@ -221,6 +221,18 @@ class Tools: NSObject {
                 complete(dict)
             }
         }
-        //
+    }
+    
+    // 正则表达式
+    static public func useRangx(pattern: String, rangeString: String) -> [String] {
+        var values: [String] = []
+        do {
+            // 规则
+            let regular = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            for result in regular.matches(in: rangeString, options: .reportProgress, range: NSMakeRange(0, rangeString.characters.count)) {
+                values.append((rangeString as NSString).substring(with: result.range))
+            }
+        }catch { }
+        return values
     }
 }
