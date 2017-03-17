@@ -23,7 +23,7 @@ class NewsViewController: UIViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.title = "科技要闻"
+        self.navigationItem.title = "豆瓣书籍"
     }
     
     override func viewDidLoad() {
