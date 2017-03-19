@@ -27,7 +27,7 @@ class GirlTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        return ToLineAnimation()
+        return ToLineAnimation(mFrame: self.frame)
     }
     
     // 交互式控制器

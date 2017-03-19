@@ -125,9 +125,12 @@ extension WeatherViewController {
     // 当时天气
     func requestCurrentWeather(city: String) -> Void {
         self.nowModel = nil
-        Alamofire.request(NetTool.currentUrl, method: .get, parameters: NetTool.getCurrentUrlParam(city: city)).responseJSON { (response) in
+        Alamofire.request(NetTool.currentUrl, method: .get, parameters: NetTool.getCurrentUrlParam(city: city)).responseJSON { [weak self] (response) in
+            guard let weakself = self else {
+                return
+            }
             // 出
-            self.group.leave()
+            weakself.group.leave()
             guard let result = response.result.value as? [String : Any] else {
                 return
             }
@@ -143,16 +146,19 @@ extension WeatherViewController {
             
             let location = NetTool.toString(any: locations["name"])
             let now = NetTool.toString(any: nows["temperature"])
-            self.nowModel = TodayViewModel(cityName: location, temperature: now)
+            weakself.nowModel = TodayViewModel(cityName: location, temperature: now)
         }
     }
     
     // 请求天气数据
     func requestThreeDayWeather(city: String) -> Void {
         self.weatherModels.removeAll()
-        Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { (response) in
+        Alamofire.request(NetTool.weathereUrl, method: .get, parameters: NetTool.getWeathereUrlParam(city: city)).responseJSON { [weak self] (response) in
+            guard let weakself = self else {
+                return
+            }
             // 出
-            self.group.leave()
+            weakself.group.leave()
             guard let result = response.result.value as? [String : Any] else { // 获得数据
                 return
             }
@@ -167,7 +173,7 @@ extension WeatherViewController {
             }
             
             for model in daily {
-                self.weatherModels.append(WeatherModel(fromDictionary: model as NSDictionary))
+                weakself.weatherModels.append(WeatherModel(fromDictionary: model as NSDictionary))
             }
         }
     }
