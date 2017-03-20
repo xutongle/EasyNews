@@ -18,7 +18,7 @@ class NewsNavViewController: UINavigationController {
         // 白色
         self.navigationBar.barStyle = .blackOpaque
         
-        self.tabBarItem.title = "摘要"
+        self.tabBarItem.title = "读书"
         self.tabBarItem.image = #imageLiteral(resourceName: "left")
     }
 

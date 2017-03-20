@@ -11,11 +11,16 @@ import UIKit
 class NewsTableViewCell: UITableViewCell {
 
     public static let ID = "NewsTableViewCell"
+    @IBOutlet weak var bookImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var avgLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var publishingLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        self.lineToLeft()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,8 +28,8 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     static func cellWith(tableview: UITableView, indexPath: IndexPath) -> NewsTableViewCell {
-        let cell = tableview.dequeueReusableCell(withIdentifier: NewsTableViewCell.ID, for: indexPath) as! NewsTableViewCell
-        return cell
+        let cell = tableview.dequeueReusableCell(withIdentifier: NewsTableViewCell.ID, for: indexPath)
+        return cell as! NewsTableViewCell
     }
     
 }

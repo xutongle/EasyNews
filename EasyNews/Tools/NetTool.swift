@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+
+typealias Success = ((_ response: Any?) -> Void)
+typealias Fail = ((_ message: String) -> Void)
 
 class NetTool: NSObject {
     
@@ -88,6 +92,20 @@ class NetTool: NSObject {
             return String(any as! Int)
         }
         return "unknow"
+    }
+    
+    // 网络请求
+    static func requestBooks(q: String, offset: Int, success: Success?, fail: Fail?) -> Void {
+        Alamofire.request("https://api.douban.com/v2/book/search", method: .get,
+                          parameters: ["q" : q, "start" : offset.toStringValue, "count" : "20"])
+            .responseJSON { (response) in
+                
+                if response.result.isSuccess {
+                    success?(response.value)
+                }else {
+                    fail?("请检查网络")
+                }
+        }
     }
     
 }

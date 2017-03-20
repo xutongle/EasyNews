@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class NewsViewController: UIViewController {
 
-    private var newsView: NewsTableView!
+    // view
+    fileprivate var newsView: NewsTableView!
+    fileprivate var searchToolBar: SearchToolBar!
     
     // 转场
     fileprivate let transationGestrue = TransationGestrue()
@@ -30,8 +33,12 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        self.newsView = NewsTableView()
+        self.newsView = NewsTableView(frame: self.view.frame, style: .plain)
         self.view.addSubview(self.newsView)
+        
+        self.searchToolBar = SearchToolBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
+        self.searchToolBar.delegate = self
+        self.view.addSubview(self.searchToolBar)
         
         initLayout()
         //UDPServer()
@@ -54,13 +61,20 @@ class NewsViewController: UIViewController {
     
     func initLayout() -> Void {
         
-        self.newsView.snp.makeConstraints { (make) in
+        self.searchToolBar.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(64)
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(35)
+        }
+        
+        self.newsView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view).offset(94)
             make.left.right.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-39)
         }
     }
     
+    // 前往天气页面
     func rightAction() -> Void {
         let weatherVC = WeatherViewController()
         
@@ -70,10 +84,35 @@ class NewsViewController: UIViewController {
         // 主要是做了手势和协议
         transationGestrue.wire(to: weatherVC)
         
-        // 前往天气页面
          self.present(weatherVC, animated: true, completion: nil)
     }
     
+}
+
+// 按了搜索按钮 执行网络请求
+extension NewsViewController: SearchToolBarProtocol {
+    
+    func searchAction(q: String) -> Void {
+        self.newsView.booksModel = []
+        self.showTransationView(style: .dark)
+        NetTool.requestBooks(q: q, offset: 0, success: { (value) in
+            self.removeTransationView()
+            guard let result = value as? [String: Any] else {
+                return
+            }
+            guard let books = result["books"] as? [NSDictionary] else {
+                return
+            }
+            //
+            for book in books {
+                self.newsView.booksModel.append(Books(fromDictionary: book))
+            }
+            
+        }) { (message) in
+            self.removeTransationView()
+            Toast.toast.show(message: message, duration: .nomal, removed: nil)
+        }
+    }
 }
 
 extension NewsViewController {

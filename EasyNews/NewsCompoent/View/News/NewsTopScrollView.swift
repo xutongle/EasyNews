@@ -20,6 +20,7 @@ enum ScrollPostionType {
     case Right
 }
 
+// 暂且未使用
 class NewsTopScrollView: UIScrollView, UIScrollViewDelegate {
 
     private var centerImageView: UIImageView!

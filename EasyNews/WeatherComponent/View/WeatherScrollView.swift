@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherScrollView: UIScrollView {
+class WeatherScrollView: UIScrollView, UIScrollViewDelegate {
 
     private var weatherView: WeatherView!
     private var searchTableView: SearchTableView!
@@ -17,6 +17,7 @@ class WeatherScrollView: UIScrollView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.groupTableViewBackground
+        self.delegate = self
         
         self.keyboardDismissMode = .onDrag  // 拖动ScrollView键盘消失
         
@@ -32,6 +33,11 @@ class WeatherScrollView: UIScrollView {
     
     func getWeatherView() -> WeatherView {
         return weatherView
+    }
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.endEditing(true)
     }
     
     required init?(coder aDecoder: NSCoder) {

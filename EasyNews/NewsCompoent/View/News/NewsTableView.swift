@@ -8,16 +8,23 @@
 
 import UIKit
 
-class NewsTableView: UITableView {
+class NewsTableView: UITableView{
 
     // 顶部滚动的view
-    private var newsTopScrollView: NewsTopScrollView!
-    // 指示器
-    private var pageController: UIPageControl!
+//    private var newsTopScrollView: NewsTopScrollView!
+//    // 指示器
+//    private var pageController: UIPageControl!
+    
+    private var tempView: TempView!
     
     // 数据源
-    var newsModel: [NewsModel] = [] {
+    var booksModel: [Books] = [] {
         didSet {
+            if booksModel.count != 0 {
+                self.tempView.removeFromSuperview()
+            }else {
+                self.addSubview(self.tempView)
+            }
             self.reloadData()
         }
     }
@@ -28,44 +35,65 @@ class NewsTableView: UITableView {
         self.backgroundColor = UIColor.white
         self.delegate = self
         self.dataSource = self
+        self.rowHeight = 130
+        self.tableFooterView = UIView()
+        self.lineToLeft()
         
-        self.newsTopScrollView = NewsTopScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120 * WScale))
-        self.tableHeaderView = self.newsTopScrollView
+        // 
+        self.keyboardDismissMode = .onDrag
+        // 没有数据显示的view
+        tempView = TempView.getView(mframe: self.frame)
+        self.addSubview(self.tempView)
         
-        self.newsTopScrollView.needChangePageControll = { type in
-            self.pageController.currentPage = type.hashValue
-        }
+        // 把滚动的视图废弃 改为搜索
+//        self.newsTopScrollView = NewsTopScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120 * WScale))
+//        self.tableHeaderView = self.newsTopScrollView
+        // 页面指示器
+//        pageController = UIPageControl()
+//        pageController.numberOfPages = 3
+//        self.addSubview(pageController)
         
-        pageController = UIPageControl()
-        pageController.numberOfPages = 3
-        self.addSubview(pageController)
+//        self.newsTopScrollView.needChangePageControll = { type in
+//            self.pageController.currentPage = type.hashValue
+//        }
         
-        self.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.ID)
+        // 注册的是nib
+        self.register(UINib(nibName: NewsTableViewCell.ID, bundle: nil), forCellReuseIdentifier: NewsTableViewCell.ID)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        pageController.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.newsTopScrollView.snp.bottom).offset(-5)
-            make.left.right.equalTo(self.newsTopScrollView)
-            make.height.equalTo(10)
-        }
+//        pageController.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(self.newsTopScrollView.snp.bottom).offset(-5)
+//            make.left.right.equalTo(self.newsTopScrollView)
+//            make.height.equalTo(10)
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension NewsTableView: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsModel.count
+        return booksModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return NewsTableViewCell.cellWith(tableview: tableView, indexPath: indexPath)
+        let cell = NewsTableViewCell.cellWith(tableview: tableView, indexPath: indexPath)
+        
+        let book = self.booksModel[indexPath.row]
+        
+        cell.bookImageView.kf.setImage(with: URL(string: book.images.medium), placeholder: nil)
+        cell.titleLabel.text = book.title
+        cell.avgLabel.text = "评分：" + book.rating.average
+        cell.authorLabel.text = "作者：" + Tools.arrayToString(array: book.author, s: ",")
+        cell.publishingLabel.text = "出版社：" + book.publisher
+        
+        return cell
     }
 }
+

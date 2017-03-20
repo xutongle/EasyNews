@@ -235,4 +235,19 @@ class Tools: NSObject {
         }catch { }
         return values
     }
+    
+    //
+    static func arrayToString(array: [String], s: String) -> String {
+        var first = true
+        var ss: String = ""
+        for str in array {
+            if first {
+                ss += str
+                first = false
+            }else {
+                ss += s + str
+            }
+        }
+        return ss
+    }
 }
