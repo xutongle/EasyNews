@@ -8,7 +8,11 @@
 
 import UIKit
 
-class NewsTableView: UITableView{
+protocol NewsTableViewProtocol {
+    func ScrollToEnd() -> Void
+}
+
+class BooksTableView: UITableView {
 
     // 顶部滚动的view
 //    private var newsTopScrollView: NewsTopScrollView!
@@ -16,6 +20,8 @@ class NewsTableView: UITableView{
 //    private var pageController: UIPageControl!
     
     private var tempView: TempView!
+    
+    var action_delegate: NewsTableViewProtocol?
     
     // 数据源
     var booksModel: [Books] = [] {
@@ -58,7 +64,7 @@ class NewsTableView: UITableView{
 //        }
         
         // 注册的是nib
-        self.register(UINib(nibName: NewsTableViewCell.ID, bundle: nil), forCellReuseIdentifier: NewsTableViewCell.ID)
+        self.register(UINib(nibName: BooksTableViewCell.ID, bundle: nil), forCellReuseIdentifier: BooksTableViewCell.ID)
     }
     
     override func layoutSubviews() {
@@ -76,14 +82,15 @@ class NewsTableView: UITableView{
     }
 }
 
-extension NewsTableView: UITableViewDelegate, UITableViewDataSource  {
+// MARK: - UITableViewDelegate, UITableViewDataSource协议
+extension BooksTableView: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return booksModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = NewsTableViewCell.cellWith(tableview: tableView, indexPath: indexPath)
+        let cell = BooksTableViewCell.cellWith(tableview: tableView, indexPath: indexPath)
         
         let book = self.booksModel[indexPath.row]
         
@@ -94,6 +101,25 @@ extension NewsTableView: UITableViewDelegate, UITableViewDataSource  {
         cell.publishingLabel.text = "出版社：" + book.publisher
         
         return cell
+    }
+}
+
+// MARK: - Scroll协议
+extension BooksTableView {
+    
+    // 滚动协议
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // ScrollView的内容是否比TableView小，小的话就随便上啦都做加载 - - 其实在这里说明没数据了 只能搜到这么多
+        if scrollView.contentSize.height < frame.size.height {
+            if scrollView.contentOffset.y > 20 {
+                // 没数据
+            }
+        }else{
+            // 需要添加数据
+            if (scrollView.contentSize.height - frame.size.height + 20 < scrollView.contentOffset.y) {
+                action_delegate?.ScrollToEnd()
+            }
+        }
     }
 }
 

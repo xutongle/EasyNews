@@ -29,8 +29,8 @@ class WeatherViewController: UIViewController {
     
     //  线程
     fileprivate let group = DispatchGroup()
-    let currentQueue = DispatchQueue(label: "com.requestCurrentWeather")
-    let threeQueue = DispatchQueue(label: "com.requestThreeDayWeather")
+    fileprivate let currentQueue = DispatchQueue(label: "com.requestCurrentWeather")
+    fileprivate let threeQueue = DispatchQueue(label: "com.requestThreeDayWeather")
     
     // state bar变白
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -64,19 +64,21 @@ class WeatherViewController: UIViewController {
         self.getLocationPre()
         
         // 监听通知 需要改变Scroll的位置
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { notification in
-            //
-            self.weatherScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            
-            self.setEditing(false, animated: true)
-            
-            guard let info = notification.userInfo else {
-                return
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(LocalConstant.NeedChangeScrollPostion), object: nil, queue: nil, using: { [weak self] notification in
+            if let weakself = self {
+                //
+                weakself.weatherScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                
+                weakself.setEditing(false, animated: true)
+                
+                guard let info = notification.userInfo else {
+                    return
+                }
+                guard let city = info["city"] as? String else {
+                    return
+                }
+                weakself.requestWeather(city: city)
             }
-            guard let city = info["city"] as? String else {
-                return
-            }
-            self.requestWeather(city: city)
         })
     }
 }

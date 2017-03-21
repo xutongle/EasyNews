@@ -12,8 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let homeIcon = UIApplicationShortcutIcon(type: .pause)
@@ -21,15 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.shortcutItems = [home]
         
+        //
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let tabbar = TabBarViewController()
-        let newsNavVC = NewsNavViewController(rootViewController: NewsViewController())
+        let tabbarVC = TabBarViewController()
+        let newsNavVC = BooksNavViewController(rootViewController: BooksViewController())
         let girlNavVC = GirlNavViewController(rootViewController: GirlViewController())
-        tabbar.addChildViewController(newsNavVC)
-        tabbar.addChildViewController(girlNavVC)
+        tabbarVC.addChildViewController(newsNavVC)
+        tabbarVC.addChildViewController(girlNavVC)
         
-        window?.rootViewController = tabbar
+        window?.rootViewController = tabbarVC
         
         window?.makeKeyAndVisible()
         
@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
     }
+    
+    //
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

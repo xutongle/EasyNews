@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 登录控制器
 class LoginViewController: UIViewController {
 
     var loginView: LoginView!

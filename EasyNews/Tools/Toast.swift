@@ -38,7 +38,7 @@ class Toast: UIView {
     private static let screen_width = UIScreen.main.bounds.width
     private static let screen_height = UIScreen.main.bounds.height
     //
-    static let toast = Toast(frame: CGRect(x: screen_width / 4, y: screen_height - 80, width: screen_width / 2, height: 39))
+    static let toast = Toast(frame: CGRect(x: screen_width / 4, y: screen_height - 49 - 40, width: screen_width / 2, height: 40))
 
     // Toast 的一些默认设置
     override fileprivate init(frame: CGRect) {

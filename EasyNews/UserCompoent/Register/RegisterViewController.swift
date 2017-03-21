@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 注册控制器
 class RegisterViewController: UIViewController {
 
     fileprivate var registerView: RegisterView!

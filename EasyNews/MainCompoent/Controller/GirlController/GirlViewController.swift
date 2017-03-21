@@ -40,17 +40,24 @@ class GirlViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
+        let barHeight = Tools.getBarHeight(nav: self.navigationController)
+        
         // 只看最新的妹子
-        newGirlscollectionView = GirlsCollectionView(frame: CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - 49))
+        newGirlscollectionView = GirlsCollectionView(frame: CGRect(x: 0, y: barHeight.sumHeight,
+                                                                   width: self.view.frame.size.width,
+                                                                   height: self.view.frame.size.height - TAB_HEIGHT))
         self.view.insertSubview(newGirlscollectionView, at: 0)
         
         // 分类看妹子
-        itemScrollView = ItemScrollView(x: 0, y: 64, width: self.view.frame.size.width)
+        itemScrollView = ItemScrollView(x: 0, y: barHeight.sumHeight, width: self.view.frame.size.width)
         self.view.addSubview(itemScrollView)
         itemScrollView.item_delegate = self
         
+        let containerViewY = barHeight.sumHeight + self.itemScrollView.getHeight()
         // 容器
-        containerView = UIView(frame: CGRect(x: 0, y: 104, width: self.view.frame.size.width, height: self.view.frame.size.height - 104 - 49))
+        containerView = UIView(frame: CGRect(x: 0, y: containerViewY,
+                                             width: self.view.frame.size.width,
+                                             height: self.view.frame.size.height - containerViewY - TAB_HEIGHT))
         containerView.backgroundColor = UIColor.groupTableViewBackground
         self.view.insertSubview(containerView, at: 2)
         
@@ -65,7 +72,9 @@ class GirlViewController: UIViewController {
                 
                 self.addChildViewController(childVC)
                 //
-                childVC.setFrame(mframe: CGRect(x: 0, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height), mid: m.id)
+                childVC.setFrame(mframe: CGRect(x: 0, y: 0,
+                                                width: self.containerView.frame.width,
+                                                height: self.containerView.frame.height), mid: m.id)
             }
             
             // 显示第一个

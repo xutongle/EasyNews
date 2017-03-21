@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 基础的view
 protocol LoginAndRegisterBaseViewButtonProtocol {
     func chooseLoginButtonAction() -> Void
     

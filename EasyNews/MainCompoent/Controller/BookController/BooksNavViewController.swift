@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsNavViewController: UINavigationController {
+class BooksNavViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

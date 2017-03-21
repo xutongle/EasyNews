@@ -8,11 +8,16 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+var TAB_HEIGHT: CGFloat!
 
+class TabBarViewController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // TABBAR 高度
+        TAB_HEIGHT = self.tabBar.bounds.size.height
+        
         self.tabBar.barStyle = .default
         self.tabBar.tintColor = MY_TSUYUKUSA
     }

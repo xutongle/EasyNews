@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
+class BooksTransationDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     private var transationGestrue: TransationGestrue!
     

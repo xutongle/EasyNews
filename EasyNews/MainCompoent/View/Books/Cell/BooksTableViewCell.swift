@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NewsTableViewCell: UITableViewCell {
+class BooksTableViewCell: UITableViewCell {
 
-    public static let ID = "NewsTableViewCell"
+    public static let ID = "BooksTableViewCell"
     @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var avgLabel: UILabel!
@@ -20,6 +20,7 @@ class NewsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.titleLabel.adjustsFontSizeToFitWidth = true
         self.lineToLeft()
     }
 
@@ -27,9 +28,9 @@ class NewsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    static func cellWith(tableview: UITableView, indexPath: IndexPath) -> NewsTableViewCell {
-        let cell = tableview.dequeueReusableCell(withIdentifier: NewsTableViewCell.ID, for: indexPath)
-        return cell as! NewsTableViewCell
+    static func cellWith(tableview: UITableView, indexPath: IndexPath) -> BooksTableViewCell {
+        let cell = tableview.dequeueReusableCell(withIdentifier: BooksTableViewCell.ID, for: indexPath)
+        return cell as! BooksTableViewCell
     }
     
 }

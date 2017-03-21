@@ -9,6 +9,19 @@
 import UIKit
 import CoreLocation
 
+// 各种Bar高度的结构体
+struct BarHeight {
+    var statusHeight: CGFloat!
+    var navgationHeight: CGFloat!
+    var sumHeight: CGFloat!
+    
+    init(sh: CGFloat, nh: CGFloat) {
+        self.statusHeight = sh
+        self.navgationHeight = nh
+        sumHeight = sh + nh
+    }
+}
+
 class Tools: NSObject {
     
     static let locationManage = CLLocationManager()
@@ -236,7 +249,7 @@ class Tools: NSObject {
         return values
     }
     
-    //
+    // array to str
     static func arrayToString(array: [String], s: String) -> String {
         var first = true
         var ss: String = ""
@@ -249,5 +262,15 @@ class Tools: NSObject {
             }
         }
         return ss
+    }
+    
+    // 状态栏高度 导航栏高度 （注意：导航栏为nil 高度为小于0）
+    static func getBarHeight(nav: UINavigationController?) -> BarHeight {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        var navHeight: CGFloat = -1
+        if nav != nil {
+            navHeight = nav!.navigationBar.bounds.size.height
+        }
+        return BarHeight(sh: statusBarHeight, nh: navHeight)
     }
 }

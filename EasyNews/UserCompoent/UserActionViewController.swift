@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 总的
 class UserActionViewController: UIViewController {
 
     static let WINDOW_HEIGT = 100 * WScale

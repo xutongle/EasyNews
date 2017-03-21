@@ -12,13 +12,18 @@ class BigPicViewController: UIViewController {
     
     // model
     var url: String!
-    var image: UIImage!
+    weak var image: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageScrollView = ImageScrollView(frame: self.view.frame, imageUrl: [url])
+        let f = self.view.frame
+        let imageScrollView = ImageScrollView(frame: f, imageUrl: [url])
         self.view.addSubview(imageScrollView)        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
 
 }
