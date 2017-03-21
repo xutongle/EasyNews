@@ -9,7 +9,7 @@
 import UIKit
 
 // 基础的view
-protocol LoginAndRegisterBaseViewButtonProtocol {
+protocol LoginAndRegisterBaseViewButtonProtocol: class {
     func chooseLoginButtonAction() -> Void
     
     func chooseRegisterButtonAction() -> Void
@@ -20,7 +20,7 @@ class LoginAndRegisterBaseView: UIView {
     fileprivate var chooseLoginButton: UIButton!
     fileprivate var chooseRegisterButton: UIButton!
     
-    var delegate: LoginAndRegisterBaseViewButtonProtocol?
+    weak var delegate: LoginAndRegisterBaseViewButtonProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

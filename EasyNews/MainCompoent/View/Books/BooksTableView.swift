@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NewsTableViewProtocol {
+protocol NewsTableViewProtocol: class {
     func ScrollToEnd() -> Void
 }
 
@@ -21,7 +21,7 @@ class BooksTableView: UITableView {
     
     private var tempView: TempView!
     
-    var action_delegate: NewsTableViewProtocol?
+    weak var action_delegate: NewsTableViewProtocol?
     
     // 数据源
     var booksModel: [Books] = [] {

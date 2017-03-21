@@ -75,6 +75,7 @@ extension UserActionViewController {
         mWindow = nil
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LocalConstant.LoginButtonClickNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LocalConstant.RegisterButtonClickNotification), object: nil)
     }
 }
 

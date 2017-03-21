@@ -26,4 +26,10 @@ class BigPicViewController: UIViewController {
         super.viewDidDisappear(animated)
     }
 
+    // - -
+    deinit {
+        self.view.removeFromSuperview()
+        self.view = nil
+    }
+    
 }

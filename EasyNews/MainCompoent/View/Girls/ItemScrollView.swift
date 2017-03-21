@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ItemScrollViewDelegate {
+protocol ItemScrollViewDelegate: class {
     func ItemCilck(girlType: GirlTypeModel)
 }
 
@@ -16,7 +16,7 @@ protocol ItemScrollViewDelegate {
 /// 这个就是横向滚动的 妹子的type
 class ItemScrollView: UIScrollView {
     
-    var item_delegate: ItemScrollViewDelegate?
+    weak var item_delegate: ItemScrollViewDelegate?
     
     var itemModels: [GirlTypeModel] = [GirlTypeModel(keywords: "暂无数据")] {
         didSet{

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GirlCollectionProtocol {
+protocol GirlCollectionProtocol: class {
     func needAdd()
     func cellSelector(girlModel: GirlModel, mframe: CGRect)
     func registerCellFor3DTouch(cell: GirlCollectionViewCell)
@@ -19,7 +19,7 @@ class GirlsCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     private var width: CGFloat = 0
     private var height: CGFloat = 0
     
-    var girl_delegate: GirlCollectionProtocol?
+    weak var girl_delegate: GirlCollectionProtocol?
     
     var models: [GirlModel] = [] {
         didSet{

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchToolBarProtocol {
+protocol SearchToolBarProtocol: class {
     func searchAction(q: String) -> Void
 }
 
@@ -17,7 +17,7 @@ class SearchToolBar: UIView {
     private var searchButton: UIButton!
     private var searchTF: UITextField!
     
-    var delegate: SearchToolBarProtocol?
+    weak var delegate: SearchToolBarProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

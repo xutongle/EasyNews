@@ -199,10 +199,10 @@
 		0A11B9421DFD109200779E04 /* WeatherView */ = {
 			isa = PBXGroup;
 			children = (
-				0AEB5F861DFBD3A60057B822 /* LastWeatherView.swift */,
-				0AEB5F801DFAF9220057B822 /* TodayView.swift */,
-				0AEB5F841DFBB8840057B822 /* WeatherInfoView.swift */,
 				0AF802AB1DFA7E51002C825F /* WeatherView.swift */,
+				0AEB5F801DFAF9220057B822 /* TodayView.swift */,
+				0AEB5F861DFBD3A60057B822 /* LastWeatherView.swift */,
+				0AEB5F841DFBB8840057B822 /* WeatherInfoView.swift */,
 			);
 			path = WeatherView;
 			sourceTree = "<group>";
