@@ -49,7 +49,6 @@ class SearchToolBar: UIView {
             make.left.equalToSuperview()
             make.right.equalTo(self.searchButton.snp.left)
         }
-        
     }
     
     //

@@ -20,11 +20,17 @@
 		0A11B9451DFD117700779E04 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9441DFD117700779E04 /* SearchTableView.swift */; };
 		0A11B9481DFD171100779E04 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */; };
 		0A11B9491DFD171100779E04 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */; };
+		0A1D4DC61E84B74000400D2F /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D4DC51E84B74000400D2F /* BookDetailViewController.swift */; };
+		0A1D4DCD1E84BCD800400D2F /* BookBaseInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D4DCB1E84BCD800400D2F /* BookBaseInfoTableViewCell.swift */; };
+		0A1D4DD01E84E76B00400D2F /* BookDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D4DCF1E84E76B00400D2F /* BookDetailTableViewCell.swift */; };
+		0A1D4DD51E84FE0A00400D2F /* SomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D4DD31E84FE0A00400D2F /* SomeDetailViewController.swift */; };
+		0A1D4DD61E84FE0A00400D2F /* SomeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D4DD41E84FE0A00400D2F /* SomeDetailViewController.xib */; };
 		0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */; };
 		0A1FDCCC1E2A8104000E34CA /* SpringShowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */; };
 		0A1FDCD21E2A81C2000E34CA /* DissmissGestrueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */; };
 		0A24D0891E669517008EA95D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A24D0881E669517008EA95D /* LoginViewController.swift */; };
 		0A24D08B1E66958A008EA95D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A24D08A1E66958A008EA95D /* LoginView.swift */; };
+		0A28A3621E83CAE000FB2F37 /* BookDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A3611E83CAE000FB2F37 /* BookDetailTableView.swift */; };
 		0A314C4A1E7FAA6B0097F864 /* SearchToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A314C491E7FAA6B0097F864 /* SearchToolBar.swift */; };
 		0A314C4C1E7FB2A10097F864 /* Books.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A314C4B1E7FB2A10097F864 /* Books.swift */; };
 		0A314C4E1E7FB2DA0097F864 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A314C4D1E7FB2DA0097F864 /* Image.swift */; };
@@ -75,6 +81,7 @@
 		0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802AB1DFA7E51002C825F /* WeatherView.swift */; };
 		0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802AE1DFA9338002C825F /* WeatherModel.swift */; };
 		0AF802B21DFA93C9002C825F /* NetTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF802B11DFA93C9002C825F /* NetTool.swift */; };
+		0AFD6B7E1E84A981005F5D1D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD6B7D1E84A981005F5D1D /* RatingView.swift */; };
 		A5585B4DF9A749A95C00E74D /* Pods_EasyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D416B0A468B85135A2AE2434 /* Pods_EasyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,11 +100,17 @@
 		0A11B9441DFD117700779E04 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		0A11B9461DFD171100779E04 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0A11B9471DFD171100779E04 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		0A1D4DC51E84B74000400D2F /* BookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		0A1D4DCB1E84BCD800400D2F /* BookBaseInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookBaseInfoTableViewCell.swift; sourceTree = "<group>"; };
+		0A1D4DCF1E84E76B00400D2F /* BookDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailTableViewCell.swift; sourceTree = "<group>"; };
+		0A1D4DD31E84FE0A00400D2F /* SomeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeDetailViewController.swift; sourceTree = "<group>"; };
+		0A1D4DD41E84FE0A00400D2F /* SomeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SomeDetailViewController.xib; sourceTree = "<group>"; };
 		0A1FDCC71E2A8029000E34CA /* TransationGestrue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransationGestrue.swift; sourceTree = "<group>"; };
 		0A1FDCCB1E2A8104000E34CA /* SpringShowAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringShowAnimation.swift; sourceTree = "<group>"; };
 		0A1FDCD11E2A81C2000E34CA /* DissmissGestrueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DissmissGestrueAnimation.swift; sourceTree = "<group>"; };
 		0A24D0881E669517008EA95D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A24D08A1E66958A008EA95D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0A28A3611E83CAE000FB2F37 /* BookDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailTableView.swift; sourceTree = "<group>"; };
 		0A28D44C1E7421CD00BCEEF4 /* EasyNews-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EasyNews-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A314C491E7FAA6B0097F864 /* SearchToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchToolBar.swift; sourceTree = "<group>"; };
 		0A314C4B1E7FB2A10097F864 /* Books.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Books.swift; sourceTree = "<group>"; };
@@ -152,6 +165,7 @@
 		0AF802AB1DFA7E51002C825F /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		0AF802AE1DFA9338002C825F /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		0AF802B11DFA93C9002C825F /* NetTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetTool.swift; sourceTree = "<group>"; };
+		0AFD6B7D1E84A981005F5D1D /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		2DC3CA7561E6282788F27415 /* Pods-EasyNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyNews.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyNews/Pods-EasyNews.debug.xcconfig"; sourceTree = "<group>"; };
 		8DA7B603CB3CAB5C4E60CF0C /* Pods-EasyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyNews.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyNews/Pods-EasyNews.release.xcconfig"; sourceTree = "<group>"; };
 		D416B0A468B85135A2AE2434 /* Pods_EasyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +271,17 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		0A28A3601E83C98A00FB2F37 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				0A28A3611E83CAE000FB2F37 /* BookDetailTableView.swift */,
+				0A1D4DCB1E84BCD800400D2F /* BookBaseInfoTableViewCell.swift */,
+				0A1D4DCF1E84E76B00400D2F /* BookDetailTableViewCell.swift */,
+				0AFD6B7D1E84A981005F5D1D /* RatingView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		0A8C514F1E74E94E008F2C71 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +344,9 @@
 			children = (
 				0ABBAF181DFFBD0000D84C94 /* BooksNavViewController.swift */,
 				0ABBAF0E1DFFA4CE00D84C94 /* BooksViewController.swift */,
+				0A1D4DC51E84B74000400D2F /* BookDetailViewController.swift */,
+				0A1D4DD31E84FE0A00400D2F /* SomeDetailViewController.swift */,
+				0A1D4DD41E84FE0A00400D2F /* SomeDetailViewController.xib */,
 			);
 			path = BookController;
 			sourceTree = "<group>";
@@ -360,6 +388,7 @@
 				0A314C491E7FAA6B0097F864 /* SearchToolBar.swift */,
 				0A314C511E7FC82E0097F864 /* TempView.swift */,
 				0A314C531E7FC8420097F864 /* TempView.xib */,
+				0A28A3601E83C98A00FB2F37 /* Detail */,
 				0A8C514F1E74E94E008F2C71 /* Cell */,
 			);
 			path = Books;
@@ -582,6 +611,7 @@
 				0AF8029D1DFA7CF7002C825F /* LaunchScreen.storyboard in Resources */,
 				0A11B93F1DFD06DE00779E04 /* city.plist in Resources */,
 				0A0AE28E1E2DC867006B4414 /* GirlCollectionReusableView.xib in Resources */,
+				0A1D4DD61E84FE0A00400D2F /* SomeDetailViewController.xib in Resources */,
 				0AF8029A1DFA7CF7002C825F /* Assets.xcassets in Resources */,
 				0AC216CE1E7BBB1400CBC01E /* BooksTableViewCell.xib in Resources */,
 				0A314C541E7FC8420097F864 /* TempView.xib in Resources */,
@@ -673,6 +703,7 @@
 				0A11B9411DFD07B300779E04 /* WeatherScrollView.swift in Sources */,
 				0A314C4A1E7FAA6B0097F864 /* SearchToolBar.swift in Sources */,
 				0AE6C2301DFAF15500B20518 /* Tools.swift in Sources */,
+				0A1D4DC61E84B74000400D2F /* BookDetailViewController.swift in Sources */,
 				0A24D0891E669517008EA95D /* LoginViewController.swift in Sources */,
 				0AE6C22B1DFAF15500B20518 /* ColorConstants.swift in Sources */,
 				0ABBAF191DFFBD0000D84C94 /* BooksNavViewController.swift in Sources */,
@@ -686,16 +717,21 @@
 				0AF802931DFA7CF7002C825F /* AppDelegate.swift in Sources */,
 				0ADB92D21E0FF3A000D35F9E /* UserActionViewController.swift in Sources */,
 				0A09ADE31E4C45E400B2FCF9 /* TopBottomSwapGestrue.swift in Sources */,
+				0A1D4DD51E84FE0A00400D2F /* SomeDetailViewController.swift in Sources */,
 				0AF802AC1DFA7E51002C825F /* WeatherView.swift in Sources */,
 				0AE6C22E1DFAF15500B20518 /* SingleManager.swift in Sources */,
+				0A1D4DD01E84E76B00400D2F /* BookDetailTableViewCell.swift in Sources */,
 				0ABBAF1E1DFFC4B500D84C94 /* GirlViewController.swift in Sources */,
 				0A09ADE71E4C4D3100B2FCF9 /* GirlTransationDelegate.swift in Sources */,
 				0AC216D61E7BC18300CBC01E /* GirlTypeModel.swift in Sources */,
 				0A1FDCC81E2A8029000E34CA /* TransationGestrue.swift in Sources */,
+				0A1D4DCD1E84BCD800400D2F /* BookBaseInfoTableViewCell.swift in Sources */,
+				0AFD6B7E1E84A981005F5D1D /* RatingView.swift in Sources */,
 				0AE6C22F1DFAF15500B20518 /* Toast.swift in Sources */,
 				0A0FFA1B1DFE96D5007A92AB /* LocalConstant.swift in Sources */,
 				0A314C4C1E7FB2A10097F864 /* Books.swift in Sources */,
 				0AF802AF1DFA9338002C825F /* WeatherModel.swift in Sources */,
+				0A28A3621E83CAE000FB2F37 /* BookDetailTableView.swift in Sources */,
 				0AE6C2321DFAF15500B20518 /* ZLY_SlidingViewController.swift in Sources */,
 				0ADB92D41E0FF3DA00D35F9E /* LoginAndRegisterBaseView.swift in Sources */,
 				0A09ADE51E4C4BAC00B2FCF9 /* ToLineAnimation.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Data{
+extension Data {
     
     /* data to 16 string */
     func hexEncodedString() -> String {
@@ -20,24 +20,17 @@ extension Data{
         return map { String(format: "%d ", $0) }.joined()
     }
     
-    func decimalStringUTF16() -> [UInt16] {
-        let asciiString = String(data: self, encoding: String.Encoding.ascii)
-        if asciiString != nil {
-            let uint16Array: [UInt16] = Array(asciiString!.utf16)
-            return uint16Array
-        }else {
-            return [0]
-        }
-    }
+//    func decimalStringUTF16() -> [UInt16]? {
+//        guard let asciiString = String(data: self, encoding: String.Encoding.ascii) else {
+//            return nil
+//        }
+//        
+//        let uint16Array: [UInt16] = Array(asciiString.utf16)
+//        return uint16Array
+//    }
     
-    func decimalStringUTF8() -> [UInt8] {
-        let utf8String = String(data: self, encoding: String.Encoding.utf8)
-        if utf8String != nil {
-            let uintf8Array: [UInt8] = Array(utf8String!.utf8)
-            return uintf8Array
-        }else {
-            return [0]
-        }
+    func decimalStringUTF8() -> [UInt8]? {
+        return [UInt8](self)
     }
     
     func toBytes() -> UnsafeRawPointer {
@@ -122,9 +115,9 @@ extension UITableViewCell {
     }
 }
 
-extension Int {
+extension Integer {
     var toStringValue: String {
-        return String(self)
+        return String(describing: self)
     }
 }
 

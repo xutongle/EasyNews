@@ -12,7 +12,7 @@ class DissmissGestrueAnimation: NSObject, UIViewControllerAnimatedTransitioning 
 
     // 转场时间
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.6
+        return 0.25
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

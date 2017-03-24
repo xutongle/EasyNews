@@ -17,7 +17,7 @@ class BooksViewController: UIViewController {
     
     // 转场
     fileprivate let transationGestrue = TransationGestrue()
-    fileprivate var transationDelegate: BooksTransationDelegate!
+    fileprivate var booksTransationDelegate: BooksTransationDelegate!
     
     // 搜索的词条
     fileprivate var q: String = ""
@@ -97,13 +97,13 @@ class BooksViewController: UIViewController {
     func rightAction() -> Void {
         let weatherVC = WeatherViewController()
         
-        transationDelegate = BooksTransationDelegate(transationGestrue: transationGestrue)
-        weatherVC.transitioningDelegate = transationDelegate
+        booksTransationDelegate = BooksTransationDelegate(transationGestrue: transationGestrue)
+        weatherVC.transitioningDelegate = booksTransationDelegate
         
         // 主要是做了手势和协议
         transationGestrue.wire(to: weatherVC)
         
-         self.present(weatherVC, animated: true, completion: nil)
+        self.present(weatherVC, animated: true, completion: nil)
     }
     
 }
@@ -151,6 +151,10 @@ extension BooksViewController: SearchToolBarProtocol {
             guard let books = result["books"] as? [NSDictionary] else {
                 return
             }
+            
+            if let total = result["total"] as? Int64 {
+                self.booksTableView.total = total
+            }
             //
             for book in books {
                 self.booksTableView.booksModel.append(Books(fromDictionary: book))
@@ -196,33 +200,40 @@ extension BooksViewController: NewsTableViewProtocol {
         self.booksTableView.tableFooterView = UIView()
         self.loadingLabel.removeFromSuperview()
     }
-}
-
-extension BooksViewController {
-
-    // UDP SERVER
-    func UDPServer() -> Void {
-        DispatchQueue.global().async {
-            let utf8Str = ("127.0.0.1" as NSString).utf8String
-            let point = UnsafeMutablePointer<Int8>(mutating: utf8Str)
-            guard Listener(point, 8080) == 1 else {
-                return
-            }
-            
-            while true {
-                guard Accept() == 1 else{
-                    return
-                }
-                
-                while getState() > 2{
-                    if let value = Reciver() {
-                        print(" swift_data", String(cString: value, encoding: String.Encoding.utf8) ?? "null")
-                    }
-                }
-                
-                // 关闭客户端
-                CloseServer(S_SHUT_RD);
-            }
-        }
+    
+    // 按了cell
+    func DidSelectCell(book: Books) {
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(BookDetailViewController(model: book), animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
 }
+
+//extension BooksViewController {
+//
+//    // UDP SERVER
+//    func UDPServer() -> Void {
+//        DispatchQueue.global().async {
+//            let utf8Str = ("127.0.0.1" as NSString).utf8String
+//            let point = UnsafeMutablePointer<Int8>(mutating: utf8Str)
+//            guard Listener(point, 8080) == 1 else {
+//                return
+//            }
+//            
+//            while true {
+//                guard Accept() == 1 else{
+//                    return
+//                }
+//                
+//                while getState() > 2{
+//                    if let value = Reciver() {
+//                        print(" swift_data", String(cString: value, encoding: String.Encoding.utf8) ?? "null")
+//                    }
+//                }
+//                
+//                // 关闭客户端
+//                CloseServer(S_SHUT_RD);
+//            }
+//        }
+//    }
+//}

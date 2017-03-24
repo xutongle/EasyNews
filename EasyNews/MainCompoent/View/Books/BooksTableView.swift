@@ -10,6 +10,7 @@ import UIKit
 
 protocol NewsTableViewProtocol: class {
     func ScrollToEnd() -> Void
+    func DidSelectCell(book: Books) -> Void
 }
 
 class BooksTableView: UITableView {
@@ -22,6 +23,8 @@ class BooksTableView: UITableView {
     private var tempView: TempView!
     
     weak var action_delegate: NewsTableViewProtocol?
+    
+    var total: Int64! = 0
     
     // 数据源
     var booksModel: [Books] = [] {
@@ -102,6 +105,19 @@ extension BooksTableView: UITableViewDelegate, UITableViewDataSource  {
         
         return cell
     }
+    
+    // - -
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        action_delegate?.DidSelectCell(book: self.booksModel[indexPath.row])
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        if indexPath.row % 20 == 0 {
+            Toast.toast.show(message: indexPath.row.toStringValue + "/" + total.toStringValue, duration: .short, removed: nil)
+        }
+    }
+    
 }
 
 // MARK: - Scroll协议
