@@ -267,7 +267,7 @@ class Tools: NSObject {
     // 状态栏高度 导航栏高度 （注意：导航栏为nil 高度为小于0）
     static func getBarHeight(nav: UINavigationController?) -> BarHeight {
         let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
-        var navHeight: CGFloat = -1
+        var navHeight: CGFloat = 0
         if nav != nil {
             navHeight = nav!.navigationBar.bounds.size.height
         }

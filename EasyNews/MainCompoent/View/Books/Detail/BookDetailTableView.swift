@@ -37,6 +37,7 @@ class BookDetailTableView: UITableView {
 
         // 图片
         topImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 240))
+        topImageView.clipsToBounds = true
         topImageView.backgroundColor = UIColor.black
         topImageView.contentMode = .scaleAspectFit
         self.tableHeaderView = topImageView
@@ -56,6 +57,7 @@ class BookDetailTableView: UITableView {
 // MARK: - UITableViewDelegate, UITableViewDataSource 协议
 extension BookDetailTableView: UITableViewDelegate, UITableViewDataSource {
     
+    // cell count
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 4
         if model.summary == nil || model.summary == "" {
@@ -70,6 +72,7 @@ extension BookDetailTableView: UITableViewDelegate, UITableViewDataSource {
         return count
     }
     
+    // config cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
@@ -95,10 +98,12 @@ extension BookDetailTableView: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
     
+    // 点击cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
@@ -115,5 +120,4 @@ extension BookDetailTableView: UITableViewDelegate, UITableViewDataSource {
             break
         }
     }
-    
 }

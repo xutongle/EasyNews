@@ -27,13 +27,20 @@ class BookDetailViewController: UIViewController, BookDetailTableViewProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         self.navigationItem.title = "详情"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bookDetailTableView = BookDetailTableView(frame: self.view.frame, model: self.model)
+        let barHeight = Tools.getBarHeight(nav: self.navigationController)
+        
+        bookDetailTableView = BookDetailTableView(frame: CGRect(x: 0, y: barHeight.navgationHeight,
+                                                                width: self.view.frame.width,
+                                                                height: self.view.frame.height - barHeight.navgationHeight) ,
+                                                  model: self.model)
         bookDetailTableView.book_detail_delegate = self
         self.view.addSubview(self.bookDetailTableView)
     }
