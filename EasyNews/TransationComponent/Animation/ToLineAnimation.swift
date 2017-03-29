@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
+class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning, CAAnimationDelegate {
 
     private var frame: CGRect!
+    private var transitionContext: UIViewControllerContextTransitioning?
     
     init(mFrame: CGRect) {
         super.init()
@@ -24,6 +25,8 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
+        self.transitionContext = transitionContext
+        
         let fromViewController = transitionContext.viewController(forKey: .from)
         let toViewController = transitionContext.viewController(forKey: .to)
         
@@ -37,17 +40,30 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
             toView = transitionContext.view(forKey: .to)
         }
         
-        let fromFrame = transitionContext.finalFrame(for: fromViewController!)
-        let toFrame = transitionContext.finalFrame(for: toViewController!)
+        let transationView = UIView(frame: fromView.frame)
+        transationView.backgroundColor = UIColor.black
+        transationView.alpha = 1
         
-        fromView.frame = fromFrame
-//        toView.clipsToBounds = true
-        toView.frame = toFrame
         
-        containerView.insertSubview(toView, belowSubview: fromView)
+        containerView.insertSubview(transationView, belowSubview: fromView)
+        containerView.insertSubview(toView, belowSubview: transationView)
+        
+        fromView.backgroundColor = .clear
         
         // 我们需要让动画时长和整个过渡的时长相同，以便UIKit进行同步。
         let transitionDuration = self.transitionDuration(using: transitionContext)
+        
+        let caBasicAnimation = CABasicAnimation(keyPath: "transform.scale.y")
+        caBasicAnimation.fromValue = 1.0
+        caBasicAnimation.toValue = 0.01
+        caBasicAnimation.isRemovedOnCompletion = true
+        caBasicAnimation.delegate = self
+        caBasicAnimation.duration = transitionDuration
+        caBasicAnimation.fillMode = kCAFillModeForwards
+        
+        fromView.layer.add(caBasicAnimation, forKey: nil)
+        
+        //
         UIView.animate(withDuration: transitionDuration, animations: {
             /**
              a 表示水方向的缩放
@@ -56,17 +72,20 @@ class ToLineAnimation: NSObject, UIViewControllerAnimatedTransitioning {
              ty 表示垂直方向的偏移
              如果 b c 不为 0 的话，那么坑定发生了旋转。
              **/
-//             fromView.transform = CGAffineTransform(a: 0.01, b: 0, c: 0, d: 0.01, tx: 0.5, ty: 0)
+             // fromView.transform = CGAffineTransform(a: 0.01, b: 0, c: 0, d: 0.01, tx: 0.5, ty: 0)
             
-            // 变成一条线消失
-            fromView.frame = self.frame
+            transationView.alpha = 0.5
             
-            //toView.frame = transitionContext.finalFrame(for: toViewController!)
         }) { (complete) in
-            if (transitionContext.transitionWasCancelled) {
-                fromView.frame = fromFrame
+            if !transitionContext.transitionWasCancelled {
+                transationView.removeFromSuperview()
+//                transationView = nil
             }
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        transitionContext!.completeTransition(!transitionContext!.transitionWasCancelled)
     }
 }

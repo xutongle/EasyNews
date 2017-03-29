@@ -20,6 +20,8 @@ class GirlViewController: UIViewController {
     fileprivate var containerView: UIView!
     // 当前容器上的view
     fileprivate var currentContainerVC: ChildGirlViewController!
+    // old
+    fileprivate var oldContainerVC: ChildGirlViewController!
     
     // 正常的图片分类分类
     fileprivate var oldID: Int = 1
@@ -121,13 +123,15 @@ extension GirlViewController: ItemScrollViewDelegate {
             return
         }
         
+//        self.oldContainerVC = self.currentContainerVC
         self.transition(from: currentContainerVC, to: vc, duration: 0.5, options: .transitionCurlDown, animations: nil) { (over) in
             vc.didMove(toParentViewController: self)
             self.currentContainerVC = vc
             
             // 老得移除 貌似不用
-            // self.currentContainerVC.willMove(toParentViewController: nil)
-            // self.currentContainerVC.removeFromParentViewController()
+//            self.oldContainerVC.willMove(toParentViewController: nil)
+//            self.oldContainerVC.view.removeFromSuperview()
+//            self.oldContainerVC.removeFromParentViewController()
         }
     }
 }

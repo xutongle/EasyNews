@@ -57,5 +57,5 @@ class BookDetailViewController: UIViewController, BookDetailTableViewProtocol {
         
         someDetailVC.textView.text = value
     }
-
+    
 }

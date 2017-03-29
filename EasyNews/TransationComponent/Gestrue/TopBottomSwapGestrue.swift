@@ -32,9 +32,10 @@ class TopBottomSwapGestrue: UIPercentDrivenInteractiveTransition {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(gestureRecognizer:)))
         gesture.maximumNumberOfTouches = 1
         view.addGestureRecognizer(gesture)
-        
-        let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(handleTapGestrue))
-        view.addGestureRecognizer(tapGestrue)
+     
+        // 点击关闭
+//        let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(handleTapGestrue))
+//        view.addGestureRecognizer(tapGestrue)
     }
     
     @objc private func handleTapGestrue() {
@@ -53,7 +54,7 @@ class TopBottomSwapGestrue: UIPercentDrivenInteractiveTransition {
         
         // 1
         let translation = gestureRecognizer.translation(in: gestrueView.superview)
-        var progress = Float(translation.y / (gestrueView.frame.size.height))
+        var progress = Float(translation.y / (gestrueView.frame.size.height / 2))
         
         //  大小 -1 到 1 之间但是取绝对值  这样上下都可以滑动
         progress = fabs(fminf(fmaxf(progress, -1.0), 1.0))

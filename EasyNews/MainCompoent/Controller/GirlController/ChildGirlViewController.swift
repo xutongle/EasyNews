@@ -52,7 +52,6 @@ class ChildGirlViewController: UIViewController {
         self.view.addSubview(collectionView)
         
         self.id = mid
-        
     }
     
     // 获得图片list 包含图片的网址

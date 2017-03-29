@@ -303,3 +303,69 @@ public extension UIDevice {
     }
 }
 
+extension UIImage{
+    
+//    func getPixelColor(pos: CGPoint) -> UIColor {
+//        guard let pixelData = self.cgImage?.dataProvider?.data else {
+//            return .white
+//        }
+//        
+//        guard let data = CFDataGetBytePtr(pixelData) else {
+//            return .white
+//        }
+//        
+//        let pixelInfo = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+//        
+//        let red = CGFloat(data[pixelInfo]) / 255
+//        let green = CGFloat(data[pixelInfo + 1]) / 255
+//        let blue = CGFloat(data[pixelInfo + 2]) / 255
+//        let alpha = CGFloat(data[pixelInfo + 3]) / 255
+//        
+//        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+//    }
+//    
+//    func getAvgColor() -> UIColor {
+//        
+//        guard let image = scaleImage(size: CGSize(width: 50, height: 50)) else {
+//            return .white
+//        }
+//        
+//        guard let pixelData = self.cgImage?.dataProvider?.data else {
+//            return .white
+//        }
+//        
+//        guard let data = CFDataGetBytePtr(pixelData) else {
+//            return .white
+//        }
+//        
+//        for x in 1...50 {
+//            for y in 1...50 {
+//                let pixelInfo = ((Int(self.size.width) * Int(y)) + Int(x)) * 4
+//                
+//                let red = CGFloat(data[pixelInfo]) / 255
+//                let green = CGFloat(data[pixelInfo + 1]) / 255
+//                let blue = CGFloat(data[pixelInfo + 2]) / 255
+//                let alpha = CGFloat(data[pixelInfo + 3]) / 255
+//            }
+//        }
+//        
+//        return
+//    }
+//    
+    func scaleImage(size: CGSize) -> UIImage? {
+        // 创建一个bitmap的context
+        // 并把它设置成为当前正在使用的context
+        UIGraphicsBeginImageContext(size)
+    
+        self.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        // 从当前context获取裁剪的图片
+        let scaleImage = UIGraphicsGetImageFromCurrentImageContext()
+        // 使当前的context出堆栈
+        UIGraphicsEndImageContext();
+        
+        return scaleImage
+    }
+    
+}
+
+

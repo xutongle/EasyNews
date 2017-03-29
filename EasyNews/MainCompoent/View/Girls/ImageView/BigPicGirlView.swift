@@ -31,7 +31,7 @@ class BigPicGirlView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.black
+        self.backgroundColor = .clear
         self.contentMode = .scaleAspectFit
         
         self.isUserInteractionEnabled = true
@@ -46,7 +46,7 @@ class BigPicGirlView: UIImageView {
         
         self.kf.setImage(with: murl, placeholder: nil, options: nil, progressBlock: { [weak self] (a, b) in
             if let weakSelf = self {
-                weakSelf.progressView.progress = CGFloat.abs(CGFloat(a)) / CGFloat.abs(CGFloat(b))
+                weakSelf.progressView.progress = CGFloat(Float(abs(a)) / Float(abs(b)))
             }
         }) { [weak self] (image, error, cache, url) in
             if let weakSelf = self {

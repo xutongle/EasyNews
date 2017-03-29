@@ -27,7 +27,7 @@ class ImageScrollView: UIScrollView {
     
     public init(frame: CGRect, imageUrl: [String]) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .clear
         self.imageUrl = imageUrl
         
         let count: CGFloat = CGFloat(imageUrl.count == 0 ? 1 : imageUrl.count)

@@ -84,8 +84,8 @@ class CycleView: UIView {
         let cycleCenter = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2) // 圆心
         let radius: CGFloat = self.bounds.size.width / 2 - self.lineWidth              // 半径
         /* 相当于x轴的中心开始 而不是x轴的最右侧开始 */
-        let startPoint = M_PI_2 * 3                                                        // 圆的起点位置
-        let endPoint = startPoint + M_PI * 2 * _progress                           // 圆的终点
+        let startPoint = Double.pi / 2.0 * 3.0                                          // 圆的起点位置
+        let endPoint = startPoint + Double.pi * 2 * _progress                           // 圆的终点
         
         return UIBezierPath(arcCenter: cycleCenter, radius: radius, startAngle: CGFloat(startPoint), endAngle: CGFloat(endPoint), clockwise: true).cgPath
     }

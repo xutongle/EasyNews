@@ -12,24 +12,27 @@ class BigPicViewController: UIViewController {
     
     // model
     var url: String!
-    weak var image: UIImage!
+    
+    var imageScrollView: ImageScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .black
         
-        let f = self.view.frame
-        let imageScrollView = ImageScrollView(frame: f, imageUrl: [url])
-        self.view.addSubview(imageScrollView)        
+        imageScrollView = ImageScrollView(frame: self.view.frame, imageUrl: [url])
+        view.addSubview(imageScrollView)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-
+    
     // - -
     deinit {
-        self.view.removeFromSuperview()
-        self.view = nil
+//        imageScrollView.removeFromSuperview()
+//        self.view.removeFromSuperview()
+//        imageScrollView = nil
+//        self.view = nil
     }
     
 }
